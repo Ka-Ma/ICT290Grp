@@ -1,0 +1,6 @@
+﻿  Sound.cpp
+  EasySound.cpp
+c:\users\kat\documents\projects\ict290\2015shaylearyall\campus tour\easysound.cpp(82): warning C4018: '>': signed/unsigned mismatch
+  Generating Code...
+  houses.vcxproj -> C:\Users\Kat\Documents\PROJECTS\ICT290\2015shayLearyALL\CAMPUS TOUR\.\Debug\houses.exe
+  houses.vcxproj -> .\Debug\houses.pdb (Full PDB)

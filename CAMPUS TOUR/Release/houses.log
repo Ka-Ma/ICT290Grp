@@ -1,0 +1,8 @@
+﻿  EasySound.cpp
+EasySound.cpp(80): warning C4018: '>': signed/unsigned mismatch
+  Sound.cpp
+  SoundTime.cpp
+  camera.cpp
+  main.cpp
+  Generating Code...
+LINK : fatal error LNK1104: cannot open file 'SDL.lib'
