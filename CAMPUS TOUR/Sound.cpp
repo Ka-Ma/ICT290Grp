@@ -62,8 +62,6 @@ bool CSound::Play()
 	m_pos = CSoundTime(0);
 	m_stop = m_len;
 	SDL_PauseAudio(0); 
-	// KM 2/9/2016 SDL2 seems to do it differently needs extra, but this is not it 
-	SDL_Delay(100);
 	
     return 0;
 }

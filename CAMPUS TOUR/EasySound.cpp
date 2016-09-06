@@ -68,7 +68,7 @@ CEasySound* CEasySound::Instance()
 
 void CEasySound::CallMixAudio(void *unused, Uint8 *stream, int len)
 {
-	SDL_memset(stream, 0, len); // KM 2/9/2016 new with SDL2
+	SDL_memset(stream, 0, len); // KM 2/9/2016 new with SDL2, stops sound repeating
 
 	//int i;
     Uint32 amount, data_len, data_pos;

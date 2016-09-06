@@ -274,11 +274,9 @@ void Camera::SetPlains(const int & moveX, const int & moveZ)
 			{
 				m_y = m_Plain.GetYstart(i);
 				
-				stepSound->Stop(); //KM 2/9/2016 adding this to see if it needs it...
-
 				if ((m_plainNo != i) && m_plainHeight != m_Plain.GetYstart(i))
 				{
-					stepSound->Play(); // KM 2/9/2016 changing this to specify a start and length with CSoundTime or with int 0 does not fix the repeating sound.
+					stepSound->Play(); 
 				}
 
 
