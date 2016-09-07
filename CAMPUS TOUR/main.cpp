@@ -1,5 +1,5 @@
 #include <math.h>
-#include <GL/glut.h>
+
 #include <time.h>
 #include "SDL.h"
 #include "OBJLoader.h"
@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <fstream>
 #include <cstdio>
+#include <GL/glut.h> //needs to be declared last for compiler reasons
 
 #undef main
 
