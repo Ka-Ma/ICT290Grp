@@ -47,8 +47,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules />
     <CodeAnalysisRuleAssemblies />
-    <IncludePath>C:\Users\Kat\Documents\PROJECTS\ICT290\SDL2-2.0.4\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Kat\Documents\PROJECTS\ICT290\SDL2-2.0.4\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\SDL2-2.0.4\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\SDL2-2.0.4\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>.\Release\</OutDir>
@@ -77,7 +77,7 @@
       <ObjectFileName>.\Debug\</ObjectFileName>
       <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <AdditionalIncludeDirectories>C:\Users\Kat\Documents\PROJECTS\ICT290\SDL2-2.0.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\SDL2-2.0.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Midl>
       <TypeLibraryName>.\Debug\houses.tlb</TypeLibraryName>
@@ -96,7 +96,7 @@
       <SubSystem>Console</SubSystem>
       <OutputFile>.\Debug\houses.exe</OutputFile>
       <AdditionalDependencies>SDL2main.lib;SDL2.lib;odbc32.lib;odbccp32.lib;opengl32.lib;glu32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Kat\Documents\PROJECTS\ICT290\SDL2-2.0.4\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\SDL2-2.0.4\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

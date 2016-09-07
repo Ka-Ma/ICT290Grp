@@ -1,6 +1,21 @@
-﻿  Sound.cpp
+﻿  texturedPolygons.cpp
+c:\users\kat\documents\projects\ict290\2015shaylearyall\campus tour\texturedpolygons.cpp(39): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+  SoundTime.cpp
+  Sound.cpp
+  PlainNode.cpp
+  PlainLinkedList.cpp
+  main.cpp
   EasySound.cpp
 c:\users\kat\documents\projects\ict290\2015shaylearyall\campus tour\easysound.cpp(82): warning C4018: '>': signed/unsigned mismatch
+  collision.cpp
+  cameraMap.cpp
+  camera.cpp
+  AABBNode.cpp
+  AABBLinkedList.cpp
+  AABB.CPP
   Generating Code...
+  LINK : .\Debug\houses.exe not found or not built by the last incremental link; performing full link
+AABB.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   houses.vcxproj -> C:\Users\Kat\Documents\PROJECTS\ICT290\2015shayLearyALL\CAMPUS TOUR\.\Debug\houses.exe
   houses.vcxproj -> .\Debug\houses.pdb (Full PDB)
