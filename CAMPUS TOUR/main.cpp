@@ -1,16 +1,24 @@
 #include <math.h>
-
+#include <GL/glut.h>
 #include <time.h>
+#include "SDL.h"
+#include "OBJLoader.h"
+
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <fstream>
+#include <cstdio>
+
+#undef main
 
 //#include <windows.h> // only used if mouse is required (not portable)
 #include "camera.h"
 #include "texturedPolygons.h"
 
-//included last to avoid compiler error
-#include <GL/glut.h>
-
 //--------------------------------------------------------------------------------------
 
+using namespace std;
 #define PI 3.1415962654
 
 // USE THESE STTEINGS TO CHANGE SPEED (on different spec computers)
@@ -320,6 +328,9 @@ unsigned char* image = NULL;
 Camera cam;
 TexturedPolygons tp;
 
+//OBJLoader object
+OBJLoader obj;
+
 // initializes setting
 void myinit();
 
@@ -407,6 +418,48 @@ void DeleteImageFromMemory(unsigned char* tempImage);
 
 //exercise
 void DrawBanner();
+
+//------------------------------PLANETS VARS AND FUNCTIONS--------------------------------
+typedef GLfloat planetsVar[5];
+static GLdouble OrbitSpeed[] = { 4.147,1.629,1,.531,.084,.033,.011,.006,.004,365 };
+planetsVar allPlanets[] = { { 0, 0, 0, 20, 10 },
+{ 40, 0, 0, 0.003, 0.03 },
+{ 80, 0, 0, 0.008, 0.08 },
+{ 120, 0, 0, 0.009, 0.09 },
+{ 160, 0, 0, 0.004, 0.04 },
+{ 200, 0, 0, .1, 1 },
+{ 240, 0, 0, .083, 0.83 },
+{ 280, 0, 0, .036, 0.36 },
+{ 320, 0, 0, .035, 0.35 },
+{ 360, 0, 0, .001, 0.01 }
+};
+
+GLfloat SunSize = 20;
+GLfloat SunX = 512000;
+GLfloat DistMult = 10;
+GLfloat SizeMult = 300;
+
+GLdouble RotSpeed = 0.01;
+const GLdouble MaxRotSpeed = 100;
+const GLdouble RotSpeedAlt = 0.001;
+
+GLfloat TeleportToX = 33467;
+GLfloat TeleportToY = 10450;
+GLfloat TeleportToZ = 39508;
+
+GLfloat TeleportFromX = SunX;
+GLfloat TeleportFromY = allPlanets[0][1];
+GLfloat TeleportFromZ = allPlanets[0][2] + 10000;
+
+void CheckLocationForTeleport();
+void TeleportToPlanets();
+void TeleportToBushCourt();
+void DisplayPlanets();
+void OrbitPlanets();
+
+//increasing movement speed
+int moveSpeed = 5;
+//------------------------------END PLANETS VARS AND FUNCTIONS--------------------------------
 
 //--------------------------------------------------------------------------------------
 //  Main function 
@@ -517,6 +570,25 @@ void Display()
 	
 	glPopMatrix();
 	glDisable (GL_TEXTURE_2D); 
+
+	CheckLocationForTeleport();
+
+	//Teleport to planets location
+	glPushMatrix();
+		glColor3f(1, 0, 0);
+		glTranslatef(TeleportToX, TeleportToY, TeleportToZ);
+		glutWireCube(1000);
+	glPopMatrix();
+
+	//Teleport to bush court
+	glPushMatrix();
+		glColor3f(1, 0, 0);
+		glTranslatef(TeleportFromX, TeleportFromY, TeleportFromZ);
+		glutWireCube(1000);
+	glPopMatrix();
+
+	DisplayPlanets();
+	OrbitPlanets();
 
 	// clear buffers
 	glFlush();
@@ -629,21 +701,21 @@ void movementKeys(int key, int x, int y)
 {
 	switch (key)
 	{
-		case GLUT_KEY_LEFT :
-			cam.DirectionRotateLR(-1);
-			break;
-
-		case GLUT_KEY_RIGHT : 
-			cam.DirectionRotateLR(1);
-			break;
-
-		case GLUT_KEY_UP : 
-			cam.DirectionFB(1);
-			break;
-
-		case GLUT_KEY_DOWN : 
-			cam.DirectionFB(-1);
-			break;
+		//case GLUT_KEY_LEFT :
+		//	cam.DirectionRotateLR(-1);
+		//	break;
+		//
+		//case GLUT_KEY_RIGHT : 
+		//	cam.DirectionRotateLR(1);
+		//	break;
+		//
+		//case GLUT_KEY_UP : 
+		//	cam.DirectionFB(1);
+		//	break;
+		//
+		//case GLUT_KEY_DOWN : 
+		//	cam.DirectionFB(-1);
+		//	break;
 	}
 }
 
@@ -652,16 +724,16 @@ void releaseKey(int key, int x, int y)
 {
 	switch (key)
 	{
-		// rotate left or right
-		case GLUT_KEY_LEFT : 
-		case GLUT_KEY_RIGHT : 
-			cam.DirectionRotateLR(0);			
-		break;
-		// move backwards or forwards
-		case GLUT_KEY_UP : 
-		case GLUT_KEY_DOWN : 
-			cam.DirectionFB(0);
-		break;
+		//// rotate left or right
+		//case GLUT_KEY_LEFT : 
+		//case GLUT_KEY_RIGHT : 
+		//	cam.DirectionRotateLR(0);			
+		//break;
+		//// move backwards or forwards
+		//case GLUT_KEY_UP : 
+		//case GLUT_KEY_DOWN : 
+		//	cam.DirectionFB(0);
+		//break;
 	}
 }
 
@@ -671,6 +743,7 @@ void keys(unsigned char key, int x, int y)
 	int i = 0;
 	switch (key)
 	{
+		/*
 		// step left
 		case 'Z':
 		case 'z':
@@ -759,7 +832,130 @@ void keys(unsigned char key, int x, int y)
 			}
 		}
 		break;
-		
+		*/
+		// step left
+		case 'Z':
+		case 'z':
+			cam.DirectionLR(-moveSpeed);
+			break;
+			// step right
+		case 'X':
+		case 'x':
+			cam.DirectionLR(moveSpeed);
+			break;
+			// look up
+		case 'R':
+		case 'r':
+			cam.DirectionLookUD(moveSpeed);
+			break;
+			// look down
+		case 'F':
+		case 'f':
+			cam.DirectionLookUD(-moveSpeed);
+			break;
+			// display campus map
+		case 'm':
+		case 'M':
+		{
+			if (DisplayMap)
+			{
+				DisplayMap = false;
+			}
+			else
+			{
+				DisplayMap = true;
+			}
+		}
+		break;
+		// exit tour (escape key)
+		case 27:
+		{
+			cam.SetRotateSpeed(0.0f);
+			cam.SetMoveSpeed(0.0f);
+			DisplayExit = true;
+		}
+		break;
+		// display welcome page (space key)
+		case ' ':
+		{
+			if (DisplayWelcome)
+			{
+				cam.SetRotateSpeed(rotationSpeed);
+				cam.SetMoveSpeed(movementSpeed);
+				DisplayWelcome = false;
+			}
+			else
+			{
+				cam.SetRotateSpeed(0.0f);
+				cam.SetMoveSpeed(0.0f);
+				DisplayWelcome = true;
+			}
+		}
+		break;
+		// display light fittings
+		case 'l':
+		case 'L':
+		{
+			if (lightsOn)
+			{
+				lightsOn = false;
+			}
+			else
+			{
+				lightsOn = true;
+			}
+		}
+		break;
+
+		case 'P':
+		case 'p':
+		{
+			// Display ECL Block
+			if (displayECL)
+			{
+				displayECL = false;
+			}
+			else
+			{
+				displayECL = true;
+			}
+		}
+		break;
+
+		case 'Q':
+		case 'q':
+			if (RotSpeed > -MaxRotSpeed)
+			{
+				RotSpeed -= RotSpeedAlt;
+			}
+			break;
+		case 'E':
+		case 'e':
+			if (RotSpeed < MaxRotSpeed)
+			{
+				RotSpeed += RotSpeedAlt;
+			}
+			break;
+
+		case 'A':
+		case 'a':
+			cam.DirectionRotateLR(-moveSpeed);
+			break;
+
+		case 'D':
+		case 'd':
+			cam.DirectionRotateLR(moveSpeed);
+			break;
+
+		case 'W':
+		case 'w':
+			cam.DirectionFB(moveSpeed);
+			break;
+
+		case 'S':
+		case 's':
+			cam.DirectionFB(-moveSpeed);
+			break;
 	}
 }
 
@@ -768,20 +964,48 @@ void releaseKeys(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
+		//// step left or right
+		//case 'x' :
+		//case 'X' :
+		//case 'z' :
+		//case 'Z' :
+		//	cam.DirectionLR(0);
+		//break;
+		//// look left up or down
+		//case 'a' :
+		//case 'A' :
+		//case 'q' :
+		//case 'Q' :
+		//	cam.DirectionLookUD(0);
+		//break;
 		// step left or right
-		case 'x' :
-		case 'X' :
-		case 'z' :
-		case 'Z' :
+		case 'x':
+		case 'X':
+		case 'z':
+		case 'Z':
 			cam.DirectionLR(0);
-		break;
-		// look left up or down
-		case 'a' :
-		case 'A' :
-		case 'q' :
-		case 'Q' :
+			break;
+			// look left up or down
+		case 'f':
+		case 'F':
+		case 'r':
+		case 'R':
 			cam.DirectionLookUD(0);
-		break;
+			break;
+			// rotate left or right
+		case 'A':
+		case 'a':
+		case 'D':
+		case 'd':
+			cam.DirectionRotateLR(0);
+			break;
+			// move backwards or forwards
+		case 'W':
+		case 'w':
+		case 'S':
+		case 's':
+			cam.DirectionFB(0);
+			break;
 	}
 }
 
@@ -4889,6 +5113,151 @@ void DrawGrass ()
 	                                         10200.0, 10425.0, 10200.0, 10200.0,
 											 33000.0, 33000.0, 36000.0, 36000.0, 1, 1);	
 }
+
+//------------------PLANETS FUNCTIONS---------------------
+//Move planets to the position updated in OrbitPlanets
+void DisplayPlanets()
+{
+	//SUN
+	glPushMatrix();
+	glColor3f(1, 1, 0);
+	glTranslatef(allPlanets[0][0] * SizeMult + SunX, allPlanets[0][1] * SizeMult, allPlanets[0][2] * SizeMult);
+	//glMaterialfv(GL_FRONT, GL_EMISSION, sun_colour);
+	//glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+
+	glRotatef(20, 1, 1, 1);
+	//glScalef(5,5,5);
+	//    glColor3f(1,1,0);
+	glutSolidSphere(allPlanets[0][3] * SizeMult, 20, 20);
+	//    glMaterialfv( GL_FRONT, GL_EMISSION, planet_emission );
+	glPopMatrix();
+
+	//Mercury
+	glPushMatrix();
+	glColor3f(1, .5, 0);
+	glTranslatef(allPlanets[1][0] * SizeMult + SunX, allPlanets[1][1] * SizeMult, allPlanets[1][2] * SizeMult);
+
+	//glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+	glutSolidSphere(SunSize*DistMult*allPlanets[1][3] * SizeMult, 20, 20);
+	glPopMatrix();
+
+	//Venus
+	glPushMatrix();
+	glColor3f(1, .8, .5);
+	//glRotatef(orbAmt[1],0,1,0);
+	glTranslatef(allPlanets[2][0] * SizeMult + SunX, allPlanets[2][1] * SizeMult, allPlanets[2][2] * SizeMult);
+
+	//glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+	glutSolidSphere(SunSize*DistMult*allPlanets[2][3] * SizeMult, 20, 20);
+	glPopMatrix();
+
+	//Earth
+	glPushMatrix();
+	glColor3f(0.1, 0.1, 1);
+	//glRotatef(orbAmt[2],0,1,0);
+	glTranslatef(allPlanets[3][0] * SizeMult + SunX, allPlanets[3][1] * SizeMult, allPlanets[3][2] * SizeMult);
+	glutSolidSphere(SunSize*DistMult*allPlanets[3][3] * SizeMult, 20, 20);
+
+	//moon
+	//glColor3f(0.9, 0.9, 0.9);
+	//glRotatef(orbAmt[9], 0, 1, 0);
+	//glTranslatef(5, 0, 0);
+	//glutSolidSphere(SunSize*DistMult*planetSize[9], 20, 20);
+	glPopMatrix();
+
+	//Mars
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	//glRotatef(orbAmt[3],0,1,0);
+	glTranslatef(allPlanets[4][0] * SizeMult + SunX, allPlanets[4][1] * SizeMult, allPlanets[4][2] * SizeMult);
+	glutSolidSphere(SunSize*DistMult*allPlanets[4][3] * SizeMult, 20, 20);
+	glPopMatrix();
+
+	//Jupiter
+	glPushMatrix();
+	glColor3f(1, .6, .3);
+	//glRotatef(orbAmt[4],0,1,0);
+	glTranslatef(allPlanets[5][0] * SizeMult + SunX, allPlanets[5][1] * SizeMult, allPlanets[5][2] * SizeMult);
+	glutSolidSphere(SunSize*DistMult*allPlanets[5][3] * SizeMult, 20, 20);
+	glPopMatrix();
+
+	//Saturn
+	glPushMatrix();
+	glColor3f(.8, 0, 1);
+	//glRotatef(orbAmt[5],0,1,0);
+	glTranslatef(allPlanets[6][0] * SizeMult + SunX, allPlanets[6][1] * SizeMult, allPlanets[6][2] * SizeMult);
+	glutSolidSphere(SunSize*DistMult*allPlanets[6][3] * SizeMult, 20, 20);
+	glPopMatrix();
+
+	//Uranus
+	glPushMatrix();
+	glColor3f(.8, 1, 1);
+	//glRotatef(orbAmt[6],0,1,0);
+	glTranslatef(allPlanets[7][0] * SizeMult + SunX, allPlanets[7][1] * SizeMult, allPlanets[7][2] * SizeMult);
+	glutSolidSphere(SunSize*DistMult*allPlanets[7][3] * SizeMult, 20, 20);
+	glPopMatrix();
+
+	//Neptune
+	glPushMatrix();
+	glColor3f(0, 0, 1);
+	//glRotatef(orbAmt[7],0,1,0);
+	glTranslatef(allPlanets[8][0] * SizeMult + SunX, allPlanets[8][1] * SizeMult, allPlanets[8][2] * SizeMult);
+	glutSolidSphere(SunSize*DistMult*allPlanets[8][3] * SizeMult, 20, 20);
+	glPopMatrix();
+
+	//Pluto
+	glPushMatrix();
+	glColor3f(1, .7, 0);
+	//glRotatef(orbAmt[8],0,1,0);
+	glTranslatef(allPlanets[9][0] * SizeMult + SunX, allPlanets[9][1] * SizeMult, allPlanets[9][2] * SizeMult);
+	glutSolidSphere(SunSize*DistMult*allPlanets[9][3] * SizeMult, 20, 20);
+	glPopMatrix();
+}
+
+//Calculate new position each planet will be moved to 
+void OrbitPlanets()
+{
+	GLdouble x, z;
+
+	//Planets orbiting sun
+	for (int i = 0; i < 9; i++)
+	{
+		x = (allPlanets[i + 1][2] * sin(OrbitSpeed[i] * RotSpeed)) + (allPlanets[i + 1][0] * cos(OrbitSpeed[i] * RotSpeed));
+		z = (allPlanets[i + 1][2] * cos(OrbitSpeed[i] * RotSpeed)) - (allPlanets[i + 1][0] * sin(OrbitSpeed[i] * RotSpeed));
+
+		allPlanets[i + 1][0] = x;
+		allPlanets[i + 1][2] = z;
+
+	}
+}
+
+void CheckLocationForTeleport()
+{
+	//x:33467
+	//y : 10450
+	//z : 39508
+	if (cam.GetLR() > TeleportToX - 1000 && cam.GetLR() < TeleportToX + 1000 && cam.GetUD() > TeleportToY - 1000 && cam.GetUD() < TeleportToY + 1000 && cam.GetFB() > TeleportToZ - 1000 && cam.GetFB() < TeleportToZ + 1000)
+	{
+		TeleportToPlanets();
+	}
+
+	if (cam.GetLR() > TeleportFromX - 1000 && cam.GetLR() < TeleportFromX + 1000 && cam.GetUD() > TeleportFromY - 1000 && cam.GetUD() < TeleportFromY + 1000 && cam.GetFB() > TeleportFromZ - 1000 && cam.GetFB() < TeleportFromZ + 1000)
+	{
+		TeleportToBushCourt();
+	}
+}
+
+void TeleportToPlanets()
+{
+	glClearColor(0, 0, 0, 1.0);
+	cam.Position(SunX, allPlanets[0][1], cam.GetFB(), 0);
+}
+void TeleportToBushCourt()
+{
+	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
+	cam.Position(32720.0, 9536.0, 4800.0, 180.0);
+}
+//------------------END PLANETS FUNCTIONS---------------------
 
 // --------------------------------------------------------------------------------------
 // Display Light Fittings
