@@ -1,21 +1,373 @@
 ﻿  texturedPolygons.cpp
-c:\users\kat\documents\projects\ict290\2015shaylearyall\campus tour\texturedpolygons.cpp(39): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(39): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(135): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(136): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(137): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(137): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(138): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(139): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(139): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(140): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(141): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(141): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(160): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(161): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(162): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(162): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(163): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(163): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(164): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(164): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(165): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(165): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(166): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(167): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(167): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(186): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(187): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(188): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(189): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(189): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(190): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(190): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(191): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(191): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(192): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(192): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(193): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(193): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(210): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(211): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(213): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(213): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(214): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(215): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(215): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(216): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(217): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(217): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(232): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(233): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(234): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(234): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(235): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(236): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(236): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(237): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(238): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(238): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(353): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(354): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(355): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(356): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(357): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(358): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(359): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\texturedpolygons.cpp(360): warning C4244: 'argument': conversion from 'const GLdouble' to 'GLfloat', possible loss of data
   SoundTime.cpp
   Sound.cpp
   PlainNode.cpp
   PlainLinkedList.cpp
   main.cpp
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(449): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(819): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(825): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(835): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(840): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(1752): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(1778): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(1795): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2033): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2121): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2133): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2199): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2200): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2201): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2202): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2203): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2205): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2212): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2213): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2214): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2215): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2216): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2218): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2226): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2227): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2228): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2229): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2230): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2232): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2298): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2302): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2382): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2387): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2391): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2397): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2401): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2408): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2412): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2418): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2435): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2439): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2445): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2449): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2488): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2495): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2506): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2513): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2536): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2550): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2570): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2608): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2609): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2610): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2611): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2660): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2668): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2675): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2688): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2696): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2762): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2763): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2764): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2765): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2774): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2775): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2776): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(2777): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3066): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3267): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3282): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3298): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3318): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3341): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3345): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3364): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3368): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3388): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3392): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3412): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3416): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3477): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3478): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3479): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3480): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3482): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3489): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3490): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3491): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3492): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3493): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3502): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3504): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3505): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3506): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3507): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3508): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3516): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3517): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3518): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3519): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3520): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3521): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3531): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3532): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3533): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3534): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3544): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3545): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3546): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3547): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3555): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3556): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3557): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3558): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3559): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3560): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3570): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3571): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3572): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3573): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3583): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3584): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3585): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3586): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3593): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3594): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3595): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3596): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3597): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3598): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3599): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3606): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3608): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3609): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3610): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3611): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3612): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3619): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3621): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3622): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3623): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3624): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3625): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3633): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3634): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3635): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3636): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3637): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3648): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3650): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3661): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3663): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3707): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3709): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3710): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3711): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3711): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3712): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3713): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3713): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3719): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3721): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3722): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3723): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3723): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3724): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3725): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3725): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3735): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3737): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3738): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3739): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3740): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3741): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3747): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3749): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3750): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3751): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3752): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3753): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3782): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3786): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3841): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3868): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3882): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3910): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3937): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(3951): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4110): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4144): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4175): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4218): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4223): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4354): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4356): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4357): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4358): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4359): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4366): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4368): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4369): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4370): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4371): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4378): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4380): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4381): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4382): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4383): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4390): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4392): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4393): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4394): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4395): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4404): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4405): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4406): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4407): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4439): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4450): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4462): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4496): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4507): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4519): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4529): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4542): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4626): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4637): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4648): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4660): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4678): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4904): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4911): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4918): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4937): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4937): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4941): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4941): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4957): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4957): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4961): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(4961): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5068): warning C4244: 'argument': conversion from 'GLdouble' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5077): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5084): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5091): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5097): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5098): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5099): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5110): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5117): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5124): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5130): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5131): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5132): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5144): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5145): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5147): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5148): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5150): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5151): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5153): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5154): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5156): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5157): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5162): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5167): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5172): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5178): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5180): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5181): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5182): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5183): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5184): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5185): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5186): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5187): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5188): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5189): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\main.cpp(5190): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
   EasySound.cpp
-c:\users\kat\documents\projects\ict290\2015shaylearyall\campus tour\easysound.cpp(82): warning C4018: '>': signed/unsigned mismatch
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\easysound.cpp(82): warning C4018: '>': signed/unsigned mismatch
   collision.cpp
   cameraMap.cpp
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\cameramap.cpp(29): warning C4244: 'argument': conversion from 'const int' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\cameramap.cpp(36): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\cameramap.cpp(37): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\cameramap.cpp(38): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\cameramap.cpp(39): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\cameramap.cpp(67): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\cameramap.cpp(99): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
   camera.cpp
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\camera.cpp(200): warning C4244: 'argument': conversion from 'GLdouble' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\camera.cpp(211): warning C4244: 'argument': conversion from 'GLdouble' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\camera.cpp(242): warning C4244: 'argument': conversion from 'GLdouble' to 'const int', possible loss of data
+c:\users\sam\documents\uni\2016\sem 2\ict290\assignments\1\ict290grp-master\ict290grp-master\campus tour\camera.cpp(252): warning C4244: 'argument': conversion from 'GLdouble' to 'const int', possible loss of data
   AABBNode.cpp
   AABBLinkedList.cpp
   AABB.CPP
   Generating Code...
-  LINK : .\Debug\houses.exe not found or not built by the last incremental link; performing full link
 AABB.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-  houses.vcxproj -> C:\Users\Kat\Documents\PROJECTS\ICT290\2015shayLearyALL\CAMPUS TOUR\.\Debug\houses.exe
-  houses.vcxproj -> .\Debug\houses.pdb (Full PDB)
+  houses.vcxproj -> C:\Users\sam\Documents\Uni\2016\Sem 2\ICT290\Assignments\1\ICT290Grp-master\ICT290Grp-master\CAMPUS TOUR\.\Debug\houses.exe
