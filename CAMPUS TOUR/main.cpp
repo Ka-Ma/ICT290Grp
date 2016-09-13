@@ -570,6 +570,7 @@ void Display()
 		DrawBanner();
 	
 	glPopMatrix();
+
 	glDisable (GL_TEXTURE_2D); 
 
 	CheckLocationForTeleport();
@@ -1074,18 +1075,13 @@ void mouseMove(int x, int y)
 void CreateBoundingBoxes()
 {
 	//KM 6/9/2016: to open gap in bounding box for doorway to corridor to portal had to split chanc block and update all the temp indexes in the below
+	//KM 13/9/2016: moved gap to further down into physical sciences doorway
 	
-	// chanc block  KM6/9/16: 1st part
+	// chanc block  
 	cam.SetAABBMaxX(0, 35879.0);
 	cam.SetAABBMinX(0, 33808.0);
-	cam.SetAABBMaxZ(0, 10560.0);
+	cam.SetAABBMaxZ(0, 22096.0);
 	cam.SetAABBMinZ(0, 4688.0);
-
-	// chanc block  KM6/9/16: 2nd part
-	cam.SetAABBMaxX(1, 35879.0);
-	cam.SetAABBMinX(1, 33808.0);
-	cam.SetAABBMaxZ(1, 22096.0);
-	cam.SetAABBMinZ(1, 11400.0);
 
 	// between chanc block and phys sci
 	cam.SetAABBMaxX(2, 35999.0);
@@ -1111,11 +1107,17 @@ void CreateBoundingBoxes()
 	cam.SetAABBMaxZ(5, 36319.0);
 	cam.SetAABBMinZ(5, 27559.0);
 
-	// phy sci block 2nd doorway
+	// phy sci block 2nd doorway   KM 13/9/2016 new gap here pt 1
+	cam.SetAABBMaxX(6, 35879.0);
+	cam.SetAABBMinX(6, 34260.0);
+	cam.SetAABBMaxZ(6, 36660.0);
+	cam.SetAABBMinZ(6, 36319.0);
+
+	// phy sci block 2nd doorway   KM 13/9/2016 new gap here pt 2
 	cam.SetAABBMaxX(6, 35879.0);
 	cam.SetAABBMinX(6, 34260.0);
 	cam.SetAABBMaxZ(6, 37855.0);
-	cam.SetAABBMinZ(6, 36319.0);
+	cam.SetAABBMinZ(6, 37180.0);
 
 	// phy sci block 3rd panel
 	cam.SetAABBMaxX(7, 35879.0);
