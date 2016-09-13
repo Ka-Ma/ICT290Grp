@@ -5254,6 +5254,13 @@ void TeleportToPlanets()
 {
 	glClearColor(0, 0, 0, 1.0);
 	cam.Position(SunX, allPlanets[0][1], cam.GetFB(), 0);
+	
+	//KM 13/9/2016 Sound bite 
+	CEasySound *es;
+	CSound* firstSound;
+	es = CEasySound::Instance();
+	firstSound = es->GetSound(es->Load("sounds/greeting.wav"));
+	firstSound->Play();
 }
 void TeleportToBushCourt()
 {
