@@ -1084,43 +1084,43 @@ void CreateBoundingBoxes()
 	cam.SetAABBMinZ(0, 4688.0);
 
 	// between chanc block and phys sci
-	cam.SetAABBMaxX(2, 35999.0);
-	cam.SetAABBMinX(2, 35730.0);
-	cam.SetAABBMaxZ(2, 25344.0);
-	cam.SetAABBMinZ(2, 22096.0);
+	cam.SetAABBMaxX(1, 35999.0);
+	cam.SetAABBMinX(1, 35730.0);
+	cam.SetAABBMaxZ(1, 25344.0);
+	cam.SetAABBMinZ(1, 22096.0);
 
 	// phy sci block panel 1
-	cam.SetAABBMaxX(3, 35879.0);
-	cam.SetAABBMinX(3, 33808.0);
-	cam.SetAABBMaxZ(3, 26752.0);
-	cam.SetAABBMinZ(3, 25344.0);
+	cam.SetAABBMaxX(2, 35879.0);
+	cam.SetAABBMinX(2, 33808.0);
+	cam.SetAABBMaxZ(2, 26752.0);
+	cam.SetAABBMinZ(2, 25344.0);
 
 	// phy sci block 1st doorway
-	cam.SetAABBMaxX(4, 35879.0);
-	cam.SetAABBMinX(4, 34256.0);
-	cam.SetAABBMaxZ(4, 27559.0);
-	cam.SetAABBMinZ(4, 26752.0);
+	cam.SetAABBMaxX(3, 35879.0);
+	cam.SetAABBMinX(3, 34256.0);
+	cam.SetAABBMaxZ(3, 27559.0);
+	cam.SetAABBMinZ(3, 26752.0);
 
 	// phy sci block 2nd panel
-	cam.SetAABBMaxX(5, 35879.0);
-	cam.SetAABBMinX(5, 33808.0);
-	cam.SetAABBMaxZ(5, 36319.0);
-	cam.SetAABBMinZ(5, 27559.0);
+	cam.SetAABBMaxX(4, 35879.0);
+	cam.SetAABBMinX(4, 33808.0);
+	cam.SetAABBMaxZ(4, 36319.0);
+	cam.SetAABBMinZ(4, 27559.0);
 
 	// phy sci block 2nd doorway   KM 13/9/2016 new gap here pt 1
-	cam.SetAABBMaxX(6, 35879.0);
-	cam.SetAABBMinX(6, 34260.0);
-	cam.SetAABBMaxZ(6, 36660.0);
-	cam.SetAABBMinZ(6, 36319.0);
+	cam.SetAABBMaxX(5, 34460.0);
+	cam.SetAABBMinX(5, 34260.0);
+	cam.SetAABBMaxZ(5, 36660.0);
+	cam.SetAABBMinZ(5, 36319.0);
 
 	// phy sci block 2nd doorway   KM 13/9/2016 new gap here pt 2
-	cam.SetAABBMaxX(6, 35879.0);
+	cam.SetAABBMaxX(6, 34460.0);
 	cam.SetAABBMinX(6, 34260.0);
 	cam.SetAABBMaxZ(6, 37855.0);
 	cam.SetAABBMinZ(6, 37180.0);
 
-	// phy sci block 3rd panel
-	cam.SetAABBMaxX(7, 35879.0);
+	// phy sci block 3rd panel   KM 14/9/2016 adjusted back of box to allow room for internals
+	cam.SetAABBMaxX(7, 34000.0);
 	cam.SetAABBMinX(7, 33808.0);
 	cam.SetAABBMaxZ(7, 41127.0);
 	cam.SetAABBMinZ(7, 37855.0);
