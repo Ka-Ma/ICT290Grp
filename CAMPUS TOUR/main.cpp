@@ -544,7 +544,7 @@ void myinit()
 	// turn collision detection on
 	cam.SetCollisionDetectionOn(true);
 	// set number of bounding boxes required
-	cam.SetNoBoundingBoxes(19);
+	cam.SetNoBoundingBoxes(25); //KM 16/9/2016 increased from 19
 	// set starting position of user
 	//cam.Position(32720.0, 9536.0,	4800.0, 180.0);
 	cam.Position(32720.0, 11000,27300, 90.0);
@@ -599,6 +599,13 @@ void Display()
 	
 	glPopMatrix();
 
+	//test for positions
+	glPushMatrix();
+	glTranslatef(33808, 10000, 27559);
+	glutSolidSphere(300, 20, 20);
+	glPopMatrix();
+
+
 	glDisable (GL_TEXTURE_2D); 
 
 	CheckLocationForTeleport();
@@ -618,7 +625,7 @@ void Display()
 	glPopMatrix();
 	
 //	DisplayTest();
-	glEnable(GL_TEXTURE_2D); //KM 15/9/2016
+	glEnable(GL_TEXTURE_2D); //KM 15/9/2016 for texture in corridor
 	DrawCorridor();
 	DrawCorridorSteps(75,95,400,35700,10000,25960,10);
 	DrawCorridorSteps(75, -95, 400, 35700-(9*95), 10750, 26360, 10);
@@ -1132,102 +1139,119 @@ void CreateBoundingBoxes()
 	cam.SetAABBMaxZ(1, 25344.0);
 	cam.SetAABBMinZ(1, 22096.0);
 
-	// phy sci block panel 1
+	// phy sci block panel 1 pt 1
 	cam.SetAABBMaxX(2, 35879.0);
 	cam.SetAABBMinX(2, 33808.0);
-	cam.SetAABBMaxZ(2, 26400.0);
+	cam.SetAABBMaxZ(2, 25400.0);
 	cam.SetAABBMinZ(2, 25344.0);
-	
+
+	// phy sci block panel 1 pt 2
+	cam.SetAABBMaxX(3, 33879.0);
+	cam.SetAABBMinX(3, 33808.0);
+	cam.SetAABBMaxZ(3, 26400.0);
+	cam.SetAABBMinZ(3, 25344.0);
+
 	// phy sci block 1st doorway p1
-	cam.SetAABBMaxX(3, 34300.0);
-	cam.SetAABBMinX(3, 34260.0);
-	cam.SetAABBMaxZ(3, 26750.0);  // KM this gap is not right. I don't know why. 15/9/2016 11:16PM
-	cam.SetAABBMinZ(3, 26400.0);
+	cam.SetAABBMaxX(4, 34300.0);
+	cam.SetAABBMinX(4, 33808.0);
+	cam.SetAABBMaxZ(4, 26400.0);  
+	cam.SetAABBMinZ(4, 26300.0);
 
 	// phy sci block 1st doorway p2
-	cam.SetAABBMaxX(4, 34300.0);
-	cam.SetAABBMinX(4, 34260.0);
-	cam.SetAABBMaxZ(4, 27559.0);
-	cam.SetAABBMinZ(4, 27352.0);
+	cam.SetAABBMaxX(5, 34300.0);
+	cam.SetAABBMinX(5, 34260.0);
+	cam.SetAABBMaxZ(5, 26750.0);
+	cam.SetAABBMinZ(5, 26400.0);
 	
+	// phy sci block 1st doorway p3
+	cam.SetAABBMaxX(6, 34300.0);
+	cam.SetAABBMinX(6, 34260.0);
+	cam.SetAABBMaxZ(6, 27559.0);
+	cam.SetAABBMinZ(6, 27540.0);
+
+	// phy sci block inside pt 1
+	cam.SetAABBMaxX(7, 38500.0);
+	cam.SetAABBMinX(7, 38300.0);
+	cam.SetAABBMaxZ(7, 30559.0);
+	cam.SetAABBMinZ(7, 25344.0);
 
 	// phy sci block 2nd panel
-	cam.SetAABBMaxX(5, 35879.0);
-	cam.SetAABBMinX(5, 33808.0);
-	cam.SetAABBMaxZ(5, 36319.0);
-	cam.SetAABBMinZ(5, 27559.0);
+	cam.SetAABBMaxX(8, 36300.0);
+	cam.SetAABBMinX(8, 33808.0);
+	cam.SetAABBMaxZ(8, 36319.0);
+	cam.SetAABBMinZ(8, 27559.0);
 	
 	// phy sci block 2nd doorway
-	cam.SetAABBMaxX(6, 34460.0);
-	cam.SetAABBMinX(6, 34260.0);
-	cam.SetAABBMaxZ(6, 37855.0);
-	cam.SetAABBMinZ(6, 26750.0);
+	cam.SetAABBMaxX(9, 34460.0);
+	cam.SetAABBMinX(9, 34260.0);
+	cam.SetAABBMaxZ(9, 37855.0);
+	cam.SetAABBMinZ(9, 26750.0);
 
 	// phy sci block 3rd panel  
-	cam.SetAABBMaxX(7, 34000.0);
-	cam.SetAABBMinX(7, 33808.0);
-	cam.SetAABBMaxZ(7, 41127.0);
-	cam.SetAABBMinZ(7, 37855.0);
+	cam.SetAABBMaxX(10, 34000.0);
+	cam.SetAABBMinX(10, 33808.0);
+	cam.SetAABBMaxZ(10, 41127.0);
+	cam.SetAABBMinZ(10, 37855.0);
 
 	// drinks machine
-	cam.SetAABBMaxX(8, 35879.0);
-	cam.SetAABBMinX(8, 34704.0);
-	cam.SetAABBMaxZ(8, 25344.0);
-	cam.SetAABBMinZ(8, 24996.0);
+	cam.SetAABBMaxX(11, 35879.0);
+	cam.SetAABBMinX(11, 34704.0);
+	cam.SetAABBMaxZ(11, 25344.0);
+	cam.SetAABBMinZ(11, 24996.0);
 		
 	// bottom of steps
-	cam.SetAABBMaxX(9, 33808.0);
-	cam.SetAABBMinX(9, 0.0);
-	cam.SetAABBMaxZ(9, 4688.0);
-	cam.SetAABBMinZ(9, 0.0);
+	cam.SetAABBMaxX(12, 33808.0);
+	cam.SetAABBMinX(12, 0.0);
+	cam.SetAABBMaxZ(12, 4688.0);
+	cam.SetAABBMinZ(12, 0.0);
 
 	// end of phy sci block exit (top of steps)
-	cam.SetAABBMaxX(10, 35879.0);
-	cam.SetAABBMinX(10, 34320.0);
-	cam.SetAABBMaxZ(10, 43056.0);
-	cam.SetAABBMinZ(10, 41127.0);
+	cam.SetAABBMaxX(13, 35879.0);
+	cam.SetAABBMinX(13, 34320.0);
+	cam.SetAABBMaxZ(13, 43056.0);
+	cam.SetAABBMinZ(13, 41127.0);
 
 	// library end panel
-	cam.SetAABBMaxX(11, 34320.0);
-	cam.SetAABBMinX(11, 6514.0);
-	cam.SetAABBMaxZ(11, 50000.0);
-	cam.SetAABBMinZ(11, 43036.0);
+	cam.SetAABBMaxX(14, 34320.0);
+	cam.SetAABBMinX(14, 6514.0);
+	cam.SetAABBMaxZ(14, 50000.0);
+	cam.SetAABBMinZ(14, 43036.0);
 
 	// KBLT
-	cam.SetAABBMaxX(12, 28104.0);
-	cam.SetAABBMinX(12, 25608.0);
-	cam.SetAABBMaxZ(12, 43046.0);
-	cam.SetAABBMinZ(12, 42754.0);
+	cam.SetAABBMaxX(15, 28104.0);
+	cam.SetAABBMinX(15, 25608.0);
+	cam.SetAABBMaxZ(15, 43046.0);
+	cam.SetAABBMinZ(15, 42754.0);
 
 	// Canteen block
-	cam.SetAABBMaxX(13, 2608.0);
-	cam.SetAABBMinX(13, 0.0);
-	cam.SetAABBMaxZ(13, 49046.0);
-	cam.SetAABBMinZ(13, 0.0);
+	cam.SetAABBMaxX(16, 2608.0);
+	cam.SetAABBMinX(16, 0.0);
+	cam.SetAABBMaxZ(16, 49046.0);
+	cam.SetAABBMinZ(16, 0.0);
 
 	// Telephones
-	cam.SetAABBMaxX(14, 33892.0);
-	cam.SetAABBMinX(14, 33872.0);
-	cam.SetAABBMaxZ(14, 25344.0);
-	cam.SetAABBMinZ(14, 25173.0);
+	cam.SetAABBMaxX(17, 33892.0);
+	cam.SetAABBMinX(17, 33872.0);
+	cam.SetAABBMaxZ(17, 25344.0);
+	cam.SetAABBMinZ(17, 25173.0);
 
 	// Telephones
-	cam.SetAABBMaxX(15, 34277.0);
-	cam.SetAABBMinX(15, 34157.0);
-	cam.SetAABBMaxZ(15, 25344.0);
-	cam.SetAABBMinZ(15, 25173.0);
+	cam.SetAABBMaxX(18, 34277.0);
+	cam.SetAABBMinX(18, 34157.0);
+	cam.SetAABBMaxZ(18, 25344.0);
+	cam.SetAABBMinZ(18, 25173.0);
 
 	// Telephones
-	cam.SetAABBMaxX(16, 35462.0);
-	cam.SetAABBMinX(16, 34541.0);
-	cam.SetAABBMaxZ(16, 25344.0);
-	cam.SetAABBMinZ(16, 25173.0);
+	cam.SetAABBMaxX(19, 35462.0);
+	cam.SetAABBMinX(19, 34541.0);
+	cam.SetAABBMaxZ(19, 25344.0);
+	cam.SetAABBMinZ(19, 25173.0);
 
 	// Wall by Steps
-	cam.SetAABBMaxX(17, 31548.0);
-	cam.SetAABBMinX(17, 31444.0);
-	cam.SetAABBMaxZ(17, 10395.0);
-	cam.SetAABBMinZ(17, 4590.0);
+	cam.SetAABBMaxX(20, 31548.0);
+	cam.SetAABBMinX(20, 31444.0);
+	cam.SetAABBMaxZ(20, 10395.0);
+	cam.SetAABBMinZ(20, 4590.0);
 }
 
 //--------------------------------------------------------------------------------------
@@ -1288,6 +1312,26 @@ void CreatePlains()
 			stepLength -= 500.0;
 			step -= 48.0;
 		}
+	}
+
+	//first steps in physci corridor. KM 16/9/2016 
+	step = 10000; // y, current height of step
+	stepLength = 35700; //x, starts at, adjusted by depth of step
+	for (int i = 0; i < 10; i++)
+	{
+		cam.SetPlains(FLAT_PLAIN, stepLength, stepLength+95, step, step, 25960, 26360); //type, xs, xe, ys, ye, zs, ze
+		step += 75;
+		stepLength += 95;
+	}
+
+	//second steps in physci corridor. KM 16/9/2016 
+	step = 10750; // y, current height of step
+	stepLength = 35700-(9*95); //x, starts at, adjusted by depth of step
+	for (int i = 0; i < 10; i++)
+	{
+		cam.SetPlains(FLAT_PLAIN, stepLength, stepLength - 95, step, step, 26360, 26760); //type, xs, xe, ys, ye, zs, ze
+		step += 75;
+		stepLength -= 95;
 	}
 
 	// temp plain to take down to ECL1
