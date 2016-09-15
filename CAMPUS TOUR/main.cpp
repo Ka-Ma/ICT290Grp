@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <fstream>
 #include <cstdio>
-#include <glut.h> //needs to be declared last for compiler reasons
+#include <GL/glut.h> //needs to be declared last for compiler reasons
 
 #undef main
 
@@ -291,6 +291,25 @@ GLdouble rotationSpeed = 0.005;
 
 //exercise
 #define KM							223
+
+//Physical Sciences Corridor & Stairs (KM 15/9/2016)
+#define PS_AROUND_CNR				224
+#define PS_CEILING					225
+#define PS_DOOR						226
+#define PS_DOOR_FAR					227
+#define PS_DOOR_RIGHT				228
+#define PS_FLOOR					229
+#define PS_LEFT_WALL				230
+#define PS_OPP_DOOR					231
+#define PS_RIGHT					232
+#define PS_RIGHT_FAR				233
+#define PS_STEP_FRONT				234
+#define PS_STEP_TOP					235
+#define PS_TV_WALL					236
+#define PS_UNDERSTAIR				237
+#define PS_WALL_OPP_STAIR			238
+
+// 239 next
 
 
 //--------------------------------------------------------------------------------------
@@ -599,10 +618,11 @@ void Display()
 	glPopMatrix();
 	
 //	DisplayTest();
-
+	glEnable(GL_TEXTURE_2D); //KM 15/9/2016
 	DrawCorridor();
 	DrawCorridorSteps(75,95,400,35700,10000,25960,10);
 	DrawCorridorSteps(75, -95, 400, 35700-(9*95), 10750, 26360, 10);
+	glDisable(GL_TEXTURE_2D); //KM 15/9/2016
 	DisplayPlanets();
 	OrbitPlanets();
 
@@ -1098,6 +1118,7 @@ void CreateBoundingBoxes()
 {
 	//KM 6/9/2016: to open gap in bounding box for doorway to corridor to portal had to split chanc block and update all the temp indexes in the below
 	//KM 13/9/2016: moved gap to further down into physical sciences doorway
+	//KM 15/9/2106: 3rd times a charm, 1st Phys Sci doorway
 	
 	// chanc block  
 	cam.SetAABBMaxX(0, 35879.0);
@@ -1112,50 +1133,37 @@ void CreateBoundingBoxes()
 	cam.SetAABBMinZ(1, 22096.0);
 
 	// phy sci block panel 1
-	/*cam.SetAABBMaxX(2, 35879.0);
+	cam.SetAABBMaxX(2, 35879.0);
 	cam.SetAABBMinX(2, 33808.0);
-	cam.SetAABBMaxZ(2, 26752);
-	cam.SetAABBMinZ(2, 25344.0);*/
-	cam.SetAABBMaxX(2, 0.0);
-	cam.SetAABBMinX(2, 0.0);
-	cam.SetAABBMaxZ(2, 0.0);
-	cam.SetAABBMinZ(2, 0.0);
+	cam.SetAABBMaxZ(2, 26400.0);
+	cam.SetAABBMinZ(2, 25344.0);
+	
+	// phy sci block 1st doorway p1
+	cam.SetAABBMaxX(3, 34300.0);
+	cam.SetAABBMinX(3, 34260.0);
+	cam.SetAABBMaxZ(3, 26750.0);  // KM this gap is not right. I don't know why. 15/9/2016 11:16PM
+	cam.SetAABBMinZ(3, 26400.0);
 
-	// phy sci block 1st doorway
-
-	cam.SetAABBMaxX(3, 0.0);
-	cam.SetAABBMinX(3, 0.0);
-	cam.SetAABBMaxZ(3, 0.0);
-	cam.SetAABBMinZ(3, 0.0);
-	/*cam.SetAABBMaxX(3, 35879.0);
-	cam.SetAABBMinX(3, 35256.0);
-	cam.SetAABBMaxZ(3, 27559.0);
-	cam.SetAABBMinZ(3, 27352.0);*/
+	// phy sci block 1st doorway p2
+	cam.SetAABBMaxX(4, 34300.0);
+	cam.SetAABBMinX(4, 34260.0);
+	cam.SetAABBMaxZ(4, 27559.0);
+	cam.SetAABBMinZ(4, 27352.0);
 	
 
 	// phy sci block 2nd panel
-	/*cam.SetAABBMaxX(4, 35879.0);
-	cam.SetAABBMinX(4, 33808.0);
-	cam.SetAABBMaxZ(4, 36319.0);
-	cam.SetAABBMinZ(4, 27559.0);*/
-	cam.SetAABBMaxX(4, 0.0);
-	cam.SetAABBMinX(4, 0.0);
-	cam.SetAABBMaxZ(4, 0.0);
-	cam.SetAABBMinZ(4, 0.0);
-
-	// phy sci block 2nd doorway   KM 13/9/2016 new gap here pt 1
-	cam.SetAABBMaxX(5, 34460.0);
-	cam.SetAABBMinX(5, 34260.0);
-	cam.SetAABBMaxZ(5, 27250.0);
-	cam.SetAABBMinZ(5, 26750.0);
-
-	// phy sci block 2nd doorway   KM 13/9/2016 new gap here pt 2
+	cam.SetAABBMaxX(5, 35879.0);
+	cam.SetAABBMinX(5, 33808.0);
+	cam.SetAABBMaxZ(5, 36319.0);
+	cam.SetAABBMinZ(5, 27559.0);
+	
+	// phy sci block 2nd doorway
 	cam.SetAABBMaxX(6, 34460.0);
 	cam.SetAABBMinX(6, 34260.0);
 	cam.SetAABBMaxZ(6, 37855.0);
-	cam.SetAABBMinZ(6, 37180.0);
+	cam.SetAABBMinZ(6, 26750.0);
 
-	// phy sci block 3rd panel   KM 14/9/2016 adjusted back of box to allow room for internals
+	// phy sci block 3rd panel  
 	cam.SetAABBMaxX(7, 34000.0);
 	cam.SetAABBMinX(7, 33808.0);
 	cam.SetAABBMaxZ(7, 41127.0);
@@ -1979,6 +1987,52 @@ void CreateTextures()
 	//exercise
 	image = tp.LoadTexture("data/KM.raw", 300, 400);
 	tp.CreateTexture(KM, image, 300, 400);
+
+	//Physical Sciences Corridor & Stairs (KM 15/9/2016)
+	image = tp.LoadTexture("data/PSaroundCorner.raw", 2862, 1024);
+	tp.CreateTexture(PS_AROUND_CNR, image, 2862, 1024);
+
+	image = tp.LoadTexture("data/PSceiling.raw", 1024, 1365);
+	tp.CreateTexture(PS_CEILING, image, 1024, 1365);
+
+	image = tp.LoadTexture("data/PSdoor.raw", 1362, 1024);
+	tp.CreateTexture(PS_DOOR, image, 1362, 1024);
+
+	image = tp.LoadTexture("data/PSdoorFar.raw", 1024, 1331);
+	tp.CreateTexture(PS_DOOR_FAR, image, 1024, 1331);
+
+	image = tp.LoadTexture("data/PSdoorRight.raw", 1097, 1024);
+	tp.CreateTexture(PS_DOOR_RIGHT, image, 1097, 1024);
+
+	image = tp.LoadTexture("data/PSfloor.raw", 1024, 1365);
+	tp.CreateTexture(PS_FLOOR, image, 1024, 1365);
+
+	image = tp.LoadTexture("data/PSleftWall.raw", 1024, 1077);
+	tp.CreateTexture(PS_LEFT_WALL, image, 1024, 1077);
+
+	image = tp.LoadTexture("data/PSoppDoor.raw", 1101, 1024);
+	tp.CreateTexture(PS_OPP_DOOR, image, 1101, 1024);
+
+	image = tp.LoadTexture("data/PSright.raw", 1867, 1024);
+	tp.CreateTexture(PS_RIGHT, image, 1867, 1024);
+
+	image = tp.LoadTexture("data/PSrightFar.raw", 2379, 1024);
+	tp.CreateTexture(PS_RIGHT_FAR, image, 2379, 1024);
+
+	image = tp.LoadTexture("data/PSstepFront.raw", 1024, 129);
+	tp.CreateTexture(PS_STEP_FRONT, image, 1024, 129);
+
+	image = tp.LoadTexture("data/PSstepTop.raw", 1024, 243);
+	tp.CreateTexture(PS_STEP_TOP, image, 1024, 243);
+
+	image = tp.LoadTexture("data/PStvWall.raw", 1024, 955);
+	tp.CreateTexture(PS_TV_WALL, image, 1024, 955);
+
+	image = tp.LoadTexture("data/PSunderStair.raw", 1024, 1439);
+	tp.CreateTexture(PS_UNDERSTAIR, image, 1024, 1439);
+
+	image = tp.LoadTexture("data/PSwallOppStair.raw", 1024, 1580);
+	tp.CreateTexture(PS_WALL_OPP_STAIR, image, 1024, 1580);
 
 
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);	
@@ -5331,84 +5385,139 @@ void TeleportToBushCourt()
 void DrawCorridor()
 {
 	//Right Door Wall
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_RIGHT)); //KM 15/9/16 added textures
 	glBegin(GL_POLYGON);
-	glVertex3f(36300, 10000, 27540);
-	glVertex3f(36300, 11000, 27540);
-	glVertex3f(34260, 11000, 27540);
-	glVertex3f(34260, 10000, 27540);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(36300, 10000, 27540);
+		glTexCoord2f(1.0, 0.0); 
+		glVertex3f(36300, 11000, 27540);
+		glTexCoord2f(0.0, 0.0); 
+		glVertex3f(34260, 11000, 27540);
+		glTexCoord2f(0.0, 1.0); 
+		glVertex3f(34260, 10000, 27540);
 	glEnd();
 
 	//Around R-corner
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_AROUND_CNR));
 	glBegin(GL_POLYGON);
-	glVertex3f(36300, 10000, 27540);
-	glVertex3f(36300, 11000, 27540);
-	glVertex3f(36300, 11000, 30600);
-	glVertex3f(36300, 10000, 30600);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(36300, 10000, 27540);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(36300, 11000, 27540);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(36300, 11000, 30600);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(36300, 10000, 30600);
 	glEnd();
 
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_DOOR_RIGHT));
 	glBegin(GL_POLYGON);
-	glVertex3f(36300, 10000, 30600);
-	glVertex3f(36300, 11000, 30600);
-	glVertex3f(37300, 11000, 30600);
-	glVertex3f(37300, 10000, 30600);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(36300, 10000, 30600);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(36300, 11000, 30600);	
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(37300, 11000, 30600);	
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(37300, 10000, 30600);
 	glEnd();
 
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_RIGHT_FAR));
 	glBegin(GL_POLYGON);
-	glVertex3f(37300, 10000, 28250);
-	glVertex3f(37300, 11000, 28250);
-	glVertex3f(37300, 11000, 30600);
-	glVertex3f(37300, 10000, 30600);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(37300, 10000, 28250);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(37300, 11000, 28250);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(37300, 11000, 30600);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(37300, 10000, 30600);
 	glEnd();
 
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
 	glBegin(GL_POLYGON);
-	glVertex3f(37300, 10000, 28250);
-	glVertex3f(37300, 11000, 28250);
-	glVertex3f(38300, 11000, 28250);
-	glVertex3f(38300, 10000, 28250);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(37300, 10000, 28250);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(37300, 11000, 28250);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(38300, 11000, 28250);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(38300, 10000, 28250);
 	glEnd();
 
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_DOOR_FAR));
 	glBegin(GL_POLYGON);
-	glVertex3f(38300, 10000, 28250);
-	glVertex3f(38300, 11000, 28250);
-	glVertex3f(38300, 11000, 27240);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(38300, 10000, 28250);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(38300, 11000, 28250);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(38300, 11000, 27240);
+		glTexCoord2f(0.0, 1.0);
 	glVertex3f(38300, 10000, 27240);
 	glEnd();
 
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
 	glBegin(GL_POLYGON);
-	glVertex3f(37300, 10000, 27240);
-	glVertex3f(37300, 11000, 27240);
-	glVertex3f(38300, 11000, 27240);
-	glVertex3f(38300, 10000, 27240);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(37300, 10000, 27240);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(37300, 11000, 27240);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(38300, 11000, 27240);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(38300, 10000, 27240);
 	glEnd();
 
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_OPP_DOOR));
 	glBegin(GL_POLYGON);
-	glVertex3f(37300, 10000, 27240);
-	glVertex3f(37300, 11000, 27240);
-	glVertex3f(37300, 11000, 26425);
-	glVertex3f(37300, 10000, 26425);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(37300, 10000, 27240);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(37300, 11000, 27240);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(37300, 11000, 26425);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(37300, 10000, 26425);
 	glEnd();
 
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_TV_WALL));
 	glBegin(GL_POLYGON);
-	glVertex3f(37300, 10000, 26425);
-	glVertex3f(37300, 11000, 26425);
-	glVertex3f(36250, 11000, 26425);
-	glVertex3f(36250, 10000, 26425);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(37300, 10000, 26425); 
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(37300, 11000, 26425);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(36250, 11000, 26425);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(36250, 10000, 26425);
 	glEnd();
 
 	// Left Door Panel
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
 	glBegin(GL_POLYGON);
-	glVertex3f(34260, 10000, 26400);
-	glVertex3f(34260, 11000, 26400);
-	glVertex3f(34260, 11000, 26750);
-	glVertex3f(34260, 10000, 26750);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(34260, 10000, 26400);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(34260, 11000, 26400);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(34260, 11000, 26750);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(34260, 10000, 26750);
 	glEnd();
 
 	//Left Door Wall
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_LEFT_WALL));
 	glBegin(GL_POLYGON);
-	glVertex3f(35700, 10000, 26400);
-	glVertex3f(35700, 11000, 26400);
-	glVertex3f(34260, 11000, 26400);
-	glVertex3f(34260, 10000, 26400);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(35700, 10000, 26400);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(35700, 11000, 26400);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(34260, 11000, 26400);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(34260, 10000, 26400);
 	glEnd();
 
 
@@ -5416,10 +5525,14 @@ void DrawCorridor()
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WALL_BRICK_YZ));
 	glColor3f(0, 1, 1);
 	glBegin(GL_POLYGON);
-	glVertex3f(35700, 10000, 26370);
-	glVertex3f(35700, 12000, 26370);
-	glVertex3f(34260, 12000, 26370);
-	glVertex3f(34260, 10000, 26370);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(35700, 10000, 26370);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(35700, 12000, 26370);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(34260, 12000, 26370);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(34260, 10000, 26370);
 	glEnd();
 
 	glColor3f(1, 1, 0);
@@ -5434,43 +5547,66 @@ void DrawCorridor()
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WALL_BRICK_YZ));
 	glColor3f(0, 0, 1);
 	glBegin(GL_POLYGON);
-	glVertex3f(36300, 10000, 25500);
-	glVertex3f(36300, 12000, 25500);
-	glVertex3f(34260, 12000, 25500);
-	glVertex3f(34260, 10000, 25500);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(36300, 10000, 25500);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(36300, 12000, 25500);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(34260, 12000, 25500);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(34260, 10000, 25500);
 	glEnd();
+
 	//Stair Wall Back
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WALL_BRICK_YZ));
 	glColor3f(1, 0, 1);
 	glBegin(GL_POLYGON);
-	glVertex3f(34260, 10000, 26370);
-	glVertex3f(34260, 12000, 26370);
-	glVertex3f(34260, 12000, 25400);
-	glVertex3f(34260, 10000, 25400);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(34260, 10000, 26370);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(34260, 12000, 26370);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(34260, 12000, 25400);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(34260, 10000, 25400);
 	glEnd();
 
 	//Front Stair Wall
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WALL_BRICK_YZ));
 	glColor3f(1, 1, 1);
 	glBegin(GL_POLYGON);
-	glVertex3f(36250, 10000, 26425);
-	glVertex3f(36250, 12000, 26425);
-	glVertex3f(36250, 12000, 25400);
-	glVertex3f(36250, 10000, 25400);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(36250, 10000, 26425);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(36250, 12000, 26425);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(36250, 12000, 25400);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(36250, 10000, 25400);
 	glEnd();
 
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_FLOOR));
 	glBegin(GL_POLYGON);
-	glVertex3f(34260, 10000, 26370);
-	glVertex3f(34260, 10000, 30600);
-	glVertex3f(38300, 10000, 30600);
-	glVertex3f(38300, 10000, 26370);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(34260, 10000, 25400);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(34260, 10000, 30600);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(38300, 10000, 30600);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(38300, 10000, 25400);
 	glEnd();
 
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_CEILING));
 	glBegin(GL_POLYGON);
-	glVertex3f(34260, 11000, 26370);
-	glVertex3f(34260, 11000, 30600);
-	glVertex3f(38300, 11000, 30600);
-	glVertex3f(38300, 11000, 26370);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(34260, 11000, 26370);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(34260, 11000, 30600);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(38300, 11000, 30600);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(38300, 11000, 26370);
 	glEnd();
 }
 
@@ -5478,20 +5614,30 @@ void DrawCorridorSteps(int stepH, int stepD, int stepW, int stepStartX, int step
 {
 	for (int i = 0; i < count; i++)
 	{
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_STEP_FRONT)); 
 		glBegin(GL_POLYGON);
-		glColor3f(0, 1, 0);
-		glVertex3f(stepStartX - (i * stepD), stepStartY + (i * stepH), stepStartZ);
-		glVertex3f(stepStartX - (i * stepD), stepStartY + (i * stepH), stepStartZ-stepW);
-		glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ-stepW);
-		glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
+			glColor3f(0, 1, 0);
+			glTexCoord2f(1.0, 1.0);
+			glVertex3f(stepStartX - (i * stepD), stepStartY + (i * stepH), stepStartZ);
+			glTexCoord2f(0.0, 1.0);
+			glVertex3f(stepStartX - (i * stepD), stepStartY + (i * stepH), stepStartZ-stepW);
+			glTexCoord2f(0.0, 0.0);
+			glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ-stepW);
+			glTexCoord2f(1.0, 0.0);
+			glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
 		glEnd();
 
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_STEP_TOP));
 		glBegin(GL_POLYGON);
-		glColor3f(1, 0, 1);
-		glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
-		glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ - stepW);
-		glVertex3f(stepStartX - stepD - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ - stepW);
-		glVertex3f(stepStartX - stepD - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
+			glColor3f(1, 0, 1);
+			glTexCoord2f(1.0, 0.0);
+			glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
+			glTexCoord2f(0.0, 0.0);
+			glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ - stepW);
+			glTexCoord2f(0.0, 1.0);
+			glVertex3f(stepStartX - stepD - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ - stepW);
+			glTexCoord2f(1.0, 1.0);
+			glVertex3f(stepStartX - stepD - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
 		glEnd();
 	}
 }
