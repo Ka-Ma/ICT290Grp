@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <fstream>
 #include <cstdio>
-#include <GL/glut.h> //needs to be declared last for compiler reasons
+#include <glut.h> //needs to be declared last for compiler reasons
 
 #undef main
 
@@ -444,9 +444,15 @@ GLdouble RotSpeed = 0.01;
 const GLdouble MaxRotSpeed = 100;
 const GLdouble RotSpeedAlt = 0.001;
 
-GLfloat TeleportToX = 33467;
-GLfloat TeleportToY = 10450;
-GLfloat TeleportToZ = 39508;
+//Masedawg
+GLfloat TeleportToX = 34467;
+GLfloat TeleportToY = 11450;
+GLfloat TeleportToZ = 26508;
+
+//Masedawg
+GLfloat TestX = 34467;
+GLfloat TestY = 11450;
+GLfloat TestZ = 26508;
 
 GLfloat TeleportFromX = SunX;
 GLfloat TeleportFromY = allPlanets[0][1];
@@ -469,8 +475,8 @@ int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowPosition(100,100);
-	glutInitWindowSize(800,500);
+	glutInitWindowPosition(0,0);
+	glutInitWindowSize(1000,1000 );
 	glutCreateWindow("Murdoch University Campus Tour");
 
 	myinit();
@@ -575,20 +581,30 @@ void Display()
 
 	CheckLocationForTeleport();
 
-	//Teleport to planets location
+	//Teleport Box Location (To Planets)
 	glPushMatrix();
 		glColor3f(1, 0, 0);
 		glTranslatef(TeleportToX, TeleportToY, TeleportToZ);
 		glutWireCube(1000);
 	glPopMatrix();
 
-	//Teleport to bush court
+	//Teleport Box Location (To Bush Court)
 	glPushMatrix();
 		glColor3f(1, 0, 0);
 		glTranslatef(TeleportFromX, TeleportFromY, TeleportFromZ);
 		glutWireCube(1000);
 	glPopMatrix();
+	
+//	DisplayTest();
 
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+		glVertex3f(30000,10000,30000);
+		glVertex3f(30000, 11000, 30000);
+		glVertex3f(31000, 11000, 30000);
+		glVertex3f(31000, 10000, 30000);
+	glEnd();
+	glPopMatrix();
 	DisplayPlanets();
 	OrbitPlanets();
 
@@ -1090,28 +1106,42 @@ void CreateBoundingBoxes()
 	cam.SetAABBMinZ(1, 22096.0);
 
 	// phy sci block panel 1
-	cam.SetAABBMaxX(2, 35879.0);
+	/*cam.SetAABBMaxX(2, 35879.0);
 	cam.SetAABBMinX(2, 33808.0);
-	cam.SetAABBMaxZ(2, 26752.0);
-	cam.SetAABBMinZ(2, 25344.0);
+	cam.SetAABBMaxZ(2, 26752);
+	cam.SetAABBMinZ(2, 25344.0);*/
+	cam.SetAABBMaxX(2, 0.0);
+	cam.SetAABBMinX(2, 0.0);
+	cam.SetAABBMaxZ(2, 0.0);
+	cam.SetAABBMinZ(2, 0.0);
 
 	// phy sci block 1st doorway
-	cam.SetAABBMaxX(3, 35879.0);
-	cam.SetAABBMinX(3, 34256.0);
+
+	cam.SetAABBMaxX(3, 0.0);
+	cam.SetAABBMinX(3, 0.0);
+	cam.SetAABBMaxZ(3, 0.0);
+	cam.SetAABBMinZ(3, 0.0);
+	/*cam.SetAABBMaxX(3, 35879.0);
+	cam.SetAABBMinX(3, 35256.0);
 	cam.SetAABBMaxZ(3, 27559.0);
-	cam.SetAABBMinZ(3, 26752.0);
+	cam.SetAABBMinZ(3, 27352.0);*/
+	
 
 	// phy sci block 2nd panel
-	cam.SetAABBMaxX(4, 35879.0);
+	/*cam.SetAABBMaxX(4, 35879.0);
 	cam.SetAABBMinX(4, 33808.0);
 	cam.SetAABBMaxZ(4, 36319.0);
-	cam.SetAABBMinZ(4, 27559.0);
+	cam.SetAABBMinZ(4, 27559.0);*/
+	cam.SetAABBMaxX(4, 0.0);
+	cam.SetAABBMinX(4, 0.0);
+	cam.SetAABBMaxZ(4, 0.0);
+	cam.SetAABBMinZ(4, 0.0);
 
 	// phy sci block 2nd doorway   KM 13/9/2016 new gap here pt 1
 	cam.SetAABBMaxX(5, 34460.0);
 	cam.SetAABBMinX(5, 34260.0);
-	cam.SetAABBMaxZ(5, 36660.0);
-	cam.SetAABBMinZ(5, 36319.0);
+	cam.SetAABBMaxZ(5, 27250.0);
+	cam.SetAABBMinZ(5, 26750.0);
 
 	// phy sci block 2nd doorway   KM 13/9/2016 new gap here pt 2
 	cam.SetAABBMaxX(6, 34460.0);
@@ -2197,6 +2227,14 @@ void DisplayDoorPosts ()
 	glPopMatrix();
 }
 
+void DisplayTest()
+{
+	glPushMatrix();
+		glColor3f(1, 0, 0);
+		glTranslatef(TeleportFromX, TeleportFromY, TeleportFromZ);
+		glutSolidCube(500);
+	glPopMatrix();
+}
 void DrawDoorPosts ()
 {
 	// DOORPOSTS_CHANC
@@ -4810,9 +4848,9 @@ void DisplayLargerTextures ()
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(SWEET_MACHINE));
 	glCallList(372);
 
-	// Phys sci door 1
-	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WINDOW_13));
-	glCallList(373);
+	// Phys sci door 1 Masedawg
+	//glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WINDOW_13));
+	//glCallList(373);
 	// Phys sci toilets
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WINDOW_14));
 	glCallList(374);
