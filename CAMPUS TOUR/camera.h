@@ -97,7 +97,7 @@ public:
 	void DisplayNoExit (const int & screenWidth, const int & screenHeight, 
 						const GLuint & tempImage);
 	
-private:
+protected:
 
 	//steep incline increments
 	GLdouble m_incrementX;

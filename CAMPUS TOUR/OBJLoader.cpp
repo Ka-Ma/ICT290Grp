@@ -62,7 +62,7 @@ int OBJLoader::loadObject(const char* filename)
 		{
 			glBegin(GL_QUADS);
 				glNormal3f(normals[faces[i]->face_num-1]->x, normals[faces[i]->face_num - 1]->y, normals[faces[i]->face_num - 1]->z);
-				glVertex3f(vertex[faces[i]->faces[0]-1]->x, vertex[faces[i]->faces[0] - 1]->y, vertex[faces[i]->faces[0] - 1]->z);
+				glVertex3f(vertex[faces[i]->faces[0] - 1]->x, vertex[faces[i]->faces[0] - 1]->y, vertex[faces[i]->faces[0] - 1]->z);
 				glVertex3f(vertex[faces[i]->faces[1] - 1]->x, vertex[faces[i]->faces[1] - 1]->y, vertex[faces[i]->faces[1] - 1]->z);
 				glVertex3f(vertex[faces[i]->faces[2] - 1]->x, vertex[faces[i]->faces[2] - 1]->y, vertex[faces[i]->faces[2] - 1]->z);
 				glVertex3f(vertex[faces[i]->faces[3] - 1]->x, vertex[faces[i]->faces[3] - 1]->y, vertex[faces[i]->faces[3] - 1]->z);

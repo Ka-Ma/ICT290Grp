@@ -9,12 +9,12 @@
 #include <algorithm>
 #include <fstream>
 #include <cstdio>
-#include <GL/glut.h> //needs to be declared last for compiler reasons
+#include <glut.h> //needs to be declared last for compiler reasons
 
 #undef main
 
-//#include <windows.h> // only used if mouse is required (not portable)
-#include "camera.h"
+#include <windows.h> // only used if mouse is required (not portable)
+#include "cameraSpace.h"
 #include "texturedPolygons.h"
 
 //--------------------------------------------------------------------------------------
@@ -326,7 +326,7 @@ GLUquadricObj *glu_cylinder;
 unsigned char* image = NULL;
 
 // objects
-Camera cam;
+CameraSpace cam;
 TexturedPolygons tp;
 
 //OBJLoader object
@@ -417,8 +417,6 @@ void CreatePlains();
 // deletes image and clears memory
 void DeleteImageFromMemory(unsigned char* tempImage);
 
-//exercise
-void DrawBanner();
 
 //------------------------------PLANETS VARS AND FUNCTIONS--------------------------------
 typedef GLfloat planetsVar[5];
@@ -460,6 +458,15 @@ void OrbitPlanets();
 
 //increasing movement speed
 int moveSpeed = 5;
+
+//OBJ loader
+int num;
+
+GLfloat DoorX = 34267;
+GLfloat DoorY = 10450;
+GLfloat DoorZ = 27000;
+GLfloat DoorWid = 500;
+
 //------------------------------END PLANETS VARS AND FUNCTIONS--------------------------------
 
 //--------------------------------------------------------------------------------------
@@ -488,6 +495,7 @@ int main(int argc, char **argv)
 	// ONLY USE IF REQUIRE MOUSE MOVEMENT
 	//glutPassiveMotionFunc(mouseMove);
 	//ShowCursor(FALSE);
+	
 
 	glutReshapeFunc(reshape);
 	glutMainLoop();
@@ -557,7 +565,7 @@ void Display()
 		if ((cam.GetLR() > 35500.0) && (cam.GetFB() < 25344.0) ||
 			(cam.GetLR() > 34100.0) && (cam.GetFB() > 41127.0))
 		{
-			cam.DisplayNoExit(width, height,tp.GetTexture(NO_EXIT));
+			//cam.DisplayNoExit(width, height,tp.GetTexture(NO_EXIT));
 		}
 				// set the movement and rotation speed according to frame count
 		IncrementFrameCount();
@@ -566,8 +574,6 @@ void Display()
 		// display images
 		DrawBackdrop();
 		
-		// exercise
-		DrawBanner();
 	
 	glPopMatrix();
 	glDisable (GL_TEXTURE_2D); 
@@ -588,93 +594,28 @@ void Display()
 		glutWireCube(1000);
 	glPopMatrix();
 
+	//draw door
+	glPushMatrix();
+		glColor3f(1, 0, 0);
+		glTranslatef(DoorX, DoorY, DoorZ);
+		glutWireCube(DoorWid);
+	glPopMatrix();
+
 	DisplayPlanets();
 	OrbitPlanets();
+
+	glPushMatrix();
+		glScalef(1000, 1000, 1000);
+		glTranslatef(32000,12000,32000);
+		glCallList(num);
+	glPopMatrix();
+	//glScalef(5,5 , 5);
 
 	// clear buffers
 	glFlush();
 	glutSwapBuffers();
 }
 
-void DrawBanner()
-{
-	//posts (1)
-	glBegin(GL_POLYGON);
-		glVertex3f(31300.0, 10000.0, 11050.0);
-		glVertex3f(31300.0, 10500.0, 11050.0);
-		glVertex3f(31350.0, 10500.0, 11050.0);
-		glVertex3f(31350.0, 10000.0, 11050.0);
-	glEnd();
-	glBegin(GL_POLYGON);
-		glVertex3f(31300.0, 10000.0, 11050.0);
-		glVertex3f(31300.0, 10000.0, 11100.0);
-		glVertex3f(31300.0, 10500.0, 11100.0);
-		glVertex3f(31300.0, 10500.0, 11050.0);
-	glEnd();
-	glBegin(GL_POLYGON);
-		glVertex3f(31300.0, 10000.0, 11100.0);
-		glVertex3f(31300.0, 10500.0, 11100.0);
-		glVertex3f(31350.0, 10500.0, 11100.0);
-		glVertex3f(31350.0, 10000.0, 11100.0);
-	glEnd();
-	glBegin(GL_POLYGON);
-		glVertex3f(31350.0, 10000.0, 11050.0);
-		glVertex3f(31350.0, 10000.0, 11100.0);
-		glVertex3f(31350.0, 10500.0, 11100.0);
-		glVertex3f(31350.0, 10500.0, 11050.0);
-	glEnd();
-	glBegin(GL_POLYGON); //top
-		glVertex3f(31350.0, 10500.0, 11050.0);
-		glVertex3f(31350.0, 10500.0, 11100.0);
-		glVertex3f(31300.0, 10500.0, 11100.0);
-		glVertex3f(31300.0, 10500.0, 11050.0);
-	glEnd();
-
-	//posts (2)
-	glBegin(GL_POLYGON);
-		glVertex3f(31300.0, 10000.0, 11500.0);
-		glVertex3f(31300.0, 10500.0, 11500.0);
-		glVertex3f(31350.0, 10500.0, 11500.0);
-		glVertex3f(31350.0, 10000.0, 11500.0);
-	glEnd();
-	glBegin(GL_POLYGON);
-		glVertex3f(31300.0, 10000.0, 11500.0);
-		glVertex3f(31300.0, 10000.0, 11550.0);
-		glVertex3f(31300.0, 10500.0, 11550.0);
-		glVertex3f(31300.0, 10500.0, 11500.0);
-	glEnd();
-	glBegin(GL_POLYGON);
-		glVertex3f(31300.0, 10000.0, 11550.0);
-		glVertex3f(31300.0, 10500.0, 11550.0);
-		glVertex3f(31350.0, 10500.0, 11550.0);
-		glVertex3f(31350.0, 10000.0, 11550.0);
-	glEnd();
-	glBegin(GL_POLYGON);
-		glVertex3f(31350.0, 10000.0, 11500.0);
-		glVertex3f(31350.0, 10000.0, 11550.0);
-		glVertex3f(31350.0, 10500.0, 11550.0);
-		glVertex3f(31350.0, 10500.0, 11500.0);
-	glEnd();
-	glBegin(GL_POLYGON); //top
-		glVertex3f(31350.0, 10500.0, 11500.0);
-		glVertex3f(31350.0, 10500.0, 11550.0);
-		glVertex3f(31300.0, 10500.0, 11550.0);
-		glVertex3f(31300.0, 10500.0, 11500.0);
-	glEnd();
-
-	// banner
-	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(KM));
-	glBegin(GL_POLYGON);
-		glTexCoord2f(1.0, 1.0);
-		glVertex3f(31325.0, 10200.0, 11100.0);
-		glTexCoord2f(1.0, 0.0);
-		glVertex3f(31325.0, 10500.0, 11100.0);
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(31325.0, 10500.0, 11500.0);
-		glTexCoord2f(0.0, 1.0);
-		glVertex3f(31325.0, 10200.0, 11500.0);
-	glEnd();
-}
 
 
 //--------------------------------------------------------------------------------------
@@ -956,6 +897,20 @@ void keys(unsigned char key, int x, int y)
 		case 'S':
 		case 's':
 			cam.DirectionFB(-moveSpeed);
+			break;
+		case 'C':
+		case 'c':
+			if (cam.AmInSpace())
+			{
+				cam.DirectionUD(moveSpeed);
+			}
+			break;
+		case 'V':
+		case 'v':
+			if (cam.AmInSpace())
+			{
+				cam.DirectionUD(-moveSpeed);
+			}
 			break;
 	}
 }
@@ -4810,7 +4765,7 @@ void DisplayLargerTextures ()
 
 	// Phys sci door 1
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WINDOW_13));
-	glCallList(373);
+	//glCallList(373);
 	// Phys sci toilets
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WINDOW_14));
 	glCallList(374);
@@ -5251,10 +5206,12 @@ void CheckLocationForTeleport()
 void TeleportToPlanets()
 {
 	glClearColor(0, 0, 0, 1.0);
+	cam.ToFromSpace();
 	cam.Position(SunX, allPlanets[0][1], cam.GetFB(), 0);
 }
 void TeleportToBushCourt()
 {
+	cam.ToFromSpace();
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
 	cam.Position(32720.0, 9536.0, 4800.0, 180.0);
 }
