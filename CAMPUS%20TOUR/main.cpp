@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <fstream>
 #include <cstdio>
-#include <glut.h> //needs to be declared last for compiler reasons
+#include <GL/glut.h> //needs to be declared last for compiler reasons (and KM's computer needs the GL/ so sorry, it's back)
 
 #undef main
 
@@ -24,7 +24,7 @@ using namespace std;
 
 // USE THESE STTEINGS TO CHANGE SPEED (on different spec computers)
 // Set speed (steps)
-GLdouble movementSpeed = 10.0;
+GLdouble movementSpeed = 8.0; //KM 16/9/2016 slowing it down a little coz I keep speeding past the stairs
 GLdouble rotationSpeed = 0.005;
 
 // TEXTURE IMAGE AXISES
@@ -292,6 +292,25 @@ GLdouble rotationSpeed = 0.005;
 //exercise
 #define KM							223
 
+//Physical Sciences Corridor & Stairs (KM 15/9/2016)
+#define PS_AROUND_CNR				224
+#define PS_CEILING					225
+#define PS_DOOR						226
+#define PS_DOOR_FAR					227
+#define PS_DOOR_RIGHT				228
+#define PS_FLOOR					229
+#define PS_LEFT_WALL				230
+#define PS_OPP_DOOR					231
+#define PS_RIGHT					232
+#define PS_RIGHT_FAR				233
+#define PS_STEP_FRONT				234
+#define PS_STEP_TOP					235
+#define PS_TV_WALL					236
+#define PS_UNDERSTAIR				237
+#define PS_WALL_OPP_STAIR			238
+
+// 239 next
+
 
 //--------------------------------------------------------------------------------------
 
@@ -308,7 +327,7 @@ int width, height;
 // display campus map
 bool DisplayMap = false;
 // display welcome screen
-bool DisplayWelcome = true;
+bool DisplayWelcome = false;
 // display exit screen
 bool DisplayExit = false;
 // display light fittings
@@ -331,6 +350,7 @@ TexturedPolygons tp;
 
 //OBJLoader object
 OBJLoader obj;
+
 
 // initializes setting
 void myinit();
@@ -446,11 +466,11 @@ const GLdouble RotSpeedAlt = 0.001;
 
 //Masedawg
 GLfloat TeleportToX = 34467;
-GLfloat TeleportToY = 11450;
+GLfloat TeleportToY = 13000;
 GLfloat TeleportToZ = 26508;
 
 //Masedawg
-GLfloat TestX = 34467;
+GLfloat TestX = 34467; 
 GLfloat TestY = 11450;
 GLfloat TestZ = 26508;
 
@@ -465,9 +485,12 @@ void DisplayPlanets();
 void OrbitPlanets();
 
 //increasing movement speed
-int moveSpeed = 5;
+int moveSpeed = 2;
 //------------------------------END PLANETS VARS AND FUNCTIONS--------------------------------
-
+//------------------------------Corridor and stairs---------------------------------------
+void DrawCorridor();
+void DrawCorridorSteps(int stepH, int stepD, int stepW, int stepStartX, int stepStartY, int stepStartZ,int count);
+//------------------------------END Corridor and stairs
 //--------------------------------------------------------------------------------------
 //  Main function 
 //--------------------------------------------------------------------------------------
@@ -480,6 +503,8 @@ int main(int argc, char **argv)
 	glutCreateWindow("Murdoch University Campus Tour");
 
 	myinit();
+
+
 
 	glutIgnoreKeyRepeat(1);
 	glutSpecialFunc(movementKeys);
@@ -522,10 +547,10 @@ void myinit()
 	// turn collision detection on
 	cam.SetCollisionDetectionOn(true);
 	// set number of bounding boxes required
-	cam.SetNoBoundingBoxes(19);
+	cam.SetNoBoundingBoxes(25); //KM 16/9/2016 increased from 19
 	// set starting position of user
-	cam.Position(32720.0, 9536.0,	
-				 4800.0, 180.0);
+	cam.Position(32720.0, 9536.0,	4800.0, 180.0);
+	//cam.Position(32720.0, 11000,27300, 90.0); Temp starting position for easy access bug fixing
 	
 	CreatePlains();	
 	
@@ -577,6 +602,13 @@ void Display()
 	
 	glPopMatrix();
 
+	//test for positions KM
+	/*glPushMatrix();
+	glTranslatef(34260, 10000, 27035);
+	glutSolidSphere(260, 20, 20);
+	glPopMatrix();
+	*/
+
 	glDisable (GL_TEXTURE_2D); 
 
 	CheckLocationForTeleport();
@@ -585,7 +617,7 @@ void Display()
 	glPushMatrix();
 		glColor3f(1, 0, 0);
 		glTranslatef(TeleportToX, TeleportToY, TeleportToZ);
-		glutWireCube(1000);
+		glutWireCube(500);
 	glPopMatrix();
 
 	//Teleport Box Location (To Bush Court)
@@ -596,17 +628,21 @@ void Display()
 	glPopMatrix();
 	
 //	DisplayTest();
-
-	glPushMatrix();
-	glBegin(GL_POLYGON);
-		glVertex3f(30000,10000,30000);
-		glVertex3f(30000, 11000, 30000);
-		glVertex3f(31000, 11000, 30000);
-		glVertex3f(31000, 10000, 30000);
-	glEnd();
-	glPopMatrix();
+	glEnable(GL_TEXTURE_2D); //KM 15/9/2016 for texture in corridor
+	DrawCorridor();
+	DrawCorridorSteps(75,95,400,35700,10000,25960,10);
+	DrawCorridorSteps(75, -95, 400, 35700-(9*95), 10750, 26360, 10);
+	glDisable(GL_TEXTURE_2D); //KM 15/9/2016
 	DisplayPlanets();
 	OrbitPlanets();
+
+
+	glBegin(GL_POLYGON);
+	glVertex3f(34075, 10750, 26360);
+	glVertex3f(34075, 10750, 25590);
+	glVertex3f(34800, 10750, 25590);
+	glVertex3f(34800, 10750, 26360);
+	glEnd();
 
 	// clear buffers
 	glFlush();
@@ -1092,6 +1128,7 @@ void CreateBoundingBoxes()
 {
 	//KM 6/9/2016: to open gap in bounding box for doorway to corridor to portal had to split chanc block and update all the temp indexes in the below
 	//KM 13/9/2016: moved gap to further down into physical sciences doorway
+	//KM 15/9/2106: 3rd times a charm, 1st Phys Sci doorway
 	
 	// chanc block  
 	cam.SetAABBMaxX(0, 35879.0);
@@ -1105,115 +1142,131 @@ void CreateBoundingBoxes()
 	cam.SetAABBMaxZ(1, 25344.0);
 	cam.SetAABBMinZ(1, 22096.0);
 
-	// phy sci block panel 1
-	/*cam.SetAABBMaxX(2, 35879.0);
+	// phy sci block panel 1 pt 1 (side of phy sci building)
+	cam.SetAABBMaxX(2, 35879.0);
 	cam.SetAABBMinX(2, 33808.0);
-	cam.SetAABBMaxZ(2, 26752);
-	cam.SetAABBMinZ(2, 25344.0);*/
-	cam.SetAABBMaxX(2, 0.0);
-	cam.SetAABBMinX(2, 0.0);
-	cam.SetAABBMaxZ(2, 0.0);
-	cam.SetAABBMinZ(2, 0.0);
+	cam.SetAABBMaxZ(2, 25400.0);
+	cam.SetAABBMinZ(2, 25344.0);
 
-	// phy sci block 1st doorway
+	// phy sci block panel 1 pt 2 (first bit of front of phy sci building)
+	cam.SetAABBMaxX(3, 34260.0);
+	cam.SetAABBMinX(3, 33808.0);
+	cam.SetAABBMaxZ(3, 26400.0);
+	cam.SetAABBMinZ(3, 25344.0);
 
-	cam.SetAABBMaxX(3, 0.0);
-	cam.SetAABBMinX(3, 0.0);
-	cam.SetAABBMaxZ(3, 0.0);
-	cam.SetAABBMinZ(3, 0.0);
-	/*cam.SetAABBMaxX(3, 35879.0);
-	cam.SetAABBMinX(3, 35256.0);
-	cam.SetAABBMaxZ(3, 27559.0);
-	cam.SetAABBMinZ(3, 27352.0);*/
+	// phy sci block 1st doorway p1 (side of step in to door extending to end of internal left wall by steps)
+	cam.SetAABBMaxX(4, 35700.0);
+	cam.SetAABBMinX(4, 33808.0);
+	cam.SetAABBMaxZ(4, 26400.0);  
+	cam.SetAABBMinZ(4, 26300.0);
+
+	// phy sci block 1st doorway p2 
+	cam.SetAABBMaxX(5, 34300.0);
+	cam.SetAABBMinX(5, 34260.0);
+	cam.SetAABBMaxZ(5, 26775.0);
+	cam.SetAABBMinZ(5, 26400.0);
 	
+	// phy sci block 1st doorway p3
+	cam.SetAABBMaxX(6, 34300.0);
+	cam.SetAABBMinX(6, 34260.0);
+	cam.SetAABBMaxZ(6, 27559.0);
+	cam.SetAABBMinZ(6, 27295.0);
+
+	// phy sci block inside pt 1 (behind opp door)
+	cam.SetAABBMaxX(7, 38500.0);
+	cam.SetAABBMinX(7, 38300.0);
+	cam.SetAABBMaxZ(7, 30559.0);
+	cam.SetAABBMinZ(7, 25344.0);
+
+	// phy sci block inside pt 2 (behind right door)
+	cam.SetAABBMaxX(7, 38500.0);
+	cam.SetAABBMinX(7, 30500.0);
+	cam.SetAABBMaxZ(7, 37500.0);
+	cam.SetAABBMinZ(7, 37300.0);
+
+	// phy sci block inside pt 3 (behind far right wall) more measurement time
+	//cam.SetAABBMaxX(7, 38500.0);
+	//cam.SetAABBMinX(7, 26425.0);
+	//cam.SetAABBMaxZ(7, 37500.0);
+	//cam.SetAABBMinZ(7, 37300.0);
 
 	// phy sci block 2nd panel
-	/*cam.SetAABBMaxX(4, 35879.0);
-	cam.SetAABBMinX(4, 33808.0);
-	cam.SetAABBMaxZ(4, 36319.0);
-	cam.SetAABBMinZ(4, 27559.0);*/
-	cam.SetAABBMaxX(4, 0.0);
-	cam.SetAABBMinX(4, 0.0);
-	cam.SetAABBMaxZ(4, 0.0);
-	cam.SetAABBMinZ(4, 0.0);
+	cam.SetAABBMaxX(8, 36300.0);
+	cam.SetAABBMinX(8, 33808.0);
+	cam.SetAABBMaxZ(8, 36319.0);
+	cam.SetAABBMinZ(8, 27559.0);
+	
+	// phy sci block 2nd doorway
+	cam.SetAABBMaxX(9, 34460.0);
+	cam.SetAABBMinX(9, 34260.0);
+	cam.SetAABBMaxZ(9, 37855.0);
+	cam.SetAABBMinZ(9, 36750.0);
 
-	// phy sci block 2nd doorway   KM 13/9/2016 new gap here pt 1
-	cam.SetAABBMaxX(5, 34460.0);
-	cam.SetAABBMinX(5, 34260.0);
-	cam.SetAABBMaxZ(5, 27250.0);
-	cam.SetAABBMinZ(5, 26750.0);
-
-	// phy sci block 2nd doorway   KM 13/9/2016 new gap here pt 2
-	cam.SetAABBMaxX(6, 34460.0);
-	cam.SetAABBMinX(6, 34260.0);
-	cam.SetAABBMaxZ(6, 37855.0);
-	cam.SetAABBMinZ(6, 37180.0);
-
-	// phy sci block 3rd panel   KM 14/9/2016 adjusted back of box to allow room for internals
-	cam.SetAABBMaxX(7, 34000.0);
-	cam.SetAABBMinX(7, 33808.0);
-	cam.SetAABBMaxZ(7, 41127.0);
-	cam.SetAABBMinZ(7, 37855.0);
+	// phy sci block 3rd panel  
+	cam.SetAABBMaxX(10, 34000.0);
+	cam.SetAABBMinX(10, 33808.0);
+	cam.SetAABBMaxZ(10, 41127.0);
+	cam.SetAABBMinZ(10, 37855.0);
 
 	// drinks machine
-	cam.SetAABBMaxX(8, 35879.0);
-	cam.SetAABBMinX(8, 34704.0);
-	cam.SetAABBMaxZ(8, 25344.0);
-	cam.SetAABBMinZ(8, 24996.0);
+	cam.SetAABBMaxX(11, 35879.0);
+	cam.SetAABBMinX(11, 34704.0);
+	cam.SetAABBMaxZ(11, 25344.0);
+	cam.SetAABBMinZ(11, 24996.0);
 		
 	// bottom of steps
-	cam.SetAABBMaxX(9, 33808.0);
-	cam.SetAABBMinX(9, 0.0);
-	cam.SetAABBMaxZ(9, 4688.0);
-	cam.SetAABBMinZ(9, 0.0);
+	cam.SetAABBMaxX(12, 33808.0);
+	cam.SetAABBMinX(12, 0.0);
+	cam.SetAABBMaxZ(12, 4688.0);
+	cam.SetAABBMinZ(12, 0.0);
 
 	// end of phy sci block exit (top of steps)
-	cam.SetAABBMaxX(10, 35879.0);
-	cam.SetAABBMinX(10, 34320.0);
-	cam.SetAABBMaxZ(10, 43056.0);
-	cam.SetAABBMinZ(10, 41127.0);
+	cam.SetAABBMaxX(13, 35879.0);
+	cam.SetAABBMinX(13, 34320.0);
+	cam.SetAABBMaxZ(13, 43056.0);
+	cam.SetAABBMinZ(13, 41127.0);
 
 	// library end panel
-	cam.SetAABBMaxX(11, 34320.0);
-	cam.SetAABBMinX(11, 6514.0);
-	cam.SetAABBMaxZ(11, 50000.0);
-	cam.SetAABBMinZ(11, 43036.0);
+	cam.SetAABBMaxX(14, 34320.0);
+	cam.SetAABBMinX(14, 6514.0);
+	cam.SetAABBMaxZ(14, 50000.0);
+	cam.SetAABBMinZ(14, 43036.0);
 
 	// KBLT
-	cam.SetAABBMaxX(12, 28104.0);
-	cam.SetAABBMinX(12, 25608.0);
-	cam.SetAABBMaxZ(12, 43046.0);
-	cam.SetAABBMinZ(12, 42754.0);
+	cam.SetAABBMaxX(15, 28104.0);
+	cam.SetAABBMinX(15, 25608.0);
+	cam.SetAABBMaxZ(15, 43046.0);
+	cam.SetAABBMinZ(15, 42754.0);
 
 	// Canteen block
-	cam.SetAABBMaxX(13, 2608.0);
-	cam.SetAABBMinX(13, 0.0);
-	cam.SetAABBMaxZ(13, 49046.0);
-	cam.SetAABBMinZ(13, 0.0);
+	cam.SetAABBMaxX(16, 2608.0);
+	cam.SetAABBMinX(16, 0.0);
+	cam.SetAABBMaxZ(16, 49046.0);
+	cam.SetAABBMinZ(16, 0.0);
 
 	// Telephones
-	cam.SetAABBMaxX(14, 33892.0);
-	cam.SetAABBMinX(14, 33872.0);
-	cam.SetAABBMaxZ(14, 25344.0);
-	cam.SetAABBMinZ(14, 25173.0);
+	cam.SetAABBMaxX(17, 33892.0);
+	cam.SetAABBMinX(17, 33872.0);
+	cam.SetAABBMaxZ(17, 25344.0);
+	cam.SetAABBMinZ(17, 25173.0);
 
 	// Telephones
-	cam.SetAABBMaxX(15, 34277.0);
-	cam.SetAABBMinX(15, 34157.0);
-	cam.SetAABBMaxZ(15, 25344.0);
-	cam.SetAABBMinZ(15, 25173.0);
+	cam.SetAABBMaxX(18, 34277.0);
+	cam.SetAABBMinX(18, 34157.0);
+	cam.SetAABBMaxZ(18, 25344.0);
+	cam.SetAABBMinZ(18, 25173.0);
 
 	// Telephones
-	cam.SetAABBMaxX(16, 35462.0);
-	cam.SetAABBMinX(16, 34541.0);
-	cam.SetAABBMaxZ(16, 25344.0);
-	cam.SetAABBMinZ(16, 25173.0);
+	cam.SetAABBMaxX(19, 35462.0);
+	cam.SetAABBMinX(19, 34541.0);
+	cam.SetAABBMaxZ(19, 25344.0);
+	cam.SetAABBMinZ(19, 25173.0);
 
 	// Wall by Steps
-	cam.SetAABBMaxX(17, 31548.0);
-	cam.SetAABBMinX(17, 31444.0);
-	cam.SetAABBMaxZ(17, 10395.0);
-	cam.SetAABBMinZ(17, 4590.0);
+	cam.SetAABBMaxX(20, 31548.0);
+	cam.SetAABBMinX(20, 31444.0);
+	cam.SetAABBMaxZ(20, 10395.0);
+	cam.SetAABBMinZ(20, 4590.0);
 }
 
 //--------------------------------------------------------------------------------------
@@ -1223,13 +1276,13 @@ void CreatePlains()
 {	
 	// grass slope
 	cam.SetPlains (ZY_PLAIN, 4848.0 ,31568.0 ,9536.0, 10450.0 ,6200.0, 10000.0);
-
+	/*
 	// flat land (pavement and grass)
 	cam.SetPlains (FLAT_PLAIN, 0.0, 36000.0 , 10450.0, 10450.0, 10000.0, 17000.0);
 	cam.SetPlains (FLAT_PLAIN, 0.0, 6500.0 , 10450.0, 10450.0, 17000.0, 40000.0);
 	cam.SetPlains (FLAT_PLAIN, 27000.0, 36000.0 , 10450.0, 10450.0, 17000.0, 40000.0);
 	cam.SetPlains (FLAT_PLAIN, 0.0, 36000.0 , 10450.0, 10450.0, 40000.0, 50000.0);
-	
+	*/
 	// top of lower hill
 	cam.SetPlains (FLAT_PLAIN, 9000.0, 22000.0 , 10650.0, 10650.0, 19000.0, 23000.0);
 	cam.SetPlains (FLAT_PLAIN, 9000.0, 10000.0 , 10650.0, 10650.0, 28000.0, 33000.0);
@@ -1243,10 +1296,27 @@ void CreatePlains()
 	// top of higher hill
 	cam.SetPlains (FLAT_PLAIN, 14000.0, 18000.0 , 10875.0, 108075.0, 28000.0, 33000.0);
 	// sides of higher hill
+	cam.SetPlains(XY_PLAIN, 34260, 35700, 11875.0, 10450.0, 25500, 26000.0); // masedawg first step plain
+
+	cam.SetPlains(XY_PLAIN, 34260, 35700, 11450.0, 12875.0, 26000, 26500.0); // 2nd step plain
+
 	cam.SetPlains (ZY_PLAIN, 10000.0, 22000.0 , 10650.0, 10875.0, 23000.0, 28000.0);
 	cam.SetPlains (ZY_PLAIN, 10000.0, 22000.0 , 10875.0, 10650.0, 33000.0, 36000.0);
 	cam.SetPlains (XY_PLAIN, 10000.0, 14000.0 , 10650.0, 10875.0, 23000.0, 36000.0);
 	cam.SetPlains (XY_PLAIN, 18000.0, 22000.0 , 10875.0, 10650.0, 23000.0, 36000.0);
+
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	//stepStartX - (i * stepD), stepStartY + (i * stepH), stepStartZ
+		//cam.SetPlains(XY_PLAIN, 35700, 35700 - (10 * 95), 10000, 10000 + (10 * 75), 26400, 26000);
+	//}
+
+		glBegin(GL_POLYGON);
+		glVertex3f(34000, 10450.0, 26400);
+		glVertex3f(34000, 10450.0, 26000);
+		glVertex3f(34000 - (10 * 95), 10450.0 + (10 * 75), 26000);
+		glVertex3f(34000 - (10 * 95), 10450.0 + (10 * 75), 26400);
+		glEnd();
 
 	//entance steps
 	step = 10450.0;
@@ -1262,7 +1332,27 @@ void CreatePlains()
 			step -= 48.0;
 		}
 	}
+	/*
+	//first steps in physci corridor. KM 16/9/2016 
+	step = 10000; // y, current height of step
+	stepLength = 35700; //x, starts at, adjusted by depth of step
+	for (int i = 0; i < 10; i++)
+	{
+		cam.SetPlains(FLAT_PLAIN, stepLength, stepLength+95, step, step, 25960, 26360); //type, xs, xe, ys, ye, zs, ze
+		step += 75;
+		stepLength += 95;
+	}
 
+	//second steps in physci corridor. KM 16/9/2016 
+	step = 10750; // y, current height of step
+	stepLength = 35700-(9*95); //x, starts at, adjusted by depth of step
+	for (int i = 0; i < 10; i++)
+	{
+		cam.SetPlains(FLAT_PLAIN, stepLength, stepLength - 95, step, step, 26360, 26760); //type, xs, xe, ys, ye, zs, ze
+		step += 75;
+		stepLength -= 95;
+	}
+	*/
 	// temp plain to take down to ECL1
 	cam.SetPlains (ZY_PLAIN, 3200.0, 4800.0 , 10450.0, 9370.0, 53400.0, 57900.0);
 }
@@ -1960,6 +2050,52 @@ void CreateTextures()
 	//exercise
 	image = tp.LoadTexture("data/KM.raw", 300, 400);
 	tp.CreateTexture(KM, image, 300, 400);
+
+	//Physical Sciences Corridor & Stairs (KM 15/9/2016)
+	image = tp.LoadTexture("data/PSaroundCorner.raw", 2862, 1024);
+	tp.CreateTexture(PS_AROUND_CNR, image, 2862, 1024);
+
+	image = tp.LoadTexture("data/PSceiling.raw", 1024, 1365);
+	tp.CreateTexture(PS_CEILING, image, 1024, 1365);
+
+	image = tp.LoadTexture("data/PSdoor.raw", 1362, 1024);
+	tp.CreateTexture(PS_DOOR, image, 1362, 1024);
+
+	image = tp.LoadTexture("data/PSdoorFar.raw", 1024, 1331);
+	tp.CreateTexture(PS_DOOR_FAR, image, 1024, 1331);
+
+	image = tp.LoadTexture("data/PSdoorRight.raw", 1097, 1024);
+	tp.CreateTexture(PS_DOOR_RIGHT, image, 1097, 1024);
+
+	image = tp.LoadTexture("data/PSfloor.raw", 1024, 1365);
+	tp.CreateTexture(PS_FLOOR, image, 1024, 1365);
+
+	image = tp.LoadTexture("data/PSleftWall.raw", 1024, 1077);
+	tp.CreateTexture(PS_LEFT_WALL, image, 1024, 1077);
+
+	image = tp.LoadTexture("data/PSoppDoor.raw", 1101, 1024);
+	tp.CreateTexture(PS_OPP_DOOR, image, 1101, 1024);
+
+	image = tp.LoadTexture("data/PSright.raw", 1867, 1024);
+	tp.CreateTexture(PS_RIGHT, image, 1867, 1024);
+
+	image = tp.LoadTexture("data/PSrightFar.raw", 2379, 1024);
+	tp.CreateTexture(PS_RIGHT_FAR, image, 2379, 1024);
+
+	image = tp.LoadTexture("data/PSstepFront.raw", 1024, 129);
+	tp.CreateTexture(PS_STEP_FRONT, image, 1024, 129);
+
+	image = tp.LoadTexture("data/PSstepTop.raw", 1024, 243);
+	tp.CreateTexture(PS_STEP_TOP, image, 1024, 243);
+
+	image = tp.LoadTexture("data/PStvWall.raw", 1024, 955);
+	tp.CreateTexture(PS_TV_WALL, image, 1024, 955);
+
+	image = tp.LoadTexture("data/PSunderStair.raw", 1024, 1439);
+	tp.CreateTexture(PS_UNDERSTAIR, image, 1024, 1439);
+
+	image = tp.LoadTexture("data/PSwallOppStair.raw", 1024, 1580);
+	tp.CreateTexture(PS_WALL_OPP_STAIR, image, 1024, 1580);
 
 
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);	
@@ -4078,6 +4214,7 @@ void DrawEntranceSteps ()
 			step -= 48.0;
 		}
 	}
+
 	step = 9808.0;
 	stepLength = 8882.0;
 	for (int i = 290; i < 293 ; i ++)
@@ -4091,6 +4228,9 @@ void DrawEntranceSteps ()
 	// steps next to GCL1
 	tp.CreateDisplayList (XZ, 206, 128.0, 1024.0, 34508.0, 10000.0, 41127, 1.0, 0.942);
 	tp.CreateDisplayList (XZ, 207, 256.0, 1024.0, 34352.0, 10000.0, 41127, 0.609, 0.942);
+	
+
+
 	
 }
 
@@ -5307,6 +5447,286 @@ void TeleportToBushCourt()
 }
 //------------------END PLANETS FUNCTIONS---------------------
 
+//******************CORRIDOR FUNCTIONS************************
+
+void DrawCorridor()
+{
+	//Right Door Wall
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_RIGHT)); //KM 15/9/16 added textures
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(36300, 10000, 27540);
+		glTexCoord2f(1.0, 0.0); 
+		glVertex3f(36300, 11000, 27540);
+		glTexCoord2f(0.0, 0.0); 
+		glVertex3f(34260, 11000, 27540);
+		glTexCoord2f(0.0, 1.0); 
+		glVertex3f(34260, 10000, 27540);
+	glEnd();
+
+	//Around R-corner
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_AROUND_CNR));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(36300, 10000, 27540);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(36300, 11000, 27540);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(36300, 11000, 30600);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(36300, 10000, 30600);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_DOOR_RIGHT));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(36300, 10000, 30600);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(36300, 11000, 30600);	
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(37300, 11000, 30600);	
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(37300, 10000, 30600);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_RIGHT_FAR));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(37300, 10000, 28250);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(37300, 11000, 28250);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(37300, 11000, 30600);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(37300, 10000, 30600);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(37300, 10000, 28250);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(37300, 11000, 28250);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(38300, 11000, 28250);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(38300, 10000, 28250);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_DOOR_FAR));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(38300, 10000, 28250);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(38300, 11000, 28250);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(38300, 11000, 27240);
+		glTexCoord2f(0.0, 1.0);
+	glVertex3f(38300, 10000, 27240);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(37300, 10000, 27240);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(37300, 11000, 27240);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(38300, 11000, 27240);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(38300, 10000, 27240);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_OPP_DOOR));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(37300, 10000, 27240);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(37300, 11000, 27240);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(37300, 11000, 26425);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(37300, 10000, 26425);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_TV_WALL));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(37300, 10000, 26425); 
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(37300, 11000, 26425);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(36250, 11000, 26425);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(36250, 10000, 26425);
+	glEnd();
+
+	// Left Door Panel
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(34260, 10000, 26400);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(34260, 11000, 26400);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(34260, 11000, 26750);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(34260, 10000, 26750);
+	glEnd();
+
+	//Left Door Wall
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_LEFT_WALL));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(35700, 10000, 26400);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(35700, 11000, 26400);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(34260, 11000, 26400);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(34260, 10000, 26400);
+	glEnd();
+
+
+	//Left Door Wall Thickness
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WALL_BRICK_YZ));
+	glColor3f(0, 1, 1);
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(35700, 10000, 26370);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(35700, 12000, 26370);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(34260, 12000, 26370);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(34260, 10000, 26370);
+	glEnd();
+
+	glColor3f(1, 1, 0);
+	glBegin(GL_POLYGON);
+	glVertex3f(35700, 10000, 26370);
+	glVertex3f(35700, 11000, 26370);
+	glVertex3f(35700, 11000, 26400);
+	glVertex3f(35700, 10000, 26400);
+	glEnd();
+
+	//Stair Wall 
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WALL_BRICK_YZ));
+	glColor3f(0, 0, 1);
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(36300, 10000, 25500);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(36300, 12500, 25500);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(34260, 12500, 25500);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(34260, 10000, 25500);
+	glEnd();
+
+	//Stair Wall Back
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WALL_BRICK_YZ));
+	glColor3f(1, 0, 1);
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(34260, 10000, 26370);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(34260, 12500, 26370);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(34260, 12500, 25400);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(34260, 10000, 25400);
+	glEnd();
+
+	//Front Stair Wall
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WALL_BRICK_YZ));
+	glColor3f(1, 1, 1);
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(36250, 10000, 26425);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(36250, 12500, 26425);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(36250, 12500, 25400);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(36250, 10000, 25400);
+	glEnd();
+
+	//Stair well roof
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_CEILING));
+	glColor3f(1, 1, 1);
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(36250, 12500, 26425);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(36250, 12500, 25400);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(34260, 12500, 25400);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(34260, 12500, 26425);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_FLOOR));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(34260, 10000, 25400);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(34260, 10000, 30600);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(38300, 10000, 30600);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(38300, 10000, 25400);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_CEILING));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(34260, 11000, 26370);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(34260, 11000, 30600);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(38300, 11000, 30600);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(38300, 11000, 26370);
+	glEnd();
+}
+
+void DrawCorridorSteps(int stepH, int stepD, int stepW, int stepStartX, int stepStartY, int stepStartZ, int count)
+{
+	// our steps
+	for (int i = 0; i < count; i++)
+	{
+		//top of steps
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_STEP_FRONT)); 
+		glBegin(GL_POLYGON);
+			glColor3f(0, 1, 0);
+			glTexCoord2f(1.0, 1.0);
+			glVertex3f(stepStartX - (i * stepD), stepStartY + (i * stepH), stepStartZ);
+			glTexCoord2f(0.0, 1.0);
+			glVertex3f(stepStartX - (i * stepD), stepStartY + (i * stepH), stepStartZ-stepW);
+			glTexCoord2f(0.0, 0.0);
+			glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ-stepW);
+			glTexCoord2f(1.0, 0.0);
+			glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
+		glEnd();
+		
+		// front of steps
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_STEP_TOP));
+		glBegin(GL_POLYGON);
+			glColor3f(1, 0, 1);
+			glTexCoord2f(1.0, 0.0);
+			glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
+			glTexCoord2f(0.0, 0.0);
+			glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ - stepW);
+			glTexCoord2f(0.0, 1.0);
+			glVertex3f(stepStartX - stepD - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ - stepW);
+			glTexCoord2f(1.0, 1.0);
+			glVertex3f(stepStartX - stepD - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
+		glEnd();
+		
+	}
+}
+//***********************END CORRIDOR FUNCTIONS***********************
 // --------------------------------------------------------------------------------------
 // Display Light Fittings
 // --------------------------------------------------------------------------------------
