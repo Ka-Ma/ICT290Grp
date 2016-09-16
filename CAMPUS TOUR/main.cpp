@@ -9,7 +9,8 @@
 #include <algorithm>
 #include <fstream>
 #include <cstdio>
-#include <GL/glut.h> //needs to be declared last for compiler reasons (and KM's computer needs the GL/ so sorry, it's back)
+
+#include <glut.h> //needs to be declared last for compiler reasons
 
 #undef main
 
@@ -466,11 +467,11 @@ const GLdouble RotSpeedAlt = 0.001;
 
 //Masedawg
 GLfloat TeleportToX = 34467;
-GLfloat TeleportToY = 13000;
+GLfloat TeleportToY = 11450;
 GLfloat TeleportToZ = 26508;
 
 //Masedawg
-GLfloat TestX = 34467; 
+GLfloat TestX = 34467;
 GLfloat TestY = 11450;
 GLfloat TestZ = 26508;
 
@@ -633,6 +634,16 @@ void Display()
 	DrawCorridorSteps(75,95,400,35700,10000,25960,10);
 	DrawCorridorSteps(75, -95, 400, 35700-(9*95), 10750, 26360, 10);
 	glDisable(GL_TEXTURE_2D); //KM 15/9/2016
+
+	//glPushMatrix();
+	//glBegin(GL_POLYGON);
+	//	glVertex3f(30000,10000,30000);
+	//	glVertex3f(30000, 11000, 30000);
+	//	glVertex3f(31000, 11000, 30000);
+	//	glVertex3f(31000, 10000, 30000);
+	//glEnd();
+	//glPopMatrix();
+
 	DisplayPlanets();
 	OrbitPlanets();
 
