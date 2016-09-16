@@ -599,12 +599,12 @@ void Display()
 	
 	glPopMatrix();
 
-	//test for positions
-	glPushMatrix();
+	//test for positions KM
+	/*glPushMatrix();
 	glTranslatef(34260, 10000, 27035);
 	glutSolidSphere(260, 20, 20);
 	glPopMatrix();
-
+	*/
 
 	glDisable (GL_TEXTURE_2D); 
 
@@ -1146,13 +1146,13 @@ void CreateBoundingBoxes()
 	cam.SetAABBMinZ(2, 25344.0);
 
 	// phy sci block panel 1 pt 2 (first bit of front of phy sci building)
-	cam.SetAABBMaxX(3, 33879.0);
+	cam.SetAABBMaxX(3, 34260.0);
 	cam.SetAABBMinX(3, 33808.0);
 	cam.SetAABBMaxZ(3, 26400.0);
 	cam.SetAABBMinZ(3, 25344.0);
 
-	// phy sci block 1st doorway p1 (side of step in to door)
-	cam.SetAABBMaxX(4, 34300.0);
+	// phy sci block 1st doorway p1 (side of step in to door extending to end of internal left wall by steps)
+	cam.SetAABBMaxX(4, 35700.0);
 	cam.SetAABBMinX(4, 33808.0);
 	cam.SetAABBMaxZ(4, 26400.0);  
 	cam.SetAABBMinZ(4, 26300.0);
@@ -1169,11 +1169,23 @@ void CreateBoundingBoxes()
 	cam.SetAABBMaxZ(6, 27559.0);
 	cam.SetAABBMinZ(6, 27295.0);
 
-	// phy sci block inside pt 1
+	// phy sci block inside pt 1 (behind opp door)
 	cam.SetAABBMaxX(7, 38500.0);
 	cam.SetAABBMinX(7, 38300.0);
 	cam.SetAABBMaxZ(7, 30559.0);
 	cam.SetAABBMinZ(7, 25344.0);
+
+	// phy sci block inside pt 2 (behind right door)
+	cam.SetAABBMaxX(7, 38500.0);
+	cam.SetAABBMinX(7, 30500.0);
+	cam.SetAABBMaxZ(7, 37500.0);
+	cam.SetAABBMinZ(7, 37300.0);
+
+	// phy sci block inside pt 3 (behind far right wall) more measurement time
+	//cam.SetAABBMaxX(7, 38500.0);
+	//cam.SetAABBMinX(7, 26425.0);
+	//cam.SetAABBMaxZ(7, 37500.0);
+	//cam.SetAABBMinZ(7, 37300.0);
 
 	// phy sci block 2nd panel
 	cam.SetAABBMaxX(8, 36300.0);
