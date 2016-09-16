@@ -351,6 +351,7 @@ TexturedPolygons tp;
 //OBJLoader object
 OBJLoader obj;
 
+
 // initializes setting
 void myinit();
 
@@ -465,11 +466,11 @@ const GLdouble RotSpeedAlt = 0.001;
 
 //Masedawg
 GLfloat TeleportToX = 34467;
-GLfloat TeleportToY = 11450;
+GLfloat TeleportToY = 13000;
 GLfloat TeleportToZ = 26508;
 
 //Masedawg
-GLfloat TestX = 34467;
+GLfloat TestX = 34467; 
 GLfloat TestY = 11450;
 GLfloat TestZ = 26508;
 
@@ -484,7 +485,7 @@ void DisplayPlanets();
 void OrbitPlanets();
 
 //increasing movement speed
-int moveSpeed = 5;
+int moveSpeed = 2;
 //------------------------------END PLANETS VARS AND FUNCTIONS--------------------------------
 //------------------------------Corridor and stairs---------------------------------------
 void DrawCorridor();
@@ -502,6 +503,8 @@ int main(int argc, char **argv)
 	glutCreateWindow("Murdoch University Campus Tour");
 
 	myinit();
+
+
 
 	glutIgnoreKeyRepeat(1);
 	glutSpecialFunc(movementKeys);
@@ -546,8 +549,8 @@ void myinit()
 	// set number of bounding boxes required
 	cam.SetNoBoundingBoxes(25); //KM 16/9/2016 increased from 19
 	// set starting position of user
-	//cam.Position(32720.0, 9536.0,	4800.0, 180.0);
-	cam.Position(32720.0, 11000,27300, 90.0);
+	cam.Position(32720.0, 9536.0,	4800.0, 180.0);
+	//cam.Position(32720.0, 11000,27300, 90.0); Temp starting position for easy access bug fixing
 	
 	CreatePlains();	
 	
@@ -614,7 +617,7 @@ void Display()
 	glPushMatrix();
 		glColor3f(1, 0, 0);
 		glTranslatef(TeleportToX, TeleportToY, TeleportToZ);
-		glutWireCube(1000);
+		glutWireCube(500);
 	glPopMatrix();
 
 	//Teleport Box Location (To Bush Court)
@@ -1273,13 +1276,13 @@ void CreatePlains()
 {	
 	// grass slope
 	cam.SetPlains (ZY_PLAIN, 4848.0 ,31568.0 ,9536.0, 10450.0 ,6200.0, 10000.0);
-
+	/*
 	// flat land (pavement and grass)
 	cam.SetPlains (FLAT_PLAIN, 0.0, 36000.0 , 10450.0, 10450.0, 10000.0, 17000.0);
 	cam.SetPlains (FLAT_PLAIN, 0.0, 6500.0 , 10450.0, 10450.0, 17000.0, 40000.0);
 	cam.SetPlains (FLAT_PLAIN, 27000.0, 36000.0 , 10450.0, 10450.0, 17000.0, 40000.0);
 	cam.SetPlains (FLAT_PLAIN, 0.0, 36000.0 , 10450.0, 10450.0, 40000.0, 50000.0);
-	
+	*/
 	// top of lower hill
 	cam.SetPlains (FLAT_PLAIN, 9000.0, 22000.0 , 10650.0, 10650.0, 19000.0, 23000.0);
 	cam.SetPlains (FLAT_PLAIN, 9000.0, 10000.0 , 10650.0, 10650.0, 28000.0, 33000.0);
@@ -1293,6 +1296,10 @@ void CreatePlains()
 	// top of higher hill
 	cam.SetPlains (FLAT_PLAIN, 14000.0, 18000.0 , 10875.0, 108075.0, 28000.0, 33000.0);
 	// sides of higher hill
+	cam.SetPlains(XY_PLAIN, 34260, 35700, 11875.0, 10450.0, 25500, 26000.0); // masedawg first step plain
+
+	cam.SetPlains(XY_PLAIN, 34260, 35700, 11450.0, 12875.0, 26000, 26500.0); // 2nd step plain
+
 	cam.SetPlains (ZY_PLAIN, 10000.0, 22000.0 , 10650.0, 10875.0, 23000.0, 28000.0);
 	cam.SetPlains (ZY_PLAIN, 10000.0, 22000.0 , 10875.0, 10650.0, 33000.0, 36000.0);
 	cam.SetPlains (XY_PLAIN, 10000.0, 14000.0 , 10650.0, 10875.0, 23000.0, 36000.0);
@@ -1301,7 +1308,7 @@ void CreatePlains()
 	//for (int i = 0; i < 10; i++)
 	//{
 	//	//stepStartX - (i * stepD), stepStartY + (i * stepH), stepStartZ
-		cam.SetPlains(XY_PLAIN, 35700, 35700 - (10 * 95), 10000, 10000 + (10 * 75), 26400, 26000);
+		//cam.SetPlains(XY_PLAIN, 35700, 35700 - (10 * 95), 10000, 10000 + (10 * 75), 26400, 26000);
 	//}
 
 		glBegin(GL_POLYGON);
@@ -1325,7 +1332,7 @@ void CreatePlains()
 			step -= 48.0;
 		}
 	}
-
+	/*
 	//first steps in physci corridor. KM 16/9/2016 
 	step = 10000; // y, current height of step
 	stepLength = 35700; //x, starts at, adjusted by depth of step
@@ -1345,7 +1352,7 @@ void CreatePlains()
 		step += 75;
 		stepLength -= 95;
 	}
-
+	*/
 	// temp plain to take down to ECL1
 	cam.SetPlains (ZY_PLAIN, 3200.0, 4800.0 , 10450.0, 9370.0, 53400.0, 57900.0);
 }
@@ -4207,6 +4214,7 @@ void DrawEntranceSteps ()
 			step -= 48.0;
 		}
 	}
+
 	step = 9808.0;
 	stepLength = 8882.0;
 	for (int i = 290; i < 293 ; i ++)
@@ -4220,6 +4228,9 @@ void DrawEntranceSteps ()
 	// steps next to GCL1
 	tp.CreateDisplayList (XZ, 206, 128.0, 1024.0, 34508.0, 10000.0, 41127, 1.0, 0.942);
 	tp.CreateDisplayList (XZ, 207, 256.0, 1024.0, 34352.0, 10000.0, 41127, 0.609, 0.942);
+	
+
+
 	
 }
 
@@ -5606,9 +5617,9 @@ void DrawCorridor()
 		glTexCoord2f(1.0, 1.0);
 		glVertex3f(36300, 10000, 25500);
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(36300, 12000, 25500);
+		glVertex3f(36300, 12500, 25500);
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(34260, 12000, 25500);
+		glVertex3f(34260, 12500, 25500);
 		glTexCoord2f(0.0, 1.0);
 		glVertex3f(34260, 10000, 25500);
 	glEnd();
@@ -5620,9 +5631,9 @@ void DrawCorridor()
 		glTexCoord2f(1.0, 1.0);
 		glVertex3f(34260, 10000, 26370);
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(34260, 12000, 26370);
+		glVertex3f(34260, 12500, 26370);
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(34260, 12000, 25400);
+		glVertex3f(34260, 12500, 25400);
 		glTexCoord2f(0.0, 1.0);
 		glVertex3f(34260, 10000, 25400);
 	glEnd();
@@ -5634,11 +5645,25 @@ void DrawCorridor()
 		glTexCoord2f(1.0, 1.0);
 		glVertex3f(36250, 10000, 26425);
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(36250, 12000, 26425);
+		glVertex3f(36250, 12500, 26425);
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(36250, 12000, 25400);
+		glVertex3f(36250, 12500, 25400);
 		glTexCoord2f(0.0, 1.0);
 		glVertex3f(36250, 10000, 25400);
+	glEnd();
+
+	//Stair well roof
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_CEILING));
+	glColor3f(1, 1, 1);
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(36250, 12500, 26425);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(36250, 12500, 25400);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(34260, 12500, 25400);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(34260, 12500, 26425);
 	glEnd();
 
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_FLOOR));
@@ -5668,8 +5693,10 @@ void DrawCorridor()
 
 void DrawCorridorSteps(int stepH, int stepD, int stepW, int stepStartX, int stepStartY, int stepStartZ, int count)
 {
+	// our steps
 	for (int i = 0; i < count; i++)
 	{
+		//top of steps
 		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_STEP_FRONT)); 
 		glBegin(GL_POLYGON);
 			glColor3f(0, 1, 0);
@@ -5682,7 +5709,8 @@ void DrawCorridorSteps(int stepH, int stepD, int stepW, int stepStartX, int step
 			glTexCoord2f(1.0, 0.0);
 			glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
 		glEnd();
-
+		
+		// front of steps
 		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_STEP_TOP));
 		glBegin(GL_POLYGON);
 			glColor3f(1, 0, 1);
@@ -5695,6 +5723,7 @@ void DrawCorridorSteps(int stepH, int stepD, int stepW, int stepStartX, int step
 			glTexCoord2f(1.0, 1.0);
 			glVertex3f(stepStartX - stepD - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
 		glEnd();
+		
 	}
 }
 //***********************END CORRIDOR FUNCTIONS***********************
