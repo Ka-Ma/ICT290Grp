@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <fstream>
 #include <cstdio>
-#include <GL/glut.h> //needs to be declared last for compiler reasons
+#include <GL/glut.h> //needs to be declared last for compiler reasons (and KM's computer needs the GL/ so sorry, it's back)
 
 #undef main
 
@@ -24,7 +24,7 @@ using namespace std;
 
 // USE THESE STTEINGS TO CHANGE SPEED (on different spec computers)
 // Set speed (steps)
-GLdouble movementSpeed = 10.0;
+GLdouble movementSpeed = 8.0; //KM 16/9/2016 slowing it down a little coz I keep speeding past the stairs
 GLdouble rotationSpeed = 0.005;
 
 // TEXTURE IMAGE AXISES
@@ -601,8 +601,8 @@ void Display()
 
 	//test for positions
 	glPushMatrix();
-	glTranslatef(33808, 10000, 27559);
-	glutSolidSphere(300, 20, 20);
+	glTranslatef(34260, 10000, 27035);
+	glutSolidSphere(260, 20, 20);
 	glPopMatrix();
 
 
@@ -1139,35 +1139,35 @@ void CreateBoundingBoxes()
 	cam.SetAABBMaxZ(1, 25344.0);
 	cam.SetAABBMinZ(1, 22096.0);
 
-	// phy sci block panel 1 pt 1
+	// phy sci block panel 1 pt 1 (side of phy sci building)
 	cam.SetAABBMaxX(2, 35879.0);
 	cam.SetAABBMinX(2, 33808.0);
 	cam.SetAABBMaxZ(2, 25400.0);
 	cam.SetAABBMinZ(2, 25344.0);
 
-	// phy sci block panel 1 pt 2
+	// phy sci block panel 1 pt 2 (first bit of front of phy sci building)
 	cam.SetAABBMaxX(3, 33879.0);
 	cam.SetAABBMinX(3, 33808.0);
 	cam.SetAABBMaxZ(3, 26400.0);
 	cam.SetAABBMinZ(3, 25344.0);
 
-	// phy sci block 1st doorway p1
+	// phy sci block 1st doorway p1 (side of step in to door)
 	cam.SetAABBMaxX(4, 34300.0);
 	cam.SetAABBMinX(4, 33808.0);
 	cam.SetAABBMaxZ(4, 26400.0);  
 	cam.SetAABBMinZ(4, 26300.0);
 
-	// phy sci block 1st doorway p2
+	// phy sci block 1st doorway p2 
 	cam.SetAABBMaxX(5, 34300.0);
 	cam.SetAABBMinX(5, 34260.0);
-	cam.SetAABBMaxZ(5, 26750.0);
+	cam.SetAABBMaxZ(5, 26775.0);
 	cam.SetAABBMinZ(5, 26400.0);
 	
 	// phy sci block 1st doorway p3
 	cam.SetAABBMaxX(6, 34300.0);
 	cam.SetAABBMinX(6, 34260.0);
 	cam.SetAABBMaxZ(6, 27559.0);
-	cam.SetAABBMinZ(6, 27540.0);
+	cam.SetAABBMinZ(6, 27295.0);
 
 	// phy sci block inside pt 1
 	cam.SetAABBMaxX(7, 38500.0);
@@ -1185,7 +1185,7 @@ void CreateBoundingBoxes()
 	cam.SetAABBMaxX(9, 34460.0);
 	cam.SetAABBMinX(9, 34260.0);
 	cam.SetAABBMaxZ(9, 37855.0);
-	cam.SetAABBMinZ(9, 26750.0);
+	cam.SetAABBMinZ(9, 36750.0);
 
 	// phy sci block 3rd panel  
 	cam.SetAABBMaxX(10, 34000.0);
