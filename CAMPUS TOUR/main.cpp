@@ -467,7 +467,7 @@ const GLdouble RotSpeedAlt = 0.001;
 
 //Masedawg
 GLfloat TeleportToX = 34467;
-GLfloat TeleportToY = 11450;
+GLfloat TeleportToY = 13000;
 GLfloat TeleportToZ = 26508;
 
 //Masedawg
@@ -2055,8 +2055,12 @@ void CreateTextures()
 	tp.CreateTexture(217, image, 256, 256);
 	image = tp.LoadTexture("data/welcome.raw", 512, 512);
 	tp.CreateTexture(218, image, 512, 512);
+	image = tp.LoadTexture("data/MandH3.raw", 512, 512);
+	tp.CreateTexture(219, image, 512, 512);
+	/* original shay's
 	image = tp.LoadTexture("data/thanks.raw", 512, 512);
 	tp.CreateTexture(219, image, 512, 512);
+	*/
 
 	//exercise
 	image = tp.LoadTexture("data/KM.raw", 300, 400);

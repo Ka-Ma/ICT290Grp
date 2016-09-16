@@ -1,8 +1,33 @@
-﻿  EasySound.cpp
-EasySound.cpp(80): warning C4018: '>': signed/unsigned mismatch
+﻿  AABB.CPP
+  AABBLinkedList.cpp
+  AABBNode.cpp
+  camera.cpp
+  cameraMap.cpp
+  collision.cpp
+  EasySound.cpp
+EasySound.cpp(82): warning C4018: '>': signed/unsigned mismatch
+  main.cpp
+main.cpp(457): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+main.cpp(784): warning C4060: switch statement contains no 'case' or 'default' labels
+main.cpp(802): warning C4060: switch statement contains no 'case' or 'default' labels
+  OBJLoader.cpp
+OBJLoader.cpp(24): warning C4018: '<': signed/unsigned mismatch
+OBJLoader.cpp(59): warning C4018: '<': signed/unsigned mismatch
+OBJLoader.cpp(31): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(2254): note: see declaration of 'sscanf'
+OBJLoader.cpp(37): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(2254): note: see declaration of 'sscanf'
+OBJLoader.cpp(45): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(2254): note: see declaration of 'sscanf'
+OBJLoader.cpp(50): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(2254): note: see declaration of 'sscanf'
+  PlainLinkedList.cpp
+  PlainNode.cpp
   Sound.cpp
   SoundTime.cpp
-  camera.cpp
-  main.cpp
+  texturedPolygons.cpp
+texturedPolygons.cpp(39): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
   Generating Code...
-LINK : fatal error LNK1104: cannot open file 'SDL.lib'
+  houses.vcxproj -> C:\Users\Kat\Documents\PROJECTS\ICT290\2015shayLearyALL\CAMPUS TOUR\.\Release\houses.exe
+  houses.vcxproj -> .\Release\houses.pdb (Full PDB)
