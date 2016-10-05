@@ -1190,10 +1190,10 @@ void CreateBoundingBoxes()
 	cam.SetAABBMinZ(7, 25344.0);
 
 	// phy sci block inside pt 2 (behind right door)
-	cam.SetAABBMaxX(7, 38500.0);
-	cam.SetAABBMinX(7, 30500.0);
-	cam.SetAABBMaxZ(7, 37500.0);
-	cam.SetAABBMinZ(7, 37300.0);
+	cam.SetAABBMaxX(8, 38500.0);
+	cam.SetAABBMinX(8, 30500.0);
+	cam.SetAABBMaxZ(8, 37500.0);
+	cam.SetAABBMinZ(8, 37300.0);
 
 	// phy sci block inside pt 3 (behind far right wall) more measurement time
 	//cam.SetAABBMaxX(7, 38500.0);
@@ -1202,82 +1202,82 @@ void CreateBoundingBoxes()
 	//cam.SetAABBMinZ(7, 37300.0);
 
 	// phy sci block 2nd panel
-	cam.SetAABBMaxX(8, 36300.0);
-	cam.SetAABBMinX(8, 33808.0);
-	cam.SetAABBMaxZ(8, 36319.0);
-	cam.SetAABBMinZ(8, 27559.0);
+	cam.SetAABBMaxX(9, 36300.0);
+	cam.SetAABBMinX(9, 33808.0);
+	cam.SetAABBMaxZ(9, 36319.0);
+	cam.SetAABBMinZ(9, 27559.0);
 	
 	// phy sci block 2nd doorway
-	cam.SetAABBMaxX(9, 34460.0);
-	cam.SetAABBMinX(9, 34260.0);
-	cam.SetAABBMaxZ(9, 37855.0);
-	cam.SetAABBMinZ(9, 36750.0);
+	cam.SetAABBMaxX(10, 34460.0);
+	cam.SetAABBMinX(10, 34260.0);
+	cam.SetAABBMaxZ(10, 37855.0);
+	cam.SetAABBMinZ(10, 36750.0);
 
 	// phy sci block 3rd panel  
-	cam.SetAABBMaxX(10, 34000.0);
-	cam.SetAABBMinX(10, 33808.0);
-	cam.SetAABBMaxZ(10, 41127.0);
-	cam.SetAABBMinZ(10, 37855.0);
+	cam.SetAABBMaxX(11, 34000.0);
+	cam.SetAABBMinX(11, 33808.0);
+	cam.SetAABBMaxZ(11, 41127.0);
+	cam.SetAABBMinZ(11, 37855.0);
 
 	// drinks machine
-	cam.SetAABBMaxX(11, 35879.0);
-	cam.SetAABBMinX(11, 34704.0);
-	cam.SetAABBMaxZ(11, 25344.0);
-	cam.SetAABBMinZ(11, 24996.0);
+	cam.SetAABBMaxX(12, 35879.0);
+	cam.SetAABBMinX(12, 34704.0);
+	cam.SetAABBMaxZ(12, 25344.0);
+	cam.SetAABBMinZ(12, 24996.0);
 		
 	// bottom of steps
-	cam.SetAABBMaxX(12, 33808.0);
-	cam.SetAABBMinX(12, 0.0);
-	cam.SetAABBMaxZ(12, 4688.0);
-	cam.SetAABBMinZ(12, 0.0);
+	cam.SetAABBMaxX(13, 33808.0);
+	cam.SetAABBMinX(13, 0.0);
+	cam.SetAABBMaxZ(13, 4688.0);
+	cam.SetAABBMinZ(13, 0.0);
 
 	// end of phy sci block exit (top of steps)
-	cam.SetAABBMaxX(13, 35879.0);
-	cam.SetAABBMinX(13, 34320.0);
-	cam.SetAABBMaxZ(13, 43056.0);
-	cam.SetAABBMinZ(13, 41127.0);
+	cam.SetAABBMaxX(14, 35879.0);
+	cam.SetAABBMinX(14, 34320.0);
+	cam.SetAABBMaxZ(14, 43056.0);
+	cam.SetAABBMinZ(14, 41127.0);
 
 	// library end panel
-	cam.SetAABBMaxX(14, 34320.0);
-	cam.SetAABBMinX(14, 6514.0);
-	cam.SetAABBMaxZ(14, 50000.0);
-	cam.SetAABBMinZ(14, 43036.0);
+	cam.SetAABBMaxX(15, 34320.0);
+	cam.SetAABBMinX(15, 6514.0);
+	cam.SetAABBMaxZ(15, 50000.0);
+	cam.SetAABBMinZ(15, 43036.0);
 
 	// KBLT
-	cam.SetAABBMaxX(15, 28104.0);
-	cam.SetAABBMinX(15, 25608.0);
-	cam.SetAABBMaxZ(15, 43046.0);
-	cam.SetAABBMinZ(15, 42754.0);
+	cam.SetAABBMaxX(16, 28104.0);
+	cam.SetAABBMinX(16, 25608.0);
+	cam.SetAABBMaxZ(16, 43046.0);
+	cam.SetAABBMinZ(16, 42754.0);
 
 	// Canteen block
-	cam.SetAABBMaxX(16, 2608.0);
-	cam.SetAABBMinX(16, 0.0);
-	cam.SetAABBMaxZ(16, 49046.0);
-	cam.SetAABBMinZ(16, 0.0);
+	cam.SetAABBMaxX(17, 2608.0);
+	cam.SetAABBMinX(17, 0.0);
+	cam.SetAABBMaxZ(17, 49046.0);
+	cam.SetAABBMinZ(17, 0.0);
 
 	// Telephones
-	cam.SetAABBMaxX(17, 33892.0);
-	cam.SetAABBMinX(17, 33872.0);
-	cam.SetAABBMaxZ(17, 25344.0);
-	cam.SetAABBMinZ(17, 25173.0);
-
-	// Telephones
-	cam.SetAABBMaxX(18, 34277.0);
-	cam.SetAABBMinX(18, 34157.0);
+	cam.SetAABBMaxX(18, 33892.0);
+	cam.SetAABBMinX(18, 33872.0);
 	cam.SetAABBMaxZ(18, 25344.0);
 	cam.SetAABBMinZ(18, 25173.0);
 
 	// Telephones
-	cam.SetAABBMaxX(19, 35462.0);
-	cam.SetAABBMinX(19, 34541.0);
+	cam.SetAABBMaxX(19, 34277.0);
+	cam.SetAABBMinX(19, 34157.0);
 	cam.SetAABBMaxZ(19, 25344.0);
 	cam.SetAABBMinZ(19, 25173.0);
 
+	// Telephones
+	cam.SetAABBMaxX(20, 35462.0);
+	cam.SetAABBMinX(20, 34541.0);
+	cam.SetAABBMaxZ(20, 25344.0);
+	cam.SetAABBMinZ(20, 25173.0);
+
 	// Wall by Steps
-	cam.SetAABBMaxX(20, 31548.0);
-	cam.SetAABBMinX(20, 31444.0);
-	cam.SetAABBMaxZ(20, 10395.0);
-	cam.SetAABBMinZ(20, 4590.0);
+	cam.SetAABBMaxX(21, 31548.0);
+	cam.SetAABBMinX(21, 31444.0);
+	cam.SetAABBMaxZ(21, 10395.0);
+	cam.SetAABBMinZ(21, 4590.0);
 }
 
 //--------------------------------------------------------------------------------------
