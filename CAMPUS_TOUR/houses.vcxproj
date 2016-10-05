@@ -144,6 +144,7 @@
     <ClCompile Include="EasySound.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
+    <ClCompile Include="OBJLoader_New.cpp" />
     <ClCompile Include="PlainLinkedList.cpp" />
     <ClCompile Include="PlainNode.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="collision.h" />
     <ClInclude Include="EasySound.h" />
     <ClInclude Include="OBJLoader.h" />
+    <ClInclude Include="OBJLoader_New.h" />
     <ClInclude Include="PlainLinkedList.h" />
     <ClInclude Include="PlainNode.h" />
     <ClInclude Include="Sound.h" />

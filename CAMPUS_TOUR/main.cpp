@@ -10,7 +10,7 @@
 #include <fstream>
 #include <cstdio>
 
-#include <glut.h> //needs to be declared last for compiler reasons
+#include <GL/glut.h> //needs to be declared last for compiler reasons
 
 #undef main
 
@@ -441,25 +441,40 @@ void DeleteImageFromMemory(unsigned char* tempImage);
 //exercise
 void DrawBanner();
 
+
+CEasySound *es;
+CSound* firstSound;
 //------------------------------PLANETS VARS AND FUNCTIONS--------------------------------
-typedef GLfloat planetsVar[5];
-static GLdouble OrbitSpeed[] = { 4.147,1.629,1,.531,.084,.033,.011,.006,.004,365 };
-planetsVar allPlanets[] = { { 0, 0, 0, 20, 10 },
-{ 40, 0, 0, 0.003, 0.03 },
-{ 80, 0, 0, 0.008, 0.08 },
-{ 120, 0, 0, 0.009, 0.09 },
-{ 160, 0, 0, 0.004, 0.04 },
-{ 200, 0, 0, .1, 1 },
-{ 240, 0, 0, .083, 0.83 },
-{ 280, 0, 0, .036, 0.36 },
-{ 320, 0, 0, .035, 0.35 },
-{ 360, 0, 0, .001, 0.01 }
-};
+//lighting
+
+GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+GLfloat light_position[] = { 512000, 0, 0, 1.0 };
+GLfloat sun_colour[] = { 0.5,0.5,0.0,1.0 };
+GLfloat planet_emission[] = { 0.0, 0.0, 0.0, 1.0 };
+
+bool InSpace = false;
 
 GLfloat SunSize = 20;
 GLfloat SunX = 512000;
 GLfloat DistMult = 10;
 GLfloat SizeMult = 300;
+
+typedef GLfloat planetsVar[5];
+static GLdouble OrbitSpeed[] = { 4.147,1.629,1,.531,.084,.033,.011,.006,.004,365 };
+planetsVar allPlanets[] = { { 512000 , 0, 0, 20, 10 },
+							{ 40, 0, 0, 0.003, 0.03 },
+							{ 80, 0, 0, 0.008, 0.08 },
+							{ 120, 0, 0, 0.009, 0.09 },
+							{ 160, 0, 0, 0.004, 0.04 },
+							{ 200, 0, 0, .1, 1 },
+							{ 240, 0, 0, .083, 0.83 },
+							{ 280, 0, 0, .036, 0.36 },
+							{ 320, 0, 0, .035, 0.35 },
+							{ 360, 0, 0, .001, 0.01 }
+							};
+
 
 GLdouble RotSpeed = 0.01;
 const GLdouble MaxRotSpeed = 100;
@@ -486,8 +501,33 @@ void DisplayPlanets();
 void OrbitPlanets();
 
 //increasing movement speed
-int moveSpeed = 2;
+//int moveSpeed = 2;
+int moveSpeed = 3;
 //------------------------------END PLANETS VARS AND FUNCTIONS--------------------------------
+//------------------------------Ball Stuff------------------------------------------------
+struct Ball {
+	float x;
+	float y;
+	float z;
+	float r;
+	float vx;
+	float vy;
+	float vz;
+	float m;
+	float color[3];
+	float speed;
+	bool visible;
+};
+
+const GLint MAX_BALLS = 1000;
+struct Ball Balls[MAX_BALLS];
+int current_balls = 0;
+
+void addParticle(float m, float r, float vx, float vy, float vz);
+void DrawBalls();
+void UpdateBalls();
+
+//------------------------------END Ball Stuff--------------------------------------------
 //------------------------------Corridor and stairs---------------------------------------
 void DrawCorridor();
 void DrawCorridorSteps(int stepH, int stepD, int stepW, int stepStartX, int stepStartY, int stepStartZ,int count);
@@ -550,10 +590,21 @@ void myinit()
 	// set number of bounding boxes required
 	cam.SetNoBoundingBoxes(25); //KM 16/9/2016 increased from 19
 	// set starting position of user
-	cam.Position(32720.0, 9536.0,	4800.0, 180.0);
-	//cam.Position(32720.0, 11000,27300, 90.0); Temp starting position for easy access bug fixing
+	//cam.Position(32720.0, 9536.0,	4800.0, 180.0);
+	cam.Position(32720.0, 10450,27300, 90.0); //Temp starting position for easy access bug fixing
 	
 	CreatePlains();	
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, sun_colour);
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+
+	glEnable(GL_COLOR_MATERIAL);
 	
 	// creates bounding boxes and places in array
 	CreateBoundingBoxes();
@@ -575,6 +626,9 @@ void Display()
 	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
 	// DISPLAY TEXTURES
 	//enable texture mapping
 	glEnable (GL_TEXTURE_2D);
@@ -589,7 +643,7 @@ void Display()
 		if ((cam.GetLR() > 35500.0) && (cam.GetFB() < 25344.0) ||
 			(cam.GetLR() > 34100.0) && (cam.GetFB() > 41127.0))
 		{
-			cam.DisplayNoExit(width, height,tp.GetTexture(NO_EXIT));
+			//cam.DisplayNoExit(width, height,tp.GetTexture(NO_EXIT));
 		}
 				// set the movement and rotation speed according to frame count
 		IncrementFrameCount();
@@ -599,7 +653,7 @@ void Display()
 		DrawBackdrop();
 		
 		// exercise
-		DrawBanner();
+		//DrawBanner();
 	
 	glPopMatrix();
 
@@ -647,6 +701,8 @@ void Display()
 	DisplayPlanets();
 	OrbitPlanets();
 
+	UpdateBalls();
+	DrawBalls();
 
 	glBegin(GL_POLYGON);
 	glVertex3f(34075, 10750, 26360);
@@ -943,17 +999,21 @@ void keys(unsigned char key, int x, int y)
 		// display welcome page (space key)
 		case ' ':
 		{
-			if (DisplayWelcome)
+			//if (DisplayWelcome)
+			//{
+			//	cam.SetRotateSpeed(rotationSpeed);
+			//	cam.SetMoveSpeed(movementSpeed);
+			//	DisplayWelcome = false;
+			//}
+			//else
+			//{
+			//	cam.SetRotateSpeed(0.0f);
+			//	cam.SetMoveSpeed(0.0f);
+			//	DisplayWelcome = true;
+			//}
+			if (current_balls < MAX_BALLS && InSpace)
 			{
-				cam.SetRotateSpeed(rotationSpeed);
-				cam.SetMoveSpeed(movementSpeed);
-				DisplayWelcome = false;
-			}
-			else
-			{
-				cam.SetRotateSpeed(0.0f);
-				cam.SetMoveSpeed(0.0f);
-				DisplayWelcome = true;
+				addParticle(0.1* SizeMult, 0.3* SizeMult, 0, 0, 0);
 			}
 		}
 		break;
@@ -1021,6 +1081,9 @@ void keys(unsigned char key, int x, int y)
 		case 's':
 			cam.DirectionFB(-moveSpeed);
 			break;
+		/*case ' ':
+
+			break;*/
 	}
 }
 
@@ -1307,6 +1370,8 @@ void CreatePlains()
 	// top of higher hill
 	cam.SetPlains (FLAT_PLAIN, 14000.0, 18000.0 , 10875.0, 108075.0, 28000.0, 33000.0);
 	// sides of higher hill
+
+	//STEPS
 	cam.SetPlains(XY_PLAIN, 34260, 35700, 11875.0, 10450.0, 25500, 26000.0); // masedawg first step plain
 
 	cam.SetPlains(XY_PLAIN, 34260, 35700, 11450.0, 12875.0, 26000, 26500.0); // 2nd step plain
@@ -5314,100 +5379,104 @@ void DrawGrass ()
 //Move planets to the position updated in OrbitPlanets
 void DisplayPlanets()
 {
-	//SUN
-	glPushMatrix();
-	glColor3f(1, 1, 0);
-	glTranslatef(allPlanets[0][0] * SizeMult + SunX, allPlanets[0][1] * SizeMult, allPlanets[0][2] * SizeMult);
-	//glMaterialfv(GL_FRONT, GL_EMISSION, sun_colour);
-	//glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+	if (InSpace)
+	{ 
+		//SUN
+		glPushMatrix();
+		//glColor3f(1, 1, 0);
+		glTranslatef(allPlanets[0][0], allPlanets[0][1] * SizeMult, allPlanets[0][2] * SizeMult);
+		glMaterialfv(GL_FRONT, GL_EMISSION, sun_colour);
+		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 
-	glRotatef(20, 1, 1, 1);
-	//glScalef(5,5,5);
-	//    glColor3f(1,1,0);
-	glutSolidSphere(allPlanets[0][3] * SizeMult, 20, 20);
-	//    glMaterialfv( GL_FRONT, GL_EMISSION, planet_emission );
-	glPopMatrix();
+		glRotatef(20, 1, 1, 1);
+		//glScalef(5,5,5);
+		//    glColor3f(1,1,0);
+		glutSolidSphere(allPlanets[0][3] * SizeMult, 20, 20);
+		//    glMaterialfv( GL_FRONT, GL_EMISSION, planet_emission );
+		glPopMatrix();
 
-	//Mercury
-	glPushMatrix();
-	glColor3f(1, .5, 0);
-	glTranslatef(allPlanets[1][0] * SizeMult + SunX, allPlanets[1][1] * SizeMult, allPlanets[1][2] * SizeMult);
+		//Mercury
+		glPushMatrix();
+		glColor3f(1, .5, 0);
+		glTranslatef(allPlanets[1][0] * SizeMult + SunX, allPlanets[1][1] * SizeMult, allPlanets[1][2] * SizeMult);
 
-	//glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-	glutSolidSphere(SunSize*DistMult*allPlanets[1][3] * SizeMult, 20, 20);
-	glPopMatrix();
+		glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+		glutSolidSphere(SunSize*DistMult*allPlanets[1][3] * SizeMult, 20, 20);
+		glPopMatrix();
 
-	//Venus
-	glPushMatrix();
-	glColor3f(1, .8, .5);
-	//glRotatef(orbAmt[1],0,1,0);
-	glTranslatef(allPlanets[2][0] * SizeMult + SunX, allPlanets[2][1] * SizeMult, allPlanets[2][2] * SizeMult);
+		//Venus
+		glPushMatrix();
+		glColor3f(1, .8, .5);
+		//glRotatef(orbAmt[1],0,1,0);
+		glTranslatef(allPlanets[2][0] * SizeMult + SunX, allPlanets[2][1] * SizeMult, allPlanets[2][2] * SizeMult);
 
-	//glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-	glutSolidSphere(SunSize*DistMult*allPlanets[2][3] * SizeMult, 20, 20);
-	glPopMatrix();
+		glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+		glutSolidSphere(SunSize*DistMult*allPlanets[2][3] * SizeMult, 20, 20);
+		glPopMatrix();
 
-	//Earth
-	glPushMatrix();
-	glColor3f(0.1, 0.1, 1);
-	//glRotatef(orbAmt[2],0,1,0);
-	glTranslatef(allPlanets[3][0] * SizeMult + SunX, allPlanets[3][1] * SizeMult, allPlanets[3][2] * SizeMult);
-	glutSolidSphere(SunSize*DistMult*allPlanets[3][3] * SizeMult, 20, 20);
+		//Earth
+		glPushMatrix();
+		glColor3f(0.1, 0.1, 1);
+		//glRotatef(orbAmt[2],0,1,0);
+		glTranslatef(allPlanets[3][0] * SizeMult + SunX, allPlanets[3][1] * SizeMult, allPlanets[3][2] * SizeMult);
+		glutSolidSphere(SunSize*DistMult*allPlanets[3][3] * SizeMult, 20, 20);
 
-	//moon
-	//glColor3f(0.9, 0.9, 0.9);
-	//glRotatef(orbAmt[9], 0, 1, 0);
-	//glTranslatef(5, 0, 0);
-	//glutSolidSphere(SunSize*DistMult*planetSize[9], 20, 20);
-	glPopMatrix();
+		//moon
+		//glColor3f(0.9, 0.9, 0.9);
+		//glRotatef(orbAmt[9], 0, 1, 0);
+		//glTranslatef(5, 0, 0);
+		//glutSolidSphere(SunSize*DistMult*planetSize[9], 20, 20);
+		glPopMatrix();
 
-	//Mars
-	glPushMatrix();
-	glColor3f(1, 0, 0);
-	//glRotatef(orbAmt[3],0,1,0);
-	glTranslatef(allPlanets[4][0] * SizeMult + SunX, allPlanets[4][1] * SizeMult, allPlanets[4][2] * SizeMult);
-	glutSolidSphere(SunSize*DistMult*allPlanets[4][3] * SizeMult, 20, 20);
-	glPopMatrix();
+		//Mars
+		glPushMatrix();
+		glColor3f(1, 0, 0);
+		//glRotatef(orbAmt[3],0,1,0);
+		glTranslatef(allPlanets[4][0] * SizeMult + SunX, allPlanets[4][1] * SizeMult, allPlanets[4][2] * SizeMult);
+		glutSolidSphere(SunSize*DistMult*allPlanets[4][3] * SizeMult, 20, 20);
+		glPopMatrix();
 
-	//Jupiter
-	glPushMatrix();
-	glColor3f(1, .6, .3);
-	//glRotatef(orbAmt[4],0,1,0);
-	glTranslatef(allPlanets[5][0] * SizeMult + SunX, allPlanets[5][1] * SizeMult, allPlanets[5][2] * SizeMult);
-	glutSolidSphere(SunSize*DistMult*allPlanets[5][3] * SizeMult, 20, 20);
-	glPopMatrix();
+		//Jupiter
+		glPushMatrix();
+		glColor3f(1, .6, .3);
+		//glRotatef(orbAmt[4],0,1,0);
+		glTranslatef(allPlanets[5][0] * SizeMult + SunX, allPlanets[5][1] * SizeMult, allPlanets[5][2] * SizeMult);
+		glutSolidSphere(SunSize*DistMult*allPlanets[5][3] * SizeMult, 20, 20);
+		glPopMatrix();
 
-	//Saturn
-	glPushMatrix();
-	glColor3f(.8, 0, 1);
-	//glRotatef(orbAmt[5],0,1,0);
-	glTranslatef(allPlanets[6][0] * SizeMult + SunX, allPlanets[6][1] * SizeMult, allPlanets[6][2] * SizeMult);
-	glutSolidSphere(SunSize*DistMult*allPlanets[6][3] * SizeMult, 20, 20);
-	glPopMatrix();
+		//Saturn
+		glPushMatrix();
+		glColor3f(.8, 0, 1);
+		//glRotatef(orbAmt[5],0,1,0);
+		glTranslatef(allPlanets[6][0] * SizeMult + SunX, allPlanets[6][1] * SizeMult, allPlanets[6][2] * SizeMult);
+		glutSolidSphere(SunSize*DistMult*allPlanets[6][3] * SizeMult, 20, 20);
+		glPopMatrix();
 
-	//Uranus
-	glPushMatrix();
-	glColor3f(.8, 1, 1);
-	//glRotatef(orbAmt[6],0,1,0);
-	glTranslatef(allPlanets[7][0] * SizeMult + SunX, allPlanets[7][1] * SizeMult, allPlanets[7][2] * SizeMult);
-	glutSolidSphere(SunSize*DistMult*allPlanets[7][3] * SizeMult, 20, 20);
-	glPopMatrix();
+		//Uranus
+		glPushMatrix();
+		glColor3f(.8, 1, 1);
+		//glRotatef(orbAmt[6],0,1,0);
+		glTranslatef(allPlanets[7][0] * SizeMult + SunX, allPlanets[7][1] * SizeMult, allPlanets[7][2] * SizeMult);
+		glutSolidSphere(SunSize*DistMult*allPlanets[7][3] * SizeMult, 20, 20);
+		glPopMatrix();
 
-	//Neptune
-	glPushMatrix();
-	glColor3f(0, 0, 1);
-	//glRotatef(orbAmt[7],0,1,0);
-	glTranslatef(allPlanets[8][0] * SizeMult + SunX, allPlanets[8][1] * SizeMult, allPlanets[8][2] * SizeMult);
-	glutSolidSphere(SunSize*DistMult*allPlanets[8][3] * SizeMult, 20, 20);
-	glPopMatrix();
+		//Neptune
+		glPushMatrix();
+		glColor3f(0, 0, 1);
+		//glRotatef(orbAmt[7],0,1,0);
+		glTranslatef(allPlanets[8][0] * SizeMult + SunX, allPlanets[8][1] * SizeMult, allPlanets[8][2] * SizeMult);
+		glutSolidSphere(SunSize*DistMult*allPlanets[8][3] * SizeMult, 20, 20);
+		glPopMatrix();
 
-	//Pluto
-	glPushMatrix();
-	glColor3f(1, .7, 0);
-	//glRotatef(orbAmt[8],0,1,0);
-	glTranslatef(allPlanets[9][0] * SizeMult + SunX, allPlanets[9][1] * SizeMult, allPlanets[9][2] * SizeMult);
-	glutSolidSphere(SunSize*DistMult*allPlanets[9][3] * SizeMult, 20, 20);
-	glPopMatrix();
+		//Pluto
+		glPushMatrix();
+		glColor3f(1, .7, 0);
+		//glRotatef(orbAmt[8],0,1,0);
+		glTranslatef(allPlanets[9][0] * SizeMult + SunX, allPlanets[9][1] * SizeMult, allPlanets[9][2] * SizeMult);
+		glutSolidSphere(SunSize*DistMult*allPlanets[9][3] * SizeMult, 20, 20);
+		glPopMatrix();
+	}
+	
 }
 
 //Calculate new position each planet will be moved to 
@@ -5423,7 +5492,6 @@ void OrbitPlanets()
 
 		allPlanets[i + 1][0] = x;
 		allPlanets[i + 1][2] = z;
-
 	}
 }
 
@@ -5445,23 +5513,120 @@ void CheckLocationForTeleport()
 
 void TeleportToPlanets()
 {
+	moveSpeed = 8;
+	InSpace = true;
 	glClearColor(0, 0, 0, 1.0);
 	cam.Position(SunX, allPlanets[0][1], cam.GetFB(), 0);
 	
 	//KM 13/9/2016 Sound bite 
-	CEasySound *es;
-	CSound* firstSound;
+	//CEasySound *es;
+	//CSound* firstSound;
 	es = CEasySound::Instance();
 	firstSound = es->GetSound(es->Load("sounds/greeting.wav"));
 	firstSound->Play();
 }
 void TeleportToBushCourt()
 {
+	InSpace = false;
+	moveSpeed = 3;
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
 	cam.Position(32720.0, 9536.0, 4800.0, 180.0);
 }
 //------------------END PLANETS FUNCTIONS---------------------
+//-------------Ball Functions-------------
+void addParticle(float m, float r, float vx, float vy, float vz)
+{
+	struct Ball p;
+	r = r * 3;
+	p.x = cam.GetLR();
+	p.y = cam.GetUD() - r;
+	p.z = cam.GetFB();
 
+	p.vx = vx / 30; // /30 in case it is a speed particle,
+	p.vy = vy / 30; // slow down the speed a little
+	p.vz = vz / 30;
+
+	p.m = m;
+	p.r = r;
+	p.speed = 50000000;
+
+	p.color[0] = 1;
+	p.color[1] = 0;
+	p.color[2] = 0;
+
+	p.visible = true;
+
+	Balls[current_balls] = p;
+	current_balls++;
+
+	//es = CEasySound::Instance();
+	//firstSound = es->GetSound(es->Load("sounds/greeting.wav"));
+	//firstSound->Play();
+}
+
+void DrawBalls()
+{
+	for (int i = 0; i < current_balls; i++)
+	{
+		struct Ball *p = &Balls[i];
+		if (p->visible)
+		{ 
+			glPushMatrix();
+				glMaterialfv(GL_FRONT, GL_DIFFUSE, p->color);
+				glTranslatef(p->x, p->y, p->z);
+				glutSolidSphere(p->r, 20, 20);
+			glPopMatrix();
+		}		
+	}
+}
+
+void UpdateBalls()
+{
+	for (int i = 0; i < current_balls; i++)
+	{
+		struct Ball *p;
+		p = &Balls[i];
+
+		for (int j = 0; j < 10; j++)
+		{
+			float d;
+			//if (j == 0) 
+			//{
+			//	d = sqrt(((allPlanets[j][0]) - p->x)*((allPlanets[j][0]) - p->x) + (allPlanets[j][1] - p->y)*(allPlanets[j][1] - p->y) + (allPlanets[j][2]  - p->z)*(allPlanets[j][2] - p->z));
+			//}
+			//else
+			//{
+				d = sqrt(((allPlanets[j][0] * SizeMult + SunX) - p->x)*((allPlanets[j][0] * SizeMult + SunX) - p->x) + (allPlanets[j][1] * SizeMult - p->y)*(allPlanets[j][1] * SizeMult - p->y) + (allPlanets[j][2] * SizeMult - p->z)*(allPlanets[j][2] * SizeMult - p->z));
+			//}
+
+			float ds = (SunSize*DistMult*allPlanets[j][3] * SizeMult) + p->r;
+			cout << j << "\nd: " << d << "\nds: " << ds << "\n" << endl;
+
+			if (d > (allPlanets[j][3] * SizeMult) + p->r)
+			{
+				p->vx += p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0] * SizeMult + SunX) - p->x) / d; //f = ma => a = f/m
+				p->vy += p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][1] * SizeMult - p->y) / d;
+				p->vz += p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][2] * SizeMult - p->z) / d;
+			}
+			else
+			{
+				p->visible = false;
+				//p->vx -= p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0] * SizeMult + SunX) - p->x) / d; //f = ma => a = f/m
+				//p->vy -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][1] * SizeMult - p->y) / d;
+				//p->vz -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][2] * SizeMult - p->z) / d;
+			}		
+
+			p->x += p->vx;
+			p->y += p->vy;
+			p->z += p->vz;
+		}
+	}
+
+	glutPostRedisplay();
+}
+
+
+//------------------END Ball Functions------------------
 //******************CORRIDOR FUNCTIONS************************
 
 void DrawCorridor()
