@@ -1184,22 +1184,34 @@ void CreateBoundingBoxes()
 	cam.SetAABBMinZ(6, 27295.0);
 
 	// phy sci block inside pt 1 (behind opp door)
-	cam.SetAABBMaxX(7, 38500.0);
+	cam.SetAABBMaxX(7, 39000.0);
 	cam.SetAABBMinX(7, 38300.0);
-	cam.SetAABBMaxZ(7, 30559.0);
-	cam.SetAABBMinZ(7, 25344.0);
+	cam.SetAABBMaxZ(7, 38300.0);
+	cam.SetAABBMinZ(7, 27200.0);
+
+	// phy sci block inside (between opp door and right door)
+	cam.SetAABBMaxX(22, 38300.0);
+	cam.SetAABBMinX(22, 37300.0);
+	cam.SetAABBMaxZ(22, 30600.0);
+	cam.SetAABBMinZ(22, 28250.0);
 
 	// phy sci block inside pt 2 (behind right door)
-	cam.SetAABBMaxX(8, 38500.0);
-	cam.SetAABBMinX(8, 30500.0);
-	cam.SetAABBMaxZ(8, 37500.0);
-	cam.SetAABBMinZ(8, 37300.0);
+	cam.SetAABBMaxX(8, 37350.0);
+	cam.SetAABBMinX(8, 36250.0);
+	cam.SetAABBMaxZ(8, 30700.0);
+	cam.SetAABBMinZ(8, 30600.0);
 
-	// phy sci block inside pt 3 (behind far right wall) more measurement time
-	//cam.SetAABBMaxX(7, 38500.0);
-	//cam.SetAABBMinX(7, 26425.0);
-	//cam.SetAABBMaxZ(7, 37500.0);
-	//cam.SetAABBMinZ(7, 37300.0);
+	// phy sci block inside pt 3 (behind weird contraption, left of opp door)
+	cam.SetAABBMaxX(23, 38300.0);
+	cam.SetAABBMinX(23, 37300.0);
+	cam.SetAABBMaxZ(23, 27240.0);
+	cam.SetAABBMinZ(23, 26425.0);
+
+	// phy sci block inside (tv wall)
+	cam.SetAABBMaxX(24, 37300.0);
+	cam.SetAABBMinX(24, 36300.0);
+	cam.SetAABBMaxZ(24, 26370.0);
+	cam.SetAABBMinZ(24, 25500.0);
 
 	// phy sci block 2nd panel
 	cam.SetAABBMaxX(9, 36300.0);
