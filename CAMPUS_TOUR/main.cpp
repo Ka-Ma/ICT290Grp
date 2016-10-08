@@ -548,7 +548,7 @@ void myinit()
 	// turn collision detection on
 	cam.SetCollisionDetectionOn(true);
 	// set number of bounding boxes required
-	cam.SetNoBoundingBoxes(25); //KM 16/9/2016 increased from 19
+	cam.SetNoBoundingBoxes(27); //KM 16/9/2016 increased from 19
 	// set starting position of user
 	cam.Position(32720.0, 9536.0,	4800.0, 180.0);
 	//cam.Position(32720.0, 11000,27300, 90.0); Temp starting position for easy access bug fixing
@@ -1148,9 +1148,9 @@ void CreateBoundingBoxes()
 	cam.SetAABBMinZ(0, 4688.0);
 
 	// between chanc block and phys sci
-	cam.SetAABBMaxX(1, 35999.0);
+	cam.SetAABBMaxX(1, 36999.0);
 	cam.SetAABBMinX(1, 35730.0);
-	cam.SetAABBMaxZ(1, 25344.0);
+	cam.SetAABBMaxZ(1, 25444.0);
 	cam.SetAABBMinZ(1, 22096.0);
 
 	// phy sci block panel 1 pt 1 (side of phy sci building)
@@ -1165,59 +1165,65 @@ void CreateBoundingBoxes()
 	cam.SetAABBMaxZ(3, 26400.0);
 	cam.SetAABBMinZ(3, 25344.0);
 
-	// phy sci block 1st doorway p1 (side of step in to door extending to end of internal left wall by steps)
+	// phy sci block 1st doorway p1 (side of step in to door extending to end of internal left wall by steps) (box 1 on the diagram - kjm)
 	cam.SetAABBMaxX(4, 35700.0);
-	cam.SetAABBMinX(4, 33808.0);
+	cam.SetAABBMinX(4, 34260.0);
 	cam.SetAABBMaxZ(4, 26400.0);  
 	cam.SetAABBMinZ(4, 26300.0);
 
-	// phy sci block 1st doorway p2 
+	// phy sci block 1st doorway p2 (box 2 on the diagram - kjm)
 	cam.SetAABBMaxX(5, 34300.0);
-	cam.SetAABBMinX(5, 34260.0);
+	cam.SetAABBMinX(5, 33808.0);
 	cam.SetAABBMaxZ(5, 26775.0);
 	cam.SetAABBMinZ(5, 26400.0);
 	
-	// phy sci block 1st doorway p3
+	// phy sci block 1st doorway p3 (box 10 on the diagram -kjm)
 	cam.SetAABBMaxX(6, 34300.0);
 	cam.SetAABBMinX(6, 34260.0);
 	cam.SetAABBMaxZ(6, 27559.0);
 	cam.SetAABBMinZ(6, 27295.0);
 
-	// phy sci block inside pt 1 (behind opp door)
+	// phy sci block inside pt 1 (behind opp door) (box 6 on the diagram - kjm)
 	cam.SetAABBMaxX(7, 39000.0);
 	cam.SetAABBMinX(7, 38300.0);
 	cam.SetAABBMaxZ(7, 38300.0);
 	cam.SetAABBMinZ(7, 27200.0);
 
-	// phy sci block inside (between opp door and right door)
+	// phy sci block inside (between opp door and right door) (box 7 on the diagram - kjm)
 	cam.SetAABBMaxX(22, 38300.0);
 	cam.SetAABBMinX(22, 37300.0);
 	cam.SetAABBMaxZ(22, 30600.0);
 	cam.SetAABBMinZ(22, 28250.0);
 
-	// phy sci block inside pt 2 (behind right door)
+	// phy sci block inside pt 2 (behind right door) (box 8 on the diagram - kjm)
 	cam.SetAABBMaxX(8, 37350.0);
 	cam.SetAABBMinX(8, 36250.0);
 	cam.SetAABBMaxZ(8, 30700.0);
 	cam.SetAABBMinZ(8, 30600.0);
 
-	// phy sci block inside pt 3 (behind weird contraption, left of opp door)
+	// phy sci block inside pt 3 (behind weird contraption, left of opp door) (box 5 on the diagram - kjm)
 	cam.SetAABBMaxX(23, 38300.0);
 	cam.SetAABBMinX(23, 37300.0);
 	cam.SetAABBMaxZ(23, 27240.0);
 	cam.SetAABBMinZ(23, 26425.0);
 
-	// phy sci block inside (tv wall)
+	// phy sci block inside (tv wall) (box 4 on the diagram - kjm)
 	cam.SetAABBMaxX(24, 37300.0);
-	cam.SetAABBMinX(24, 36300.0);
-	cam.SetAABBMaxZ(24, 26370.0);
-	cam.SetAABBMinZ(24, 25500.0);
+	cam.SetAABBMinX(24, 36250.0);
+	cam.SetAABBMaxZ(24, 26425.0);
+	cam.SetAABBMinZ(24, 25450.0);
 
-	// phy sci block 2nd panel
+	// phy sci block inside (far stairwell wall) (box 3 on the diagram - kjm)
+	cam.SetAABBMaxX(25, 37250.0);
+	cam.SetAABBMinX(25, 34260.0);
+	cam.SetAABBMaxZ(25, 25500.0);
+	cam.SetAABBMinZ(25, 25400.0);
+
+	// phy sci block 2nd panel (box 9 on the diagram -kjm)
 	cam.SetAABBMaxX(9, 36300.0);
 	cam.SetAABBMinX(9, 33808.0);
 	cam.SetAABBMaxZ(9, 36319.0);
-	cam.SetAABBMinZ(9, 27559.0);
+	cam.SetAABBMinZ(9, 27540.0);
 	
 	// phy sci block 2nd doorway
 	cam.SetAABBMaxX(10, 34460.0);
@@ -5616,8 +5622,8 @@ void DrawCorridor()
 
 
 	//Left Door Wall Thickness
-	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WALL_BRICK_YZ));
-	glColor3f(0, 1, 1);
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	//glColor3f(0, 1, 1);
 	glBegin(GL_POLYGON);
 		glTexCoord2f(1.0, 1.0);
 		glVertex3f(35700, 10000, 26370);
@@ -5629,22 +5635,27 @@ void DrawCorridor()
 		glVertex3f(34260, 10000, 26370);
 	glEnd();
 
-	glColor3f(1, 1, 0);
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	//glColor3f(1, 1, 0);
 	glBegin(GL_POLYGON);
-	glVertex3f(35700, 10000, 26370);
-	glVertex3f(35700, 11000, 26370);
-	glVertex3f(35700, 11000, 26400);
-	glVertex3f(35700, 10000, 26400);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(35700, 10000, 26370);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(35700, 11000, 26370);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(35700, 11000, 26400);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(35700, 10000, 26400);
 	glEnd();
 
-	//Stair Wall 
-	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WALL_BRICK_YZ));
+	//Stair Wall (facing as walk in)
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR)); 
 	glColor3f(0, 0, 1);
 	glBegin(GL_POLYGON);
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(36300, 10000, 25500);
+		glVertex3f(36250, 10000, 25500);
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(36300, 12500, 25500);
+		glVertex3f(36250, 12500, 25500);
 		glTexCoord2f(0.0, 0.0);
 		glVertex3f(34260, 12500, 25500);
 		glTexCoord2f(0.0, 1.0);
@@ -5652,7 +5663,7 @@ void DrawCorridor()
 	glEnd();
 
 	//Stair Wall Back
-	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WALL_BRICK_YZ));
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
 	glColor3f(1, 0, 1);
 	glBegin(GL_POLYGON);
 		glTexCoord2f(1.0, 1.0);
@@ -5666,13 +5677,13 @@ void DrawCorridor()
 	glEnd();
 
 	//Front Stair Wall
-	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(WALL_BRICK_YZ));
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
 	glColor3f(1, 1, 1);
 	glBegin(GL_POLYGON);
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(36250, 10000, 26425);
+		glVertex3f(36250, 10000, 26400);
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(36250, 12500, 26425);
+		glVertex3f(36250, 12500, 26400);
 		glTexCoord2f(0.0, 0.0);
 		glVertex3f(36250, 12500, 25400);
 		glTexCoord2f(0.0, 1.0);
