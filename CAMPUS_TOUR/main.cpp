@@ -2085,50 +2085,54 @@ void CreateTextures()
 	tp.CreateTexture(KM, image, 300, 400);
 
 	//Physical Sciences Corridor & Stairs (KM 15/9/2016)
-	image = tp.LoadTexture("data/PSaroundCorner.raw", 2862, 1024);
-	tp.CreateTexture(PS_AROUND_CNR, image, 2862, 1024);
+	image = tp.LoadTexture("data/PSaroundCorner.raw", 1024, 366);
+	tp.CreateTexture(PS_AROUND_CNR, image, 1024, 366);
 
-	image = tp.LoadTexture("data/PSceiling.raw", 1024, 1365);
-	tp.CreateTexture(PS_CEILING, image, 1024, 1365);
+	image = tp.LoadTexture("data/PSceiling.raw", 128, 171);
+	tp.CreateTexture(PS_CEILING, image, 128, 171);
 
+	/* not used - may as well not load -kjm 9/10/2016
 	image = tp.LoadTexture("data/PSdoor.raw", 1362, 1024);
 	tp.CreateTexture(PS_DOOR, image, 1362, 1024);
+	*/
 
-	image = tp.LoadTexture("data/PSdoorFar.raw", 1024, 1331);
-	tp.CreateTexture(PS_DOOR_FAR, image, 1024, 1331);
+	image = tp.LoadTexture("data/PSdoorFar.raw", 512, 666);
+	tp.CreateTexture(PS_DOOR_FAR, image, 512, 666);
 
-	image = tp.LoadTexture("data/PSdoorRight.raw", 1097, 1024);
-	tp.CreateTexture(PS_DOOR_RIGHT, image, 1097, 1024);
+	image = tp.LoadTexture("data/PSdoorRight.raw", 512, 478);
+	tp.CreateTexture(PS_DOOR_RIGHT, image, 512, 478);
 
-	image = tp.LoadTexture("data/PSfloor.raw", 1024, 1365);
-	tp.CreateTexture(PS_FLOOR, image, 1024, 1365);
+	image = tp.LoadTexture("data/PSfloor.raw", 128, 171);
+	tp.CreateTexture(PS_FLOOR, image, 128, 171);
 
-	image = tp.LoadTexture("data/PSleftWall.raw", 1024, 1077);
-	tp.CreateTexture(PS_LEFT_WALL, image, 1024, 1077);
+	image = tp.LoadTexture("data/PSleftWall.raw", 512, 539);
+	tp.CreateTexture(PS_LEFT_WALL, image, 512, 539);
 
-	image = tp.LoadTexture("data/PSoppDoor.raw", 1101, 1024);
-	tp.CreateTexture(PS_OPP_DOOR, image, 1101, 1024);
+	image = tp.LoadTexture("data/PSoppDoor.raw", 512, 476);
+	tp.CreateTexture(PS_OPP_DOOR, image, 512, 476);
 
-	image = tp.LoadTexture("data/PSright.raw", 1867, 1024);
-	tp.CreateTexture(PS_RIGHT, image, 1867, 1024);
+	image = tp.LoadTexture("data/PSright.raw", 1024, 562);
+	tp.CreateTexture(PS_RIGHT, image, 1024, 562);
 
-	image = tp.LoadTexture("data/PSrightFar.raw", 2379, 1024);
-	tp.CreateTexture(PS_RIGHT_FAR, image, 2379, 1024);
+	image = tp.LoadTexture("data/PSrightFar.raw", 1024, 441);
+	tp.CreateTexture(PS_RIGHT_FAR, image, 1024, 441);
 
-	image = tp.LoadTexture("data/PSstepFront.raw", 1024, 129);
-	tp.CreateTexture(PS_STEP_FRONT, image, 1024, 129);
+	image = tp.LoadTexture("data/PSstepFront.raw", 256, 32);
+	tp.CreateTexture(PS_STEP_FRONT, image, 256, 32);
 
-	image = tp.LoadTexture("data/PSstepTop.raw", 1024, 243);
-	tp.CreateTexture(PS_STEP_TOP, image, 1024, 243);
+	image = tp.LoadTexture("data/PSstepTop.raw", 256, 61);
+	tp.CreateTexture(PS_STEP_TOP, image, 256, 61);
 
-	image = tp.LoadTexture("data/PStvWall.raw", 1024, 955);
-	tp.CreateTexture(PS_TV_WALL, image, 1024, 955);
+	image = tp.LoadTexture("data/PStvWall.raw", 512, 478);
+	tp.CreateTexture(PS_TV_WALL, image, 512, 478);
 
+	/* not used - may as well not load -kjm 9/10/2016
 	image = tp.LoadTexture("data/PSunderStair.raw", 1024, 1439);
 	tp.CreateTexture(PS_UNDERSTAIR, image, 1024, 1439);
+	*/
 
-	image = tp.LoadTexture("data/PSwallOppStair.raw", 1024, 1580);
-	tp.CreateTexture(PS_WALL_OPP_STAIR, image, 1024, 1580);
+	image = tp.LoadTexture("data/PSwallOppStair.raw", 512, 790);
+	tp.CreateTexture(PS_WALL_OPP_STAIR, image, 512, 790);
 
 
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);	
@@ -5487,13 +5491,13 @@ void DrawCorridor()
 	//Right Door Wall
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_RIGHT)); //KM 15/9/16 added textures
 	glBegin(GL_POLYGON);
-		glTexCoord2f(1.0, 1.0);
+		glTexCoord2f(0.0, 1.0);
 		glVertex3f(36300, 10000, 27540);
-		glTexCoord2f(1.0, 0.0); 
-		glVertex3f(36300, 11000, 27540);
 		glTexCoord2f(0.0, 0.0); 
+		glVertex3f(36300, 11000, 27540);
+		glTexCoord2f(1.0, 0.0); 
 		glVertex3f(34260, 11000, 27540);
-		glTexCoord2f(0.0, 1.0); 
+		glTexCoord2f(1.0, 1.0); 
 		glVertex3f(34260, 10000, 27540);
 	glEnd();
 
@@ -5692,39 +5696,45 @@ void DrawCorridor()
 
 	//Stair well roof
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_CEILING));
-	glColor3f(1, 1, 1);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//glColor3f(1, 1, 1);
 	glBegin(GL_POLYGON);
-		glTexCoord2f(1.0, 1.0);
+		glTexCoord2f(3.0, 2.0);
 		glVertex3f(36250, 12500, 26425);
-		glTexCoord2f(1.0, 0.0);
+		glTexCoord2f(3.0, 0.0);
 		glVertex3f(36250, 12500, 25400);
 		glTexCoord2f(0.0, 0.0);
 		glVertex3f(34260, 12500, 25400);
-		glTexCoord2f(0.0, 1.0);
+		glTexCoord2f(0.0, 2.0);
 		glVertex3f(34260, 12500, 26425);
 	glEnd();
 
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_FLOOR));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glBegin(GL_POLYGON);
-		glTexCoord2f(1.0, 1.0);
+		glTexCoord2f(6.0, 8.0);
 		glVertex3f(34260, 10000, 25400);
-		glTexCoord2f(1.0, 0.0);
+		glTexCoord2f(6.0, 0.0);
 		glVertex3f(34260, 10000, 30600);
 		glTexCoord2f(0.0, 0.0);
 		glVertex3f(38300, 10000, 30600);
-		glTexCoord2f(0.0, 1.0);
+		glTexCoord2f(0.0, 8.0);
 		glVertex3f(38300, 10000, 25400);
 	glEnd();
 
 	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_CEILING));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glBegin(GL_POLYGON);
-		glTexCoord2f(1.0, 1.0);
+		glTexCoord2f(6.0, 8.0);
 		glVertex3f(34260, 11000, 26370);
-		glTexCoord2f(1.0, 0.0);
+		glTexCoord2f(6.0, 0.0);
 		glVertex3f(34260, 11000, 30600);
 		glTexCoord2f(0.0, 0.0);
 		glVertex3f(38300, 11000, 30600);
-		glTexCoord2f(0.0, 1.0);
+		glTexCoord2f(0.0, 8.0);
 		glVertex3f(38300, 11000, 26370);
 	glEnd();
 }
