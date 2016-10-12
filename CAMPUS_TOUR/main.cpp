@@ -3,6 +3,8 @@
 #include <time.h>
 #include "SDL.h"
 #include "OBJLoader.h"
+#include "globalVariable.h" //for ui - KJM 12/10/2016
+
 
 #include <vector>
 #include <string>
@@ -337,6 +339,7 @@ float ratio;
 // screen width and height
 int width, height;
 
+/*MOVED TO GLOBALVARIABLE - KJM 12/10/2016
 // display campus map
 bool DisplayMap = false;
 // display welcome screen
@@ -347,6 +350,7 @@ bool DisplayExit = false;
 bool lightsOn;
 // display ECL block
 bool displayECL = true;
+*/
 
 // varibles used for tarnslating graphics etc
 GLdouble step, step2, stepLength;
@@ -650,18 +654,21 @@ void Display()
 	glEnable (GL_TEXTURE_2D);
 	glPushMatrix();	
 		// displays the welcome screen
-		if (DisplayWelcome) cam.DisplayWelcomeScreen (width, height, 1, tp.GetTexture(WELCOME));	
+		if (gVar.DisplayWelcome) cam.DisplayWelcomeScreen (width, height, 1, tp.GetTexture(WELCOME));	
 		// displays the exit screen
-		if (DisplayExit) cam.DisplayWelcomeScreen (width, height, 0, tp.GetTexture(EXIT) );
+		if (gVar.DisplayExit) cam.DisplayWelcomeScreen (width, height, 0, tp.GetTexture(EXIT) );
 		// displays the map
-		if (DisplayMap) cam.DisplayMap(width, height, tp.GetTexture(MAP));
+		if (gVar.DisplayMap) cam.DisplayMap(width, height, tp.GetTexture(MAP));
 		// display no exit sign (position check should really be in an object, but didn't have time)
+		/* Removing Model Area WArning - KJM 12/10/2016
 		if ((cam.GetLR() > 35500.0) && (cam.GetFB() < 25344.0) ||
 			(cam.GetLR() > 34100.0) && (cam.GetFB() > 41127.0))
 		{
-			//cam.DisplayNoExit(width, height,tp.GetTexture(NO_EXIT));
+			cam.DisplayNoExit(width, height,tp.GetTexture(NO_EXIT));
 		}
-				// set the movement and rotation speed according to frame count
+        */
+
+		// set the movement and rotation speed according to frame count
 		IncrementFrameCount();
 		cam.SetMoveSpeed (stepIncrement);
 		cam.SetRotateSpeed (angleIncrement);
@@ -999,13 +1006,13 @@ void keys(unsigned char key, int x, int y)
 		case 'm':
 		case 'M':
 		{
-			if (DisplayMap)
+			if (gVar.DisplayMap)
 			{
-				DisplayMap = false;
+				gVar.DisplayMap = false;
 			}
 			else
 			{
-				DisplayMap = true;
+				gVar.DisplayMap = true;
 			}
 		}
 		break;
@@ -1014,23 +1021,23 @@ void keys(unsigned char key, int x, int y)
 		{
 			cam.SetRotateSpeed(0.0f);
 			cam.SetMoveSpeed(0.0f);
-			DisplayExit = true;
+			gVar.DisplayExit = true;
 		}
 		break;
 		// display welcome page (space key)
 		case ' ':
 		{
-			//if (DisplayWelcome)
+			//if (gVar.DisplayWelcome)
 			//{
 			//	cam.SetRotateSpeed(rotationSpeed);
 			//	cam.SetMoveSpeed(movementSpeed);
-			//	DisplayWelcome = false;
+			//	gVar.DisplayWelcome = false;
 			//}
 			//else
 			//{
 			//	cam.SetRotateSpeed(0.0f);
 			//	cam.SetMoveSpeed(0.0f);
-			//	DisplayWelcome = true;
+			//	gVar.DisplayWelcome = true;
 			//}
 			if (current_balls < MAX_BALLS && InSpace)
 			{
@@ -1042,13 +1049,13 @@ void keys(unsigned char key, int x, int y)
 		case 'l':
 		case 'L':
 		{
-			if (lightsOn)
+			if (gVar.lightsOn)
 			{
-				lightsOn = false;
+				gVar.lightsOn = false;
 			}
 			else
 			{
-				lightsOn = true;
+				gVar.lightsOn = true;
 			}
 		}
 		break;
@@ -1057,13 +1064,13 @@ void keys(unsigned char key, int x, int y)
 		case 'p':
 		{
 			// Display ECL Block
-			if (displayECL)
+			if (gVar.displayECL)
 			{
-				displayECL = false;
+				gVar.displayECL = false;
 			}
 			else
 			{
-				displayECL = true;
+				gVar.displayECL = true;
 			}
 		}
 		break;
@@ -1163,7 +1170,7 @@ void Mouse(int button, int state, int x, int y)
 	// exit tour if clicked on exit splash screen
 	if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
 	{
-		if ((DisplayExit) && (x <= width/2.0 + 256.0) && (x >= width/2.0 - 256.0)
+		if ((gVar.DisplayExit) && (x <= width/2.0 + 256.0) && (x >= width/2.0 - 256.0)
 			&& (y <= height/2.0 + 256.0) && (y >= height/2.0 - 256.0))
 		{
 			DeleteImageFromMemory(image);
@@ -2290,7 +2297,7 @@ void DrawBackdrop()
 	DisplayRedPosts ();
 	DisplayRoof();
 	DisplayStepBricks ();
-	if (lightsOn) DisplayLights ();
+	if (gVar.lightsOn) DisplayLights ();
 }
 
 
