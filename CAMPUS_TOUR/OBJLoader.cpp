@@ -51,6 +51,12 @@ int OBJLoader::loadObject(const char* filename)
 				faces.push_back(new face(a, b, c, d));
 			}			
 		}
+		else if ((*coord[i])[0] == 'v' && (*coord[i])[1] == 't')
+		{
+			float x, y;
+			sscanf(coord[i]->c_str(), "vt %f %f", x, y);
+			uvs.push_back(new uv(x,y));
+		}
 	}
 	//draw object
 	int num;
@@ -84,6 +90,7 @@ int OBJLoader::loadObject(const char* filename)
 	faces.clear();
 	normals.clear();
 	vertex.clear();
+	uvs.clear();
 
 	//for (int i = 0; i < coord.size(); i++)
 	//{

@@ -29,6 +29,12 @@ struct coordinates
 	coordinates(float a, float b, float c) : x(a), y(b), z(c) {};
 };
 
+struct uv
+{
+	float x, y;
+	uv(float a, float b) : x(a), y(b) {};
+};
+
 struct face
 {
 	int face_num;
@@ -58,6 +64,7 @@ private:
 	vector<coordinates*> vertex;
 	vector<face*> faces;
 	vector<coordinates*> normals;
+	vector<uv*> uvs;
 public:
 	int loadObject(const char* filename);
 };
