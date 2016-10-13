@@ -11,7 +11,7 @@
 #include "globalVariable.h"
 #include "gl/freeglut.h"
 
-void displayUIHUD(int screenWidth, int screenHeight);
+void displayUIHUD(int screenWidth, int screenHeight, const GLuint & tempImage);
 
 	/**
 	@brief Function operation of keys in this setting

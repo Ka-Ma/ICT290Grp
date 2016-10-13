@@ -60,6 +60,12 @@
     <ClCompile Include="globalVariable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="uiHUD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="uiKeysHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.H">
@@ -102,6 +108,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="globalVariable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="uiHUD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="uiKeysHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

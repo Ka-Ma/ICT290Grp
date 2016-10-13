@@ -671,9 +671,7 @@ void Display()
 		}
         */
 
-		if (InSpace) {
-			displayUIHUD(width, height);
-		}
+		
 
 
 		// set the movement and rotation speed according to frame count
@@ -746,6 +744,12 @@ void Display()
 	glVertex3f(34800, 10750, 25590);
 	glVertex3f(34800, 10750, 26360);
 	glEnd();
+
+
+	//after everything else so it draws on top - KJM 13/10/2016
+	if (InSpace) {
+		displayUIHUD(width, height, tp.GetTexture(999));
+	}
 
 	// clear buffers
 	glFlush();
@@ -2233,6 +2237,10 @@ void CreateTextures()
 
 	image = tp.LoadTexture("data/PSwallOppStair.raw", 512, 790);
 	tp.CreateTexture(PS_WALL_OPP_STAIR, image, 512, 790);
+
+	//ui
+	image = tp.LoadTexture("data/UIgreenRing.raw", 376, 376);
+	tp.CreateTexture(999, image, 376, 376);
 
 	// Planet Texture loads - MM
 	image = tp.LoadTexture("data/planets_sun.raw", 3000, 1500);
