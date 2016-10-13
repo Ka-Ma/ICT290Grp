@@ -3,8 +3,10 @@
 #include <time.h>
 #include "SDL.h"
 #include "OBJLoader.h"
-#include "globalVariable.h" //for ui - KJM 12/10/2016
 
+//for ui - KJM 12/10/2016
+#include "globalVariable.h" 
+#include "uiKeysHandler.h"
 
 #include <vector>
 #include <string>
@@ -891,99 +893,102 @@ void releaseKey(int key, int x, int y)
 void keys(unsigned char key, int x, int y)
 {
 	int i = 0;
-	switch (key)
+
+	if (!uiKeysHandler(key, x, y)) //filter for UI - KJM 13/10/2016
 	{
-		/*
-		// step left
-		case 'Z':
-		case 'z':
-			cam.DirectionLR(-1);
-			break;
-		// step right
-		case 'X':
-		case 'x':
-			cam.DirectionLR(1);
-		break;
-		// look up
-		case 'Q':
-		case 'q':
-			cam.DirectionLookUD(1);
-			break;
-		// look down
-		case 'A':
-		case 'a':
-			cam.DirectionLookUD(-1);
-		break;
-		// display campus map
-		case 'm':
-		case 'M':
+		switch (key)
 		{
-			if (DisplayMap)
+			/*
+			// step left
+			case 'Z':
+			case 'z':
+				cam.DirectionLR(-1);
+				break;
+			// step right
+			case 'X':
+			case 'x':
+				cam.DirectionLR(1);
+			break;
+			// look up
+			case 'Q':
+			case 'q':
+				cam.DirectionLookUD(1);
+				break;
+			// look down
+			case 'A':
+			case 'a':
+				cam.DirectionLookUD(-1);
+			break;
+			// display campus map
+			case 'm':
+			case 'M':
 			{
-				DisplayMap = false;
-			}
-			else
-			{
-				DisplayMap = true;
-			}
-		}
-		break;
-		// exit tour (escape key)
-		case 27:
-			{
-				cam.SetRotateSpeed (0.0f);
-				cam.SetMoveSpeed (0.0f);
-				DisplayExit = true;
-			}
-		break;
-		// display welcome page (space key)
-		case ' ':
-			{
-				if (DisplayWelcome)
+				if (DisplayMap)
 				{
-					cam.SetRotateSpeed (rotationSpeed);
-					cam.SetMoveSpeed (movementSpeed);
-					DisplayWelcome = false;
+					DisplayMap = false;
 				}
 				else
 				{
-					cam.SetRotateSpeed (0.0f);
-					cam.SetMoveSpeed (0.0f);
-					DisplayWelcome = true;
+					DisplayMap = true;
 				}
 			}
-		break;
-		// display light fittings
-		case 'l':
-		case 'L':
-		{
-			if (lightsOn)
+			break;
+			// exit tour (escape key)
+			case 27:
+				{
+					cam.SetRotateSpeed (0.0f);
+					cam.SetMoveSpeed (0.0f);
+					DisplayExit = true;
+				}
+			break;
+			// display welcome page (space key)
+			case ' ':
+				{
+					if (DisplayWelcome)
+					{
+						cam.SetRotateSpeed (rotationSpeed);
+						cam.SetMoveSpeed (movementSpeed);
+						DisplayWelcome = false;
+					}
+					else
+					{
+						cam.SetRotateSpeed (0.0f);
+						cam.SetMoveSpeed (0.0f);
+						DisplayWelcome = true;
+					}
+				}
+			break;
+			// display light fittings
+			case 'l':
+			case 'L':
 			{
-				lightsOn = false;
+				if (lightsOn)
+				{
+					lightsOn = false;
+				}
+				else
+				{
+					lightsOn = true;
+				}
 			}
-			else
+			break;
+
+			case 'P':
+			case 'p':
 			{
-				lightsOn = true;
+				// Display ECL Block
+				if (displayECL)
+				{
+					displayECL = false;
+				}
+				else
+				{
+					displayECL = true;
+				}
 			}
-		}
-		break;
-		
-		case 'P':
-		case 'p':
-		{
-			// Display ECL Block
-			if (displayECL)
-			{
-				displayECL = false;
-			}
-			else
-			{
-				displayECL = true;
-			}
-		}
-		break;
-		*/
-		// step left
+			break;
+			*/
+			// step left
 		case 'Z':
 		case 'z':
 			cam.DirectionLR(-moveSpeed);
@@ -1025,7 +1030,7 @@ void keys(unsigned char key, int x, int y)
 			gVar.DisplayExit = true;
 		}
 		break;
-		// display welcome page (space key)
+		// display welcome page (space key) or release balls in game
 		case ' ':
 		{
 			//if (gVar.DisplayWelcome)
@@ -1110,6 +1115,7 @@ void keys(unsigned char key, int x, int y)
 		case 's':
 			cam.DirectionFB(-moveSpeed);
 			break;
+		}
 	}
 }
 
