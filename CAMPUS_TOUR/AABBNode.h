@@ -10,7 +10,8 @@
 #define AABBNODE_H
 
 #include <vector>
-#include <gl/glut.h>
+//#include <gl/glut.h>
+#include <GL/freeglut.h>
 
 //--------------------------------------------------------------------------------------
 

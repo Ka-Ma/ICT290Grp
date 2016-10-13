@@ -9,7 +9,8 @@
 #include "Camera.h"
 
 #include <math.h>
-#include <gl/glut.h>
+//#include <gl/glut.h>
+#include <GL/freeglut.h>
 
 //--------------------------------------------------------------------------------------
 // Set initial values

@@ -12,7 +12,8 @@
 #include <fstream>
 #include <cstdio>
 
-#include <GL/glut.h> //needs to be declared last for compiler reasons
+//#include <GL/glut.h> //needs to be declared last for compiler reasons
+#include <GL/freeglut.h> // needed for glutBitmapString - kjm 13/10/2016
 
 #undef main
 
@@ -5485,6 +5486,7 @@ void DisplayPlanets()
 
 	//glutSolidSphere(allPlanets[0][3] * SizeMult, 20, 20);
 	//    glMaterialfv( GL_FRONT, GL_EMISSION, planet_emission );
+
 	glPopMatrix();
 
 	//Mercury

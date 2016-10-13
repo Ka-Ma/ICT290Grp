@@ -7,7 +7,8 @@
 #include <algorithm>
 #include <fstream>
 #include <cstdio>
-#include <gl/glut.h>
+//#include <gl/glut.h>
+#include <GL/freeglut.h>
 
 /*
 TO USE:

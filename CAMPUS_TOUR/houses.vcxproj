@@ -142,6 +142,7 @@
     <ClCompile Include="cameraMap.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="EasySound.cpp" />
+    <ClCompile Include="globalVariable.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
     <ClCompile Include="PlainLinkedList.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="cameraMap.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="EasySound.h" />
+    <ClInclude Include="globalVariable.h" />
     <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="PlainLinkedList.h" />
     <ClInclude Include="PlainNode.h" />

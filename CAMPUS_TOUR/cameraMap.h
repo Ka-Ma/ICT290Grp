@@ -8,7 +8,8 @@
 #ifndef CAMERA_MAP_H
 #define CAMERA_MAP_H
 
-#include <gl/glut.h>
+//#include <gl/glut.h>
+#include <GL/freeglut.h>
 
 //--------------------------------------------------------------------------------------
 
