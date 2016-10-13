@@ -9,8 +9,9 @@
 #define UIHUD_H
 
 #include "globalVariable.h"
+#include "gl/freeglut.h"
 
-void displayUIHUD();
+void displayUIHUD(int screenWidth, int screenHeight);
 
 	/**
 	@brief Function operation of keys in this setting

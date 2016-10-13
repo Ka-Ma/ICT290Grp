@@ -671,6 +671,11 @@ void Display()
 		}
         */
 
+		if (InSpace) {
+			displayUIHUD(width, height);
+		}
+
+
 		// set the movement and rotation speed according to frame count
 		IncrementFrameCount();
 		cam.SetMoveSpeed (stepIncrement);
