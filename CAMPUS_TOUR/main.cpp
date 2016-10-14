@@ -14,8 +14,8 @@
 #include <fstream>
 #include <cstdio>
 
-//#include <GL/glut.h> //needs to be declared last for compiler reasons
-#include <GL/freeglut.h> // needed for glutBitmapString - kjm 13/10/2016
+#include <GL/glut.h> //needs to be declared last for compiler reasons
+//#include <GL/freeglut.h> // needed for glutBitmapString - kjm 13/10/2016
 
 #undef main
 

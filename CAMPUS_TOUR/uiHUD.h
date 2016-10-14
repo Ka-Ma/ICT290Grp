@@ -9,7 +9,8 @@
 #define UIHUD_H
 
 #include "globalVariable.h"
-#include "gl/freeglut.h"
+#include "gl/freeglut.h"  //for glutBitmapString()
+#include "gl/glut.h"
 
 void displayUIHUD(int screenWidth, int screenHeight, const GLuint & tempImage);
 

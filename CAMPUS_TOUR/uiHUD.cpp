@@ -69,16 +69,17 @@ void displayUIHUD(int screenWidth, int screenHeight, const GLuint & tempImage)
 		glVertex2f(screenWidth - 170, 170);
 	glEnd();
 	
-	
+	//need to add this texts to image so it doesn't cause problems when it exceeds the window size
+	//data will need to be converted to string in order to put on screen
 	glBindTexture(GL_TEXTURE_2D, 0); //sets active to none
 	glColor3f(0.498f, 1.0f, 0.0f);
 	glRasterPos2i(10, 10);
-	glutBitmapString(GLUT_BITMAP_HELVETICA_12, (const unsigned char*)"Balls In Play / Available");
+	glutBitmapString(GLUT_BITMAP_HELVETICA_12, (const unsigned char*)"Balls In Play / Available");  
 	glRasterPos2i(screenWidth-110, screenHeight-20);
 	glutBitmapString(GLUT_BITMAP_HELVETICA_12, (const unsigned char*)"Timer");
 	glRasterPos2i(10, screenHeight - 20);
 	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"Menu");
-	glRasterPos2i(screenWidth-130, 10);
+	glRasterPos2i(screenWidth-150, 10);
 	glutBitmapString(GLUT_BITMAP_HELVETICA_10, (const unsigned char*)"Dist from Goal / Planets Hit");
 	glEnable(GL_LIGHTING);
 

@@ -12,8 +12,8 @@
 
 #include <iostream>
 #include <math.h>
-//#include <gl/glut.h>
-#include <GL/freeglut.h>
+#include <gl/glut.h>
+//#include <GL/freeglut.h>
 
 class PlainNode
 {

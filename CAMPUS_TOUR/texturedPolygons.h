@@ -10,8 +10,8 @@
 
 //--------------------------------------------------------------------------------------
 
-//#include <gl/glut.h>
-#include <GL/freeglut.h>
+#include <gl/glut.h>
+//#include <GL/freeglut.h>
 #include <stdio.h>	// should really be using c++, but didn't get time to change
 #include <stdlib.h>
 
