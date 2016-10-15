@@ -4,6 +4,7 @@
 
 void displayUIHUD(int screenWidth, int screenHeight, const GLuint & tempImage)
 {
+	int d = 200; //width and height of hud arc
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
@@ -25,34 +26,34 @@ void displayUIHUD(int screenWidth, int screenHeight, const GLuint & tempImage)
 	glBegin(GL_QUADS);
 		glTexCoord2f(0.5, 0.5);
 		glVertex2f(0, 0);
-		glTexCoord2f(0.0, .5);
+		glTexCoord2f(0.5, 1);
 		glVertex2f(0, 170);
-		glTexCoord2f(.0, .0);
+		glTexCoord2f(1, 1);
 		glVertex2f(170, 170);
-		glTexCoord2f(.5, 0.0);
+		glTexCoord2f(1, 0.5);
 		glVertex2f(170, 0);
 	glEnd();
 
 	//TIMER
 	glBegin(GL_QUADS);
 		glTexCoord2f(0.0, 0.0);
-		glVertex2f(screenWidth-170, screenHeight-170);
-		glTexCoord2f(0.0, .5);
-		glVertex2f(screenWidth-170, screenHeight);
-		glTexCoord2f(.5, .5);
+		glVertex2f(screenWidth-d, screenHeight-d);
+		glTexCoord2f(0.0, 0.5);
+		glVertex2f(screenWidth-d, screenHeight);
+		glTexCoord2f(0.5, 0.5);
 		glVertex2f(screenWidth, screenHeight);
-		glTexCoord2f(.5, 0.0);
-		glVertex2f(screenWidth, screenHeight-170);
+		glTexCoord2f(0.5, 0.0);
+		glVertex2f(screenWidth, screenHeight-d);
 	glEnd();
 
 	//MENU
 	glBegin(GL_QUADS);
 		glTexCoord2f(0.5, 0.0);
-		glVertex2f(0, screenHeight - 170);
+		glVertex2f(0, screenHeight - d);
 		glTexCoord2f(1, 0.0);
-		glVertex2f(170, screenHeight - 170);
+		glVertex2f(d, screenHeight - d);
 		glTexCoord2f(1, .5);
-		glVertex2f(170, screenHeight);
+		glVertex2f(d, screenHeight);
 		glTexCoord2f(.50, 0.5);
 		glVertex2f(0, screenHeight);
 	glEnd();
@@ -60,13 +61,13 @@ void displayUIHUD(int screenWidth, int screenHeight, const GLuint & tempImage)
 	//PLAYER/SCORE STATS 
 	glBegin(GL_QUADS);
 		glTexCoord2f(0, 0.5);
-		glVertex2f(screenWidth - 170, 0);
+		glVertex2f(screenWidth - d, 0);
 		glTexCoord2f(0.5, 0.5);
 		glVertex2f(screenWidth, 0);
 		glTexCoord2f(0.5, 1);
-		glVertex2f(screenWidth, 170);
+		glVertex2f(screenWidth, d);
 		glTexCoord2f(0, 1);
-		glVertex2f(screenWidth - 170, 170);
+		glVertex2f(screenWidth - d, d);
 	glEnd();
 	
 	//need to add this texts to image so it doesn't cause problems when it exceeds the window size

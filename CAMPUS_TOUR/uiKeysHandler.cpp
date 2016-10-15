@@ -7,6 +7,11 @@ bool uiKeysHandler(unsigned char key, int x, int y)
         keysUIHUD(key, x, y);
         return true;
     }
-    else
+    else if(gVar.uiMenu) 
+	{
+		keysUIMenu(key, x, y);
+		return true;
+	}
+	else
         return false;
 }

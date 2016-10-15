@@ -747,8 +747,11 @@ void Display()
 
 
 	//after everything else so it draws on top - KJM 13/10/2016
-	if (InSpace) {
+	if (gVar.uiHUD) {
 		displayUIHUD(width, height, tp.GetTexture(999));
+	}
+	if (gVar.uiMenu) {
+		displayUIMenu(width, height, tp.GetTexture(998));
 	}
 
 	// clear buffers
@@ -2241,6 +2244,8 @@ void CreateTextures()
 	//ui
 	image = tp.LoadTexture("data/UIgreenRing.raw", 376, 376);
 	tp.CreateTexture(999, image, 376, 376);
+	image = tp.LoadTexture("data/UImenu.raw", 600, 600);
+	tp.CreateTexture(998, image, 600, 600);
 
 	// Planet Texture loads - MM
 	image = tp.LoadTexture("data/planets_sun.raw", 3000, 1500);
@@ -5678,7 +5683,7 @@ void CheckLocationForTeleport()
 void TeleportToPlanets()
 {
 	moveSpeed = 8;
-	InSpace = true;
+	gVar.uiHUD = InSpace = true;
 	glClearColor(0, 0, 0, 1.0);
 	cam.Position(SunX, allPlanets[0][1], cam.GetFB(), 0);
 
@@ -5691,7 +5696,7 @@ void TeleportToPlanets()
 }
 void TeleportToBushCourt()
 {
-	InSpace = false;
+	gVar.uiHUD = InSpace = false;
 	moveSpeed = 3;
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
 	cam.Position(32720.0, 9536.0, 4800.0, 180.0);

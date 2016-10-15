@@ -11,6 +11,7 @@
 #include "globalVariable.h"
 //include uiHeaders.h
 #include "uiHUD.h"
+#include "uiMenu.h"
 
 bool uiKeysHandler(unsigned char key, int x, int y);
 
