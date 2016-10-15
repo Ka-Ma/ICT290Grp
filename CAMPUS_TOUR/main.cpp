@@ -747,11 +747,11 @@ void Display()
 
 
 	//after everything else so it draws on top - KJM 13/10/2016
-	if (gVar.uiHUD) {
-		displayUIHUD(width, height, tp.GetTexture(999));
-	}
 	if (gVar.uiMenu) {
 		displayUIMenu(width, height, tp.GetTexture(998));
+	}
+	if (gVar.uiHUD) {
+		displayUIHUD(width, height, tp.GetTexture(999));
 	}
 
 	// clear buffers

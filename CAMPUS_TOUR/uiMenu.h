@@ -11,6 +11,7 @@
 #include "globalVariable.h"
 #include "gl/freeglut.h"  //for glutBitmapString()
 #include "gl/glut.h"
+#include "EasySound.h"
 
 
 	/**

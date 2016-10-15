@@ -12,7 +12,13 @@
 #include "gl/freeglut.h"  //for glutBitmapString()
 #include "gl/glut.h"
 
-void displayUIHUD(int screenWidth, int screenHeight, const GLuint & tempImage);
+	/**
+	@brief display the elements of the HUD
+	@param w - width of the screen
+	@param h - height of the screen
+	@param tempImage - pointer to UI image passed in
+	*/
+void displayUIHUD(int w, int h, const GLuint & tempImage);
 
 	/**
 	@brief Function operation of keys in this setting

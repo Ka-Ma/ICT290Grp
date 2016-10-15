@@ -2,14 +2,15 @@
 
 
 
-void displayUIHUD(int screenWidth, int screenHeight, const GLuint & tempImage)
+void displayUIHUD(int w, int h, const GLuint & tempImage)
 {
 	int d = 200; //width and height of hud arc
+	
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	gluOrtho2D(0, screenWidth, 0, screenHeight);
+	gluOrtho2D(0, w, 0, h);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
@@ -19,55 +20,58 @@ void displayUIHUD(int screenWidth, int screenHeight, const GLuint & tempImage)
 	glDisable(GL_LIGHTING);  //need to disable for text to render properly
 	glEnable(GL_TEXTURE_2D); //need for tempImage
 
-	// display images
+	// display images: quad is counterclockwise starting top left, texture coords are top left = 0,0
 	// this will be the corners with the menu, timer, ball stats, player/score stats
 	// BALL STATS
 	glBindTexture(GL_TEXTURE_2D, tempImage); 
 	glBegin(GL_QUADS);
+		glTexCoord2f(0.5, 0.0);
+		glVertex2f(0, d);
 		glTexCoord2f(0.5, 0.5);
 		glVertex2f(0, 0);
-		glTexCoord2f(0.5, 1);
-		glVertex2f(0, 170);
-		glTexCoord2f(1, 1);
-		glVertex2f(170, 170);
-		glTexCoord2f(1, 0.5);
-		glVertex2f(170, 0);
+		glTexCoord2f(1.0, 0.5);
+		glVertex2f(d, 0);
+		glTexCoord2f(1.0, 0.0);
+		glVertex2f(d, d);
 	glEnd();
 
 	//TIMER
+	glBindTexture(GL_TEXTURE_2D, tempImage); 
 	glBegin(GL_QUADS);
-		glTexCoord2f(0.0, 0.0);
-		glVertex2f(screenWidth-d, screenHeight-d);
 		glTexCoord2f(0.0, 0.5);
-		glVertex2f(screenWidth-d, screenHeight);
+		glVertex2f(w-d, h);
+		glTexCoord2f(0.0, 1.0);
+		glVertex2f(w-d, h-d);
+		glTexCoord2f(0.5, 1.0);
+		glVertex2f(w, h-d);
 		glTexCoord2f(0.5, 0.5);
-		glVertex2f(screenWidth, screenHeight);
-		glTexCoord2f(0.5, 0.0);
-		glVertex2f(screenWidth, screenHeight-d);
+		glVertex2f(w, h);
 	glEnd();
 
 	//MENU
+	glBindTexture(GL_TEXTURE_2D, tempImage); 
 	glBegin(GL_QUADS);
-		glTexCoord2f(0.5, 0.0);
-		glVertex2f(0, screenHeight - d);
-		glTexCoord2f(1, 0.0);
-		glVertex2f(d, screenHeight - d);
-		glTexCoord2f(1, .5);
-		glVertex2f(d, screenHeight);
-		glTexCoord2f(.50, 0.5);
-		glVertex2f(0, screenHeight);
+		glTexCoord2f(0.5, 0.5);
+		glVertex2f(0, h);
+		glTexCoord2f(0.5, 1.0);
+		glVertex2f(0, h - d);
+		glTexCoord2f(1.0, 1.0);
+		glVertex2f(d, h-d);
+		glTexCoord2f(1.0, 0.5);
+		glVertex2f(d, h);
 	glEnd();
 
 	//PLAYER/SCORE STATS 
+	glBindTexture(GL_TEXTURE_2D, tempImage); 
 	glBegin(GL_QUADS);
-		glTexCoord2f(0, 0.5);
-		glVertex2f(screenWidth - d, 0);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(w - d, d);
+		glTexCoord2f(0.0, 0.5);
+		glVertex2f(w-d, 0);
 		glTexCoord2f(0.5, 0.5);
-		glVertex2f(screenWidth, 0);
-		glTexCoord2f(0.5, 1);
-		glVertex2f(screenWidth, d);
-		glTexCoord2f(0, 1);
-		glVertex2f(screenWidth - d, d);
+		glVertex2f(w, 0);
+		glTexCoord2f(0.5, 0.0);
+		glVertex2f(w, d);
 	glEnd();
 	
 	//need to add this texts to image so it doesn't cause problems when it exceeds the window size
@@ -75,13 +79,11 @@ void displayUIHUD(int screenWidth, int screenHeight, const GLuint & tempImage)
 	glBindTexture(GL_TEXTURE_2D, 0); //sets active to none
 	glColor3f(0.498f, 1.0f, 0.0f);
 	glRasterPos2i(10, 10);
-	glutBitmapString(GLUT_BITMAP_HELVETICA_12, (const unsigned char*)"Balls In Play / Available");  
-	glRasterPos2i(screenWidth-110, screenHeight-20);
-	glutBitmapString(GLUT_BITMAP_HELVETICA_12, (const unsigned char*)"Timer");
-	glRasterPos2i(10, screenHeight - 20);
-	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"Menu");
-	glRasterPos2i(screenWidth-150, 10);
-	glutBitmapString(GLUT_BITMAP_HELVETICA_10, (const unsigned char*)"Dist from Goal / Planets Hit");
+	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"1");  //replace with ballsInPlay variable to string
+	glRasterPos2i(w-110, h-20);
+	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"1000");  //replace with timer variable to string
+	glRasterPos2i(w-150, 10);
+	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"51200");  // replace with distFromGoal variable to string & planetsHit variable to string
 	glEnable(GL_LIGHTING);
 
 

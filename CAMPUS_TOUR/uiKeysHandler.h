@@ -8,8 +8,10 @@
 #ifndef UIKEYSHANDLER_H
 #define UIKEYSHANDLER_H
 
+//for troubleshooting
+#include <iostream>
+
 #include "globalVariable.h"
-//include uiHeaders.h
 #include "uiHUD.h"
 #include "uiMenu.h"
 
