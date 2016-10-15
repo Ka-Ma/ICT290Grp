@@ -2,13 +2,18 @@
 
 
 
-void displayUIMenu(int screenWidth, int screenHeight, const GLuint & tempImage)
+void displayUIMenu(int w, int h, const GLuint & tempImage)
 {
+	//finding centre of screen
+	int wc = w / 2; 
+	int hc = h / 2;
+	int d = 300; // half of width and height of UI screen
+
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	gluOrtho2D(0, screenWidth, 0, screenHeight);
+	gluOrtho2D(0, w, 0, h);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
@@ -20,14 +25,14 @@ void displayUIMenu(int screenWidth, int screenHeight, const GLuint & tempImage)
 	// display menu image at screen centre
 	glBindTexture(GL_TEXTURE_2D, tempImage); 
 	glBegin(GL_QUADS);
-		glTexCoord2f(0, 1);
-		glVertex2f(screenWidth / 2 - 300, screenHeight / 2 - 300);
-		glTexCoord2f(0, 0);
-		glVertex2f(screenWidth/2-300, screenHeight/2+300);
-		glTexCoord2f(1, 0);
-		glVertex2f(screenWidth/2+300, screenHeight / 2 + 300);
-		glTexCoord2f(1, 1);
-		glVertex2f(screenWidth / 2 + 300, screenHeight / 2 - 300);
+		glTexCoord2f(0.0, 0.0);
+		glVertex2f(wc - d, hc + d);
+		glTexCoord2f(0.0, 1.0);
+		glVertex2f(wc - d, hc - d);
+		glTexCoord2f(1.0, 1.0);
+		glVertex2f(wc + d, hc - d);
+		glTexCoord2f(1.0, 0.0);
+		glVertex2f(wc + d, hc + d);
 	glEnd();
 
 	// Reset Perspective Projection

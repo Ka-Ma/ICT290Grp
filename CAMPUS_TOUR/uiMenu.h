@@ -16,11 +16,11 @@
 
 	/**
 	@brief Displays visual elements of this UI
-	@param screenWidth
-	@param screenHeight 
+	@param w - width of screen
+	@param h - height of screen 
 	@param tempImage - passing in pointer for image to be used
 	*/
-void displayUIMenu(int screenWidth, int screenHeight, const GLuint & tempImage);
+void displayUIMenu(int w, int h, const GLuint & tempImage);
 
 	/**
 	@brief Function operation of keys in this setting
