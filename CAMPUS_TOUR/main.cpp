@@ -753,6 +753,9 @@ void Display()
 	if (gVar.uiMenu) {
 		displayUIMenu(width, height, tp.GetTexture(998));
 	}
+	if (gVar.uiOptions) {
+		displayUIOptions(width, height, tp.GetTexture(997));
+	}
 
 	// clear buffers
 	glFlush();
@@ -1032,14 +1035,6 @@ void keys(unsigned char key, int x, int y)
 				gVar.DisplayMap = true;
 			}
 		}
-		else {
-			if (gVar.uiMenu) {
-				gVar.uiMenu = false;
-			}
-			else {
-				gVar.uiMenu = true;
-			}
-		}
 	}
 	break;
 	// exit tour (escape key)
@@ -1048,6 +1043,7 @@ void keys(unsigned char key, int x, int y)
 		cam.SetRotateSpeed(0.0f);
 		cam.SetMoveSpeed(0.0f);
 		gVar.DisplayExit = true;
+		if (gVar.uiMenu) { gVar.uiMenu = false; }
 	}
 	break;
 	// display welcome page (space key) or release balls in game
@@ -2254,8 +2250,10 @@ void CreateTextures()
 	//ui
 	image = tp.LoadTexture("data/UIgreenRing.raw", 376, 376);
 	tp.CreateTexture(999, image, 376, 376);
-	image = tp.LoadTexture("data/UImenu.raw", 600, 600);
-	tp.CreateTexture(998, image, 600, 600);
+	image = tp.LoadTexture("data/UImenu.raw", 400, 400);
+	tp.CreateTexture(998, image, 400, 400);
+	image = tp.LoadTexture("data/UIoptions.raw", 600, 600);
+	tp.CreateTexture(997, image, 600, 600);
 
 	// Planet Texture loads - MM
 	image = tp.LoadTexture("data/planets_sun.raw", 3000, 1500);

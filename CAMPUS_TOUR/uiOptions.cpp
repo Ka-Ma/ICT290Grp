@@ -1,8 +1,8 @@
-#include "uiMenu.h"
+#include "uiOptions.h"
 
 
 
-void displayUIMenu(int w, int h, const GLuint & tempImage)
+void displayUIOptions(int w, int h, const GLuint & tempImage)
 {
 	//finding centre of screen
 	int wc = w / 2; 
@@ -44,7 +44,7 @@ void displayUIMenu(int w, int h, const GLuint & tempImage)
 	glEnable(GL_DEPTH_TEST);
 }
 
-void mouseUIMenu(int button, int state, int x, int y)
+void mouseUIOptions(int button, int state, int x, int y)
 {
 	//KM 15/10/2016 click noise - sourced from http://soundbible.com/1705-Click2.html
 	CEasySound *es;
@@ -56,8 +56,9 @@ void mouseUIMenu(int button, int state, int x, int y)
 	//screen height and width centres
 	int hc = 500;
 	int wc = 500;
-	int btnW = 190 / 2; // width of button, halved for calcs
-	//fyi: button is 20px high and there is 60px between buttons
+	int maxPlanets = 9;
+	int numPlanets = 9;
+	int minPlanets = 2;
 	
 	//when click in pixel area of menu option make click sound and do expected action
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
@@ -66,55 +67,48 @@ void mouseUIMenu(int button, int state, int x, int y)
 		
 		std::cout << "x " << x << ", y " << y << std::endl;
 		//if coord range equals 
-		//restart: reset all variables to beginning state and uiMenu = false
-		if (x >= wc - btnW && x <= wc+btnW && y >= 400 && y <= 425)
+		//increase planet number
+	/*	if (x >= wc - btnW && x <= wc+btnW && y >= 400 && y <= 425)
 		{
 			clickSound->Play();
-			
-			//reset game to starting variables
-			//timer = max
-			//planetsHit = 0
-			//player position = start
-			//balls = start
-
-			//restarts animation
-			//restarts timer
-
-			//returns to game
-			gVar.uiMenu = false;
+			if (numPlanets != maxPlanets) {
+				numPlanets++;
+			}
 		}
-		//resume: uiMenu = false, restarts animation and timer
+		//decrease planet number
 		if (x >= wc - btnW && x <= wc + btnW && y >= 478 && y <= 498)
 		{
 			clickSound->Play();
-			//restart animation
-			//restart timer
-
-			//returns to game
-			gVar.uiMenu = false;
+			if (numPlanets != minPlanets) {
+				numPlanets--;
+			}
 		}
-		//options: uiOptions = true
+		//increase projectiles
 		if (x >= wc - btnW && x <= wc + btnW && y >= 557 && y <= 577)
 		{
 			clickSound->Play();
-			gVar.uiOptions = true;
-			gVar.uiMenu = false;
+			if (numProj != maxProj) {
+				numProj++;
+			}
 		}
-		//leaderboard: uiLeaderboard = true
+		//decreate projectiles
 		if (x >= wc - btnW && x <= wc + btnW && y >= 635 && y <= 655)
 		{
 			clickSound->Play();
-			gVar.uiLeaderBoard = true;
-			gVar.uiMenu = false;
+			if (numProj != minProj) {
+				numProj--;
+			}
 		}
-		//exit: displayExit = true
+		//return to game
 		if (x >= wc - btnW && x <= wc + btnW && y >= 714 && y <= 734)
 		{
 			clickSound->Play();
-			gVar.DisplayExit = true;
-			gVar.uiMenu = false;
+			gVar.uiOptions = false;
+			// reset and start timer, 
+			// reset all other game variables 
+			// restart animation
 		}
-
+*/
 	}
 }
 

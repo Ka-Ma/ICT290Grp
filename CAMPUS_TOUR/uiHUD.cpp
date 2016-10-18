@@ -75,7 +75,7 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 	//data will need to be converted to string in order to put on screen
 	glBindTexture(GL_TEXTURE_2D, 0); //sets active to none
 	glColor3f(0.498f, 1.0f, 0.0f);
-	glRasterPos2i(10, 10);
+	glRasterPos2i(30, 10);
 	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"1");  //replace with ballsInPlay variable to string
 	glRasterPos2i(w-110, h-20);
 	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"1000");  //replace with timer variable to string
@@ -100,6 +100,7 @@ void mouseUIHUD(int button, int state, int x, int y)
 		if (x <= 200 && x >= 0 && y <= 200 && y >= 0) 
 		{
 			gVar.uiMenu = true;
+			//pause timer & animation
 		}
 		/*else if ((gVar.DisplayExit) && (x <= width / 2.0 + 256.0) && (x >= width / 2.0 - 256.0)
 			&& (y <= height / 2.0 + 256.0) && (y >= height / 2.0 - 256.0))

@@ -27,6 +27,8 @@ typedef struct globalVariable {
 	bool uiOptions;
 	bool uiLeaderBoard;
 
+
+
 	//posible futures
 	//leaderboard vector
 	//dist from goal variable

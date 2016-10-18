@@ -1,12 +1,12 @@
 	/**
-	@brief Menu elements
-	@author Katherine Mann, except where noted
+	@brief Options elements
+	@author Katherine Mann
 	@version 01
-	@date 15/10/2016
+	@date 18/10/2016
 	*/
 
-#ifndef UIMENU_H
-#define UIMENU_H
+#ifndef UIOPTIONS_H
+#define UIOPTIONS_H
 
 //for troubleshooting
 #include <iostream>
@@ -23,7 +23,7 @@
 	@param h - height of screen 
 	@param tempImage - passing in pointer for image to be used
 	*/
-void displayUIMenu(int w, int h, const GLuint & tempImage);
+void displayUIOptions(int w, int h, const GLuint & tempImage);
 
 	/**
 	@brief Function operation of mouse in this setting
@@ -32,6 +32,6 @@ void displayUIMenu(int w, int h, const GLuint & tempImage);
 	@param x - x position
 	@param y - y position
 	*/
-void mouseUIMenu(int button, int state, int x, int y);
+void mouseUIOptions(int button, int state, int x, int y);
 
-#endif // UIMENU_H
+#endif // UIOPTIONS_H
