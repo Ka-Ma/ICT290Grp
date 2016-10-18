@@ -6,10 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "houses", "houses.vcxproj", "{76305D85-2C28-4999-A3E9-D2AFE269A606}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EA4AE43-C8D5-4456-9FEB-C565D229D501}"
-	ProjectSection(SolutionItems) = preProject
-		uiMenu.cpp = uiMenu.cpp
-		uiMenu.h = uiMenu.h
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

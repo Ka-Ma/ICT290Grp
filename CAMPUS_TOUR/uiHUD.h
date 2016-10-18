@@ -21,13 +21,12 @@
 void displayUIHUD(int w, int h, const GLuint & tempImage);
 
 	/**
-	@brief Function operation of keys in this setting
-	@param key - the key that was pressed
-	@param x - x position 
-	@param y - y position 
+	@brief Function operation of mouse in this setting
+	@param button - the button that was pressed
+	@param state
+	@param x - x position
+	@param y - y position
 	*/
-void keysUIHUD(unsigned char key, int x, int y);
-
-void mouseUIOptions(int button, int state, int x, int y);
+void mouseUIHUD(int button, int state, int x, int y);
 
 #endif // UIHUD_H

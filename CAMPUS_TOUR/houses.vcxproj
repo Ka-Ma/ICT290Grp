@@ -151,8 +151,8 @@
     <ClCompile Include="SoundTime.cpp" />
     <ClCompile Include="texturedPolygons.cpp" />
     <ClCompile Include="uiHUD.cpp" />
-    <ClCompile Include="uiKeysHandler.cpp" />
     <ClCompile Include="uiMenu.cpp" />
+    <ClCompile Include="uiMouseHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.H" />
@@ -170,8 +170,8 @@
     <ClInclude Include="SoundTime.h" />
     <ClInclude Include="texturedPolygons.h" />
     <ClInclude Include="uiHUD.h" />
-    <ClInclude Include="uiKeysHandler.h" />
     <ClInclude Include="uiMenu.h" />
+    <ClInclude Include="uiMouseHandler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

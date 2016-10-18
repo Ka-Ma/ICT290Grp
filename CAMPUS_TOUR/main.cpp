@@ -6,7 +6,7 @@
 
 //for ui - KJM 12/10/2016
 #include "globalVariable.h" 
-#include "uiKeysHandler.h"
+#include "uiMouseHandler.h"
 
 #include <vector>
 #include <string>
@@ -747,11 +747,11 @@ void Display()
 
 
 	//after everything else so it draws on top - KJM 13/10/2016
-	if (gVar.uiMenu) {
-		displayUIMenu(width, height, tp.GetTexture(998));
-	}
 	if (gVar.uiHUD) {
 		displayUIHUD(width, height, tp.GetTexture(999));
+	}
+	if (gVar.uiMenu) {
+		displayUIMenu(width, height, tp.GetTexture(998));
 	}
 
 	// clear buffers
@@ -906,124 +906,123 @@ void keys(unsigned char key, int x, int y)
 {
 	int i = 0;
 
-	if (!uiKeysHandler(key, x, y)) //filter for UI - KJM 13/10/2016
+	switch (key)
 	{
-		switch (key)
-		{
-			/*
-			// step left
-			case 'Z':
-			case 'z':
-				cam.DirectionLR(-1);
-				break;
-			// step right
-			case 'X':
-			case 'x':
-				cam.DirectionLR(1);
-			break;
-			// look up
-			case 'Q':
-			case 'q':
-				cam.DirectionLookUD(1);
-				break;
-			// look down
-			case 'A':
-			case 'a':
-				cam.DirectionLookUD(-1);
-			break;
-			// display campus map
-			case 'm':
-			case 'M':
-			{
-				if (DisplayMap)
-				{
-					DisplayMap = false;
-				}
-				else
-				{
-					DisplayMap = true;
-				}
-			}
-			break;
-			// exit tour (escape key)
-			case 27:
-				{
-					cam.SetRotateSpeed (0.0f);
-					cam.SetMoveSpeed (0.0f);
-					DisplayExit = true;
-				}
-			break;
-			// display welcome page (space key)
-			case ' ':
-				{
-					if (DisplayWelcome)
-					{
-						cam.SetRotateSpeed (rotationSpeed);
-						cam.SetMoveSpeed (movementSpeed);
-						DisplayWelcome = false;
-					}
-					else
-					{
-						cam.SetRotateSpeed (0.0f);
-						cam.SetMoveSpeed (0.0f);
-						DisplayWelcome = true;
-					}
-				}
-			break;
-			// display light fittings
-			case 'l':
-			case 'L':
-			{
-				if (lightsOn)
-				{
-					lightsOn = false;
-				}
-				else
-				{
-					lightsOn = true;
-				}
-			}
-			break;
-
-			case 'P':
-			case 'p':
-			{
-				// Display ECL Block
-				if (displayECL)
-				{
-					displayECL = false;
-				}
-				else
-				{
-					displayECL = true;
-				}
-			}
-			break;
-			*/
-			// step left
+		/*
+		// step left
 		case 'Z':
 		case 'z':
-			cam.DirectionLR(-moveSpeed);
+			cam.DirectionLR(-1);
 			break;
-			// step right
+		// step right
 		case 'X':
 		case 'x':
-			cam.DirectionLR(moveSpeed);
+			cam.DirectionLR(1);
+		break;
+		// look up
+		case 'Q':
+		case 'q':
+			cam.DirectionLookUD(1);
 			break;
-			// look up
-		case 'R':
-		case 'r':
-			cam.DirectionLookUD(moveSpeed);
-			break;
-			// look down
-		case 'F':
-		case 'f':
-			cam.DirectionLookUD(-moveSpeed);
-			break;
-			// display campus map
+		// look down
+		case 'A':
+		case 'a':
+			cam.DirectionLookUD(-1);
+		break;
+		// display campus map
 		case 'm':
 		case 'M':
 		{
+			if (DisplayMap)
+			{
+				DisplayMap = false;
+			}
+			else
+			{
+				DisplayMap = true;
+			}
+		}
+		break;
+		// exit tour (escape key)
+		case 27:
+			{
+				cam.SetRotateSpeed (0.0f);
+				cam.SetMoveSpeed (0.0f);
+				DisplayExit = true;
+			}
+		break;
+		// display welcome page (space key)
+		case ' ':
+			{
+				if (DisplayWelcome)
+				{
+					cam.SetRotateSpeed (rotationSpeed);
+					cam.SetMoveSpeed (movementSpeed);
+					DisplayWelcome = false;
+				}
+				else
+				{
+					cam.SetRotateSpeed (0.0f);
+					cam.SetMoveSpeed (0.0f);
+					DisplayWelcome = true;
+				}
+			}
+		break;
+		// display light fittings
+		case 'l':
+		case 'L':
+		{
+			if (lightsOn)
+			{
+				lightsOn = false;
+			}
+			else
+			{
+				lightsOn = true;
+			}
+		}
+		break;
+
+		case 'P':
+		case 'p':
+		{
+			// Display ECL Block
+			if (displayECL)
+			{
+				displayECL = false;
+			}
+			else
+			{
+				displayECL = true;
+			}
+		}
+		break;
+		*/
+		// step left
+	case 'Z':
+	case 'z':
+		cam.DirectionLR(-moveSpeed);
+		break;
+		// step right
+	case 'X':
+	case 'x':
+		cam.DirectionLR(moveSpeed);
+		break;
+		// look up
+	case 'R':
+	case 'r':
+		cam.DirectionLookUD(moveSpeed);
+		break;
+		// look down
+	case 'F':
+	case 'f':
+		cam.DirectionLookUD(-moveSpeed);
+		break;
+		// display campus map
+	case 'm':
+	case 'M':
+	{
+		if (!InSpace) {
 			if (gVar.DisplayMap)
 			{
 				gVar.DisplayMap = false;
@@ -1033,101 +1032,109 @@ void keys(unsigned char key, int x, int y)
 				gVar.DisplayMap = true;
 			}
 		}
-		break;
-		// exit tour (escape key)
-		case 27:
+		else {
+			if (gVar.uiMenu) {
+				gVar.uiMenu = false;
+			}
+			else {
+				gVar.uiMenu = true;
+			}
+		}
+	}
+	break;
+	// exit tour (escape key)
+	case 27:
+	{
+		cam.SetRotateSpeed(0.0f);
+		cam.SetMoveSpeed(0.0f);
+		gVar.DisplayExit = true;
+	}
+	break;
+	// display welcome page (space key) or release balls in game
+	case ' ':
+	{
+		//if (gVar.DisplayWelcome)
+		//{
+		//	cam.SetRotateSpeed(rotationSpeed);
+		//	cam.SetMoveSpeed(movementSpeed);
+		//	gVar.DisplayWelcome = false;
+		//}
+		//else
+		//{
+		//	cam.SetRotateSpeed(0.0f);
+		//	cam.SetMoveSpeed(0.0f);
+		//	gVar.DisplayWelcome = true;
+		//}
+		if (current_balls < MAX_BALLS && InSpace)
 		{
-			cam.SetRotateSpeed(0.0f);
-			cam.SetMoveSpeed(0.0f);
-			gVar.DisplayExit = true;
+			addParticle(0.1* SizeMult, 0.3* SizeMult, 0, 0, 0);
 		}
-		break;
-		// display welcome page (space key) or release balls in game
-		case ' ':
+	}
+	break;
+	// display light fittings
+	case 'l':
+	case 'L':
+	{
+		if (gVar.lightsOn)
 		{
-			//if (gVar.DisplayWelcome)
-			//{
-			//	cam.SetRotateSpeed(rotationSpeed);
-			//	cam.SetMoveSpeed(movementSpeed);
-			//	gVar.DisplayWelcome = false;
-			//}
-			//else
-			//{
-			//	cam.SetRotateSpeed(0.0f);
-			//	cam.SetMoveSpeed(0.0f);
-			//	gVar.DisplayWelcome = true;
-			//}
-			if (current_balls < MAX_BALLS && InSpace)
-			{
-				addParticle(0.1* SizeMult, 0.3* SizeMult, 0, 0, 0);
-			}
+			gVar.lightsOn = false;
 		}
-		break;
-		// display light fittings
-		case 'l':
-		case 'L':
+		else
 		{
-			if (gVar.lightsOn)
-			{
-				gVar.lightsOn = false;
-			}
-			else
-			{
-				gVar.lightsOn = true;
-			}
+			gVar.lightsOn = true;
 		}
-		break;
+	}
+	break;
 
-		case 'P':
-		case 'p':
+	case 'P':
+	case 'p':
+	{
+		// Display ECL Block
+		if (gVar.displayECL)
 		{
-			// Display ECL Block
-			if (gVar.displayECL)
-			{
-				gVar.displayECL = false;
-			}
-			else
-			{
-				gVar.displayECL = true;
-			}
+			gVar.displayECL = false;
+		}
+		else
+		{
+			gVar.displayECL = true;
+		}
+	}
+	break;
+
+	case 'Q':
+	case 'q':
+		if (RotSpeed > -MaxRotSpeed)
+		{
+			RotSpeed -= RotSpeedAlt;
+		}
+		break;
+	case 'E':
+	case 'e':
+		if (RotSpeed < MaxRotSpeed)
+		{
+			RotSpeed += RotSpeedAlt;
 		}
 		break;
 
-		case 'Q':
-		case 'q':
-			if (RotSpeed > -MaxRotSpeed)
-			{
-				RotSpeed -= RotSpeedAlt;
-			}
-			break;
-		case 'E':
-		case 'e':
-			if (RotSpeed < MaxRotSpeed)
-			{
-				RotSpeed += RotSpeedAlt;
-			}
-			break;
+	case 'A':
+	case 'a':
+		cam.DirectionRotateLR(-moveSpeed);
+		break;
 
-		case 'A':
-		case 'a':
-			cam.DirectionRotateLR(-moveSpeed);
-			break;
+	case 'D':
+	case 'd':
+		cam.DirectionRotateLR(moveSpeed);
+		break;
 
-		case 'D':
-		case 'd':
-			cam.DirectionRotateLR(moveSpeed);
-			break;
+	case 'W':
+	case 'w':
+		cam.DirectionFB(moveSpeed);
+		break;
 
-		case 'W':
-		case 'w':
-			cam.DirectionFB(moveSpeed);
-			break;
-
-		case 'S':
-		case 's':
-			cam.DirectionFB(-moveSpeed);
-			break;
-		}
+	case 'S':
+	case 's':
+		cam.DirectionFB(-moveSpeed);
+		break;
 	}
 }
 
@@ -1186,16 +1193,19 @@ void releaseKeys(unsigned char key, int x, int y)
 //--------------------------------------------------------------------------------------
 void Mouse(int button, int state, int x, int y)
 {
-	// exit tour if clicked on exit splash screen
-	if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
+	if (!uiMouseHandler(button, state, x, y) || gVar.DisplayExit) //filter for UI - KJM 18/10/2016 except for exit
 	{
-		if ((gVar.DisplayExit) && (x <= width/2.0 + 256.0) && (x >= width/2.0 - 256.0)
-			&& (y <= height/2.0 + 256.0) && (y >= height/2.0 - 256.0))
+		// exit tour if clicked on exit splash screen
+		if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
 		{
-			DeleteImageFromMemory(image);
-			exit(1);
+			if ((gVar.DisplayExit) && (x <= width / 2.0 + 256.0) && (x >= width / 2.0 - 256.0)
+				&& (y <= height / 2.0 + 256.0) && (y >= height / 2.0 - 256.0))
+			{
+				DeleteImageFromMemory(image);
+				exit(1);
+			}
 		}
-  	 }
+	}
 }
 
 //--------------------------------------------------------------------------------------

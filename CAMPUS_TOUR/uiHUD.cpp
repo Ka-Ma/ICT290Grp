@@ -36,7 +36,6 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 	glEnd();
 
 	//TIMER
-	glBindTexture(GL_TEXTURE_2D, tempImage); 
 	glBegin(GL_QUADS);
 		glTexCoord2f(0.0, 0.5);
 		glVertex2f(w-d, h);
@@ -49,7 +48,6 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 	glEnd();
 
 	//MENU
-	glBindTexture(GL_TEXTURE_2D, tempImage); 
 	glBegin(GL_QUADS);
 		glTexCoord2f(0.5, 0.5);
 		glVertex2f(0, h);
@@ -62,7 +60,6 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 	glEnd();
 
 	//PLAYER/SCORE STATS 
-	glBindTexture(GL_TEXTURE_2D, tempImage); 
 	glBegin(GL_QUADS);
 		glTexCoord2f(0.0, 0.0);
 		glVertex2f(w - d, d);
@@ -96,22 +93,20 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 	glEnable(GL_DEPTH_TEST);
 }
 
-void keysUIHUD(unsigned char key, int x, int y)
+void mouseUIHUD(int button, int state, int x, int y)
 {
-    switch (key)
-    {
-    case 'm': //menu
-	case 'M':
-        gVar.uiMenu = true;
-        break;
-    case 27: //quit
-        gVar.DisplayExit = true;
-        break;
-    }
-}
-
-void mouseUIOptions(int button, int state, int x, int y)
-{
-    
+	if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
+	{
+		if (x <= 200 && x >= 0 && y <= 200 && y >= 0) 
+		{
+			gVar.uiMenu = true;
+		}
+		/*else if ((gVar.DisplayExit) && (x <= width / 2.0 + 256.0) && (x >= width / 2.0 - 256.0)
+			&& (y <= height / 2.0 + 256.0) && (y >= height / 2.0 - 256.0))
+		{
+			DeleteImageFromMemory(image);
+			exit(1);
+		}*/
+	}
 }
 

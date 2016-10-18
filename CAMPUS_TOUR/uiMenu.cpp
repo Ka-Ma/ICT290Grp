@@ -44,21 +44,6 @@ void displayUIMenu(int w, int h, const GLuint & tempImage)
 	glEnable(GL_DEPTH_TEST);
 }
 
-void keysUIMenu(unsigned char key, int x, int y)
-{
-	switch (key)
-    {
-    case 'm': 
-	case 'M':
-		gVar.uiMenu = false;
-        break;
-    case 27: //quit
-		gVar.uiMenu = false;
-        gVar.DisplayExit = true;
-        break;
-    }
-}
-
 void mouseUIMenu(int button, int state, int x, int y)
 {
 	//KM 15/10/2016 click noise - sourced from http://soundbible.com/1705-Click2.html

@@ -23,14 +23,6 @@
 void displayUIMenu(int w, int h, const GLuint & tempImage);
 
 	/**
-	@brief Function operation of keys in this setting
-	@param key - the key that was pressed
-	@param x - x position 
-	@param y - y position 
-	*/
-void keysUIMenu(unsigned char key, int x, int y);
-
-	/**
 	@brief Function operation of mouse in this setting
 	@param button - the button that was pressed
 	@param state

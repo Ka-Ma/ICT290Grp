@@ -63,10 +63,10 @@
     <ClCompile Include="uiHUD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="uiKeysHandler.cpp">
+    <ClCompile Include="uiMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="uiMenu.cpp">
+    <ClCompile Include="uiMouseHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,10 +116,10 @@
     <ClInclude Include="uiHUD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="uiKeysHandler.h">
+    <ClInclude Include="uiMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="uiMenu.h">
+    <ClInclude Include="uiMouseHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
