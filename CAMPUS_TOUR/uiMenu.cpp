@@ -18,7 +18,7 @@ void displayUIMenu(int w, int h, const GLuint & tempImage)
 	glLoadIdentity();
 	
 	//gl depth test disabled so hud draws correctly
-	glDisable(GL_DEPTH_TEST); 
+	glDisable(GL_DEPTH_TEST|GL_LIGHTING); 
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_TEXTURE_2D); //need for tempImage
 
@@ -35,13 +35,13 @@ void displayUIMenu(int w, int h, const GLuint & tempImage)
 		glVertex2f(wc + d, hc + d);
 	glEnd();
 
+	glEnable(GL_DEPTH_TEST|GL_LIGHTING);
+
 	// Reset Perspective Projection
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
-
-	glEnable(GL_DEPTH_TEST);
 }
 
 void mouseUIMenu(int button, int state, int x, int y)

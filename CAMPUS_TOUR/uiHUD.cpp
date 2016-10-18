@@ -15,9 +15,8 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 	glLoadIdentity();
 	
 	//gl depth test disabled so hud draws correctly
-	glDisable(GL_DEPTH_TEST); 
+	glDisable(GL_DEPTH_TEST|GL_LIGHTING); // disable depth test for 2d, lighting for text
 	glClear(GL_DEPTH_BUFFER_BIT);
-	glDisable(GL_LIGHTING);  //need to disable for text to render properly
 	glEnable(GL_TEXTURE_2D); //need for tempImage
 
 	// display images: quad is counterclockwise starting top left, texture coords are top left = 0,0
@@ -71,7 +70,6 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 		glVertex2f(w, d);
 	glEnd();
 	
-	//need to add this texts to image so it doesn't cause problems when it exceeds the window size
 	//data will need to be converted to string in order to put on screen
 	glBindTexture(GL_TEXTURE_2D, 0); //sets active to none
 	glColor3f(0.498f, 1.0f, 0.0f);
@@ -81,8 +79,8 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"1000");  //replace with timer variable to string
 	glRasterPos2i(w-150, 10);
 	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"51200");  // replace with distFromGoal variable to string & planetsHit variable to string
-	glEnable(GL_LIGHTING);
 
+	glEnable(GL_DEPTH_TEST|GL_LIGHTING);
 
 	// Reset Perspective Projection
 	glMatrixMode(GL_PROJECTION);
@@ -90,15 +88,22 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
 
-	glEnable(GL_DEPTH_TEST);
+	
 }
 
 void mouseUIHUD(int button, int state, int x, int y)
 {
+	//KM 15/10/2016 click noise - sourced from http://soundbible.com/1705-Click2.html
+	CEasySound *es;
+	CSound* clickSound;
+	es = CEasySound::Instance();
+	clickSound = es->GetSound(es->Load("sounds/Click2-Sebastian-759472264.wav"));
+
 	if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
 	{
 		if (x <= 200 && x >= 0 && y <= 200 && y >= 0) 
 		{
+			clickSound->Play();
 			gVar.uiMenu = true;
 			//pause timer & animation
 		}

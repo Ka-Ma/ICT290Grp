@@ -616,8 +616,8 @@ void myinit()
 	// set number of bounding boxes required
 	cam.SetNoBoundingBoxes(27); //KM 16/9/2016 increased from 19
 	// set starting position of user
-	cam.Position(32720.0, 9536.0,	4800.0, 180.0);
-	//cam.Position(32720.0, 11000,27300, 90.0); Temp starting position for easy access bug fixing
+	//cam.Position(32720.0, 9536.0,	4800.0, 180.0);
+	cam.Position(32720.0, 11000,27300, 90.0); //Temp starting position for easy access bug fixing
 	
 	CreatePlains();	
 	
@@ -755,6 +755,9 @@ void Display()
 	}
 	if (gVar.uiOptions) {
 		displayUIOptions(width, height, tp.GetTexture(997));
+	}
+	if (gVar.uiLeaderBoard) {
+		displayUILeaderBoard(width, height, tp.GetTexture(996));
 	}
 
 	// clear buffers
@@ -1040,10 +1043,20 @@ void keys(unsigned char key, int x, int y)
 	// exit tour (escape key)
 	case 27:
 	{
-		cam.SetRotateSpeed(0.0f);
-		cam.SetMoveSpeed(0.0f);
-		gVar.DisplayExit = true;
-		if (gVar.uiMenu) { gVar.uiMenu = false; }
+		if (gVar.uiOptions) {
+			gVar.uiOptions = false;
+			gVar.uiMenu = true;
+		}
+		else if (gVar.uiLeaderBoard) {
+			gVar.uiLeaderBoard = false;
+			gVar.uiMenu = true;
+		}
+		else {
+			cam.SetRotateSpeed(0.0f);
+			cam.SetMoveSpeed(0.0f);
+			gVar.DisplayExit = true;
+			if (gVar.uiMenu) { gVar.uiMenu = false; }
+		}
 	}
 	break;
 	// display welcome page (space key) or release balls in game
@@ -1522,7 +1535,7 @@ void CreateTextures()
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	
 	// set texture count
-	tp.SetTextureCount(250);
+	tp.SetTextureCount(270); //increased number from 250 to 270 kjm 18/10/2016
 
 	// load and create textures
 	image = tp.LoadTexture("data/abovechanctext.raw", 128, 1024);
@@ -2254,6 +2267,8 @@ void CreateTextures()
 	tp.CreateTexture(998, image, 400, 400);
 	image = tp.LoadTexture("data/UIoptions.raw", 600, 600);
 	tp.CreateTexture(997, image, 600, 600);
+	image = tp.LoadTexture("data/UIleaderboard.raw", 400, 400);
+	tp.CreateTexture(996, image, 400, 400);
 
 	// Planet Texture loads - MM
 	image = tp.LoadTexture("data/planets_sun.raw", 3000, 1500);

@@ -15,6 +15,11 @@ bool uiMouseHandler(int button, int state, int x, int y)
 		mouseUIOptions(button, state, x, y);
 		return true;
 	}
+	else if (gVar.uiLeaderBoard) {
+		std::cout << "LeaderBoard has control of mouse" << std::endl;
+		mouseUILeaderBoard(button, state, x, y);
+		return true;
+	}
 	else if(gVar.uiHUD)
 	{
 		std::cout << "HUD has control of mouse" << std::endl;

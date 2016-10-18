@@ -151,6 +151,7 @@
     <ClCompile Include="SoundTime.cpp" />
     <ClCompile Include="texturedPolygons.cpp" />
     <ClCompile Include="uiHUD.cpp" />
+    <ClCompile Include="uiLeaderBoard.cpp" />
     <ClCompile Include="uiMenu.cpp" />
     <ClCompile Include="uiMouseHandler.cpp" />
     <ClCompile Include="uiOptions.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="SoundTime.h" />
     <ClInclude Include="texturedPolygons.h" />
     <ClInclude Include="uiHUD.h" />
+    <ClInclude Include="uiLeaderBoard.h" />
     <ClInclude Include="uiMenu.h" />
     <ClInclude Include="uiMouseHandler.h" />
     <ClInclude Include="uiOptions.h" />
