@@ -748,16 +748,16 @@ void Display()
 
 	//after everything else so it draws on top - KJM 13/10/2016
 	if (gVar.uiHUD) {
-		displayUIHUD(width, height, tp.GetTexture(999));
+		displayUIHUD(width, height, tp.GetTexture(251));
 	}
 	if (gVar.uiMenu) {
-		displayUIMenu(width, height, tp.GetTexture(998));
+		displayUIMenu(width, height, tp.GetTexture(252));
 	}
 	if (gVar.uiOptions) {
-		displayUIOptions(width, height, tp.GetTexture(997));
+		displayUIOptions(width, height, tp.GetTexture(253));
 	}
 	if (gVar.uiLeaderBoard) {
-		displayUILeaderBoard(width, height, tp.GetTexture(996));
+		displayUILeaderBoard(width, height, tp.GetTexture(254));
 	}
 
 	// clear buffers
@@ -2262,13 +2262,13 @@ void CreateTextures()
 
 	//ui
 	image = tp.LoadTexture("data/UIgreenRing.raw", 376, 376);
-	tp.CreateTexture(999, image, 376, 376);
+	tp.CreateTexture(251, image, 376, 376);
 	image = tp.LoadTexture("data/UImenu.raw", 400, 400);
-	tp.CreateTexture(998, image, 400, 400);
+	tp.CreateTexture(252, image, 400, 400);
 	image = tp.LoadTexture("data/UIoptions.raw", 600, 600);
-	tp.CreateTexture(997, image, 600, 600);
+	tp.CreateTexture(253, image, 600, 600);
 	image = tp.LoadTexture("data/UIleaderboard.raw", 400, 400);
-	tp.CreateTexture(996, image, 400, 400);
+	tp.CreateTexture(254, image, 400, 400);
 
 	// Planet Texture loads - MM
 	image = tp.LoadTexture("data/planets_sun.raw", 3000, 1500);

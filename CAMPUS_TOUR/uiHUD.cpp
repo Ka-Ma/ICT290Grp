@@ -75,9 +75,9 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 	glColor3f(0.498f, 1.0f, 0.0f);
 	glRasterPos2i(30, 10);
 	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"1");  //replace with ballsInPlay variable to string
-	glRasterPos2i(w-110, h-20);
+	glRasterPos2i(w-110, h-30);
 	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"1000");  //replace with timer variable to string
-	glRasterPos2i(w-150, 10);
+	glRasterPos2i(w-140, 20);
 	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"51200");  // replace with distFromGoal variable to string & planetsHit variable to string
 
 	glEnable(GL_DEPTH_TEST|GL_LIGHTING);
