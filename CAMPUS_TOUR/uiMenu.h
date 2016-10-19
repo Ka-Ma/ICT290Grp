@@ -3,6 +3,8 @@
 	@author Katherine Mann, except where noted
 	@version 01
 	@date 15/10/2016
+	@version 02 - convert to class - KJM
+	@date 19/10/2016
 	*/
 
 #ifndef UIMENU_H
@@ -16,14 +18,19 @@
 #include "gl/glut.h"
 #include "EasySound.h"
 
+class uiMenu {
+public:
+	uiMenu(int w, int h);
+
+	void updateUIMenuMembers(int w, int h);
 
 	/**
 	@brief Displays visual elements of this UI
 	@param w - width of screen
-	@param h - height of screen 
+	@param h - height of screen
 	@param tempImage - passing in pointer for image to be used
 	*/
-void displayUIMenu(int w, int h, const GLuint & tempImage);
+	void displayUIMenu(const GLuint & tempImage);
 
 	/**
 	@brief Function operation of mouse in this setting
@@ -32,6 +39,13 @@ void displayUIMenu(int w, int h, const GLuint & tempImage);
 	@param x - x position
 	@param y - y position
 	*/
-void mouseUIMenu(int button, int state, int x, int y);
+	void mouseUIMenu(int button, int state, int x, int y);
+
+private:
+	int width; //screen width
+	int height; //screen height
+};
+
+	
 
 #endif // UIMENU_H

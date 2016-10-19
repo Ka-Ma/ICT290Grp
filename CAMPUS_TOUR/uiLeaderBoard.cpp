@@ -43,7 +43,12 @@ void displayUILeaderBoard(int w, int h, const GLuint & tempImage)
 	//glRasterPos2i(x, y+25);
 	glRasterPos2i(wc - d+100, hc+d-200); 
 	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"ABC   18/10/2016   512890"); // need to replace with details from leaderboard vector
-	
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (const unsigned char*)" 8 by 13");
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)" 9 by 15");
+	glutBitmapString(GLUT_BITMAP_HELVETICA_10, (const unsigned char*)" hel 10");
+	glutBitmapString(GLUT_BITMAP_HELVETICA_12, (const unsigned char*)" hel 12");
+	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*)" timrom 24");
+
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 

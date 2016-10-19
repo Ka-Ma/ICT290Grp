@@ -1,8 +1,17 @@
 #include "uiHUD.h"
 
+uiHUD::uiHUD(int w, int h)
+{
+	updateUIHIDMembers(w, h);
+}
 
+void uiHUD::updateUIHIDMembers(int w, int h)
+{
+	width = w;
+	height = h;
+}
 
-void displayUIHUD(int w, int h, const GLuint & tempImage)
+void uiHUD::displayUIHUD(const GLuint & tempImage)
 {
 	int d = 200; //width and height of hud arc
 	
@@ -10,7 +19,7 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	gluOrtho2D(0, w, 0, h);
+	gluOrtho2D(0, width, 0, height);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
@@ -37,48 +46,48 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 	//TIMER
 	glBegin(GL_QUADS);
 		glTexCoord2f(0.0, 0.5);
-		glVertex2f(w-d, h);
+		glVertex2f(width-d, height);
 		glTexCoord2f(0.0, 1.0);
-		glVertex2f(w-d, h-d);
+		glVertex2f(width-d, height-d);
 		glTexCoord2f(0.5, 1.0);
-		glVertex2f(w, h-d);
+		glVertex2f(width, height-d);
 		glTexCoord2f(0.5, 0.5);
-		glVertex2f(w, h);
+		glVertex2f(width, height);
 	glEnd();
 
 	//MENU
 	glBegin(GL_QUADS);
 		glTexCoord2f(0.5, 0.5);
-		glVertex2f(0, h);
+		glVertex2f(0, height);
 		glTexCoord2f(0.5, 1.0);
-		glVertex2f(0, h - d);
+		glVertex2f(0, height - d);
 		glTexCoord2f(1.0, 1.0);
-		glVertex2f(d, h-d);
+		glVertex2f(d, height-d);
 		glTexCoord2f(1.0, 0.5);
-		glVertex2f(d, h);
+		glVertex2f(d, height);
 	glEnd();
 
 	//PLAYER/SCORE STATS 
 	glBegin(GL_QUADS);
 		glTexCoord2f(0.0, 0.0);
-		glVertex2f(w - d, d);
+		glVertex2f(width - d, d);
 		glTexCoord2f(0.0, 0.5);
-		glVertex2f(w-d, 0);
+		glVertex2f(width-d, 0);
 		glTexCoord2f(0.5, 0.5);
-		glVertex2f(w, 0);
+		glVertex2f(width, 0);
 		glTexCoord2f(0.5, 0.0);
-		glVertex2f(w, d);
+		glVertex2f(width, d);
 	glEnd();
 	
 	//data will need to be converted to string in order to put on screen
 	glBindTexture(GL_TEXTURE_2D, 0); //sets active to none
 	glColor3f(0.498f, 1.0f, 0.0f);
 	glRasterPos2i(30, 10);
-	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"1");  //replace with ballsInPlay variable to string
-	glRasterPos2i(w-110, h-30);
-	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"1000");  //replace with timer variable to string
-	glRasterPos2i(w-140, 20);
-	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"51200");  // replace with distFromGoal variable to string & planetsHit variable to string
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"1");  //replace with ballsInPlay variable to string
+	glRasterPos2i(width-110, height-30);
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"1000");  //replace with timer variable to string
+	glRasterPos2i(width-140, 20);
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"51200");  // replace with distFromGoal variable to string & planetsHit variable to string
 
 	glEnable(GL_DEPTH_TEST|GL_LIGHTING);
 
@@ -91,7 +100,7 @@ void displayUIHUD(int w, int h, const GLuint & tempImage)
 	
 }
 
-void mouseUIHUD(int button, int state, int x, int y)
+void uiHUD::mouseUIHUD(int button, int state, int x, int y)
 {
 	//KM 15/10/2016 click noise - sourced from http://soundbible.com/1705-Click2.html
 	CEasySound *es;
@@ -107,12 +116,6 @@ void mouseUIHUD(int button, int state, int x, int y)
 			gVar.uiMenu = true;
 			//pause timer & animation
 		}
-		/*else if ((gVar.DisplayExit) && (x <= width / 2.0 + 256.0) && (x >= width / 2.0 - 256.0)
-			&& (y <= height / 2.0 + 256.0) && (y >= height / 2.0 - 256.0))
-		{
-			DeleteImageFromMemory(image);
-			exit(1);
-		}*/
 	}
 }
 
