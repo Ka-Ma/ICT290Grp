@@ -16,13 +16,19 @@
 #include "gl/glut.h"
 #include "EasySound.h"
 
+class uiLeaderBoard {
+public:
+	uiLeaderBoard(int w, int h);
+
+	void updateUILeaderBoardMembers(int w, int h);
+
 	/**
 	@brief display the elements of the LeaderBoard
 	@param w - width of the screen
 	@param h - height of the screen
 	@param tempImage - pointer to UI image passed in
 	*/
-void displayUILeaderBoard(int w, int h, const GLuint & tempImage);
+	void displayUILeaderBoard(const GLuint & tempImage);
 
 	/**
 	@brief Function operation of mouse in this setting
@@ -31,6 +37,13 @@ void displayUILeaderBoard(int w, int h, const GLuint & tempImage);
 	@param x - x position
 	@param y - y position
 	*/
-void mouseUILeaderBoard(int button, int state, int x, int y);
+	void mouseUILeaderBoard(int button, int state, int x, int y);
+
+private:
+	int width; //screen width
+	int height; //screen height
+};
+
+	
 
 #endif // UILEADERBOARD_H

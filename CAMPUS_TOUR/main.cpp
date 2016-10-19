@@ -374,6 +374,8 @@ OBJLoader obj;
 //ui objects
 uiHUD uih(1000,1000);
 uiMenu uim(1000, 1000);
+uiOptions uio(1000, 1000);
+uiLeaderBoard uil(1000, 1000);
 
 // mm
 GLUquadric *quad;
@@ -758,10 +760,10 @@ void Display()
 		uim.displayUIMenu(tp.GetTexture(252));
 	}
 	if (gVar.uiOptions) {
-		displayUIOptions(width, height, tp.GetTexture(253));
+		uio.displayUIOptions(tp.GetTexture(253));
 	}
 	if (gVar.uiLeaderBoard) {
-		displayUILeaderBoard(width, height, tp.GetTexture(254));
+		uil.displayUILeaderBoard(tp.GetTexture(254));
 	}
 
 	// clear buffers
@@ -859,6 +861,8 @@ void reshape(int w, int h)
 	//update ui objects
 	uih.updateUIHIDMembers(w, h);
 	uim.updateUIMenuMembers(w, h);
+	uio.updateUIOptionsMembers(w, h);
+	uil.updateUILeaderBoardMembers(w, h);
 
 	// Prevent a divide by zero, when window is too short
 	// (you cant make a window of zero width).
@@ -1211,7 +1215,7 @@ void releaseKeys(unsigned char key, int x, int y)
 //--------------------------------------------------------------------------------------
 void Mouse(int button, int state, int x, int y)
 {
-	if (!uiMouseHandler(button, state, x, y, uih, uim) || gVar.DisplayExit) //filter for UI - KJM 18/10/2016 except for exit
+	if (!uiMouseHandler(button, state, x, y, uih, uim, uio, uil) || gVar.DisplayExit) //filter for UI - KJM 18/10/2016 except for exit
 	{
 		// exit tour if clicked on exit splash screen
 		if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))

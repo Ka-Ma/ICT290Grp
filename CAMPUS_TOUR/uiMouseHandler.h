@@ -17,6 +17,6 @@
 #include "uiOptions.h"
 #include "uiLeaderBoard.h"
 
-bool uiMouseHandler(int button, int state, int x, int y, uiHUD & uih, uiMenu & uim);
+bool uiMouseHandler(int button, int state, int x, int y, uiHUD & uih, uiMenu & uim, uiOptions & uio, uiLeaderBoard & uil);
 
 #endif //UIMOUSEHANDLER_H

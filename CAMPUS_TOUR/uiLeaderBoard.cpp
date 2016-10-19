@@ -1,19 +1,28 @@
 #include "uiLeaderBoard.h"
 
+uiLeaderBoard::uiLeaderBoard(int w, int h)
+{
+	updateUILeaderBoardMembers(w, h);
+}
 
+void uiLeaderBoard::updateUILeaderBoardMembers(int w, int h)
+{
+	width = w;
+	height = h;
+}
 
-void displayUILeaderBoard(int w, int h, const GLuint & tempImage)
+void uiLeaderBoard::displayUILeaderBoard(const GLuint & tempImage)
 {
 	//finding centre of screen
-	int wc = w / 2;
-	int hc = h / 2;
+	int wc = width / 2;
+	int hc = height / 2;
 	int d = 300; // half of width and height of UI screen
 
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	gluOrtho2D(0, w, 0, h);
+	gluOrtho2D(0, width, 0, height);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -42,13 +51,8 @@ void displayUILeaderBoard(int w, int h, const GLuint & tempImage)
 	//for (each entry in leaderboard vector)
 	//glRasterPos2i(x, y+25);
 	glRasterPos2i(wc - d+100, hc+d-200); 
-	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"ABC   18/10/2016   512890"); // need to replace with details from leaderboard vector
-	glutBitmapString(GLUT_BITMAP_8_BY_13, (const unsigned char*)" 8 by 13");
-	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)" 9 by 15");
-	glutBitmapString(GLUT_BITMAP_HELVETICA_10, (const unsigned char*)" hel 10");
-	glutBitmapString(GLUT_BITMAP_HELVETICA_12, (const unsigned char*)" hel 12");
-	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*)" timrom 24");
-
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"ABC   18/10/2016   512890"); // need to replace with details from leaderboard vector
+	
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 
@@ -59,8 +63,11 @@ void displayUILeaderBoard(int w, int h, const GLuint & tempImage)
 	glPopMatrix();
 }
 
-void mouseUILeaderBoard(int button, int state, int x, int y)
+void uiLeaderBoard::mouseUILeaderBoard(int button, int state, int x, int y)
 {
+	int wc = width / 2;
+	int hc = height / 2;
+
 	//KM 18/10/2016 click noise - sourced from http://soundbible.com/1705-Click2.html
 	CEasySound *es;
 	CSound* clickSound;
@@ -71,7 +78,7 @@ void mouseUILeaderBoard(int button, int state, int x, int y)
 	{
 		std::cout << "x " << x << ", y " << y << std::endl;
 		//return to menu
-		if (x >= 668 && x <= 775 && y >= 741 && y <= 772)
+		if (x >= wc + 168 && x <= wc + 275 && y >= hc +241 && y <= hc+272)
 		{
 			clickSound->Play();
 			gVar.uiLeaderBoard = false;
