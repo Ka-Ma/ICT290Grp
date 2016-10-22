@@ -169,5 +169,18 @@ void uiLeaderBoard::getLeaderBoard()
 
 void uiLeaderBoard::setLeaderBoard()
 {
-	//for each score in the vector write to the file
+	//for each score in the vector write to the file 
+	std::ofstream lbFile;
+	lbFile.open("data/LeaderBoard.txt");
+
+	size_t size = lboard.size();
+
+	for (int i = 0; i < size; i++)
+	{
+		lbFile << lboard[i].name <<","<< lboard[i].sDate <<","<< lboard[i].nScore << "," ;
+		if (i < size - 1) //newline for each except last
+			lbFile << "\n";
+	}
+
+	lbFile.close();
 }

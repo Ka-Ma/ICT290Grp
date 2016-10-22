@@ -630,7 +630,7 @@ void myinit()
 	cam.SetNoBoundingBoxes(27); //KM 16/9/2016 increased from 19
 	// set starting position of user
 	//cam.Position(32720.0, 9536.0,	4800.0, 180.0);
-	cam.Position(35000.0, 12000, 26100, 90.0); //Temp starting position for easy access bug fixing
+	cam.Position(35000.0, 12000, 26100, 90.0); //Temp starting position at top of stairs for easy access bug fixing
 	
 	CreatePlains();	
 	
@@ -1245,6 +1245,7 @@ void Mouse(int button, int state, int x, int y)
 				&& (y <= height / 2.0 + 256.0) && (y >= height / 2.0 - 256.0))
 			{
 				DeleteImageFromMemory(image);
+				uil.setLeaderBoard(); //write leaderboard to file to save for next time.
 				exit(1);
 			}
 		}
