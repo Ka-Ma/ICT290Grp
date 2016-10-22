@@ -11,6 +11,13 @@
 //troubleshooting
 #include <iostream>
 
+//leaderboard file
+#include <fstream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <sstream>
+
 #include "globalVariable.h"
 #include "gl/freeglut.h"  //for glutBitmapString()
 #include "gl/glut.h"
@@ -39,9 +46,26 @@ public:
 	*/
 	void mouseUILeaderBoard(int button, int state, int x, int y);
 
+	/**
+	@brief populate leaderboard vector from leaderboard text file
+	*/
+	void uiLeaderBoard::getLeaderBoard();
+
+	/**
+	@brief rewrite LeaderBoard.txt
+	*/
+	void uiLeaderBoard::setLeaderBoard();
+
 private:
 	int width; //screen width
 	int height; //screen height
+	struct score 
+	{ 
+		std::string name; 
+		std::string sDate; 
+		int nScore; 
+	};
+	std::vector<score> lboard;
 };
 
 	
