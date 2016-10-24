@@ -320,7 +320,7 @@ GLdouble rotationSpeed = 0.005;
 #define PLANETS_MERCURY				240
 #define PLANETS_VENUS				241
 #define PLANETS_EARTH				242
-#define PLANETS_MARS					243
+#define PLANETS_MARS				243
 #define PLANETS_JUPITER				244
 #define PLANETS_SATURN				245
 #define PLANETS_URANUS				246
@@ -639,7 +639,7 @@ void myinit()
 	// turn collision detection on
 	cam.SetCollisionDetectionOn(true);
 	// set number of bounding boxes required
-	cam.SetNoBoundingBoxes(27); //KM 16/9/2016 increased from 19
+	cam.SetNoBoundingBoxes(28); //KM 16/9/2016 increased from 19
 	// set starting position of user
 	//cam.Position(32720.0, 9536.0,	4800.0, 180.0);
 	cam.Position(32720.0, 10450,27300, 90.0); //Temp starting position for easy access bug fixing
@@ -1072,9 +1072,11 @@ void keys(unsigned char key, int x, int y)
 		cam.DirectionLookUD(moveSpeed);
 		break;
 	case 'h':
+		if (LevelNum < 3)
 		LevelNum++;
 		break;
 	case 'g':
+		if (LevelNum > 1)
 		LevelNum--;
 		break;
 		// look down
@@ -1506,10 +1508,10 @@ void CreateBoundingBoxes()
 	cam.SetAABBMinZ(26, 25930);
 
 	// railing on stairs 2
-	cam.SetAABBMaxX(27, 36250);
+	/*cam.SetAABBMaxX(27, 36250);
 	cam.SetAABBMinX(27, 35795);
 	cam.SetAABBMaxZ(27, 25990);
-	cam.SetAABBMinZ(27, 25960);
+	cam.SetAABBMinZ(27, 25960);*/
 }
 
 //--------------------------------------------------------------------------------------
@@ -5882,7 +5884,7 @@ void DrawBalls()
 			glPushMatrix();
 
 			glTranslatef(p->x, p->y, p->z);
-			//glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
 			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(ASTEROID));
 			gluSphere(quad, p->r, 20, 20);
 
@@ -6195,7 +6197,9 @@ void DrawCorridor()
 	if (portalCounter < (portalNum + 1) * 30)
 		portalCounter++;
 	else
-		portalNum++;
+	{
+			portalNum++;
+	}
 
 	if (portalNum > 2)
 	{
