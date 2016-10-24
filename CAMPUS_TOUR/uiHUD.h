@@ -3,6 +3,8 @@
 	@author Katherine Mann, except where noted
 	@version 01
 	@date 13/10/2016
+	@version 02 - updated to class KJM
+	@date 19/10/2016
 	*/
 
 #ifndef UIHUD_H
@@ -13,13 +15,20 @@
 #include "gl/glut.h"
 #include "EasySound.h"
 
+class uiHUD {
+public:
+
+	uiHUD(int w, int h);
+
+	void updateUIHIDMembers(int w, int h);
+
 	/**
 	@brief display the elements of the HUD
 	@param w - width of the screen
 	@param h - height of the screen
 	@param tempImage - pointer to UI image passed in
 	*/
-void displayUIHUD(int w, int h, const GLuint & tempImage);
+	void displayUIHUD(const GLuint & tempImage);
 
 	/**
 	@brief Function operation of mouse in this setting
@@ -28,6 +37,13 @@ void displayUIHUD(int w, int h, const GLuint & tempImage);
 	@param x - x position
 	@param y - y position
 	*/
-void mouseUIHUD(int button, int state, int x, int y);
+	void mouseUIHUD(int button, int state, int x, int y);
+
+private:
+	int width; //screen width
+	int height; //screen height
+};
+
+	
 
 #endif // UIHUD_H

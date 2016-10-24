@@ -1,19 +1,28 @@
 #include "uiOptions.h"
 
+uiOptions::uiOptions(int w, int h)
+{
+	updateUIOptionsMembers(w, h);
+}
 
+void uiOptions::updateUIOptionsMembers(int w, int h)
+{
+	width = w;
+	height = h;
+}
 
-void displayUIOptions(int w, int h, const GLuint & tempImage)
+void uiOptions::displayUIOptions(const GLuint & tempImage)
 {
 	//finding centre of screen
-	int wc = w / 2; 
-	int hc = h / 2;
+	int wc = width / 2; 
+	int hc = height / 2;
 	int d = 300; // half of width and height of UI screen
 
 	glPushMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	gluOrtho2D(0, w, 0, h);
+	gluOrtho2D(0, width, 0, height);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
@@ -39,10 +48,10 @@ void displayUIOptions(int w, int h, const GLuint & tempImage)
 	//data will need to be converted to string in order to put on screen
 	glBindTexture(GL_TEXTURE_2D, 0); //sets active to none
 	glColor3f(0.498f, 1.0f, 0.0f);
-	glRasterPos2i(527, 495);
-	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"9"); // need to replace with numPlanets
-	glRasterPos2i(527, 421);
-	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)"15"); // need to replace with numProj
+	glRasterPos2i(wc + 27, hc - 5);
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"9"); // need to replace with numPlanets
+	glRasterPos2i(wc + 27, hc - 79);
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"15"); // need to replace with numProj
 	
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
@@ -54,7 +63,7 @@ void displayUIOptions(int w, int h, const GLuint & tempImage)
 	glPopMatrix();
 }
 
-void mouseUIOptions(int button, int state, int x, int y)
+void uiOptions::mouseUIOptions(int button, int state, int x, int y)
 {
 	//KM 15/10/2016 click noise - sourced from http://soundbible.com/1705-Click2.html
 	CEasySound *es;
@@ -64,8 +73,8 @@ void mouseUIOptions(int button, int state, int x, int y)
 
 	//temp vars that may need to be in gVar or similar
 	//screen height and width centres
-	int hc = 500;
-	int wc = 500;
+	int hc = height /2;
+	int wc = width/2;
 	int maxPlanets = 9;
 	int numPlanets = 9;
 	int minPlanets = 2;
@@ -81,7 +90,7 @@ void mouseUIOptions(int button, int state, int x, int y)
 		std::cout << "x " << x << ", y " << y << std::endl;
 		//if coord range equals 
 		//increase planet number
-		if (x >= 520 && x <= 547 && y >= 471 && y <= 487)
+		if (x >= wc+20 && x <= wc+47 && y >= hc-29 && y <= hc-13)
 		{
 			clickSound->Play();
 			if (numPlanets != maxPlanets) {
@@ -89,7 +98,7 @@ void mouseUIOptions(int button, int state, int x, int y)
 			}
 		}
 		//decrease planet number
-		if (x >= 520 && x <= 547 && y >= 505 && y <= 519)
+		if (x >= wc + 20 && x <= wc+47 && y >= hc+5 && y <= hc+19)
 		{
 			clickSound->Play();
 			if (numPlanets != minPlanets) {
@@ -97,7 +106,7 @@ void mouseUIOptions(int button, int state, int x, int y)
 			}
 		}
 		//increase projectiles
-		if (x >= 518 && x <= 547 && y >= 549 && y <= 565)
+		if (x >= wc+18 && x <= wc+47 && y >= hc+49 && y <= hc+65)
 		{
 			clickSound->Play();
 			if (numProj != maxProj) {
@@ -105,7 +114,7 @@ void mouseUIOptions(int button, int state, int x, int y)
 			}
 		}
 		//decreate projectiles
-		if (x >= 519 && x <= 547 && y >= 584 && y <= 597)
+		if (x >= wc+19 && x <= wc+47 && y >= hc+84 && y <= hc+97)
 		{
 			clickSound->Play();
 			if (numProj != minProj) {
@@ -113,7 +122,7 @@ void mouseUIOptions(int button, int state, int x, int y)
 			}
 		}
 		//return to game
-		if (x >= 640 && x <= 736 && y >= 714 && y <= 735)
+		if (x >= wc+140 && x <= wc+236 && y >= hc+214 && y <= hc+235)
 		{
 			clickSound->Play();
 			gVar.uiOptions = false;
