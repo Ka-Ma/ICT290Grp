@@ -27,6 +27,9 @@ typedef struct globalVariable {
 	bool uiOptions;
 	bool uiLeaderBoard;
 
+	//game paused
+	bool paused;
+
 
 
 	//posible futures
