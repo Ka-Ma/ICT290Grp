@@ -22,7 +22,5 @@ struct globalVariable gVar = {
 	//uiOptions
 	false,
 	//uiLeaderboard
-	false,
-	//paused
 	false
 };
