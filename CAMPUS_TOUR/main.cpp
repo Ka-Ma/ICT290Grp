@@ -320,7 +320,7 @@ GLdouble rotationSpeed = 0.005;
 #define PLANETS_MERCURY				240
 #define PLANETS_VENUS				241
 #define PLANETS_EARTH				242
-#define PLANETS_MARS					243
+#define PLANETS_MARS				243
 #define PLANETS_JUPITER				244
 #define PLANETS_SATURN				245
 #define PLANETS_URANUS				246
@@ -328,6 +328,12 @@ GLdouble rotationSpeed = 0.005;
 #define PLANETS_PLUTO				248
 #define PLANETS_SATURNRINGS			249
 #define ASTEROID					250
+
+//Portal textures
+#define PORTAL1						255
+#define PORTAL2						256
+#define PORTAL3						257
+
 
 
 //--------------------------------------------------------------------------------------
@@ -471,6 +477,8 @@ void DrawBanner();
 //initialise sound
 CEasySound *es;
 CSound* firstSound;
+CSound* doorSlide;
+CSound* releaseBall;
 //------------------------------PLANETS VARS AND FUNCTIONS--------------------------------
 //lighting
 
@@ -494,8 +502,8 @@ GLfloat DistMult = 10;
 GLfloat SizeMult = 300;
 
 typedef GLfloat planetsVar[5];
-static GLdouble OrbitSpeed[] = { 4.147,1.629,1,.531,.084,.033,.011,.006,.004,365 };
-static GLdouble RotationSpeed[] = { 1.1,58.65,-243,1,1.03,.41,.44,-.72,.72,-6.38 };
+static GLfloat OrbitSpeed[] = { 4.147,1.629,1,.531,.084,.033,.011,.006,.004,365 };
+static GLfloat RotationSpeed[] = { 1.1,58.65,-243,1,1.03,.41,.44,-.72,.72,-6.38 };
 GLfloat rotAmt[] = { 0,0,0,0,0,0,0,0,0,0 };
 
 planetsVar allPlanets[] = { { 512000 , 0, 0, 20, 10 },
@@ -518,9 +526,9 @@ GLdouble tempSpeed = 0;
 bool Paused = false;
 
 //Masedawg
-GLfloat TeleportToX = 34467;
-GLfloat TeleportToY = 13000;
-GLfloat TeleportToZ = 26508;
+GLfloat TeleportToX = 36000;
+GLfloat TeleportToY = 12000;
+GLfloat TeleportToZ = 26770;
 
 //Masedawg
 GLfloat TestX = 34467;
@@ -531,18 +539,12 @@ GLfloat TeleportFromX = SunX;
 GLfloat TeleportFromY = allPlanets[0][1];
 GLfloat TeleportFromZ = allPlanets[0][2] + 10000;
 
-GLfloat GoalX = SunX + 1000;
-GLfloat GoalY = allPlanets[0][1];
-GLfloat GoalZ = allPlanets[0][2] + 10000;
-
-int distToGoal;
-
 void CheckLocationForTeleport();
 void TeleportToPlanets();
 void TeleportToBushCourt();
 void DisplayPlanets();
 void OrbitPlanets();
-void PauseSpace();
+//void PauseSpace();
 
 //increasing movement speed
 //int moveSpeed = 2;
@@ -574,8 +576,20 @@ void UpdateBalls();
 
 //------------------------------END Ball Stuff--------------------------------------------
 //------------------------------Corridor and stairs---------------------------------------
+float DoorLoc[3] = { 34295, 10450, 26975 };
+float DoorZVar = 0;
+float MaxDoorZVar = 550;
+
+float PortalImgs[3] = { PORTAL1,PORTAL2,PORTAL3 };
+int portalNum=0;
+int portalCounter=0;
+
 void DrawCorridor();
 void DrawCorridorSteps(int stepH, int stepD, int stepW, int stepStartX, int stepStartY, int stepStartZ,int count);
+
+float DoorSpeed = 5;
+void DrawSlidingDoor();
+void OpenSlidingDoor();
 //------------------------------END Corridor and stairs
 //--------------------------------------------------------------------------------------
 //  Main function 
@@ -633,10 +647,14 @@ void myinit()
 	// turn collision detection on
 	cam.SetCollisionDetectionOn(true);
 	// set number of bounding boxes required
-	cam.SetNoBoundingBoxes(27); //KM 16/9/2016 increased from 19
+	cam.SetNoBoundingBoxes(28); //KM 16/9/2016 increased from 19
 	// set starting position of user
 	//cam.Position(32720.0, 9536.0,	4800.0, 180.0);
-	cam.Position(35000.0, 12000, 26100, 90.0); //Temp starting position at top of stairs for easy access bug fixing
+
+	cam.Position(32720.0, 10450,27300, 90.0); //Temp starting position for easy access bug fixing
+
+	//cam.Position(35000.0, 12000, 26100, 90.0); //Temp starting position at top of stairs for easy access bug fixing
+
 	
 	CreatePlains();	
 	
@@ -732,20 +750,21 @@ void Display()
 		glTranslatef(TeleportFromX, TeleportFromY, TeleportFromZ);
 		glutWireCube(1000);
 	glPopMatrix();
-
-	//MT Goal box Location
-	glPushMatrix();
-		glColor3f(1, 1, 0); 
-		glTranslatef(TeleportFromX+1000, TeleportFromY, TeleportFromZ);
-		glutWireCube(1000);
-	glPopMatrix();
 	
 //	DisplayTest();
 	glEnable(GL_TEXTURE_2D); //KM 15/9/2016 for texture in corridor
 	DrawCorridor();
-	DrawCorridorSteps(75,95,400,35700,10000,25960,10);
-	DrawCorridorSteps(75, -95, 400, 35700-(9*95), 10750, 26360, 10);
+	DrawCorridorSteps(75,95,440,35700,10000,25920,10);
+	DrawCorridorSteps(75, -95, 420, 35700-(9*95), 10750, 26380, 10);
 	glDisable(GL_TEXTURE_2D); //KM 15/9/2016
+
+	//glPushMatrix();
+		
+	glEnable(GL_TEXTURE_2D);
+		DrawSlidingDoor();
+	glDisable(GL_TEXTURE_2D);
+	OpenSlidingDoor();
+	//glPopMatrix
 
 	//glPushMatrix();
 	//glBegin(GL_POLYGON);
@@ -765,17 +784,32 @@ void Display()
 	glDisable(GL_TEXTURE_2D); // mm
 
 	OrbitPlanets();
-	UpdateBalls();
+	if (!(gVar.paused))
+	{
+		UpdateBalls();
+	}
+	if (gVar.paused != Paused)
+	{
+		if (Paused)
+		{
+			RotSpeed = tempSpeed;
+		}
+		else
+		{
+			tempSpeed = RotSpeed;
+			RotSpeed = 0;
+		}
+		Paused = gVar.paused;
+	}
 
-	glBegin(GL_POLYGON);
+	/*glBegin(GL_POLYGON);
 	glVertex3f(34075, 10750, 26360);
 	glVertex3f(34075, 10750, 25590);
 	glVertex3f(34800, 10750, 25590);
 	glVertex3f(34800, 10750, 26360);
-	glEnd();
+	glEnd();*/
 
-	distToGoal = sqrt(((GoalX - cam.GetLR()) * (GoalX - cam.GetLR())) + ((GoalY - cam.GetFB()) * (GoalY - cam.GetFB())) + ((GoalZ - cam.GetUD()) * (GoalZ - cam.GetUD())));
-	uih.setDist(distToGoal);
+
 	//after everything else so it draws on top - KJM 13/10/2016
 	if (gVar.uiHUD) {
 		uih.displayUIHUD(tp.GetTexture(251));
@@ -1044,27 +1078,33 @@ void keys(unsigned char key, int x, int y)
 		// step left
 	case 'Z':
 	case 'z':
+		if (!(gVar.paused))
 		cam.DirectionLR(-moveSpeed);
 		break;
 		// step right
 	case 'X':
 	case 'x':
+		if (!(gVar.paused))
 		cam.DirectionLR(moveSpeed);
 		break;
 		// look up
 	case 'R':
 	case 'r':
+		if (!(gVar.paused))
 		cam.DirectionLookUD(moveSpeed);
 		break;
 	case 'h':
+		if (LevelNum < 3)
 		LevelNum++;
 		break;
 	case 'g':
+		if (LevelNum > 1)
 		LevelNum--;
 		break;
 		// look down
 	case 'F':
 	case 'f':
+		if (!(gVar.paused))
 		cam.DirectionLookUD(-moveSpeed);
 		break;
 		// display campus map
@@ -1117,8 +1157,13 @@ void keys(unsigned char key, int x, int y)
 		//	cam.SetMoveSpeed(0.0f);
 		//	gVar.DisplayWelcome = true;
 		//}
+		if (!(gVar.paused))
 		if (current_balls < MAX_BALLS && InSpace)
 		{
+			es = CEasySound::Instance();
+			releaseBall = es->GetSound(es->Load("sounds/tennisserve.wav"));
+			releaseBall->Play();
+
 			addParticle(0.1* SizeMult, 0.3* SizeMult, 0, 0, 0);
 		}
 	}
@@ -1155,14 +1200,14 @@ void keys(unsigned char key, int x, int y)
 
 	case 'Q':
 	case 'q':
-		if (RotSpeed > -MaxRotSpeed && !(Paused))
+		if (RotSpeed > -MaxRotSpeed && !(gVar.paused))
 		{
 			RotSpeed -= RotSpeedAlt;
 		}
 		break;
 	case 'E':
 	case 'e':
-		if (RotSpeed < MaxRotSpeed && !(Paused))
+		if (RotSpeed < MaxRotSpeed && !(gVar.paused))
 		{
 			RotSpeed += RotSpeedAlt;
 		}
@@ -1170,27 +1215,32 @@ void keys(unsigned char key, int x, int y)
 
 	case 'A':
 	case 'a':
+		if (!(gVar.paused))
 		cam.DirectionRotateLR(-moveSpeed);
 		break;
 
 	case 'D':
 	case 'd':
+		if (!(gVar.paused))
 		cam.DirectionRotateLR(moveSpeed);
 		break;
 
 	case 'W':
 	case 'w':
+		if (!(gVar.paused))
 		cam.DirectionFB(moveSpeed);
 		break;
 
 	case 'S':
 	case 's':
+		if (!(gVar.paused))
 		cam.DirectionFB(-moveSpeed);
 		break;
 
 	case 'O':
 	case 'o':
-		PauseSpace();
+		if (gVar.paused) gVar.paused = false; else gVar.paused = true;
+		cout << "x: " << cam.GetLR() << "y: " << cam.GetUD() << "z: " << cam.GetFB() << endl;
 		break;
 	}
 }
@@ -1473,10 +1523,22 @@ void CreateBoundingBoxes()
 	cam.SetAABBMinZ(21, 4590.0);*/
 
 	// Wall by Steps
-	/*cam.SetAABBMaxX(21, 31548.0);
+	cam.SetAABBMaxX(21, 31548.0);
 	cam.SetAABBMinX(21, 31444.0);
 	cam.SetAABBMaxZ(21, 10395.0);
-	cam.SetAABBMinZ(21, 4590.0);*/
+	cam.SetAABBMinZ(21, 4590.0);
+
+	// railing on stairs
+	cam.SetAABBMaxX(26, 35795);
+	cam.SetAABBMinX(26, 34845);
+	cam.SetAABBMaxZ(26, 25990);
+	cam.SetAABBMinZ(26, 25930);
+
+	// railing on stairs 2
+	/*cam.SetAABBMaxX(27, 36250);
+	cam.SetAABBMinX(27, 35795);
+	cam.SetAABBMaxZ(27, 25990);
+	cam.SetAABBMinZ(27, 25960);*/
 }
 
 //--------------------------------------------------------------------------------------
@@ -1506,9 +1568,12 @@ void CreatePlains()
 	// top of higher hill
 	cam.SetPlains (FLAT_PLAIN, 14000.0, 18000.0 , 10875.0, 108075.0, 28000.0, 33000.0);
 	// sides of higher hill
-	cam.SetPlains(XY_PLAIN, 34260, 35700, 11875.0, 10450.0, 25500, 26000.0); // masedawg first step plain
 
-	cam.SetPlains(XY_PLAIN, 34260, 35700, 11450.0, 12875.0, 26000, 26500.0); // 2nd step plain
+	//CORRIDOR STAIRS
+	//cam.SetPlains(XY_PLAIN, 34845, 35700, 11150, 10450, 25500, 25900.0); // masedawg first step plain
+	//cam.SetPlains(XY_PLAIN, 34845, 35700, 11150, 11900, 25900.0, 26300.0); // 2nd step plain
+	cam.SetPlains(XY_PLAIN, 34845, 35700, 11150,10450, 25560, 25960); // masedawg first step plain
+	cam.SetPlains(XY_PLAIN, 34845, 35700, 11150, 11900, 25960, 26360); // 2nd step plain
 
 	cam.SetPlains (ZY_PLAIN, 10000.0, 22000.0 , 10650.0, 10875.0, 23000.0, 28000.0);
 	cam.SetPlains (ZY_PLAIN, 10000.0, 22000.0 , 10875.0, 10650.0, 33000.0, 36000.0);
@@ -1521,12 +1586,7 @@ void CreatePlains()
 		//cam.SetPlains(XY_PLAIN, 35700, 35700 - (10 * 95), 10000, 10000 + (10 * 75), 26400, 26000);
 	//}
 
-		glBegin(GL_POLYGON);
-		glVertex3f(34000, 10450.0, 26400);
-		glVertex3f(34000, 10450.0, 26000);
-		glVertex3f(34000 - (10 * 95), 10450.0 + (10 * 75), 26000);
-		glVertex3f(34000 - (10 * 95), 10450.0 + (10 * 75), 26400);
-		glEnd();
+		
 
 	//entance steps
 	step = 10450.0;
@@ -2272,10 +2332,10 @@ void CreateTextures()
 	image = tp.LoadTexture("data/PSceiling.raw", 128, 171);
 	tp.CreateTexture(PS_CEILING, image, 128, 171);
 
-	/* not used - may as well not load -kjm 9/10/2016
+	// not used - may as well not load -kjm 9/10/2016
 	image = tp.LoadTexture("data/PSdoor.raw", 1362, 1024);
 	tp.CreateTexture(PS_DOOR, image, 1362, 1024);
-	*/
+	
 
 	image = tp.LoadTexture("data/PSdoorFar.raw", 512, 666);
 	tp.CreateTexture(PS_DOOR_FAR, image, 512, 666);
@@ -2362,6 +2422,15 @@ void CreateTextures()
 	image = tp.LoadTexture("data/asteroid.raw", 600, 300);
 	tp.CreateTexture(ASTEROID, image, 600, 300);
 
+	//Portal textures
+	image = tp.LoadTexture("data/portal1.raw", 500, 500);
+	tp.CreateTexture(PORTAL1, image, 500, 500);
+
+	image = tp.LoadTexture("data/portal2.raw", 500, 500);
+	tp.CreateTexture(PORTAL2, image, 500, 500);
+
+	image = tp.LoadTexture("data/portal3.raw", 500, 500);
+	tp.CreateTexture(PORTAL3, image, 500, 500);
 
 	quad = gluNewQuadric(); // MM - setting up quad for sphere textures
 
@@ -5748,7 +5817,7 @@ void OrbitPlanets()
 	GLdouble x, z;
 
 	//rotAmt[0] += RotationSpeed[0] * 0.01;
-	rotAmt[0] += RotationSpeed[0] * RotSpeed;
+	rotAmt[0] += RotationSpeed[0] * (RotSpeed * 10);
 	//Planets orbiting sun
 	for (int i = 0; i < 9; i++)
 	{
@@ -5759,7 +5828,7 @@ void OrbitPlanets()
 		allPlanets[i + 1][2] = z;
 
 		//rotAmt[i+1] += RotationSpeed[i+1] * 0.01; 
-		rotAmt[i + 1] += RotationSpeed[i + 1] * RotSpeed;
+		rotAmt[i + 1] += RotationSpeed[i + 1] * (RotSpeed * 10);
 	}
 }
 
@@ -5768,12 +5837,12 @@ void CheckLocationForTeleport()
 	//x:33467
 	//y : 10450
 	//z : 39508
-	if (cam.GetLR() > TeleportToX - 1000 && cam.GetLR() < TeleportToX + 1000 && cam.GetUD() > TeleportToY - 1000 && cam.GetUD() < TeleportToY + 1000 && cam.GetFB() > TeleportToZ - 1000 && cam.GetFB() < TeleportToZ + 1000)
+	if (cam.GetLR() > TeleportToX - 500 && cam.GetLR() < TeleportToX + 500 && cam.GetUD() > TeleportToY - 500 && cam.GetUD() < TeleportToY + 500 && cam.GetFB() > TeleportToZ - 500 && cam.GetFB() < TeleportToZ + 500)
 	{
 		TeleportToPlanets();
 	}
 
-	if (cam.GetLR() > TeleportFromX - 1000 && cam.GetLR() < TeleportFromX + 1000 && cam.GetUD() > TeleportFromY - 1000 && cam.GetUD() < TeleportFromY + 1000 && cam.GetFB() > TeleportFromZ - 1000 && cam.GetFB() < TeleportFromZ + 1000)
+	if (cam.GetLR() > TeleportFromX - 500 && cam.GetLR() < TeleportFromX + 500 && cam.GetUD() > TeleportFromY - 500 && cam.GetUD() < TeleportFromY + 500 && cam.GetFB() > TeleportFromZ - 500 && cam.GetFB() < TeleportFromZ + 500)
 	{
 		TeleportToBushCourt();
 	}
@@ -5798,7 +5867,7 @@ void TeleportToBushCourt()
 	gVar.uiHUD = InSpace = false;
 	moveSpeed = 3;
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
-	cam.Position(32720.0, 9536.0, 4800.0, 180.0);
+	cam.Position(36110, 11918, 26197, 270);
 }
 //------------------END PLANETS FUNCTIONS---------------------
 //-------------Ball Functions-------------
@@ -5826,7 +5895,7 @@ void addParticle(float m, float r, float vx, float vy, float vz)
 
 	Balls[current_balls] = p;
 	current_balls++;
-	uih.setBallCount(current_balls);
+
 	//es = CEasySound::Instance();
 	//firstSound = es->GetSound(es->Load("sounds/greeting.wav"));
 	//firstSound->Play();
@@ -5842,7 +5911,7 @@ void DrawBalls()
 			glPushMatrix();
 
 			glTranslatef(p->x, p->y, p->z);
-			//glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
 			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(ASTEROID));
 			gluSphere(quad, p->r, 20, 20);
 
@@ -5853,46 +5922,43 @@ void DrawBalls()
 
 void UpdateBalls()
 {
-	if (!(Paused))
+	for (int i = 0; i < current_balls; i++)
 	{
-		for (int i = 0; i < current_balls; i++)
+		struct Ball *p;
+		p = &Balls[i];
+
+		for (int j = 0; j < LevelNum * 3 + 1; j++)
 		{
-			struct Ball *p;
-			p = &Balls[i];
+			float d;
+			//if (j == 0) 
+			//{
+			//	d = sqrt(((allPlanets[j][0]) - p->x)*((allPlanets[j][0]) - p->x) + (allPlanets[j][1] - p->y)*(allPlanets[j][1] - p->y) + (allPlanets[j][2]  - p->z)*(allPlanets[j][2] - p->z));
+			//}
+			//else
+			//{
+			d = sqrt(((allPlanets[j][0] * SizeMult + SunX) - p->x)*((allPlanets[j][0] * SizeMult + SunX) - p->x) + (allPlanets[j][1] * SizeMult - p->y)*(allPlanets[j][1] * SizeMult - p->y) + (allPlanets[j][2] * SizeMult - p->z)*(allPlanets[j][2] * SizeMult - p->z));
+			//}
 
-			for (int j = 0; j < LevelNum * 3 + 1; j++)
+			float ds = (SunSize*DistMult*allPlanets[j][3] * SizeMult) + p->r;
+			//cout << j << "\nd: " << d << "\nds: " << ds << "\n" << endl;
+
+			if (d > (allPlanets[j][3] * SizeMult) + p->r)
 			{
-				float d;
-				//if (j == 0) 
-				//{
-				//	d = sqrt(((allPlanets[j][0]) - p->x)*((allPlanets[j][0]) - p->x) + (allPlanets[j][1] - p->y)*(allPlanets[j][1] - p->y) + (allPlanets[j][2]  - p->z)*(allPlanets[j][2] - p->z));
-				//}
-				//else
-				//{
-				d = sqrt(((allPlanets[j][0] * SizeMult + SunX) - p->x)*((allPlanets[j][0] * SizeMult + SunX) - p->x) + (allPlanets[j][1] * SizeMult - p->y)*(allPlanets[j][1] * SizeMult - p->y) + (allPlanets[j][2] * SizeMult - p->z)*(allPlanets[j][2] * SizeMult - p->z));
-				//}
-
-				float ds = (SunSize*DistMult*allPlanets[j][3] * SizeMult) + p->r;
-				//cout << j << "\nd: " << d << "\nds: " << ds << "\n" << endl;
-
-				if (d > (allPlanets[j][3] * SizeMult) + p->r)
-				{
-					p->vx += p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0] * SizeMult + SunX) - p->x) / d; //f = ma => a = f/m
-					p->vy += p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][1] * SizeMult - p->y) / d;
-					p->vz += p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][2] * SizeMult - p->z) / d;
-				}
-				//else
-				//{
-				//	p->visible = false;
-				//p->vx -= p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0] * SizeMult + SunX) - p->x) / d; //f = ma => a = f/m
-				//p->vy -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][1] * SizeMult - p->y) / d;
-				//p->vz -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][2] * SizeMult - p->z) / d;
-				//}		
-
-				p->x += p->vx;
-				p->y += p->vy;
-				p->z += p->vz;
+				p->vx += p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0] * SizeMult + SunX) - p->x) / d; //f = ma => a = f/m
+				p->vy += p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][1] * SizeMult - p->y) / d;
+				p->vz += p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][2] * SizeMult - p->z) / d;
 			}
+			//else
+			//{
+			//	p->visible = false;
+			//p->vx -= p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0] * SizeMult + SunX) - p->x) / d; //f = ma => a = f/m
+			//p->vy -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][1] * SizeMult - p->y) / d;
+			//p->vz -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][2] * SizeMult - p->z) / d;
+			//}		
+
+			p->x += p->vx;
+			p->y += p->vy;
+			p->z += p->vz;
 		}
 	}
 	//glutPostRedisplay();
@@ -6048,9 +6114,9 @@ void DrawCorridor()
 		glTexCoord2f(1.0, 1.0);
 		glVertex3f(35700, 10000, 26370);
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(35700, 12000, 26370);
+		glVertex3f(35700, 12500, 26370);
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(34260, 12000, 26370);
+		glVertex3f(34260, 12500, 26370);
 		glTexCoord2f(0.0, 1.0);
 		glVertex3f(34260, 10000, 26370);
 	glEnd();
@@ -6153,6 +6219,270 @@ void DrawCorridor()
 		glTexCoord2f(0.0, 8.0);
 		glVertex3f(38300, 11000, 26370);
 	glEnd();
+
+	//Portal wall
+	if (portalCounter < (portalNum + 1) * 30)
+		portalCounter++;
+	else
+	{
+			portalNum++;
+	}
+
+	if (portalNum > 2)
+	{
+		portalCounter = 0;
+		portalNum = 0;
+	}
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PortalImgs[portalNum]));
+	glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(35700, 11500, 26370);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(35700, 12500, 26370);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(36250, 12500, 26370);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(36250, 11500, 26370);
+	glEnd();
+
+	//platform between stairs
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(34845, 10750, 25500);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(34245, 10750, 25500);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(34245, 10750, 26360);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(34845, 10750, 26360);
+	glEnd();
+
+	//platform top of stairs
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(36250, 11500, 25990);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(35700, 11500, 25990);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(35700, 11500, 26390);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(36250, 11500, 26390);
+	glEnd();
+
+	//Wall between stairs - lower level
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(35700, 10000, 25960);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(35700, 10300, 25960);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(34845, 11000, 25960);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(34845, 10000, 25960);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(35700, 10000, 25930);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(35700, 10300, 25930);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(34845, 11000, 25930);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(34845, 10000, 25930);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(35700, 10300, 25960);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(35700, 10300, 25930);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(34845, 11000, 25930);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(34845, 11000, 25960);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(35700, 10000, 25960);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(35700, 10000, 25930);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(35700, 10300, 25930);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(35700, 10300, 25960);
+	glEnd();
+
+	//Wall between stairs - upper level
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(34845, 10700, 25960);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(34845, 11000, 25960);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(35795, 11770, 25960);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(35795, 11300, 25960);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));//36250
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(35795, 11770, 25960);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(36250, 11770, 25960);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(36250, 11300, 25960);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(35795, 11300, 25960);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(34845, 10700, 25990);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(34845, 11000, 25990);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(35795, 11770, 25990);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(35795, 11300, 25990);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(35795, 11770, 25990);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(36250, 11770, 25990);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(36250, 11300, 25990);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(35795, 11300, 25990);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(35795, 11770, 25990);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(36250, 11770, 25990);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(36250, 11770, 25960);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(35795, 11770, 25960);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(34845, 11000, 25990);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(35795, 11770, 25990);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(35795, 11770, 25960);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(34845, 11000, 25960);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(34845, 10700, 25990);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(35795, 11300, 25990);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(35795, 11300, 25960);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(34845, 10700, 25960);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(34880, 10700, 25960);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(35795, 11300, 25960);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(35795, 11300, 26360);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(34880, 10700, 26360);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(36250, 11300, 25960);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(35795, 11300, 25960);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(35795, 11300, 26360);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(36250, 11300, 26360);
+	glEnd();
+
+	//join at middle
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(34785, 11000, 25990);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(34845, 11000, 25990);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(34845, 11000, 25930);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(34785, 11000, 25930);
+	glEnd();
+	
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(34785, 10700, 25930);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(34785, 11000, 25930);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(34845, 11000, 25930);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(34845, 10700, 25930);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(34785, 10700, 25990);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(34785, 11000, 25990);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(34845, 11000, 25990);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(34845, 10700, 25990);
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_WALL_OPP_STAIR));
+	glBegin(GL_POLYGON);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(34785, 10700, 25990);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(34785, 11000, 25990);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(34785, 11000, 25930);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(34785, 10700, 25930);
+	glEnd();
+
+	
+
+	//attempt at handrail
+	//gluCylinder(quad,15,15,900,8,1 );
 }
 
 void DrawCorridorSteps(int stepH, int stepD, int stepW, int stepStartX, int stepStartY, int stepStartZ, int count)
@@ -6173,7 +6503,9 @@ void DrawCorridorSteps(int stepH, int stepD, int stepW, int stepStartX, int step
 			glTexCoord2f(1.0, 0.0);
 			glVertex3f(stepStartX - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
 		glEnd();
-		
+	}
+	for (int i = 0; i < count-1; i++)
+	{
 		// front of steps
 		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_STEP_TOP));
 		glBegin(GL_POLYGON);
@@ -6186,28 +6518,95 @@ void DrawCorridorSteps(int stepH, int stepD, int stepW, int stepStartX, int step
 			glVertex3f(stepStartX - stepD - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ - stepW);
 			glTexCoord2f(1.0, 1.0);
 			glVertex3f(stepStartX - stepD - (i * stepD), stepStartY + stepH + (i * stepH), stepStartZ);
-		glEnd();
-		
+		glEnd();		
 	}
 }
-//***********************END CORRIDOR FUNCTIONS***********************
-//*********************PAUSE FUCNTION*********************
-void PauseSpace()
+
+void DrawSlidingDoor()
 {
-	if (Paused)
+	glPushMatrix();
+		glTranslatef(0, 0, DoorZVar);
+		//front face
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_DOOR));
+		glBegin(GL_POLYGON);
+			glTexCoord2f(0.0, 0.0);
+			glVertex3f(34270, 10900, 26750);
+			glTexCoord2f(0.0, 1.0);
+			glVertex3f(34270, 10000, 26750);
+			glTexCoord2f(1.0, 1.0);
+			glVertex3f(34270, 10000, 27300);
+			glTexCoord2f(1.0, 0.0);
+			glVertex3f(34270, 10900, 27300);
+		glEnd();
+
+		//back face
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_DOOR));
+		glBegin(GL_POLYGON);
+			glTexCoord2f(0.0, 0.0);
+			glVertex3f(34320, 10900, 26750);
+			glTexCoord2f(0.0, 1.0);
+			glVertex3f(34320, 10000, 26750);
+			glTexCoord2f(1.0, 1.0);
+			glVertex3f(34320, 10000, 27300);
+			glTexCoord2f(1.0, 0.0);
+			glVertex3f(34320, 10900, 27300);
+		glEnd();
+
+		//left face
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_DOOR));
+		glBegin(GL_POLYGON);
+			glTexCoord2f(0.0, 0.0);
+			glVertex3f(34270, 10900, 26750);
+			glTexCoord2f(0.0, 1.0);
+			glVertex3f(34270, 10000, 26750);
+			glTexCoord2f(1.0, 1.0);
+			glVertex3f(34320, 10000, 26750);
+			glTexCoord2f(1.0, 0.0);
+			glVertex3f(34320, 10900, 26750);
+		glEnd();
+
+		//right face
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_DOOR));
+		glBegin(GL_POLYGON);
+			glTexCoord2f(0.0, 0.0);
+			glVertex3f(34270, 10900, 27300);
+			glTexCoord2f(0.0, 1.0);
+			glVertex3f(34270, 10000, 27300);
+			glTexCoord2f(1.0, 1.0);
+			glVertex3f(34320, 10000, 27300);
+			glTexCoord2f(1.0, 0.0);
+			glVertex3f(34320, 10900, 27300);
+		glEnd();
+	glPopMatrix();
+}
+
+void OpenSlidingDoor()
+{
+	//if door starting to open or starting to close play sound
+	if (DoorZVar == MaxDoorZVar-DoorSpeed || DoorZVar == DoorSpeed) { 
+		es = CEasySound::Instance(); 
+		doorSlide = es->GetSound(es->Load("sounds/close_door.wav"));
+		doorSlide->Play();
+	}
+	
+
+	if (cam.GetLR() > DoorLoc[0] - 500 && cam.GetLR() < DoorLoc[0] + 500 && cam.GetUD() > DoorLoc[1] - 500 && cam.GetUD() < DoorLoc[1] + 500 && cam.GetFB() > DoorLoc[2] - 500 && cam.GetFB() < DoorLoc[2] + 500)
 	{
-		RotSpeed = tempSpeed;
-		Paused = false;
+		if (DoorZVar < MaxDoorZVar)
+		{
+			DoorZVar += DoorSpeed;
+		}
 	}
 	else
 	{
-		tempSpeed = RotSpeed;
-		RotSpeed = 0;
-		Paused = true;
+		if (DoorZVar > 0)
+		{
+			DoorZVar -= DoorSpeed;
+		}
 	}
-	
+
 }
-//**********************END PAUSE*************************
+//***********************END CORRIDOR FUNCTIONS***********************
 // --------------------------------------------------------------------------------------
 // Display Light Fittings
 // --------------------------------------------------------------------------------------

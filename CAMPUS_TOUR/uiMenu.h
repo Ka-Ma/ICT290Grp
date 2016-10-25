@@ -22,6 +22,11 @@ class uiMenu {
 public:
 	uiMenu(int w, int h);
 
+	/**
+	@brief update the members of the menu to new screen size
+	@param w - width of the screen
+	@param h - height of the screen
+	*/
 	void updateUIMenuMembers(int w, int h);
 
 	/**
