@@ -30,6 +30,8 @@ typedef struct globalVariable {
 	//game paused
 	bool paused;
 
+	//determines number of planets
+	int LevelNum;
 
 
 	//posible futures

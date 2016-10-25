@@ -45,11 +45,14 @@ void uiOptions::displayUIOptions(const GLuint & tempImage)
 		glVertex2f(wc + d, hc + d);
 	glEnd();
 
+	string a = to_string(gVar.LevelNum);
+	//cout << gVar.LevelNum << " " << a << endl;
+
 	//data will need to be converted to string in order to put on screen
 	glBindTexture(GL_TEXTURE_2D, 0); //sets active to none
 	glColor3f(0.498f, 1.0f, 0.0f);
 	glRasterPos2i(wc + 27, hc - 5);
-	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"9"); // need to replace with numPlanets
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)a.c_str()); // need to replace with numPlanets
 	glRasterPos2i(wc + 27, hc - 79);
 	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"15"); // need to replace with numProj
 	
@@ -75,9 +78,9 @@ void uiOptions::mouseUIOptions(int button, int state, int x, int y)
 	//screen height and width centres
 	int hc = height /2;
 	int wc = width/2;
-	int maxPlanets = 9;
-	int numPlanets = 9;
-	int minPlanets = 2;
+	int maxPlanets = 3;
+	int numPlanets = 1;
+	int minPlanets = 1;
 	int maxProj = 1000;
 	int minProj = 1;
 	int numProj = 15;
@@ -93,16 +96,16 @@ void uiOptions::mouseUIOptions(int button, int state, int x, int y)
 		if (x >= wc+20 && x <= wc+47 && y >= hc-29 && y <= hc-13)
 		{
 			clickSound->Play();
-			if (numPlanets != maxPlanets) {
-				numPlanets++;
+			if (gVar.LevelNum != maxPlanets) {
+				gVar.LevelNum++;
 			}
 		}
 		//decrease planet number
 		if (x >= wc + 20 && x <= wc+47 && y >= hc+5 && y <= hc+19)
 		{
 			clickSound->Play();
-			if (numPlanets != minPlanets) {
-				numPlanets--;
+			if (gVar.LevelNum != minPlanets) {
+				gVar.LevelNum--;
 			}
 		}
 		//increase projectiles

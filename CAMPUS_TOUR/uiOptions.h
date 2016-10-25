@@ -17,6 +17,9 @@
 #include "gl/freeglut.h"  //for glutBitmapString()
 #include "gl/glut.h"
 #include "EasySound.h"
+#include <string>
+
+using namespace std;
 
 class uiOptions {
 public:

@@ -24,5 +24,7 @@ struct globalVariable gVar = {
 	//uiLeaderboard
 	false,
 	//paused
-	false
+	false,
+	//LevelNum
+	1
 };

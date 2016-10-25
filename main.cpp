@@ -504,7 +504,7 @@ static GLfloat OrbitSpeed[] = { 4.147,1.629,1,.531,.084,.033,.011,.006,.004,365 
 static GLfloat RotationSpeed[] = { 1.1,58.65,-243,1,1.03,.41,.44,-.72,.72,-6.38 };
 GLfloat rotAmt[] = { 0,0,0,0,0,0,0,0,0,0 };
 
-planetsVar allPlanets[] = { { 512000 , 0, 0, 20, 1.5 },
+planetsVar allPlanets[] = { { 512000 , 0, 0, 20, 10 },
 							{ 40, 0, 0, 0.003, 0.03 },
 							{ 80, 0, 0, 0.008, 0.08 },
 							{ 120, 0, 0, 0.009, 0.09 },
@@ -5757,6 +5757,15 @@ void DisplayPlanets()
 		glPushMatrix();
 		//glColor3f(.8, 0, 1);
 		//glRotatef(orbAmt[5],0,1,0);
+		glTranslatef(allPlanets[6][0] * SizeMult + SunX, allPlanets[6][1] * SizeMult, allPlanets[6][2] * SizeMult);
+		glRotatef(20,0,1,0);
+
+		glBegin(GL_POLYGON);
+			glVertex3f(SunSize*DistMult*allPlanets[6][3] * SizeMult, 0.0, SunSize*DistMult*allPlanets[6][3] * SizeMult);
+			glVertex3f(SunSize*DistMult*allPlanets[6][3] * SizeMult, 0.0, SunSize*DistMult*allPlanets[6][3] * SizeMult);
+			glVertex3f(SunSize*DistMult*allPlanets[6][3] * SizeMult, 0.0, SunSize*DistMult*allPlanets[6][3] * SizeMult);
+			glVertex3f(SunSize*DistMult*allPlanets[6][3] * SizeMult, 0.0, SunSize*DistMult*allPlanets[6][3] * SizeMult);
+		glEnd();
 
 		glTranslatef(allPlanets[6][0] * SizeMult + SunX, allPlanets[6][1] * SizeMult, allPlanets[6][2] * SizeMult);
 
@@ -5772,21 +5781,13 @@ void DisplayPlanets()
 		//Saturns rings
 		glPushMatrix();
 			glTranslatef(allPlanets[6][0] * SizeMult + SunX, allPlanets[6][1] * SizeMult, allPlanets[6][2] * SizeMult);
-			glRotatef(20, 0, 0, 1);
-			glRotatef(rotAmt[6]*3, 0, 1, 0);
-			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-			//glColor3f(0,0,1);
+			glRotatef(20, 0, 1, 0);
 
-			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_SATURNRINGS));
 			glBegin(GL_POLYGON);
-				glTexCoord2f(0.0, 0.0);
-				glVertex3f(-(SunSize*DistMult*allPlanets[6][3] * SizeMult)*2, 0.0, -(SunSize*DistMult*allPlanets[6][3] * SizeMult) * 2);
-				glTexCoord2f(0.0, 1.0);
-				glVertex3f(-(SunSize*DistMult*allPlanets[6][3] * SizeMult) * 2, 0.0, (SunSize*DistMult*allPlanets[6][3] * SizeMult) * 2);
-				glTexCoord2f(1.0, 1.0);
-				glVertex3f((SunSize*DistMult*allPlanets[6][3] * SizeMult)*2, 0.0, (SunSize*DistMult*allPlanets[6][3] * SizeMult) * 2);
-				glTexCoord2f(1.0, 0.0);
-				glVertex3f((SunSize*DistMult*allPlanets[6][3] * SizeMult) * 2, 0.0, -(SunSize*DistMult*allPlanets[6][3] * SizeMult)*2);
+				glVertex3f(SunSize*DistMult*allPlanets[6][3] * SizeMult, 0.0, SunSize*DistMult*allPlanets[6][3] * SizeMult);
+				glVertex3f(SunSize*DistMult*allPlanets[6][3] * SizeMult, 0.0, SunSize*DistMult*allPlanets[6][3] * SizeMult);
+				glVertex3f(SunSize*DistMult*allPlanets[6][3] * SizeMult, 0.0, SunSize*DistMult*allPlanets[6][3] * SizeMult);
+				glVertex3f(SunSize*DistMult*allPlanets[6][3] * SizeMult, 0.0, SunSize*DistMult*allPlanets[6][3] * SizeMult);
 			glEnd();
 		glPopMatrix();
 	}
@@ -5959,7 +5960,7 @@ void UpdateBalls()
 			struct Ball *p;
 			p = &Balls[i];
 
-			for (int j = 0; j < gVar.LevelNum * 3 + 1; j++)
+			for (int j = 0; j < LevelNum * 3 + 1; j++)
 			{
 				float d;
 				if (j == 0) 
