@@ -160,11 +160,7 @@ void uiLeaderBoard::getLeaderBoard()
 		lbFile.close();
 	}
 
-	//sort largest score first
-	std::sort(lboard.begin(), lboard.end(), [](const score& lhs, const score& rhs)
-	{
-		return lhs.nScore > rhs.nScore;
-	});
+	sortLeaderBoard();
 }
 
 void uiLeaderBoard::setLeaderBoard()
@@ -183,4 +179,25 @@ void uiLeaderBoard::setLeaderBoard()
 	}
 
 	lbFile.close();
+}
+
+void uiLeaderBoard::addLeaderBoard(std::string newName, std::string newDate, int newScore)
+{
+	score temp;
+	temp.name = newName;
+	temp.sDate = newDate;
+	temp.nScore = newScore;
+
+	lboard.push_back(temp);
+
+	sortLeaderBoard();
+}
+
+void uiLeaderBoard::sortLeaderBoard() 
+{
+	//sort largest score first
+	std::sort(lboard.begin(), lboard.end(), [](const score& lhs, const score& rhs)
+	{
+		return lhs.nScore > rhs.nScore;
+	});
 }
