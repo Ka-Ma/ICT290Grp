@@ -477,6 +477,8 @@ void DrawBanner();
 //initialise sound
 CEasySound *es;
 CSound* firstSound;
+CSound* doorSlide;
+CSound* releaseBall;
 //------------------------------PLANETS VARS AND FUNCTIONS--------------------------------
 //lighting
 
@@ -1158,6 +1160,10 @@ void keys(unsigned char key, int x, int y)
 		if (!(gVar.paused))
 		if (current_balls < MAX_BALLS && InSpace)
 		{
+			es = CEasySound::Instance();
+			releaseBall = es->GetSound(es->Load("sounds/tennisserve.wav"));
+			releaseBall->Play();
+
 			addParticle(0.1* SizeMult, 0.3* SizeMult, 0, 0, 0);
 		}
 	}
@@ -6576,7 +6582,15 @@ void DrawSlidingDoor()
 
 void OpenSlidingDoor()
 {
-	if (cam.GetLR() > DoorLoc[0] - 1000 && cam.GetLR() < DoorLoc[0] + 1000 && cam.GetUD() > DoorLoc[1] - 1000 && cam.GetUD() < DoorLoc[1] + 1000 && cam.GetFB() > DoorLoc[2] - 1000 && cam.GetFB() < DoorLoc[2] + 1000)
+	//if door starting to open or starting to close play sound
+	if (DoorZVar == MaxDoorZVar-DoorSpeed || DoorZVar == DoorSpeed) { 
+		es = CEasySound::Instance(); 
+		doorSlide = es->GetSound(es->Load("sounds/close_door.wav"));
+		doorSlide->Play();
+	}
+	
+
+	if (cam.GetLR() > DoorLoc[0] - 500 && cam.GetLR() < DoorLoc[0] + 500 && cam.GetUD() > DoorLoc[1] - 500 && cam.GetUD() < DoorLoc[1] + 500 && cam.GetFB() > DoorLoc[2] - 500 && cam.GetFB() < DoorLoc[2] + 500)
 	{
 		if (DoorZVar < MaxDoorZVar)
 		{
