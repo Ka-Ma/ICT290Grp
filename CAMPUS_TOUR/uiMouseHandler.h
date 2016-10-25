@@ -17,17 +17,6 @@
 #include "uiOptions.h"
 #include "uiLeaderBoard.h"
 
-/**
-@brief controls which ui has control of the mouse
-@param button
-@param state
-@param x
-@param y
-@param uih - pointer to the hud object
-@param uim - pointer to the menu object
-@param uio - pointer to the options object
-@param uil - pointer to the leaderboard object
-*/
 bool uiMouseHandler(int button, int state, int x, int y, uiHUD & uih, uiMenu & uim, uiOptions & uio, uiLeaderBoard & uil);
 
 #endif //UIMOUSEHANDLER_H
