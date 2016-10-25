@@ -22,6 +22,11 @@ class uiOptions {
 public:
 	uiOptions(int w, int h);
 
+	/**
+	@brief update the members of the options to new screen size
+	@param w - width of the screen
+	@param h - height of the screen
+	*/
 	void updateUIOptionsMembers(int w, int h);
 
 	/**

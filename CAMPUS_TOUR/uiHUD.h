@@ -20,6 +20,11 @@ public:
 
 	uiHUD(int w, int h);
 
+	/**
+	@brief update the members of the HUD to new screen size
+	@param w - width of the screen
+	@param h - height of the screen
+	*/
 	void updateUIHIDMembers(int w, int h);
 
 	/**
