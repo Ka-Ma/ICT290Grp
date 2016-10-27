@@ -7,7 +7,7 @@ uiHUD::uiHUD(int w, int h)
 
 void uiHUD::setBallCount(int ball)
 {
-	cball = ball;
+	cball = gVar.ballCount - ball;
 }
 int uiHUD::getBallCount()
 {

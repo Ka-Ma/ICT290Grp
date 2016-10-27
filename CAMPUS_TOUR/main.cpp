@@ -5883,6 +5883,7 @@ void UpdateBalls()
 				}
 				//else
 				//{
+
 				//	p->visible = false;
 				//p->vx -= p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0] * SizeMult + SunX) - p->x) / d; //f = ma => a = f/m
 				//p->vy -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][1] * SizeMult - p->y) / d;
