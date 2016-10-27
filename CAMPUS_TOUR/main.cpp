@@ -503,8 +503,8 @@ GLfloat DistMult = 10;
 GLfloat SizeMult = 300;
 
 typedef GLfloat planetsVar[5];
-static GLfloat OrbitSpeed[] = { 4.147,1.629,1,.531,.084,.033,.011,.006,.004,365 };
-static GLfloat RotationSpeed[] = { 1.1,58.65,-243,1,1.03,.41,.44,-.72,.72,-6.38 };
+static GLfloat OrbitSpeed[] = { 4.147,1.629,1,.531,.084,.033,.011,.006,.004,365 }; //FIX does it need to be GLdouble
+static GLfloat RotationSpeed[] = { 1.1,58.65,-243,1,1.03,.41,.44,-.72,.72,-6.38 }; //FIX does it need to be GLdouble
 GLfloat rotAmt[] = { 0,0,0,0,0,0,0,0,0,0 };
 
 planetsVar allPlanets[] = { { 512000 , 0, 0, 30, 1.5 },
@@ -527,9 +527,9 @@ GLdouble tempSpeed = 0;
 bool Paused = false;
 
 //Masedawg
-GLfloat TeleportToX = 36000;
-GLfloat TeleportToY = 12000;
-GLfloat TeleportToZ = 26770;
+GLfloat TeleportToX = 34467; //FIXED FROM 36000;
+GLfloat TeleportToY = 13000; //FIXED FROM 12000;
+GLfloat TeleportToZ = 26508: //FIXED FROM 26770;
 
 //Masedawg
 GLfloat TestX = 34467;
@@ -539,6 +539,14 @@ GLfloat TestZ = 26508;
 GLfloat TeleportFromX = SunX;
 GLfloat TeleportFromY = allPlanets[0][1];
 GLfloat TeleportFromZ = allPlanets[0][2] + 10000;
+
+//FIX STARTS
+GLfloat GoalX = SunX + 1000;
+GLfloat GoalY = allPlanets[0][1];
+GLfloat GoalZ = allPlanets[0][2] + 10000;
+
+int distToGoal;
+//FIX ENDS
 
 void CheckLocationForTeleport();
 void TeleportToPlanets();
@@ -758,6 +766,15 @@ void Display()
 		glutWireCube(1000);
 	glPopMatrix();
 	
+	//FIX STARTS
+	//MT Goal box Location
+	glPushMatrix();
+		glColor3f(1, 1, 0); 
+		glTranslatef(TeleportFromX+1000, TeleportFromY, TeleportFromZ);
+		glutWireCube(1000);
+	glPopMatrix();
+	//FIX ENDS
+	
 //	DisplayTest();
 	glEnable(GL_TEXTURE_2D); //KM 15/9/2016 for texture in corridor
 	DrawCorridor();
@@ -823,6 +840,10 @@ void Display()
 	glVertex3f(34800, 10750, 26360);
 	glEnd();*/
 
+	//FIX STARTS
+	distToGoal = sqrt(((GoalX - cam.GetLR()) * (GoalX - cam.GetLR())) + ((GoalY - cam.GetFB()) * (GoalY - cam.GetFB())) + ((GoalZ - cam.GetUD()) * (GoalZ - cam.GetUD())));
+ 	uih.setDist(distToGoal);
+	//FIX ENDS
 
 	//after everything else so it draws on top - KJM 13/10/2016
 	if (gVar.uiHUD) {
@@ -1630,7 +1651,14 @@ void CreatePlains()
 		//cam.SetPlains(XY_PLAIN, 35700, 35700 - (10 * 95), 10000, 10000 + (10 * 75), 26400, 26000);
 	//}
 
-		
+	//FIX STARTS
+	glBegin(GL_POLYGON);
+	glVertex3f(34000, 10450.0, 26400);
+	glVertex3f(34000, 10450.0, 26000);
+	glVertex3f(34000 - (10 * 95), 10450.0 + (10 * 75), 26000);
+	glVertex3f(34000 - (10 * 95), 10450.0 + (10 * 75), 26400);
+	glEnd();
+	//FIX ENDS
 
 	//entance steps
 	step = 10450.0;
@@ -5974,6 +6002,7 @@ void addParticle(float m, float r, float vx, float vy, float vz)
 
 	Balls[current_balls] = p;
 	current_balls++;
+	uih.setBallCount(current_balls);
 
 	//es = CEasySound::Instance();
 	//firstSound = es->GetSound(es->Load("sounds/greeting.wav"));

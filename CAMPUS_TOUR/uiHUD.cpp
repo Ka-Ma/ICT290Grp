@@ -5,10 +5,52 @@ uiHUD::uiHUD(int w, int h)
 	updateUIHIDMembers(w, h);
 }
 
+void uiHUD::setBallCount(int ball)
+{
+	cball = ball;
+}
+int uiHUD::getBallCount()
+{
+	return cball;
+}
+
+int uiHUD::getDist()
+{
+	return distance;
+}
+
+void uiHUD::setDist(int distances)
+{
+	distance = distances;
+}
+
+float uiHUD::getTimeCount()
+{
+	clock_t end = clock();
+	float seconds = (float)(end - start) / CLOCKS_PER_SEC;
+	return 10000 - seconds;
+}	
+
+void uiHUD::setScore(int score)
+{
+	curScore = score;
+}
+
+int uiHUD::genScore()
+{
+	curScore = ((getTimeCount() * 10) / cball) * 1000;
+	return curScore;
+}
+
 void uiHUD::updateUIHIDMembers(int w, int h)
 {
 	width = w;
 	height = h;
+}
+
+void uiHUD::setClock(clock_t nclock)
+{
+	start = nclock;
 }
 
 void uiHUD::displayUIHUD(const GLuint & tempImage)
@@ -82,13 +124,19 @@ void uiHUD::displayUIHUD(const GLuint & tempImage)
 	//data will need to be converted to string in order to put on screen
 	glBindTexture(GL_TEXTURE_2D, 0); //sets active to none
 	glColor3f(0.498f, 1.0f, 0.0f);
-	glRasterPos2i(30, 10);
-	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"1");  //replace with ballsInPlay variable to string
-	glRasterPos2i(width-110, height-30);
-	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"1000");  //replace with timer variable to string
-	glRasterPos2i(width-140, 20);
-	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"51200");  // replace with distFromGoal variable to string & planetsHit variable to string
-
+	//FIX STARTS
+	glRasterPos2i(30, 100);// position of balls in play counter
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)std::to_string(getBallCount()).c_str());  //replace with ballsInPlay variable to string **MT Changed to sing getters and sets to be converted to a string
+	glRasterPos2i(100, 40);// position of balls in play counter
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"test");
+   	glRasterPos2i(width-110, height-30);
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)std::to_string(getTimeCount()).c_str());  //replace with timer variable to string
+  	glRasterPos2i(width-140, 20);
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)std::to_string(getDist()).c_str());  // replace with distFromGoal variable to string & planetsHit variable to string **MT now activly shows how far away from the goal you are
+	glRasterPos2i(width - 50, 80);
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"test");//MT** Planets hits number
+	//FIX ENDS
+	
 	glEnable(GL_DEPTH_TEST|GL_LIGHTING);
 
 	// Reset Perspective Projection
