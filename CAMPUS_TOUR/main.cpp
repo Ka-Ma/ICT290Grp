@@ -479,6 +479,7 @@ CEasySound *es;
 CSound* firstSound;
 CSound* doorSlide;
 CSound* releaseBall;
+CSound* ambientspace;
 //------------------------------PLANETS VARS AND FUNCTIONS--------------------------------
 //lighting
 
@@ -506,16 +507,16 @@ static GLfloat OrbitSpeed[] = { 4.147,1.629,1,.531,.084,.033,.011,.006,.004,365 
 static GLfloat RotationSpeed[] = { 1.1,58.65,-243,1,1.03,.41,.44,-.72,.72,-6.38 }; //FIX does it need to be GLdouble
 GLfloat rotAmt[] = { 0,0,0,0,0,0,0,0,0,0 };
 
-planetsVar allPlanets[] = { { 512000 , 0, 0, 20, 1.5 },
-							{ 40, 0, 0, 0.003, 0.03 },
-							{ 80, 0, 0, 0.008, 0.08 },
-							{ 120, 0, 0, 0.009, 0.09 },
-							{ 160, 0, 0, 0.004, 0.04 },
-							{ 200, 0, 0, .1, 1 },
-							{ 240, 0, 0, .083, 0.83 },
-							{ 280, 0, 0, .036, 0.36 },
-							{ 320, 0, 0, .035, 0.35 },
-							{ 360, 0, 0, .001, 0.01 }
+planetsVar allPlanets[] = { { 512000 , 0, 0, 30, 1.5 },
+							{ 50, 0, 0, 0.003, 0.03 },
+							{ 100, 0, 0, 0.008, 0.08 },
+							{ 150, 0, 0, 0.009, 0.09 },
+							{ 200, 0, 0, 0.004, 0.04 },
+							{ 250, 0, 0, .1, 1 },
+							{ 300, 0, 0, .083, 0.83 },
+							{ 350, 0, 0, .036, 0.36 },
+							{ 400, 0, 0, .035, 0.35 },
+							{ 450, 0, 0, .001, 0.01 }
 							};
 
 
@@ -608,7 +609,7 @@ int main(int argc, char **argv)
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(0,0);
 	glutInitWindowSize(1000,1000 );
-	glutCreateWindow("Murdoch University Campus Tour");
+	glutCreateWindow("Gravity Ball");
 
 	myinit();
 
@@ -655,7 +656,7 @@ void myinit()
 	// turn collision detection on
 	cam.SetCollisionDetectionOn(true);
 	// set number of bounding boxes required
-	cam.SetNoBoundingBoxes(28); //KM 16/9/2016 increased from 19
+	cam.SetNoBoundingBoxes(31); //KM 16/9/2016 increased from 19
 	// set starting position of user
 	//cam.Position(32720.0, 9536.0,	4800.0, 180.0);
 
@@ -685,6 +686,12 @@ void myinit()
 	// load texture images and create display lists
 	CreateTextureList();
 	CreateTextures();
+
+	es = CEasySound::Instance();
+	ambientspace = es->GetSound(es->Load("sounds/ambient_space.wav"));
+	firstSound = es->GetSound(es->Load("sounds/greeting.wav")); 
+	releaseBall = es->GetSound(es->Load("sounds/tennisserve.wav"));
+	doorSlide = es->GetSound(es->Load("sounds/close_door.wav"));
 
 	//populate LeaderBoard
 	uil.getLeaderBoard();
@@ -817,6 +824,13 @@ void Display()
 			RotSpeed = 0;
 		}
 		Paused = gVar.paused;
+	}
+
+	if (InSpace)
+	{
+		if (ambientspace->m_pos.GetSDLTime() >= ambientspace->m_len.GetSDLTime()-5000)
+			//ambientspace->m_pos = CSoundTime(0);
+			ambientspace->Play();
 	}
 
 	/*glBegin(GL_POLYGON);
@@ -958,7 +972,7 @@ void reshape(int w, int h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glViewport(0, 0, w, h);
-	gluPerspective(45,ratio,1,250000);	
+	gluPerspective(45,ratio,1,500000);	
 	glMatrixMode(GL_MODELVIEW);
 }
 
@@ -1185,10 +1199,8 @@ void keys(unsigned char key, int x, int y)
 		//	gVar.DisplayWelcome = true;
 		//}
 		if (!(gVar.paused))
-		if (current_balls < MAX_BALLS && InSpace)
+		if (current_balls < gVar.ballCount && InSpace)
 		{
-			es = CEasySound::Instance();
-			releaseBall = es->GetSound(es->Load("sounds/tennisserve.wav"));
 			releaseBall->Play();
 
 			addParticle(0.1* SizeMult, 0.3* SizeMult, 0, 0, 0);
@@ -1568,6 +1580,30 @@ void CreateBoundingBoxes()
 	cam.SetAABBMinY(27, 11300);
 	cam.SetAABBMaxZ(27, 25990);
 	cam.SetAABBMinZ(27, 25960);*/
+
+	//Space boundaries - walls based on beginning location in space
+	//Left
+	cam.SetAABBMaxX(27, 253000);
+	cam.SetAABBMinX(27, 250000);
+	cam.SetAABBMaxZ(27, 250000);
+	cam.SetAABBMinZ(27, -250000);
+	//Right
+	cam.SetAABBMaxX(28, 753000);
+	cam.SetAABBMinX(28, 750000);
+	cam.SetAABBMaxZ(28, 250000);
+	cam.SetAABBMinZ(28, -250000);
+
+	//Front
+	cam.SetAABBMaxX(29, 750000);
+	cam.SetAABBMinX(29, 250000);
+	cam.SetAABBMaxZ(29, -250000);
+	cam.SetAABBMinZ(29, -253000);
+	
+	//Back
+	cam.SetAABBMaxX(30, 750000);
+	cam.SetAABBMinX(30, 250000);
+	cam.SetAABBMaxZ(30, 253000);
+	cam.SetAABBMinZ(30, 250000);
 }
 
 //--------------------------------------------------------------------------------------
@@ -5754,7 +5790,7 @@ void DisplayPlanets()
 																			   //glutSolidSphere(SunSize*DistMult*planetSize[9], 20, 20);
 		glPopMatrix();
 	}
-	if (gVar.LevelNum > 1)
+	if (gVar.LevelNum > 3)
 	{
 
 		//Mars
@@ -5807,7 +5843,7 @@ void DisplayPlanets()
 		glPushMatrix();
 			glTranslatef(allPlanets[6][0] * SizeMult + SunX, allPlanets[6][1] * SizeMult, allPlanets[6][2] * SizeMult);
 			glRotatef(20, 0, 0, 1);
-			glRotatef(rotAmt[6]*3, 0, 1, 0);
+			glRotatef(rotAmt[6]*300, 0, 1, 0);
 			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
 			//glColor3f(0,0,1);
 
@@ -5824,7 +5860,7 @@ void DisplayPlanets()
 			glEnd();
 		glPopMatrix();
 	}
-	if (gVar.LevelNum > 2)
+	if (gVar.LevelNum > 6)
 	{
 
 		//Uranus
@@ -5922,8 +5958,14 @@ void TeleportToPlanets()
 	//KM 13/9/2016 Sound bite 
 	//CEasySound *es;
 	//CSound* firstSound;
-	es = CEasySound::Instance();
-	firstSound = es->GetSound(es->Load("sounds/greeting.wav"));
+
+	ambientspace->Play();
+	//ambientspace = es->GetSound(es->Load("sounds/ambient_space.wav"));
+	//es = CEasySound::Instance();
+
+	//es = CEasySound::Instance();
+	//ambientspace = es->GetSound(es->Load("sounds/ambient_space.wav"));
+	//firstSound = es->GetSound(es->Load("sounds/greeting.wav"));
 	firstSound->Play();
 }
 void TeleportToBushCourt()
@@ -5931,8 +5973,8 @@ void TeleportToBushCourt()
 	gVar.uiHUD = InSpace = false;
 	moveSpeed = 3;
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
-	cam.Position(36110, 11918, 26197, 270);  //FIX which one is right?
-	//cam.Position(32720.0, 9536.0, 4800.0, 180.0); //FIX which one is right?
+	cam.Position(36110, 11918, 26197, 270);
+
 }
 //------------------END PLANETS FUNCTIONS---------------------
 //-------------Ball Functions-------------
@@ -5995,7 +6037,7 @@ void UpdateBalls()
 			struct Ball *p;
 			p = &Balls[i];
 
-			for (int j = 0; j < gVar.LevelNum * 3 + 1; j++)
+			for (int j = 0; j < gVar.LevelNum + 1; j++)
 			{
 				float d;
 				if (j == 0) 
@@ -6660,13 +6702,11 @@ void OpenSlidingDoor()
 {
 	//if door starting to open or starting to close play sound
 	if (DoorZVar == MaxDoorZVar-DoorSpeed || DoorZVar == DoorSpeed) { 
-		es = CEasySound::Instance(); 
-		doorSlide = es->GetSound(es->Load("sounds/close_door.wav"));
 		doorSlide->Play();
 	}
 	
 
-	if (cam.GetLR() > DoorLoc[0] - 500 && cam.GetLR() < DoorLoc[0] + 500 && cam.GetUD() > DoorLoc[1] - 500 && cam.GetUD() < DoorLoc[1] + 500 && cam.GetFB() > DoorLoc[2] - 500 && cam.GetFB() < DoorLoc[2] + 500)
+	if (cam.GetLR() > DoorLoc[0] - 1000 && cam.GetLR() < DoorLoc[0] + 1000 && cam.GetUD() > DoorLoc[1] - 500 && cam.GetUD() < DoorLoc[1] + 500 && cam.GetFB() > DoorLoc[2] - 500 && cam.GetFB() < DoorLoc[2] + 500)
 	{
 		if (DoorZVar < MaxDoorZVar)
 		{
