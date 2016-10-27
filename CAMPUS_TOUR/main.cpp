@@ -302,6 +302,8 @@ GLdouble rotationSpeed = 0.005;
 #define PS_AROUND_CNR				224
 #define PS_CEILING					225
 #define PS_DOOR						226
+#define PS_DOOR_INSIDE				258
+#define PS_DOOR_OUTSIDE				259
 #define PS_DOOR_FAR					227
 #define PS_DOOR_RIGHT				228
 #define PS_FLOOR					229
@@ -333,6 +335,7 @@ GLdouble rotationSpeed = 0.005;
 #define PORTAL1						255
 #define PORTAL2						256
 #define PORTAL3						257
+
 
 
 
@@ -526,9 +529,9 @@ GLdouble tempSpeed = 0;
 bool Paused = false;
 
 //Masedawg
-GLfloat TeleportToX = 34467; //FIXED FROM 36000;
-GLfloat TeleportToY = 13000; //FIXED FROM 12000;
-GLfloat TeleportToZ = 26508: //FIXED FROM 26770;
+GLfloat TeleportToX = 36000; //FIXED FROM 36000;
+GLfloat TeleportToY = 12000; //FIXED FROM 12000;
+GLfloat TeleportToZ = 26770; //FIXED FROM 26770;
 
 //Masedawg
 GLfloat TestX = 34467;
@@ -659,9 +662,9 @@ void myinit()
 	// set starting position of user
 	//cam.Position(32720.0, 9536.0,	4800.0, 180.0);
 
-	cam.Position(32720.0, 10450,27300, 90.0); //Temp starting position for easy access bug fixing
+	//cam.Position(32720.0, 10450,27300, 90.0); //Temp starting position for easy access bug fixing
 
-	//cam.Position(35000.0, 12000, 26100, 90.0); //Temp starting position at top of stairs for easy access bug fixing
+	cam.Position(35000.0, 12000, 26100, 90.0); //Temp starting position at top of stairs for easy access bug fixing
 
 	
 	CreatePlains();	
@@ -1615,14 +1618,7 @@ void CreatePlains()
 		//cam.SetPlains(XY_PLAIN, 35700, 35700 - (10 * 95), 10000, 10000 + (10 * 75), 26400, 26000);
 	//}
 
-	//FIX STARTS
-	glBegin(GL_POLYGON);
-	glVertex3f(34000, 10450.0, 26400);
-	glVertex3f(34000, 10450.0, 26000);
-	glVertex3f(34000 - (10 * 95), 10450.0 + (10 * 75), 26000);
-	glVertex3f(34000 - (10 * 95), 10450.0 + (10 * 75), 26400);
-	glEnd();
-	//FIX ENDS
+
 
 	//entance steps
 	step = 10450.0;
@@ -2371,7 +2367,12 @@ void CreateTextures()
 	// not used - may as well not load -kjm 9/10/2016
 	image = tp.LoadTexture("data/PSdoor.raw", 1362, 1024);
 	tp.CreateTexture(PS_DOOR, image, 1362, 1024);
-	
+
+	image = tp.LoadTexture("data/PSdoorInside.raw", 256, 508);
+	tp.CreateTexture(PS_DOOR_INSIDE, image, 256, 508);
+
+	image = tp.LoadTexture("data/PSdoorOutside.raw", 256, 537);
+	tp.CreateTexture(PS_DOOR_OUTSIDE, image, 256, 537);
 
 	image = tp.LoadTexture("data/PSdoorFar.raw", 512, 666);
 	tp.CreateTexture(PS_DOOR_FAR, image, 512, 666);
@@ -5931,7 +5932,7 @@ void TeleportToBushCourt()
 	gVar.uiHUD = InSpace = false;
 	moveSpeed = 3;
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
-	cam.Position(36110, 11918, 26197, 270);  //FIX which one is right?
+	cam.Position(36110, 11918, 26197, 270);  //FIX which one is right? This one is correct as it teleports back to the top of the stairs.
 	//cam.Position(32720.0, 9536.0, 4800.0, 180.0); //FIX which one is right?
 }
 //------------------END PLANETS FUNCTIONS---------------------
@@ -6603,20 +6604,20 @@ void DrawSlidingDoor()
 	glPushMatrix();
 		glTranslatef(0, 0, DoorZVar);
 		//front face
-		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_DOOR));
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_DOOR_OUTSIDE));
 		glBegin(GL_POLYGON);
-			glTexCoord2f(0.2, 0.1);
+			glTexCoord2f(0.0, 0.0);
 			glVertex3f(34270, 10900, 26750);
-			glTexCoord2f(0.2, 1.0);
+			glTexCoord2f(0.0, 1.0);
 			glVertex3f(34270, 10000, 26750);
-			glTexCoord2f(0.7, 1.0);
+			glTexCoord2f(1.0, 1.0);
 			glVertex3f(34270, 10000, 27300);
-			glTexCoord2f(0.7, 0.1);
+			glTexCoord2f(1.0, 0.0);
 			glVertex3f(34270, 10900, 27300);
 		glEnd();
 
 		//back face
-		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_DOOR));
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PS_DOOR_INSIDE));
 		glBegin(GL_POLYGON);
 			glTexCoord2f(0.0, 0.0);
 			glVertex3f(34320, 10900, 26750);
