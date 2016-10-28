@@ -33,9 +33,6 @@ typedef struct globalVariable {
 	//determines number of planets
 	int LevelNum;
 
-	//number of balls
-	int ballCount;
-
 
 	//posible futures
 	//leaderboard vector

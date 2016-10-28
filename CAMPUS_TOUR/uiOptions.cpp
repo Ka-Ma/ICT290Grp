@@ -45,17 +45,16 @@ void uiOptions::displayUIOptions(const GLuint & tempImage)
 		glVertex2f(wc + d, hc + d);
 	glEnd();
 
-	string Level = to_string(gVar.LevelNum);
-	string BallCount = to_string(gVar.ballCount);
+	string a = to_string(gVar.LevelNum);
 	//cout << gVar.LevelNum << " " << a << endl;
 
 	//data will need to be converted to string in order to put on screen
 	glBindTexture(GL_TEXTURE_2D, 0); //sets active to none
 	glColor3f(0.498f, 1.0f, 0.0f);
 	glRasterPos2i(wc + 27, hc - 5);
-	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)Level.c_str()); // need to replace with numPlanets
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)a.c_str()); // need to replace with numPlanets
 	glRasterPos2i(wc + 27, hc - 79);
-	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)BallCount.c_str()); // need to replace with numProj
+	glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)"15"); // need to replace with numProj
 	
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
@@ -79,10 +78,10 @@ void uiOptions::mouseUIOptions(int button, int state, int x, int y)
 	//screen height and width centres
 	int hc = height /2;
 	int wc = width/2;
-	int maxPlanets = 9;
+	int maxPlanets = 3;
 	int numPlanets = 1;
-	int minPlanets = 3;
-	int maxProj = 20;
+	int minPlanets = 1;
+	int maxProj = 1000;
 	int minProj = 1;
 	int numProj = 15;
 	
@@ -98,7 +97,7 @@ void uiOptions::mouseUIOptions(int button, int state, int x, int y)
 		{
 			clickSound->Play();
 			if (gVar.LevelNum != maxPlanets) {
-				gVar.LevelNum+=3;
+				gVar.LevelNum++;
 			}
 		}
 		//decrease planet number
@@ -106,23 +105,23 @@ void uiOptions::mouseUIOptions(int button, int state, int x, int y)
 		{
 			clickSound->Play();
 			if (gVar.LevelNum != minPlanets) {
-				gVar.LevelNum-=3;
+				gVar.LevelNum--;
 			}
 		}
 		//increase projectiles
 		if (x >= wc+18 && x <= wc+47 && y >= hc+49 && y <= hc+65)
 		{
 			clickSound->Play();
-			if (gVar.ballCount != maxProj) {
-				gVar.ballCount++;
+			if (numProj != maxProj) {
+				numProj++;
 			}
 		}
 		//decreate projectiles
 		if (x >= wc+19 && x <= wc+47 && y >= hc+84 && y <= hc+97)
 		{
 			clickSound->Play();
-			if (gVar.ballCount != minProj) {
-				gVar.ballCount--;
+			if (numProj != minProj) {
+				numProj--;
 			}
 		}
 		//return to game

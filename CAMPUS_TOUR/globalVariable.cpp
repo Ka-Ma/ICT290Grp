@@ -26,7 +26,5 @@ struct globalVariable gVar = {
 	//paused
 	false,
 	//LevelNum
-	3,
-	//Number of balls
-	15
+	1
 };
