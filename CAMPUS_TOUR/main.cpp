@@ -336,6 +336,10 @@ GLdouble rotationSpeed = 0.005;
 #define PORTAL2						256
 #define PORTAL3						257
 
+//Goal textures
+#define GOAL1						260
+#define GOAL2						261
+#define GOAL3						262
 
 
 
@@ -510,7 +514,7 @@ static GLfloat OrbitSpeed[] = { 4.147,1.629,1,.531,.084,.033,.011,.006,.004,365 
 static GLfloat RotationSpeed[] = { 1.1,58.65,-243,1,1.03,.41,.44,-.72,.72,-6.38 }; //FIX does it need to be GLdouble
 GLfloat rotAmt[] = { 0,0,0,0,0,0,0,0,0,0 };
 
-planetsVar allPlanets[] = { { 512000 , 0, 0, 30, 1.5 },
+planetsVar allPlanets[] = { { 512000 , 0, 0, 30, 0.1 },
 							{ 50, 0, 0, 0.003, 0.03 },
 							{ 100, 0, 0, 0.008, 0.08 },
 							{ 150, 0, 0, 0.009, 0.09 },
@@ -544,9 +548,21 @@ GLfloat TeleportFromY = allPlanets[0][1];
 GLfloat TeleportFromZ = allPlanets[0][2] + 10000;
 
 //FIX STARTS
-GLfloat GoalX = SunX + 1000;
-GLfloat GoalY = allPlanets[0][1];
-GLfloat GoalZ = allPlanets[0][2] + 10000;
+int GoalLocI = 0;
+int MaxGoals = 5;
+GLfloat GoalLoc[][3] = 
+{ 
+	{520000,allPlanets[0][1] + 450,25000 },
+	{450000,allPlanets[0][1] + 450 ,-45000},
+	{ 550000,allPlanets[0][1] + 450 ,-20000},
+	{ 512000,allPlanets[0][1] + 450 ,35000 },
+	{ 420000,allPlanets[0][1] + 450 ,5000 }
+};
+
+void DrawGoal();
+float GoalImgs[3] = { GOAL1,GOAL2,GOAL3 };
+int GoalNum = 0;
+int GoalCounter = 0;
 
 int distToGoal;
 //FIX ENDS
@@ -663,9 +679,9 @@ void myinit()
 	// set starting position of user
 	//cam.Position(32720.0, 9536.0,	4800.0, 180.0);
 
-	//cam.Position(32720.0, 10450,27300, 90.0); //Temp starting position for easy access bug fixing
+	cam.Position(32720.0, 10450,27300, 90.0); //Temp starting position for easy access bug fixing
 
-	cam.Position(35000.0, 12000, 26100, 90.0); //Temp starting position at top of stairs for easy access bug fixing
+	//cam.Position(35000.0, 12000, 26100, 90.0); //Temp starting position at top of stairs for easy access bug fixing
 
 	
 	CreatePlains();	
@@ -705,6 +721,7 @@ void myinit()
 //--------------------------------------------------------------------------------------
 void Display()
 {
+
 	// check for movement
 	cam.CheckCamera();
 	
@@ -772,9 +789,9 @@ void Display()
 	//FIX STARTS
 	//MT Goal box Location
 	glPushMatrix();
-		glColor3f(1, 1, 0); 
-		glTranslatef(TeleportFromX+1000, TeleportFromY, TeleportFromZ);
-		glutWireCube(1000);
+		/*glColor3f(1, 1, 0); 
+		glTranslatef(GoalX, GoalY, GoalZ);
+		glutWireCube(1000);*/
 	glPopMatrix();
 	//FIX ENDS
 	
@@ -783,6 +800,8 @@ void Display()
 	DrawCorridor();
 	DrawCorridorSteps(75,95,440,35700,10000,25920,10);
 	DrawCorridorSteps(75, -95, 420, 35700-(9*95), 10750, 26380, 10);
+
+	DrawGoal();
 	glDisable(GL_TEXTURE_2D); //KM 15/9/2016
 
 	//glPushMatrix();
@@ -844,7 +863,7 @@ void Display()
 	glEnd();*/
 
 	//FIX STARTS
-	distToGoal = sqrt(((GoalX - cam.GetLR()) * (GoalX - cam.GetLR())) + ((GoalY - cam.GetFB()) * (GoalY - cam.GetFB())) + ((GoalZ - cam.GetUD()) * (GoalZ - cam.GetUD())));
+	distToGoal = sqrt(((GoalLoc[GoalLocI][0] - cam.GetLR()) * (GoalLoc[GoalLocI][0] - cam.GetLR())) + ((GoalLoc[GoalLocI][1] - cam.GetFB()) * (GoalLoc[GoalLocI][1] - cam.GetFB())) + ((GoalLoc[GoalLocI][2] - cam.GetUD()) * (GoalLoc[GoalLocI][2] - cam.GetUD())));
  	uih.setDist(distToGoal);
 	//FIX ENDS
 
@@ -975,7 +994,7 @@ void reshape(int w, int h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glViewport(0, 0, w, h);
-	gluPerspective(45,ratio,1,500000);	
+	gluPerspective(45,ratio,1,400000);	
 	glMatrixMode(GL_MODELVIEW);
 }
 
@@ -1282,7 +1301,8 @@ void keys(unsigned char key, int x, int y)
 	case 'O':
 	case 'o':
 		if (gVar.paused) gVar.paused = false; else gVar.paused = true;
-		cout << "x: " << cam.GetLR() << "y: " << cam.GetUD() << "z: " << cam.GetFB() << endl;
+		cout << "Player x: " << cam.GetLR() << " y: " << cam.GetUD() << " z: " << cam.GetFB() << endl;
+		cout << "Goal x: " << GoalLoc[GoalLocI][0] << " y: " << GoalLoc[GoalLocI][1] << " z: " << GoalLoc[GoalLocI][2] << endl;
 		break;
 	}
 }
@@ -2504,6 +2524,16 @@ void CreateTextures()
 
 	image = tp.LoadTexture("data/portal3.raw", 500, 500);
 	tp.CreateTexture(PORTAL3, image, 500, 500);
+
+	//Goal textures
+	image = tp.LoadTexture("data/goal1.raw", 250, 250);
+	tp.CreateTexture(GOAL1, image, 250, 250);
+
+	image = tp.LoadTexture("data/goal2.raw", 250, 250);
+	tp.CreateTexture(GOAL2, image, 250, 250);
+
+	image = tp.LoadTexture("data/goal3.raw", 250, 250);
+	tp.CreateTexture(GOAL3, image, 250, 250);
 
 	quad = gluNewQuadric(); // MM - setting up quad for sphere textures
 
@@ -5949,9 +5979,20 @@ void CheckLocationForTeleport()
 	}
 }
 
+
 void TeleportToPlanets()
 {
+	//change location of goal
+	if (GoalLocI < MaxGoals-1)
+		GoalLocI++;
+	else
+		GoalLocI = 0;
+
 	moveSpeed = 8;
+	gVar.LevelNum = 3;
+	RotSpeed = 0.01;
+	current_balls = 0;
+	uih.setBallCount(current_balls);
 	gVar.uiHUD = InSpace = true;
 	glClearColor(0, 0, 0, 1.0);
 	cam.Position(SunX, allPlanets[0][1], cam.GetFB(), 0);
@@ -5977,6 +6018,75 @@ void TeleportToBushCourt()
 	cam.Position(36110, 11918, 26197, 270);  
 }
 //------------------END PLANETS FUNCTIONS---------------------
+//------------GOAL-------------
+void DrawGoal()
+{
+	glPushMatrix();
+		if (GoalCounter < (GoalNum + 1) * 30)
+			GoalCounter++;
+		else
+		{
+			GoalNum++;
+		}
+
+		if (GoalNum > 2)
+		{
+			GoalCounter = 0;
+			GoalNum = 0;
+		}
+		glTranslatef(GoalLoc[GoalLocI][0], GoalLoc[GoalLocI][1], GoalLoc[GoalLocI][2]);
+
+		//front
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(GoalImgs[GoalNum]));
+		glBegin(GL_POLYGON);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(0,0,0);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(0,-1000,0);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(1000, -1000, 0);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(1000, 0, 0);
+		glEnd();
+		//back
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(GoalImgs[GoalNum]));
+		glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(0, 0, -1000);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(0, -1000, -1000);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(1000, -1000, -1000);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(1000, 0, -1000);
+		glEnd();
+		//left
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(GoalImgs[GoalNum]));
+		glBegin(GL_POLYGON);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(0, 0, -1000);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(0, -1000, -1000);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(0, -1000, 0);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(0, 0, 0);
+		glEnd();
+		//right
+		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(GoalImgs[GoalNum]));
+		glBegin(GL_POLYGON);
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(1000, 0, -1000);
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(1000, -1000, -1000);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(1000, -1000, 0);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(1000, 0, 0);
+		glEnd();
+	glPopMatrix();
+}
+//-------END GOAL------
 //-------------Ball Functions-------------
 void addParticle(float m, float r, float vx, float vy, float vz)
 {
@@ -6003,6 +6113,7 @@ void addParticle(float m, float r, float vx, float vy, float vz)
 	Balls[current_balls] = p;
 	current_balls++;
 	uih.setBallCount(current_balls);
+	uih.setTotalBallCount(current_balls);
 
 	//es = CEasySound::Instance();
 	//firstSound = es->GetSound(es->Load("sounds/greeting.wav"));
@@ -6011,11 +6122,14 @@ void addParticle(float m, float r, float vx, float vy, float vz)
 
 void DrawBalls()
 {
+	int visibleBalls = 0;
 	for (int i = 0; i < current_balls; i++)
 	{
 		struct Ball *p = &Balls[i];
 		if (p->visible)
 		{
+
+			visibleBalls++;
 			glPushMatrix();
 
 			glTranslatef(p->x, p->y, p->z);
@@ -6026,6 +6140,7 @@ void DrawBalls()
 			glPopMatrix();
 		}
 	}
+	uih.setBallCount(visibleBalls);
 }
 
 void UpdateBalls()
@@ -6037,45 +6152,56 @@ void UpdateBalls()
 			struct Ball *p;
 			p = &Balls[i];
 
-			for (int j = 0; j < gVar.LevelNum + 1; j++)
+		
+
+			if (p->visible)
 			{
-				float d;
-				if (j == 0) 
+				for (int j = 0; j < gVar.LevelNum + 1; j++)
 				{
-					d = sqrt(((allPlanets[j][0]) - p->x)*((allPlanets[j][0]) - p->x) + (allPlanets[j][1] * SizeMult - p->y)*(allPlanets[j][1] * SizeMult - p->y) + (allPlanets[j][2] * SizeMult - p->z)*(allPlanets[j][2] * SizeMult - p->z));
-				}
-				else
-				{
-					d = sqrt(((allPlanets[j][0] * SizeMult + SunX) - p->x)*((allPlanets[j][0] * SizeMult + SunX) - p->x) + (allPlanets[j][1] * SizeMult - p->y)*(allPlanets[j][1] * SizeMult - p->y) + (allPlanets[j][2] * SizeMult - p->z)*(allPlanets[j][2] * SizeMult - p->z));
-				}
-
-				float ds = (SunSize*DistMult*allPlanets[j][3] * SizeMult) + p->r;
-				//cout << j << "\nd: " << d << "\nds: " << ds << "\n" << endl;
-
-				if (d > (allPlanets[j][3] * SizeMult) + p->r)
-				{
+					float d;
 					if (j == 0)
-						p->vx += p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0]) - p->x) / d; //f = ma => a = f/m
+					{
+						d = sqrt(((allPlanets[j][0]) - p->x)*((allPlanets[j][0]) - p->x) + (allPlanets[j][1] * SizeMult - p->y)*(allPlanets[j][1] * SizeMult - p->y) + (allPlanets[j][2] * SizeMult - p->z)*(allPlanets[j][2] * SizeMult - p->z));
+					}
 					else
-						p->vx += p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0] * SizeMult + SunX) - p->x) / d; //f = ma => a = f/m
+					{
+						d = sqrt(((allPlanets[j][0] * SizeMult + SunX) - p->x)*((allPlanets[j][0] * SizeMult + SunX) - p->x) + (allPlanets[j][1] * SizeMult - p->y)*(allPlanets[j][1] * SizeMult - p->y) + (allPlanets[j][2] * SizeMult - p->z)*(allPlanets[j][2] * SizeMult - p->z));
+					}
 
-					p->vy += p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][1] * SizeMult - p->y) / d;
-					p->vz += p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][2] * SizeMult - p->z) / d;
+					float ds = (SunSize*DistMult*allPlanets[j][3] * SizeMult) + p->r;
+					//cout << j << "\nd: " << d << "\nds: " << ds << "\n" << endl;
 
-					p->x += p->vx;
-					p->y += p->vy;
-					p->z += p->vz;
+					if (d > (allPlanets[j][3] * SizeMult) + p->r)
+					{
+						if (j == 0)
+							p->vx += p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0]) - p->x) / d; //f = ma => a = f/m
+						else
+							p->vx += p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0] * SizeMult + SunX) - p->x) / d; //f = ma => a = f/m
+
+						p->vy += p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][1] * SizeMult - p->y) / d;
+						p->vz += p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][2] * SizeMult - p->z) / d;
+
+						p->x += p->vx;
+						p->y += p->vy;
+						p->z += p->vz;
+					}
+					else
+					{
+						p->visible = false;
+						uih.hitPlanet();
+						cout << "coloide" << endl;
+						/*p->vx -= p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0] * SizeMult + SunX) - p->x) / d; //f = ma => a = f/m
+						p->vy -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][1] * SizeMult - p->y) / d;
+						p->vz -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][2] * SizeMult - p->z) / d;*/
+					}
+
+					
 				}
-				else
+				if (p->x > GoalLoc[GoalLocI][0] - 500 && p->x < GoalLoc[GoalLocI][0] + 500 && p->y + 450 > GoalLoc[GoalLocI][1] - 500 && p->y + 450 < GoalLoc[GoalLocI][1] + 500 && p->z >  GoalLoc[GoalLocI][2] - 500 && p->z < GoalLoc[GoalLocI][2] + 500)
 				{
+					cout << "Goal Hit" << endl;
 					p->visible = false;
-					cout << "coloide" << endl;
-					/*p->vx -= p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0] * SizeMult + SunX) - p->x) / d; //f = ma => a = f/m
-					p->vy -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][1] * SizeMult - p->y) / d;
-					p->vz -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][2] * SizeMult - p->z) / d;*/
-				}		
-
-				
+				}
 			}
 		}
 	}
@@ -6706,7 +6832,7 @@ void OpenSlidingDoor()
 	}
 	
 
-	if (cam.GetLR() > DoorLoc[0] - 1000 && cam.GetLR() < DoorLoc[0] + 1000 && cam.GetUD() > DoorLoc[1] - 500 && cam.GetUD() < DoorLoc[1] + 500 && cam.GetFB() > DoorLoc[2] - 500 && cam.GetFB() < DoorLoc[2] + 500)
+	if (cam.GetLR() > DoorLoc[0] - 1500 && cam.GetLR() < DoorLoc[0] + 1500 && cam.GetUD() > DoorLoc[1] - 500 && cam.GetUD() < DoorLoc[1] + 500 && cam.GetFB() > DoorLoc[2] - 500 && cam.GetFB() < DoorLoc[2] + 500)
 	{
 		if (DoorZVar < MaxDoorZVar)
 		{
