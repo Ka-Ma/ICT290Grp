@@ -57,6 +57,10 @@ public:
 	float getTimeCount();
 	int genScore();
 	int getDist();
+	int getTotalBallCount(); 
+	void setTotalBallCount(int currentBalls);
+	void hitPlanet();
+
 
 	void setClock(clock_t nclock);
 	void setScore(int score);
@@ -70,6 +74,8 @@ private:
 	clock_t start = clock(); //starting clock
 	int curScore =0; //current score
 	int distance; //distance from planets
+	int current_Balls;
+	int hit_Planets = 0;
 };
 
 	
