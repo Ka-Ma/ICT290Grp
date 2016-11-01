@@ -89,6 +89,8 @@ void uiMenu::mouseUIMenu(int button, int state, int x, int y)
 			//restarts animation
 			//restarts timer
 
+			
+
 			//returns to game
 			gVar.uiMenu = false;
 		}

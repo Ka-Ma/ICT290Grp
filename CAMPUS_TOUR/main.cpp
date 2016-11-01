@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <fstream>
 #include <cstdio>
+#include <cstdlib>
 
 #include <GL/glut.h> //needs to be declared last for compiler reasons
 //#include <GL/freeglut.h> // needed for glutBitmapString - kjm 13/10/2016
@@ -487,6 +488,9 @@ CSound* firstSound;
 CSound* doorSlide;
 CSound* releaseBall;
 CSound* ambientspace;
+CSound* goal[4];
+int GoalNumAud = 2; 
+int MaxGoalsAud = 4;
 //------------------------------PLANETS VARS AND FUNCTIONS--------------------------------
 //lighting
 
@@ -548,21 +552,23 @@ GLfloat TeleportFromY = allPlanets[0][1];
 GLfloat TeleportFromZ = allPlanets[0][2] + 10000;
 
 //FIX STARTS
-int GoalLocI = 0;
-int MaxGoals = 5;
-GLfloat GoalLoc[][3] = 
-{ 
-	{520000,allPlanets[0][1] + 450,25000 },
-	{450000,allPlanets[0][1] + 450 ,-45000},
-	{ 550000,allPlanets[0][1] + 450 ,-20000},
-	{ 512000,allPlanets[0][1] + 450 ,35000 },
-	{ 420000,allPlanets[0][1] + 450 ,5000 }
-};
-
 void DrawGoal();
 float GoalImgs[3] = { GOAL1,GOAL2,GOAL3 };
 int GoalNum = 0;
 int GoalCounter = 0;
+int GoalSize = 10000;
+int GoalLocI = 0;
+int MaxGoals = 5;
+GLfloat GoalLoc[][3] = 
+{ 
+	{520000,GoalSize/2,25000 },
+	{450000,GoalSize/2 ,-45000},
+	{ 550000, GoalSize/2 ,-20000},
+	{ 512000,GoalSize/2 ,35000 },
+	{ 420000,GoalSize/2 ,5000 }
+};
+
+
 
 int distToGoal;
 //FIX ENDS
@@ -711,6 +717,10 @@ void myinit()
 	firstSound = es->GetSound(es->Load("sounds/greeting.wav")); 
 	releaseBall = es->GetSound(es->Load("sounds/tennisserve.wav"));
 	doorSlide = es->GetSound(es->Load("sounds/close_door.wav"));
+	goal[0] = es->GetSound(es->Load("sounds/goal1.wav"));
+	goal[1] = es->GetSound(es->Load("sounds/goal2.wav"));
+	goal[2] = es->GetSound(es->Load("sounds/goal3.wav"));
+	goal[3] = es->GetSound(es->Load("sounds/goal4.wav"));
 
 	//populate LeaderBoard
 	uil.getLeaderBoard();
@@ -5745,80 +5755,50 @@ void DisplayPlanets()
 {
 	if (gVar.LevelNum > 0)
 	{
-
 		//SUN
 		glPushMatrix();
-		//glColor3f(1, 1, 0);
-
-		glTranslatef(allPlanets[0][0], allPlanets[0][1] * SizeMult, allPlanets[0][2] * SizeMult);
-		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-		glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, sun_colour);
-
-		glRotatef(rotAmt[0], 0, 1, 0);
-		glRotatef(90, 1, 0, 0);
-		//glScalef(5,5,5);
-		//    glColor3f(1,1,0);
-
-		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_SUN)); // MM - temp texture
-		gluSphere(quad, allPlanets[0][3] * SizeMult, 20, 20); // MM - changed to glusphere for texturing
-
-															  //glutSolidSphere(allPlanets[0][3] * SizeMult, 20, 20);
-															  //    glMaterialfv( GL_FRONT, GL_EMISSION, planet_emission );
-
+			glTranslatef(allPlanets[0][0], allPlanets[0][1] * SizeMult, allPlanets[0][2] * SizeMult);
+			glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+			glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, sun_colour);
+			glRotatef(rotAmt[0], 0, 1, 0);
+			glRotatef(90, 1, 0, 0);
+			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_SUN)); // MM - temp texture
+			gluSphere(quad, allPlanets[0][3] * SizeMult, 20, 20); // MM - changed to glusphere for texturing
 		glPopMatrix();
 
 		//Mercury
 		glPushMatrix();
-		//glColor3f(1, .5, 0);
-		glTranslatef(allPlanets[1][0] * SizeMult + SunX, allPlanets[1][1] * SizeMult, allPlanets[1][2] * SizeMult);
-		glRotatef(rotAmt[1], 0, 1, 0);
-		glRotatef(90, 1, 0, 0);
-		glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-		//glutSolidSphere(SunSize*DistMult*allPlanets[1][3] * SizeMult, 20, 20);
-
-		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_MERCURY)); //MM - temp texture
-		gluSphere(quad, SunSize*DistMult*allPlanets[1][3] * SizeMult, 20, 20);
-
+			glTranslatef(allPlanets[1][0] * SizeMult + SunX, allPlanets[1][1] * SizeMult, allPlanets[1][2] * SizeMult);
+			glRotatef(rotAmt[1], 0, 1, 0);
+			glRotatef(90, 1, 0, 0);
+			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_MERCURY)); //MM - temp texture
+			gluSphere(quad, SunSize*DistMult*allPlanets[1][3] * SizeMult, 20, 20);
 		glPopMatrix();
 
 		//Venus
 		glPushMatrix();
-		//glColor3f(1, .8, .5);
-		//glRotatef(orbAmt[1],0,1,0);
-
-		//attach the teleport to earth for the return
-		TeleportFromX = allPlanets[3][0] * SizeMult + SunX;
-		TeleportFromY = allPlanets[3][1] * SizeMult;
-		TeleportFromZ = allPlanets[3][2] * SizeMult;
-
-		glTranslatef(allPlanets[2][0] * SizeMult + SunX, allPlanets[2][1] * SizeMult, allPlanets[2][2] * SizeMult);
-		glRotatef(rotAmt[2], 0, 1, 0);
-		glRotatef(90, 1, 0, 0);
-		glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-		//glutSolidSphere(SunSize*DistMult*allPlanets[2][3] * SizeMult, 20, 20);
-
-		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_VENUS)); //MM - temp texture
-		gluSphere(quad, SunSize*DistMult*allPlanets[2][3] * SizeMult, 20, 20); //mm
-
+			glTranslatef(allPlanets[2][0] * SizeMult + SunX, allPlanets[2][1] * SizeMult, allPlanets[2][2] * SizeMult);
+			glRotatef(rotAmt[2], 0, 1, 0);
+			glRotatef(90, 1, 0, 0);
+			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_VENUS)); //MM - temp texture
+			gluSphere(quad, SunSize*DistMult*allPlanets[2][3] * SizeMult, 20, 20); //mm
 		glPopMatrix();
 
 		//Earth
 		glPushMatrix();
-		//glColor3f(0.1, 0.1, 1);
-		//glRotatef(orbAmt[2],0,1,0);
-		glTranslatef(allPlanets[3][0] * SizeMult + SunX, allPlanets[3][1] * SizeMult, allPlanets[3][2] * SizeMult);
-		//glutSolidSphere(SunSize*DistMult*allPlanets[3][3] * SizeMult, 20, 20);
-		glRotatef(rotAmt[3], 0, 1, 0);
-		glRotatef(90, 1, 0, 0);
-		glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_EARTH)); //MM - temp texture
-		gluSphere(quad, SunSize*DistMult*allPlanets[3][3] * SizeMult, 20, 20); //mm
+			//attach the teleport to earth for the return
+			TeleportFromX = allPlanets[3][0] * SizeMult + SunX;
+			TeleportFromY = allPlanets[3][1] * SizeMult;
+			TeleportFromZ = allPlanets[3][2] * SizeMult;
 
-																			   //moon
-																			   //glColor3f(0.9, 0.9, 0.9);
-																			   //glRotatef(orbAmt[9], 0, 1, 0);
-																			   //glTranslatef(5, 0, 0);
-																			   //glutSolidSphere(SunSize*DistMult*planetSize[9], 20, 20);
+			glTranslatef(allPlanets[3][0] * SizeMult + SunX, allPlanets[3][1] * SizeMult, allPlanets[3][2] * SizeMult);
+			glRotatef(rotAmt[3], 0, 1, 0);
+			glRotatef(90, 1, 0, 0);
+			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_EARTH)); //MM - temp texture
+			gluSphere(quad, SunSize*DistMult*allPlanets[3][3] * SizeMult, 20, 20); //mm
 		glPopMatrix();
 	}
 	if (gVar.LevelNum > 3)
@@ -5826,57 +5806,40 @@ void DisplayPlanets()
 
 		//Mars
 		glPushMatrix();
-		//glColor3f(1, 0, 0);
-		//glRotatef(orbAmt[3],0,1,0);
-		glTranslatef(allPlanets[4][0] * SizeMult + SunX, allPlanets[4][1] * SizeMult, allPlanets[4][2] * SizeMult);
-		//glutSolidSphere(SunSize*DistMult*allPlanets[4][3] * SizeMult, 20, 20);
-		glRotatef(rotAmt[4], 0, 1, 0);
-		glRotatef(90, 1, 0, 0);
-		glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_MARS)); //MM - temp texture
-		gluSphere(quad, SunSize*DistMult*allPlanets[4][3] * SizeMult, 20, 20);
-
+			glTranslatef(allPlanets[4][0] * SizeMult + SunX, allPlanets[4][1] * SizeMult, allPlanets[4][2] * SizeMult);
+			glRotatef(rotAmt[4], 0, 1, 0);
+			glRotatef(90, 1, 0, 0);
+			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_MARS)); //MM - temp texture
+			gluSphere(quad, SunSize*DistMult*allPlanets[4][3] * SizeMult, 20, 20);
 		glPopMatrix();
 
 		//Jupiter
 		glPushMatrix();
-		//glColor3f(1, .6, .3);
-		//glRotatef(orbAmt[4],0,1,0);
-		glTranslatef(allPlanets[5][0] * SizeMult + SunX, allPlanets[5][1] * SizeMult, allPlanets[5][2] * SizeMult);
-		//glutSolidSphere(SunSize*DistMult*allPlanets[5][3] * SizeMult, 20, 20);
-
-		glRotatef(rotAmt[5], 0, 1, 0);
-		glRotatef(90, 1, 0, 0);
-		glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_JUPITER)); //MM - temp texture
-		gluSphere(quad, SunSize*DistMult*allPlanets[5][3] * SizeMult, 20, 20);
-
+			glTranslatef(allPlanets[5][0] * SizeMult + SunX, allPlanets[5][1] * SizeMult, allPlanets[5][2] * SizeMult);
+			glRotatef(rotAmt[5], 0, 1, 0);
+			glRotatef(90, 1, 0, 0);
+			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_JUPITER)); //MM - temp texture
+			gluSphere(quad, SunSize*DistMult*allPlanets[5][3] * SizeMult, 20, 20);
 		glPopMatrix();
-
 
 		//Saturn
 		glPushMatrix();
-		//glColor3f(.8, 0, 1);
-		//glRotatef(orbAmt[5],0,1,0);
-
-		glTranslatef(allPlanets[6][0] * SizeMult + SunX, allPlanets[6][1] * SizeMult, allPlanets[6][2] * SizeMult);
-
-		//glutSolidSphere(SunSize*DistMult*allPlanets[6][3] * SizeMult, 20, 20);
-
-		glRotatef(rotAmt[6], 0, 1, 0);
-		glRotatef(90, 1, 0, 0);
-		glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_SATURN)); //MM - temp texture
-		gluSphere(quad, SunSize*DistMult*allPlanets[6][3] * SizeMult, 20, 20);
-
+			glTranslatef(allPlanets[6][0] * SizeMult + SunX, allPlanets[6][1] * SizeMult, allPlanets[6][2] * SizeMult);
+			glRotatef(rotAmt[6], 0, 1, 0);
+			glRotatef(90, 1, 0, 0);
+			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_SATURN)); //MM - temp texture
+			gluSphere(quad, SunSize*DistMult*allPlanets[6][3] * SizeMult, 20, 20);
 		glPopMatrix();
+		
 		//Saturns rings
 		glPushMatrix();
 			glTranslatef(allPlanets[6][0] * SizeMult + SunX, allPlanets[6][1] * SizeMult, allPlanets[6][2] * SizeMult);
 			glRotatef(20, 0, 0, 1);
 			glRotatef(rotAmt[6]*300, 0, 1, 0);
 			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-			//glColor3f(0,0,1);
 
 			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_SATURNRINGS));
 			glBegin(GL_POLYGON);
@@ -5896,47 +5859,32 @@ void DisplayPlanets()
 
 		//Uranus
 		glPushMatrix();
-		//glColor3f(.8, 1, 1);
-		//glRotatef(orbAmt[6],0,1,0);
-		glTranslatef(allPlanets[7][0] * SizeMult + SunX, allPlanets[7][1] * SizeMult, allPlanets[7][2] * SizeMult);
-		//glutSolidSphere(SunSize*DistMult*allPlanets[7][3] * SizeMult, 20, 20);
-
-		glRotatef(rotAmt[7], 0, 1, 0);
-		glRotatef(90, 1, 0, 0);
-		glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_URANUS)); //MM - temp texture
-		gluSphere(quad, SunSize*DistMult*allPlanets[7][3] * SizeMult, 20, 20);
-
+			glTranslatef(allPlanets[7][0] * SizeMult + SunX, allPlanets[7][1] * SizeMult, allPlanets[7][2] * SizeMult);
+			glRotatef(rotAmt[7], 0, 1, 0);
+			glRotatef(90, 1, 0, 0);
+			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_URANUS)); //MM - temp texture
+			gluSphere(quad, SunSize*DistMult*allPlanets[7][3] * SizeMult, 20, 20);
 		glPopMatrix();
 
 		//Neptune
 		glPushMatrix();
-		//glColor3f(0, 0, 1);
-		//glRotatef(orbAmt[7],0,1,0);
-		glTranslatef(allPlanets[8][0] * SizeMult + SunX, allPlanets[8][1] * SizeMult, allPlanets[8][2] * SizeMult);
-		//glutSolidSphere(SunSize*DistMult*allPlanets[8][3] * SizeMult, 20, 20);
-
-		glRotatef(rotAmt[8], 0, 1, 0);
-		glRotatef(90, 1, 0, 0);
-		glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_NEPTUNE)); //MM - temp texture
-		gluSphere(quad, SunSize*DistMult*allPlanets[8][3] * SizeMult, 20, 20);
-
+			glTranslatef(allPlanets[8][0] * SizeMult + SunX, allPlanets[8][1] * SizeMult, allPlanets[8][2] * SizeMult);
+			glRotatef(rotAmt[8], 0, 1, 0);
+			glRotatef(90, 1, 0, 0);
+			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_NEPTUNE)); //MM - temp texture
+			gluSphere(quad, SunSize*DistMult*allPlanets[8][3] * SizeMult, 20, 20);
 		glPopMatrix();
 
 		//Pluto
 		glPushMatrix();
-		//glColor3f(1, .7, 0);
-		//glRotatef(orbAmt[8],0,1,0);
-		glTranslatef(allPlanets[9][0] * SizeMult + SunX, allPlanets[9][1] * SizeMult, allPlanets[9][2] * SizeMult);
-		//glutSolidSphere(SunSize*DistMult*allPlanets[9][3] * SizeMult, 20, 20);
-
-		glRotatef(rotAmt[9], 0, 1, 0);
-		glRotatef(90, 1, 0, 0);
-		glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
-		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_PLUTO)); //MM - temp texture
-		gluSphere(quad, SunSize*DistMult*allPlanets[9][3] * SizeMult, 20, 20);
-
+			glTranslatef(allPlanets[9][0] * SizeMult + SunX, allPlanets[9][1] * SizeMult, allPlanets[9][2] * SizeMult);
+			glRotatef(rotAmt[9], 0, 1, 0);
+			glRotatef(90, 1, 0, 0);
+			glMaterialfv(GL_FRONT, GL_EMISSION, planet_emission);
+			glBindTexture(GL_TEXTURE_2D, tp.GetTexture(PLANETS_PLUTO)); //MM - temp texture
+			gluSphere(quad, SunSize*DistMult*allPlanets[9][3] * SizeMult, 20, 20);
 		glPopMatrix();
 	}
 
@@ -5947,9 +5895,7 @@ void OrbitPlanets()
 {
 	GLdouble x, z;
 
-	//rotAmt[0] += RotationSpeed[0] * 0.01;
 	rotAmt[0] += RotationSpeed[0] * (RotSpeed * 10);
-	//Planets orbiting sun
 	for (int i = 0; i < 9; i++)
 	{
 		x = (allPlanets[i + 1][2] * sin(OrbitSpeed[i] * RotSpeed)) + (allPlanets[i + 1][0] * cos(OrbitSpeed[i] * RotSpeed));
@@ -5958,16 +5904,12 @@ void OrbitPlanets()
 		allPlanets[i + 1][0] = x;
 		allPlanets[i + 1][2] = z;
 
-		//rotAmt[i+1] += RotationSpeed[i+1] * 0.01; 
 		rotAmt[i + 1] += RotationSpeed[i + 1] * (RotSpeed * 10);
 	}
 }
 
 void CheckLocationForTeleport()
 {
-	//x:33467
-	//y : 10450
-	//z : 39508
 	if (cam.GetLR() > TeleportToX - 500 && cam.GetLR() < TeleportToX + 500 && cam.GetUD() > TeleportToY - 500 && cam.GetUD() < TeleportToY + 500 && cam.GetFB() > TeleportToZ - 500 && cam.GetFB() < TeleportToZ + 500)
 	{
 		TeleportToPlanets();
@@ -5997,17 +5939,8 @@ void TeleportToPlanets()
 	glClearColor(0, 0, 0, 1.0);
 	cam.Position(SunX, allPlanets[0][1], cam.GetFB(), 0);
 
-	//KM 13/9/2016 Sound bite 
-	//CEasySound *es;
-	//CSound* firstSound;
 
 	ambientspace->Play();
-	//ambientspace = es->GetSound(es->Load("sounds/ambient_space.wav"));
-	//es = CEasySound::Instance();
-
-	//es = CEasySound::Instance();
-	//ambientspace = es->GetSound(es->Load("sounds/ambient_space.wav"));
-	//firstSound = es->GetSound(es->Load("sounds/greeting.wav"));
 	firstSound->Play();
 }
 void TeleportToBushCourt()
@@ -6016,6 +5949,7 @@ void TeleportToBushCourt()
 	moveSpeed = 3;
 	glClearColor(97.0 / 255.0, 140.0 / 255.0, 185.0 / 255.0, 1.0);
 	cam.Position(36110, 11918, 26197, 270);  
+	ambientspace->Stop();
 }
 //------------------END PLANETS FUNCTIONS---------------------
 //------------GOAL-------------
@@ -6042,33 +5976,33 @@ void DrawGoal()
 		glTexCoord2f(0.0, 0.0);
 		glVertex3f(0,0,0);
 		glTexCoord2f(0.0, 1.0);
-		glVertex3f(0,-1000,0);
+		glVertex3f(0,-GoalSize,0);
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(1000, -1000, 0);
+		glVertex3f(GoalSize, -GoalSize, 0);
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(1000, 0, 0);
+		glVertex3f(GoalSize, 0, 0);
 		glEnd();
 		//back
 		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(GoalImgs[GoalNum]));
 		glBegin(GL_POLYGON);
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(0, 0, -1000);
+		glVertex3f(0, 0, -GoalSize);
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(0, -1000, -1000);
+		glVertex3f(0, -GoalSize, -GoalSize);
 		glTexCoord2f(0.0, 1.0);
-		glVertex3f(1000, -1000, -1000);
+		glVertex3f(GoalSize, -GoalSize, -GoalSize);
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(1000, 0, -1000);
+		glVertex3f(GoalSize, 0, -GoalSize);
 		glEnd();
 		//left
 		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(GoalImgs[GoalNum]));
 		glBegin(GL_POLYGON);
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(0, 0, -1000);
+		glVertex3f(0, 0, -GoalSize);
 		glTexCoord2f(0.0, 1.0);
-		glVertex3f(0, -1000, -1000);
+		glVertex3f(0, -GoalSize, -GoalSize);
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(0, -1000, 0);
+		glVertex3f(0, -GoalSize, 0);
 		glTexCoord2f(1.0, 0.0);
 		glVertex3f(0, 0, 0);
 		glEnd();
@@ -6076,13 +6010,13 @@ void DrawGoal()
 		glBindTexture(GL_TEXTURE_2D, tp.GetTexture(GoalImgs[GoalNum]));
 		glBegin(GL_POLYGON);
 		glTexCoord2f(1.0, 0.0);
-		glVertex3f(1000, 0, -1000);
+		glVertex3f(GoalSize, 0, -GoalSize);
 		glTexCoord2f(1.0, 1.0);
-		glVertex3f(1000, -1000, -1000);
+		glVertex3f(GoalSize, -GoalSize, -GoalSize);
 		glTexCoord2f(0.0, 1.0);
-		glVertex3f(1000, -1000, 0);
+		glVertex3f(GoalSize, -GoalSize, 0);
 		glTexCoord2f(0.0, 0.0);
-		glVertex3f(1000, 0, 0);
+		glVertex3f(GoalSize, 0, 0);
 		glEnd();
 	glPopMatrix();
 }
@@ -6114,10 +6048,6 @@ void addParticle(float m, float r, float vx, float vy, float vz)
 	current_balls++;
 	uih.setBallCount(current_balls);
 	uih.setTotalBallCount(current_balls);
-
-	//es = CEasySound::Instance();
-	//firstSound = es->GetSound(es->Load("sounds/greeting.wav"));
-	//firstSound->Play();
 }
 
 void DrawBalls()
@@ -6128,7 +6058,6 @@ void DrawBalls()
 		struct Ball *p = &Balls[i];
 		if (p->visible)
 		{
-
 			visibleBalls++;
 			glPushMatrix();
 
@@ -6152,14 +6081,12 @@ void UpdateBalls()
 			struct Ball *p;
 			p = &Balls[i];
 
-		
-
-			if (p->visible)
+			if (p->visible)//Has not been destroyed
 			{
 				for (int j = 0; j < gVar.LevelNum + 1; j++)
 				{
 					float d;
-					if (j == 0)
+					if (j == 0)//Determines distance of the ball from each planets and the Sun. Sun has different equation from other planets
 					{
 						d = sqrt(((allPlanets[j][0]) - p->x)*((allPlanets[j][0]) - p->x) + (allPlanets[j][1] * SizeMult - p->y)*(allPlanets[j][1] * SizeMult - p->y) + (allPlanets[j][2] * SizeMult - p->z)*(allPlanets[j][2] * SizeMult - p->z));
 					}
@@ -6168,10 +6095,7 @@ void UpdateBalls()
 						d = sqrt(((allPlanets[j][0] * SizeMult + SunX) - p->x)*((allPlanets[j][0] * SizeMult + SunX) - p->x) + (allPlanets[j][1] * SizeMult - p->y)*(allPlanets[j][1] * SizeMult - p->y) + (allPlanets[j][2] * SizeMult - p->z)*(allPlanets[j][2] * SizeMult - p->z));
 					}
 
-					float ds = (SunSize*DistMult*allPlanets[j][3] * SizeMult) + p->r;
-					//cout << j << "\nd: " << d << "\nds: " << ds << "\n" << endl;
-
-					if (d > (allPlanets[j][3] * SizeMult) + p->r)
+					if (d > (allPlanets[j][3] * SizeMult) + p->r)//If not within the bounds of the planets, update the location of the ball based on the distance from the planets
 					{
 						if (j == 0)
 							p->vx += p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0]) - p->x) / d; //f = ma => a = f/m
@@ -6185,27 +6109,24 @@ void UpdateBalls()
 						p->y += p->vy;
 						p->z += p->vz;
 					}
-					else
+					else//Removes ball from play
 					{
 						p->visible = false;
 						uih.hitPlanet();
-						cout << "coloide" << endl;
-						/*p->vx -= p->speed * allPlanets[j][4] / (d*d) * ((allPlanets[j][0] * SizeMult + SunX) - p->x) / d; //f = ma => a = f/m
-						p->vy -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][1] * SizeMult - p->y) / d;
-						p->vz -= p->speed * allPlanets[j][4] / (d*d) * (allPlanets[j][2] * SizeMult - p->z) / d;*/
-					}
-
-					
+					}					
 				}
-				if (p->x > GoalLoc[GoalLocI][0] - 500 && p->x < GoalLoc[GoalLocI][0] + 500 && p->y + 450 > GoalLoc[GoalLocI][1] - 500 && p->y + 450 < GoalLoc[GoalLocI][1] + 500 && p->z >  GoalLoc[GoalLocI][2] - 500 && p->z < GoalLoc[GoalLocI][2] + 500)
+				//Checking if ball has hit goal. If it is hit, reset space and play a sound.
+				if (p->x > GoalLoc[GoalLocI][0] - GoalSize/2 && p->x < GoalLoc[GoalLocI][0] + GoalSize/2 && p->y + GoalSize/2 > GoalLoc[GoalLocI][1] - GoalSize/2 && p->y + GoalSize/2 < GoalLoc[GoalLocI][1] + GoalSize/2 && p->z >  GoalLoc[GoalLocI][2] - GoalSize/2 && p->z < GoalLoc[GoalLocI][2] + GoalSize/2)
 				{
-					cout << "Goal Hit" << endl;
+					srand(time(0));
+					GoalNumAud = rand() % MaxGoalsAud - 1;
+					goal[GoalNumAud]->Play();
 					p->visible = false;
+					TeleportToPlanets();
 				}
 			}
 		}
 	}
-	//glutPostRedisplay();
 }
 
 
@@ -6846,7 +6767,6 @@ void OpenSlidingDoor()
 			DoorZVar -= DoorSpeed;
 		}
 	}
-
 }
 //***********************END CORRIDOR FUNCTIONS***********************
 // --------------------------------------------------------------------------------------
