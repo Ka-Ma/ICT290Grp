@@ -7,6 +7,8 @@
 	@date 19/10/2016
 	@version 03 - MT::update with dynamic tracking of ui elements
 	@date 25/10/2016
+	@version 04 - KJM added instruction screen
+	@date 2/11/2016
 	*/
 
 #ifndef UIHUD_H
@@ -33,11 +35,15 @@ public:
 
 	/**
 	@brief display the elements of the HUD
-	@param w - width of the screen
-	@param h - height of the screen
 	@param tempImage - pointer to UI image passed in
 	*/
 	void displayUIHUD(const GLuint & tempImage);
+
+	/**
+	@brief display the instruction Screent
+	@param tempImage - pointer to UI image passed in
+	*/
+	void displayInstruct(const GLuint & tempImage);
 
 	/**
 	@brief Function operation of mouse in this setting

@@ -26,6 +26,8 @@ typedef struct globalVariable {
 	bool uiMenu;
 	bool uiOptions;
 	bool uiLeaderBoard;
+	bool uiScore;
+	bool uiInstruct;
 
 	//game paused
 	bool paused;
@@ -36,11 +38,8 @@ typedef struct globalVariable {
 	//number of balls
 	int ballCount;
 
-
-	//posible futures
-	//leaderboard vector
-	//dist from goal variable
-	//balls in play stats vector (dist from goal at release, number ball it was at release)
+	//end score
+	int endScore;
 
 }globalVariable;
 

@@ -23,10 +23,16 @@ struct globalVariable gVar = {
 	false,
 	//uiLeaderboard
 	false,
+	//uiScore
+	false,
+	//uiInstruct
+	false,
 	//paused
 	false,
 	//LevelNum
 	3,
 	//Number of balls
-	15
+	15,
+	//end score
+	0
 };

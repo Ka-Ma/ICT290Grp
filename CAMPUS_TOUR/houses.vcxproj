@@ -155,6 +155,7 @@
     <ClCompile Include="uiMenu.cpp" />
     <ClCompile Include="uiMouseHandler.cpp" />
     <ClCompile Include="uiOptions.cpp" />
+    <ClCompile Include="uiScore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.H" />
@@ -176,6 +177,7 @@
     <ClInclude Include="uiMenu.h" />
     <ClInclude Include="uiMouseHandler.h" />
     <ClInclude Include="uiOptions.h" />
+    <ClInclude Include="uiScore.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

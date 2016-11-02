@@ -164,6 +164,50 @@ void uiHUD::displayUIHUD(const GLuint & tempImage)
 	
 }
 
+void uiHUD::displayInstruct(const GLuint & tempImage)
+{
+	//finding centre of screen
+	int wc = width / 2;
+	int hc = height / 2;
+	int d = 512/2; // half of width and height of screen
+
+	glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(0, width, 0, height);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	//gl depth test disabled so hud draws correctly
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_LIGHTING);
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_TEXTURE_2D); //need for tempImage
+
+	// display menu image at screen centre
+	glBindTexture(GL_TEXTURE_2D, tempImage);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0, 0.0);
+	glVertex2f(wc - d, hc + d);
+	glTexCoord2f(0.0, 1.0);
+	glVertex2f(wc - d, hc - d);
+	glTexCoord2f(1.0, 1.0);
+	glVertex2f(wc + d, hc - d);
+	glTexCoord2f(1.0, 0.0);
+	glVertex2f(wc + d, hc + d);
+	glEnd();
+
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+
+	// Reset Perspective Projection
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+}
+
 void uiHUD::mouseUIHUD(int button, int state, int x, int y)
 {
 	//KM 15/10/2016 click noise - sourced from http://soundbible.com/1705-Click2.html

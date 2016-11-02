@@ -1,9 +1,15 @@
 #include "uiMouseHandler.h"
 
-bool uiMouseHandler(int button, int state, int x, int y, uiHUD & uih, uiMenu & uim, uiOptions & uio, uiLeaderBoard & uil)
+bool uiMouseHandler(int button, int state, int x, int y, uiHUD & uih, uiMenu & uim, uiOptions & uio, uiLeaderBoard & uil, uiScore & uis)
 {
     
-	if(gVar.uiMenu) 
+	if (gVar.uiScore)
+	{
+		std::cout << "Score has control of mouse" << std::endl;
+		uis.mouseUIScore(button, state, x, y);
+		return true;
+	}
+	else if(gVar.uiMenu) 
 	{
 		std::cout << "Menu has control of mouse" << std::endl;
 		uim.mouseUIMenu(button, state, x, y);

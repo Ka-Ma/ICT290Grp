@@ -1,5 +1,5 @@
 #include <math.h>
-
+#include <ctime>
 #include <time.h>
 #include "SDL.h"
 #include "OBJLoader.h"
@@ -390,6 +390,7 @@ uiHUD uih(1000,1000);
 uiMenu uim(1000, 1000);
 uiOptions uio(1000, 1000);
 uiLeaderBoard uil(1000, 1000);
+uiScore uis(1000, 1000);
 
 // mm
 GLUquadric *quad;
@@ -755,6 +756,7 @@ void Display()
 			cam.DisplayNoExit(width, height,tp.GetTexture(NO_EXIT));
 		}
         */
+				
 
 		
 
@@ -872,11 +874,9 @@ void Display()
 	glVertex3f(34800, 10750, 26360);
 	glEnd();*/
 
-	//FIX STARTS
 	distToGoal = sqrt(((GoalLoc[GoalLocI][0] - cam.GetLR()) * (GoalLoc[GoalLocI][0] - cam.GetLR())) + ((GoalLoc[GoalLocI][1] - cam.GetFB()) * (GoalLoc[GoalLocI][1] - cam.GetFB())) + ((GoalLoc[GoalLocI][2] - cam.GetUD()) * (GoalLoc[GoalLocI][2] - cam.GetUD())));
  	uih.setDist(distToGoal);
-	//FIX ENDS
-
+	
 	//after everything else so it draws on top - KJM 13/10/2016
 	if (gVar.uiHUD) {
 		uih.displayUIHUD(tp.GetTexture(251));
@@ -893,8 +893,14 @@ void Display()
 		gVar.paused = true;
 		uil.displayUILeaderBoard(tp.GetTexture(254));
 	}
+	if (gVar.uiInstruct) {
+		uih.displayInstruct(tp.GetTexture(263));
+	}
+	if (gVar.uiScore) {
+		uis.displayUIScore(tp.GetTexture(264), gVar.endScore);
+	}
 
-	if (!(gVar.uiMenu) && !(gVar.uiOptions) && !(gVar.uiLeaderBoard))
+	if (!(gVar.uiMenu) && !(gVar.uiOptions) && !(gVar.uiLeaderBoard) &&!(gVar.uiInstruct))
 		gVar.paused = false;
 
 	// clear buffers
@@ -994,6 +1000,7 @@ void reshape(int w, int h)
 	uim.updateUIMenuMembers(w, h);
 	uio.updateUIOptionsMembers(w, h);
 	uil.updateUILeaderBoardMembers(w, h);
+	uis.updateUIScoreMembers(w, h);
 
 	// Prevent a divide by zero, when window is too short
 	// (you cant make a window of zero width).
@@ -1314,6 +1321,18 @@ void keys(unsigned char key, int x, int y)
 		cout << "Player x: " << cam.GetLR() << " y: " << cam.GetUD() << " z: " << cam.GetFB() << endl;
 		cout << "Goal x: " << GoalLoc[GoalLocI][0] << " y: " << GoalLoc[GoalLocI][1] << " z: " << GoalLoc[GoalLocI][2] << endl;
 		break;
+	case 'I':
+	case 'i':
+		if (gVar.uiHUD) {
+			if (gVar.uiInstruct) {
+				gVar.uiInstruct = false;
+				gVar.paused = false;
+			}
+			else {
+				gVar.uiInstruct = true;
+				gVar.paused = true;
+			}
+		}
 	}
 }
 
@@ -1372,7 +1391,7 @@ void releaseKeys(unsigned char key, int x, int y)
 //--------------------------------------------------------------------------------------
 void Mouse(int button, int state, int x, int y)
 {
-	if (!uiMouseHandler(button, state, x, y, uih, uim, uio, uil) || gVar.DisplayExit) //filter for UI - KJM 18/10/2016 except for exit
+	if (!uiMouseHandler(button, state, x, y, uih, uim, uio, uil, uis) || gVar.DisplayExit) //filter for UI - KJM 18/10/2016 except for exit
 	{
 		// exit tour if clicked on exit splash screen
 		if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
@@ -2487,6 +2506,10 @@ void CreateTextures()
 	tp.CreateTexture(253, image, 600, 600);
 	image = tp.LoadTexture("data/UIleaderboard.raw", 400, 400);
 	tp.CreateTexture(254, image, 400, 400);
+	image = tp.LoadTexture("data/instructions.raw", 512, 512);
+	tp.CreateTexture(263, image, 512, 512);
+	image = tp.LoadTexture("data/UIscore.raw", 600, 600);
+	tp.CreateTexture(264, image, 600, 600);
 
 	// Planet Texture loads - MM
 	image = tp.LoadTexture("data/planets_sun.raw", 500, 250);
@@ -5936,6 +5959,8 @@ void TeleportToPlanets()
 	current_balls = 0;
 	uih.setBallCount(current_balls);
 	gVar.uiHUD = InSpace = true;
+	gVar.uiInstruct = true;
+	gVar.paused = true;
 	glClearColor(0, 0, 0, 1.0);
 	cam.Position(SunX, allPlanets[0][1], cam.GetFB(), 0);
 
@@ -6122,6 +6147,31 @@ void UpdateBalls()
 					GoalNumAud = rand() % MaxGoalsAud - 1;
 					goal[GoalNumAud]->Play();
 					p->visible = false;
+					
+					//calculate score
+					gVar.endScore = uih.genScore();
+					cout << "score is calculated to " << gVar.endScore << endl;
+					//display uiScore to enter intials
+					gVar.uiScore = true;
+					string endInitials = uis.getInitials();
+					cout << "initials are " << endInitials << endl;
+					
+					//stringify date
+					time_t now = time(0);
+					tm *ltm = localtime(&now);
+					string thisday = to_string(ltm->tm_mday);
+					string thismonth = to_string(ltm->tm_mon);
+					string thisyear = to_string(ltm->tm_year);
+					string thisdate;
+					thisdate.append(thisday);
+					thisdate.append("/");
+					thisdate.append(thismonth);
+					thisdate.append("/");
+					thisdate.append(thisyear);
+					//send strings of initials and score and date to uiLeaderBoard
+					uil.addLeaderBoard(endInitials, thisdate, gVar.endScore);
+
+
 					TeleportToPlanets();
 				}
 			}
@@ -6745,11 +6795,15 @@ void DrawSlidingDoor()
 	glPopMatrix();
 }
 
+int countSlides = 1; //to get it to only play once
+
 void OpenSlidingDoor()
 {
 	//if door starting to open or starting to close play sound
-	if (DoorZVar == MaxDoorZVar-DoorSpeed || DoorZVar == DoorSpeed) { 
-		doorSlide->Play();
+	if (DoorZVar == MaxDoorZVar-DoorSpeed || DoorZVar == DoorSpeed) {
+		countSlides++;
+		if(countSlides % 2 == 0)
+			doorSlide->Play();
 	}
 	
 
