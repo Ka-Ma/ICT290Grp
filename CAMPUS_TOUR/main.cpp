@@ -6148,30 +6148,36 @@ void UpdateBalls()
 					goal[GoalNumAud]->Play();
 					p->visible = false;
 					
+					//pause game while all things finalising
+					gVar.paused = true;
+
+					//need to wait somehow while initials are put in
+					
 					//calculate score
 					gVar.endScore = uih.genScore();
 					cout << "score is calculated to " << gVar.endScore << endl;
 					//display uiScore to enter intials
 					gVar.uiScore = true;
 					string endInitials = uis.getInitials();
+										
 					cout << "initials are " << endInitials << endl;
-					
+
 					//stringify date
 					time_t now = time(0);
 					tm *ltm = localtime(&now);
 					string thisday = to_string(ltm->tm_mday);
-					string thismonth = to_string(ltm->tm_mon);
-					string thisyear = to_string(ltm->tm_year);
+					string thismonth = to_string(ltm->tm_mon + 1);
+					string thisyear = to_string(ltm->tm_year + 1900);
 					string thisdate;
 					thisdate.append(thisday);
 					thisdate.append("/");
 					thisdate.append(thismonth);
 					thisdate.append("/");
 					thisdate.append(thisyear);
+
 					//send strings of initials and score and date to uiLeaderBoard
 					uil.addLeaderBoard(endInitials, thisdate, gVar.endScore);
-
-
+					
 					TeleportToPlanets();
 				}
 			}

@@ -62,6 +62,9 @@ private:
 	int arr[3]; //letter of alphabet for initials
 	string initials;
 
+	/**
+	@brief returns string of converstion from int to alpha
+	*/
 	string alphaFromInt(int letter);
 };
 

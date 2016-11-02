@@ -159,6 +159,7 @@ void uiScore::mouseUIScore(int button, int state, int x, int y)
 			clickSound->Play();
 			setInitials(arr);
 			gVar.uiScore = false;
+			gVar.paused = false;
 		}
 	}
 }
