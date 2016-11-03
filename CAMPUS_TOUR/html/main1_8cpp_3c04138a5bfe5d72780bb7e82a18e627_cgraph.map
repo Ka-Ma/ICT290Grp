@@ -1,0 +1,49 @@
+<area shape="rect" href="$main_8cpp.html#5d3fb9b91b5c167b70a1a0557e67f271" title="Display" alt="" coords="128,1297,192,1324">
+<area shape="rect" href="$main_8cpp.html#5828243a546dac120bbeb4679ac4d828" title="keys" alt="" coords="136,284,184,311">
+<area shape="rect" href="$main_8cpp.html#9f40c74c3dfe5c0f35d51e5160eeeab6" title="Mouse" alt="" coords="131,1728,189,1755">
+<area shape="rect" href="$main_8cpp.html#095e2fbdd5922031684bbcdb434dd4d1" title="movementKeys" alt="" coords="105,1779,215,1805">
+<area shape="rect" href="$main_8cpp.html#8264fa9a7444ab4805520c3d018b6623" title="myinit" alt="" coords="132,1829,188,1856">
+<area shape="rect" href="$main_8cpp.html#cd0be7034feaba24b1c4956202907666" title="releaseKey" alt="" coords="117,1880,203,1907">
+<area shape="rect" href="$main_8cpp.html#fe803587002217240c9f183634c9aba9" title="releaseKeys" alt="" coords="113,107,207,133">
+<area shape="rect" href="$main_8cpp.html#cc1ffe65e6869931318610cae7210078" title="reshape" alt="" coords="127,1931,193,1957">
+<area shape="rect" href="$class_camera.html#5757577b0e11b8722bf251ee086eef1d" title="Camera::CheckCamera" alt="" coords="307,917,461,944">
+<area shape="rect" href="$main_8cpp.html#dbb27b78ad978f939e870f72c76016a7" title="CheckLocationForTeleport" alt="" coords="299,664,469,691">
+<area shape="rect" href="$class_camera.html#2c82b9713e7cc1fb77130aad72728478" title="Camera::GetFB" alt="" coords="797,563,909,589">
+<area shape="rect" href="$class_camera.html#5d71756678367cc9ef6d3186dff7e821" title="Camera::GetLR" alt="" coords="595,664,707,691">
+<area shape="rect" href="$class_camera.html#caa842acd09e3a18c409ddc0c89cf808" title="Camera::GetUD" alt="" coords="595,512,707,539">
+<area shape="rect" href="$main_8cpp.html#4da4989065b4b5e6437f39ba5fa3bb2b" title="TeleportToPlanets" alt="" coords="588,955,713,981">
+<area shape="rect" href="$class_c_sound.html#17f9bef660b17787ac312ce02446ac96" title="CSound::Play" alt="" coords="803,955,904,981">
+<area shape="rect" href="$classui_h_u_d.html#9fa6c1cad8e3d6f9ce79c4c22f1622dc" title="display the instruction Screent" alt="" coords="309,1931,459,1957">
+<area shape="rect" href="$class_camera.html#dc12edf020e48254432214200f8e63c3" title="Camera::DisplayMap" alt="" coords="313,715,455,741">
+<area shape="rect" href="$main_8cpp.html#92fbc6f782b9e818ed9a7554e57f9fc0" title="DisplayPlanets" alt="" coords="331,2083,437,2109">
+<area shape="rect" href="$class_textured_polygons.html#f6694e3cbea65de23f5dcfab77a48b99" title="TexturedPolygons::GetTexture" alt="" coords="552,1551,749,1577">
+<area shape="rect" href="$classui_h_u_d.html#d4b693804c9b8688a492e343b2119291" title="display the elements of the HUD" alt="" coords="311,867,457,893">
+<area shape="rect" href="$classui_leader_board.html#dcaef089fdeefb9c046ae34d56e2975f" title="display the elements of the LeaderBoard" alt="" coords="265,968,503,995">
+<area shape="rect" href="$classui_menu.html#f81e7b34f7d4707b14ac16401367fbf9" title="Displays visual elements of this UI." alt="" coords="307,1069,461,1096">
+<area shape="rect" href="$classui_options.html#7fa69a101aa96894dcc7bd8a37c35c93" title="Displays visual elements of this UI." alt="" coords="293,1120,475,1147">
+<area shape="rect" href="$classui_score.html#4d6bf1c3f6bfb7df2cfe017c7669a685" title="Displays visual elements of this UI." alt="" coords="304,1221,464,1248">
+<area shape="rect" href="$class_camera.html#b8084e679b9cf9bf9a6e333ca8a0caee" title="Camera::DisplayWelcomeScreen" alt="" coords="277,816,491,843">
+<area shape="rect" href="$main_8cpp.html#da52bdbf899ab2ba3572a72e95ac0857" title="DrawBackdrop" alt="" coords="332,1627,436,1653">
+<area shape="rect" href="$main_8cpp.html#b3706f15e95bf1782365fa2fad42e7bc" title="DrawBalls" alt="" coords="344,1373,424,1400">
+<area shape="rect" href="$main_8cpp.html#6acfdd140bb41a91848e875ba80e8b51" title="DrawBanner" alt="" coords="339,1525,429,1552">
+<area shape="rect" href="$main_8cpp.html#2a5307c5f110a0274df5e5ffe3024704" title="DrawCorridor" alt="" coords="336,1576,432,1603">
+<area shape="rect" href="$main_8cpp.html#3fe809c6fc223670b7f4f2e5bb44dd13" title="DrawCorridorSteps" alt="" coords="320,1981,448,2008">
+<area shape="rect" href="$main_8cpp.html#5368ba980e78f21cb7eb3c06b43fd356" title="DrawGoal" alt="" coords="345,1424,423,1451">
+<area shape="rect" href="$main_8cpp.html#b063a5b0735aa8fae726cb88411a9124" title="DrawSlidingDoor" alt="" coords="327,1475,441,1501">
+<area shape="rect" href="$class_c_sound_time.html#51ef710780c9680f685b39421d605377" title="CSoundTime::GetSDLTime" alt="" coords="296,1677,472,1704">
+<area shape="rect" href="$classui_h_u_d.html#2399e22f0252ecd5ee12f55986c49e12" title="getter to get the zeroCLOCK" alt="" coords="313,1728,455,1755">
+<area shape="rect" href="$main_8cpp.html#abc0dc23c6edac5eb54affde4b2e129a" title="IncrementFrameCount" alt="" coords="309,1779,459,1805">
+<area shape="rect" href="$main_8cpp.html#ae772e42b9e895cd17956f663e096440" title="OpenSlidingDoor" alt="" coords="325,613,443,640">
+<area shape="rect" href="$main_8cpp.html#ef2317f93c6f98ba2968471eb706a013" title="OrbitPlanets" alt="" coords="337,1829,431,1856">
+<area shape="rect" href="$classui_h_u_d.html#c54b9be34c2fa431690af103001789dc" title="setter to set the distance" alt="" coords="331,1880,437,1907">
+<area shape="rect" href="$class_camera.html#86a5a6f374125bb58c6a97ba2d921a64" title="Camera::SetMoveSpeed" alt="" coords="304,461,464,488">
+<area shape="rect" href="$class_camera.html#f1b56a7aee4d2b0c38054e05c0553e51" title="Camera::SetRotateSpeed" alt="" coords="300,411,468,437">
+<area shape="rect" href="$main_8cpp.html#d474d1c93896c15f9c9eab34e508024e" title="UpdateBalls" alt="" coords="339,1272,429,1299">
+<area shape="rect" href="$main_8cpp.html#7c1c66ab597e3f223d86e07a98ba9a8c" title="addParticle" alt="" coords="341,309,427,336">
+<area shape="rect" href="$class_camera.html#19d7bf6f171a46abe5b7743c0429ca75" title="Camera::DirectionFB" alt="" coords="313,5,455,32">
+<area shape="rect" href="$class_camera.html#7271df5741bcbe72f464729f8d80ad43" title="Camera::DirectionLookUD" alt="" coords="299,56,469,83">
+<area shape="rect" href="$class_camera.html#11f6493139834cc9d31a1c28e5effa1a" title="Camera::DirectionLR" alt="" coords="313,107,455,133">
+<area shape="rect" href="$class_camera.html#9b7f4a96faa388248f8350c733789688" title="Camera::DirectionRotateLR" alt="" coords="295,157,473,184">
+<area shape="rect" href="$main_8cpp.html#20d8d7e57e6f273bd1f9abf81d4553e4" title="DeleteImageFromMemory" alt="" coords="299,2133,469,2160">
+<area shape="rect" href="$classui_leader_board.html#ad6899174e911b8b82b92e3e41716d96" title="rewrite LeaderBoard.txt" alt="" coords="283,2184,485,2211">
+<area shape="rect" href="$ui_mouse_handler_8cpp.html#4a70d1236a316c9a5e80e340ec6f6c0e" title="Evaluates situation, if particular UI is displayed passes click &amp; coords to that..." alt="" coords="327,2235,441,2261">

@@ -1,0 +1,17 @@
+<area shape="rect" href="$class_camera.html#e72895a4f32cdc88146bee6a1a3ea636" title="Camera::LookUD" alt="" coords="225,5,345,32">
+<area shape="rect" href="$class_camera.html#3b3f5cedfa0d89824ea52f109bc3eba8" title="Camera::LookUDOK" alt="" coords="216,259,355,285">
+<area shape="rect" href="$class_camera.html#cc808e653e9c59f0d2450c9caca26b98" title="Camera::MoveFB" alt="" coords="225,157,345,184">
+<area shape="rect" href="$class_camera.html#8937b6b035801d1f698b40693c53d1e6" title="Camera::MoveFBOK" alt="" coords="216,309,355,336">
+<area shape="rect" href="$class_camera.html#d53c2248f2d38bc8f01ac288e8cc21d3" title="Camera::MoveLR" alt="" coords="225,208,345,235">
+<area shape="rect" href="$class_camera.html#4e500f9773f9f46a69e6a70d40d838bf" title="Camera::MoveLROK" alt="" coords="216,360,355,387">
+<area shape="rect" href="$class_camera.html#f14abc814d362ed9781db6725919f836" title="Camera::MoveUD" alt="" coords="224,107,347,133">
+<area shape="rect" href="$class_camera.html#3bb636079c02cdb8ac235c157faa4556" title="Camera::MoveUDOK" alt="" coords="215,411,356,437">
+<area shape="rect" href="$class_camera.html#ff5a71068d0d6f82c5a03efe1c9be259" title="Camera::RotateLR" alt="" coords="221,56,349,83">
+<area shape="rect" href="$class_camera.html#5c352dbad24a210bf0159e00f1dfe8b8" title="Camera::RotateLROK" alt="" coords="212,461,359,488">
+<area shape="rect" href="$class_camera.html#023cb3e9d92301d8132f338c7ef5be77" title="Camera::callGLLookAt" alt="" coords="408,107,560,133">
+<area shape="rect" href="$class_collision.html#0b97a69bc20aeecc04e5c4359e675af7" title="Collision::Collide" alt="" coords="425,157,543,184">
+<area shape="rect" href="$class_camera.html#5b5c1468bdb3b8e6e654bea66c9561b8" title="Camera::SetPlains" alt="" coords="419,208,549,235">
+<area shape="rect" href="$class_plain_linked_list.html#4d9d62421c215a3c9e2c9ef0833b84a1" title="PlainLinkedList::AddToStart" alt="" coords="609,208,791,235">
+<area shape="rect" href="$class_plain_node.html#34f55330c3e261b76b9086fec5928386" title="PlainNode::GetNext" alt="" coords="840,157,976,184">
+<area shape="rect" href="$class_plain_node.html#566db8fc78c8b4dea13373f908a53577" title="PlainNode::SetData" alt="" coords="840,208,976,235">
+<area shape="rect" href="$class_plain_node.html#fe5be77c2dfbf7447105f0ea722e77f1" title="PlainNode::SetNext" alt="" coords="840,259,976,285">

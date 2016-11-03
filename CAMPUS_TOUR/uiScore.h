@@ -33,6 +33,7 @@ public:
 	/**
 	@brief Displays visual elements of this UI
 	@param tempImage - passing in pointer for image to be used
+	@param score - passing in score to be displayed
 	*/
 	void displayUIScore(const GLuint & tempImage, int score);
 
@@ -47,6 +48,7 @@ public:
 
 	/**
 	@brief sets string of intials for this score from ints
+	@param arr an array of 3 ints representing letters of alphabet
 	*/
 	void setInitials(int arr[]);
 
@@ -64,6 +66,7 @@ private:
 
 	/**
 	@brief returns string of converstion from int to alpha
+	@param letter - an int representing a letter of the alphabet
 	*/
 	string alphaFromInt(int letter);
 };

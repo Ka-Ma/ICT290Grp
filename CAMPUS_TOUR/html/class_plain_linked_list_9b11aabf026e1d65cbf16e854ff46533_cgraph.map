@@ -1,0 +1,4 @@
+<area shape="rect" href="$class_plain_linked_list.html#836472749021aa66632a7adb79f210a2" title="PlainLinkedList::Clear" alt="" coords="268,31,415,57">
+<area shape="rect" href="$class_plain_linked_list.html#f7efedb06f304d6d886a8817a83988d7" title="PlainLinkedList::Delete" alt="" coords="464,56,619,83">
+<area shape="rect" href="$class_plain_node.html#34f55330c3e261b76b9086fec5928386" title="PlainNode::GetNext" alt="" coords="667,5,803,32">
+<area shape="rect" href="$class_plain_node.html#fe5be77c2dfbf7447105f0ea722e77f1" title="PlainNode::SetNext" alt="" coords="667,56,803,83">

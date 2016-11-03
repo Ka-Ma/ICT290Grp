@@ -1,0 +1,8 @@
+<area shape="rect" href="$class_camera.html#2c82b9713e7cc1fb77130aad72728478" title="Camera::GetFB" alt="" coords="195,5,307,32">
+<area shape="rect" href="$class_c_sound.html#17f9bef660b17787ac312ce02446ac96" title="CSound::Play" alt="" coords="200,56,301,83">
+<area shape="rect" href="$class_camera.html#259204729f7a60277c6f6215559adcc0" title="Camera::Position" alt="" coords="191,107,311,133">
+<area shape="rect" href="$classui_h_u_d.html#6185531f82dca781041b35e07f2deef4" title="function to reset clock" alt="" coords="187,157,315,184">
+<area shape="rect" href="$classui_h_u_d.html#bdc3cb8805e33a3e678dffde58990dd1" title="Setter for setting the current ball count ingame." alt="" coords="181,208,320,235">
+<area shape="rect" href="$classui_h_u_d.html#c53791030275ee238fd608cb7e74e19f" title="setter to set the clock to false" alt="" coords="180,259,321,285">
+<area shape="rect" href="$class_camera.html#023cb3e9d92301d8132f338c7ef5be77" title="Camera::callGLLookAt" alt="" coords="371,81,523,108">
+<area shape="rect" href="$class_camera.html#11d15ac81e6fbe74c1dd09e342be3e9c" title="Camera::ResetXYZ" alt="" coords="381,132,512,159">

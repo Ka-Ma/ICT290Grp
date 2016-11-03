@@ -31,8 +31,6 @@ public:
 
 	/**
 	@brief Displays visual elements of this UI
-	@param w - width of screen
-	@param h - height of screen
 	@param tempImage - passing in pointer for image to be used
 	*/
 	void displayUIMenu(const GLuint & tempImage);

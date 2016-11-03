@@ -1,0 +1,49 @@
+<area shape="rect" href="$class_camera.html#7271df5741bcbe72f464729f8d80ad43" title="Camera::DirectionLookUD" alt="" coords="149,1221,320,1248">
+<area shape="rect" href="$class_camera.html#9b7f4a96faa388248f8350c733789688" title="Camera::DirectionRotateLR" alt="" coords="145,1272,324,1299">
+<area shape="rect" href="$main_8cpp.html#5d3fb9b91b5c167b70a1a0557e67f271" title="Display" alt="" coords="203,1323,267,1349">
+<area shape="rect" href="$class_camera.html#5757577b0e11b8722bf251ee086eef1d" title="Camera::CheckCamera" alt="" coords="416,259,571,285">
+<area shape="rect" href="$main_8cpp.html#dbb27b78ad978f939e870f72c76016a7" title="CheckLocationForTeleport" alt="" coords="408,613,579,640">
+<area shape="rect" href="$class_camera.html#2c82b9713e7cc1fb77130aad72728478" title="Camera::GetFB" alt="" coords="907,765,1019,792">
+<area shape="rect" href="$class_camera.html#5d71756678367cc9ef6d3186dff7e821" title="Camera::GetLR" alt="" coords="704,664,816,691">
+<area shape="rect" href="$class_camera.html#caa842acd09e3a18c409ddc0c89cf808" title="Camera::GetUD" alt="" coords="704,563,816,589">
+<area shape="rect" href="$main_8cpp.html#4da4989065b4b5e6437f39ba5fa3bb2b" title="TeleportToPlanets" alt="" coords="697,968,823,995">
+<area shape="rect" href="$class_c_sound.html#17f9bef660b17787ac312ce02446ac96" title="CSound::Play" alt="" coords="912,993,1013,1020">
+<area shape="rect" href="$classui_h_u_d.html#9fa6c1cad8e3d6f9ce79c4c22f1622dc" title="display the instruction Screent" alt="" coords="419,867,568,893">
+<area shape="rect" href="$class_camera.html#dc12edf020e48254432214200f8e63c3" title="Camera::DisplayMap" alt="" coords="423,816,564,843">
+<area shape="rect" href="$main_8cpp.html#92fbc6f782b9e818ed9a7554e57f9fc0" title="DisplayPlanets" alt="" coords="440,1424,547,1451">
+<area shape="rect" href="$class_textured_polygons.html#f6694e3cbea65de23f5dcfab77a48b99" title="TexturedPolygons::GetTexture" alt="" coords="661,1601,859,1628">
+<area shape="rect" href="$classui_h_u_d.html#d4b693804c9b8688a492e343b2119291" title="display the elements of the HUD" alt="" coords="420,1069,567,1096">
+<area shape="rect" href="$classui_leader_board.html#dcaef089fdeefb9c046ae34d56e2975f" title="display the elements of the LeaderBoard" alt="" coords="375,1120,612,1147">
+<area shape="rect" href="$classui_menu.html#f81e7b34f7d4707b14ac16401367fbf9" title="Displays visual elements of this UI." alt="" coords="416,1171,571,1197">
+<area shape="rect" href="$classui_options.html#7fa69a101aa96894dcc7bd8a37c35c93" title="Displays visual elements of this UI." alt="" coords="403,1221,584,1248">
+<area shape="rect" href="$classui_score.html#4d6bf1c3f6bfb7df2cfe017c7669a685" title="Displays visual elements of this UI." alt="" coords="413,1272,573,1299">
+<area shape="rect" href="$class_camera.html#b8084e679b9cf9bf9a6e333ca8a0caee" title="Camera::DisplayWelcomeScreen" alt="" coords="387,1323,600,1349">
+<area shape="rect" href="$main_8cpp.html#da52bdbf899ab2ba3572a72e95ac0857" title="DrawBackdrop" alt="" coords="441,1373,545,1400">
+<area shape="rect" href="$main_8cpp.html#b3706f15e95bf1782365fa2fad42e7bc" title="DrawBalls" alt="" coords="453,1525,533,1552">
+<area shape="rect" href="$main_8cpp.html#6acfdd140bb41a91848e875ba80e8b51" title="DrawBanner" alt="" coords="448,1576,539,1603">
+<area shape="rect" href="$main_8cpp.html#2a5307c5f110a0274df5e5ffe3024704" title="DrawCorridor" alt="" coords="445,1627,541,1653">
+<area shape="rect" href="$main_8cpp.html#3fe809c6fc223670b7f4f2e5bb44dd13" title="DrawCorridorSteps" alt="" coords="429,1677,557,1704">
+<area shape="rect" href="$main_8cpp.html#5368ba980e78f21cb7eb3c06b43fd356" title="DrawGoal" alt="" coords="455,1880,532,1907">
+<area shape="rect" href="$main_8cpp.html#b063a5b0735aa8fae726cb88411a9124" title="DrawSlidingDoor" alt="" coords="436,2133,551,2160">
+<area shape="rect" href="$class_c_sound_time.html#51ef710780c9680f685b39421d605377" title="CSoundTime::GetSDLTime" alt="" coords="405,1728,581,1755">
+<area shape="rect" href="$classui_h_u_d.html#2399e22f0252ecd5ee12f55986c49e12" title="getter to get the zeroCLOCK" alt="" coords="423,1779,564,1805">
+<area shape="rect" href="$main_8cpp.html#abc0dc23c6edac5eb54affde4b2e129a" title="IncrementFrameCount" alt="" coords="419,1829,568,1856">
+<area shape="rect" href="$main_8cpp.html#ae772e42b9e895cd17956f663e096440" title="OpenSlidingDoor" alt="" coords="435,715,552,741">
+<area shape="rect" href="$main_8cpp.html#ef2317f93c6f98ba2968471eb706a013" title="OrbitPlanets" alt="" coords="447,1931,540,1957">
+<area shape="rect" href="$classui_h_u_d.html#c54b9be34c2fa431690af103001789dc" title="setter to set the distance" alt="" coords="440,1981,547,2008">
+<area shape="rect" href="$class_camera.html#86a5a6f374125bb58c6a97ba2d921a64" title="Camera::SetMoveSpeed" alt="" coords="413,2032,573,2059">
+<area shape="rect" href="$class_camera.html#f1b56a7aee4d2b0c38054e05c0553e51" title="Camera::SetRotateSpeed" alt="" coords="409,2083,577,2109">
+<area shape="rect" href="$main_8cpp.html#d474d1c93896c15f9c9eab34e508024e" title="UpdateBalls" alt="" coords="448,968,539,995">
+<area shape="rect" href="$class_camera.html#e72895a4f32cdc88146bee6a1a3ea636" title="Camera::LookUD" alt="" coords="700,107,820,133">
+<area shape="rect" href="$class_camera.html#3b3f5cedfa0d89824ea52f109bc3eba8" title="Camera::LookUDOK" alt="" coords="691,157,829,184">
+<area shape="rect" href="$class_camera.html#cc808e653e9c59f0d2450c9caca26b98" title="Camera::MoveFB" alt="" coords="700,208,820,235">
+<area shape="rect" href="$class_camera.html#8937b6b035801d1f698b40693c53d1e6" title="Camera::MoveFBOK" alt="" coords="691,259,829,285">
+<area shape="rect" href="$class_camera.html#d53c2248f2d38bc8f01ac288e8cc21d3" title="Camera::MoveLR" alt="" coords="700,309,820,336">
+<area shape="rect" href="$class_camera.html#4e500f9773f9f46a69e6a70d40d838bf" title="Camera::MoveLROK" alt="" coords="691,360,829,387">
+<area shape="rect" href="$class_camera.html#f14abc814d362ed9781db6725919f836" title="Camera::MoveUD" alt="" coords="699,411,821,437">
+<area shape="rect" href="$class_camera.html#3bb636079c02cdb8ac235c157faa4556" title="Camera::MoveUDOK" alt="" coords="689,461,831,488">
+<area shape="rect" href="$class_camera.html#ff5a71068d0d6f82c5a03efe1c9be259" title="Camera::RotateLR" alt="" coords="696,5,824,32">
+<area shape="rect" href="$class_camera.html#5c352dbad24a210bf0159e00f1dfe8b8" title="Camera::RotateLROK" alt="" coords="687,56,833,83">
+<area shape="rect" href="$main_8cpp.html#0acc2f7f76f8ac302423965304a357bc" title="TeleportToBushCourt" alt="" coords="689,613,831,640">
+<area shape="rect" href="$class_camera_map.html#e9310b2f4c46953742fc6a7e7f9358d4" title="CameraMap::DisplayMap" alt="" coords="676,917,844,944">
+<area shape="rect" href="$classui_h_u_d.html#7bf0bae0870341c5c866faaea0becbcf" title="Getter to get how many balls are in play." alt="" coords="691,1120,829,1147">

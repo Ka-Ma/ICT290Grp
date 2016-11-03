@@ -1,0 +1,13 @@
+<area shape="rect" href="$class_camera.html#2c82b9713e7cc1fb77130aad72728478" title="Camera::GetFB" alt="" coords="435,107,547,133">
+<area shape="rect" href="$class_camera.html#5d71756678367cc9ef6d3186dff7e821" title="Camera::GetLR" alt="" coords="243,208,355,235">
+<area shape="rect" href="$class_camera.html#caa842acd09e3a18c409ddc0c89cf808" title="Camera::GetUD" alt="" coords="243,259,355,285">
+<area shape="rect" href="$main_8cpp.html#0acc2f7f76f8ac302423965304a357bc" title="TeleportToBushCourt" alt="" coords="228,56,369,83">
+<area shape="rect" href="$main_8cpp.html#4da4989065b4b5e6437f39ba5fa3bb2b" title="TeleportToPlanets" alt="" coords="236,157,361,184">
+<area shape="rect" href="$class_camera.html#259204729f7a60277c6f6215559adcc0" title="Camera::Position" alt="" coords="431,56,551,83">
+<area shape="rect" href="$class_c_sound.html#366c42ebc2c48e56e0788caa72f226df" title="CSound::Stop" alt="" coords="440,5,541,32">
+<area shape="rect" href="$class_camera.html#023cb3e9d92301d8132f338c7ef5be77" title="Camera::callGLLookAt" alt="" coords="611,31,763,57">
+<area shape="rect" href="$class_camera.html#11d15ac81e6fbe74c1dd09e342be3e9c" title="Camera::ResetXYZ" alt="" coords="621,81,752,108">
+<area shape="rect" href="$class_c_sound.html#17f9bef660b17787ac312ce02446ac96" title="CSound::Play" alt="" coords="440,208,541,235">
+<area shape="rect" href="$classui_h_u_d.html#6185531f82dca781041b35e07f2deef4" title="function to reset clock" alt="" coords="427,259,555,285">
+<area shape="rect" href="$classui_h_u_d.html#bdc3cb8805e33a3e678dffde58990dd1" title="Setter for setting the current ball count ingame." alt="" coords="421,309,560,336">
+<area shape="rect" href="$classui_h_u_d.html#c53791030275ee238fd608cb7e74e19f" title="setter to set the clock to false" alt="" coords="420,157,561,184">

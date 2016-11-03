@@ -1,0 +1,17 @@
+<area shape="rect" href="$class_plain_linked_list.html#5c8077af674e9abc6fc6062f7460dd35" title="PlainLinkedList::GetListSize" alt="" coords="185,5,369,32">
+<area shape="rect" href="$class_plain_linked_list.html#d10e61ef1f9a9479b7b64d396e4e34cc" title="PlainLinkedList::GetType" alt="" coords="195,107,360,133">
+<area shape="rect" href="$class_plain_linked_list.html#ca26ded8e3d474096f32ccf8c3b2157f" title="PlainLinkedList::GetXend" alt="" coords="195,56,360,83">
+<area shape="rect" href="$class_plain_linked_list.html#2085c878239f34eb9a17822756c39461" title="PlainLinkedList::GetXstart" alt="" coords="192,157,363,184">
+<area shape="rect" href="$class_plain_linked_list.html#82ff501e86ac795549d28067ae70441b" title="PlainLinkedList::GetYend" alt="" coords="193,208,361,235">
+<area shape="rect" href="$class_plain_linked_list.html#d0b9f3d62cc92f26ec919c3bde7fdd22" title="PlainLinkedList::GetYstart" alt="" coords="191,259,364,285">
+<area shape="rect" href="$class_plain_linked_list.html#f5801f80f8cac4465eadfd0bec88704c" title="PlainLinkedList::GetZend" alt="" coords="195,309,360,336">
+<area shape="rect" href="$class_plain_linked_list.html#597babac3511eca108443d88d0b0cbf8" title="PlainLinkedList::GetZstart" alt="" coords="192,360,363,387">
+<area shape="rect" href="$class_c_sound.html#17f9bef660b17787ac312ce02446ac96" title="CSound::Play" alt="" coords="227,411,328,437">
+<area shape="rect" href="$class_plain_node.html#34f55330c3e261b76b9086fec5928386" title="PlainNode::GetNext" alt="" coords="423,183,559,209">
+<area shape="rect" href="$class_plain_node.html#92a67076341f1facb73017b158626885" title="PlainNode::GetType" alt="" coords="423,81,559,108">
+<area shape="rect" href="$class_plain_node.html#1a5b063da3d3e818012ab62c26578b64" title="PlainNode::GetXend" alt="" coords="423,31,559,57">
+<area shape="rect" href="$class_plain_node.html#85adb877e9592e4c6a02e529d6a0f88a" title="PlainNode::GetXstart" alt="" coords="420,132,561,159">
+<area shape="rect" href="$class_plain_node.html#fe6e74faec6b6d1f1e1584630e6a1cb0" title="PlainNode::GetYend" alt="" coords="421,233,560,260">
+<area shape="rect" href="$class_plain_node.html#b2b832010948f49b45f7b12962b26a79" title="PlainNode::GetYstart" alt="" coords="419,284,563,311">
+<area shape="rect" href="$class_plain_node.html#d5a0b8555f754557b89ced6f4c14aa53" title="PlainNode::GetZend" alt="" coords="423,335,559,361">
+<area shape="rect" href="$class_plain_node.html#38912cf44f7dd4bebd7c96d15fce281f" title="PlainNode::GetZstart" alt="" coords="420,385,561,412">

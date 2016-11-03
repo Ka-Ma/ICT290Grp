@@ -1,0 +1,15 @@
+<area shape="rect" href="$classui_h_u_d.html#00c2250b028a553c2a5baeb3b177cac4" title="Function operation of mouse in this setting." alt="" coords="215,56,359,83">
+<area shape="rect" href="$classui_leader_board.html#0f6d589f68b5b639815839841c862a37" title="Function operation of mouse in this setting." alt="" coords="169,107,404,133">
+<area shape="rect" href="$classui_menu.html#6ed8d58288ae57fc3b0bfba5c6745deb" title="Function operation of mouse in this setting." alt="" coords="209,157,364,184">
+<area shape="rect" href="$classui_options.html#c96666eff0cec644e1ef7af837d24b48" title="Function operation of mouse in this setting." alt="" coords="197,5,376,32">
+<area shape="rect" href="$classui_score.html#f6d8c6f29e3f30cc1c987c0f80b4015f" title="Function operation of mouse in this setting." alt="" coords="208,208,365,235">
+<area shape="rect" href="$class_c_easy_sound.html#871478c0717d884846c2a4f528860a5f" title="CEasySound::GetSound" alt="" coords="455,56,617,83">
+<area shape="rect" href="$class_c_easy_sound.html#89e74a3e4cf2bd0e72c3bbf6901dcb7c" title="CEasySound::Instance" alt="" coords="459,157,613,184">
+<area shape="rect" href="$class_c_easy_sound.html#a1d7ffd4f5c4891a863df85d6136daf1" title="CEasySound::Load" alt="" coords="469,107,603,133">
+<area shape="rect" href="$class_c_sound.html#17f9bef660b17787ac312ce02446ac96" title="CSound::Play" alt="" coords="485,5,587,32">
+<area shape="rect" href="$class_c_easy_sound.html#4a18c7ef207c8a00470c19f07044f8b6" title="CEasySound::CEasySound" alt="" coords="667,195,848,221">
+<area shape="rect" href="$_easy_sound_8cpp.html#cb5aef18dcd112d5e47c746978b6df4d" title="mixaudio" alt="" coords="897,169,969,196">
+<area shape="rect" href="$class_c_easy_sound.html#29fc35523c9eedb3b2589f90f27d03f0" title="CEasySound::CallMixAudio" alt="" coords="1019,169,1200,196">
+<area shape="rect" href="$class_c_sound.html#81b39696be6a9aff2aa09f1fed26e750" title="CSound::GetLength" alt="" coords="689,93,825,120">
+<area shape="rect" href="$classui_score.html#c84055d76812de4e2c8212f94949c34c" title="sets string of intials for this score from ints" alt="" coords="472,220,600,247">
+<area shape="rect" href="$classui_score.html#cfc1cb8275a49ddcd437e33bb0b247f0" title="returns string of converstion from int to alpha" alt="" coords="684,245,831,272">

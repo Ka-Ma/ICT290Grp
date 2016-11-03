@@ -38,8 +38,6 @@ public:
 
 	/**
 	@brief display the elements of the LeaderBoard
-	@param w - width of the screen
-	@param h - height of the screen
 	@param tempImage - pointer to UI image passed in
 	*/
 	void displayUILeaderBoard(const GLuint & tempImage);

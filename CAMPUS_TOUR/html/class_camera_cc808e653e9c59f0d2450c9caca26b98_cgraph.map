@@ -1,0 +1,7 @@
+<area shape="rect" href="$class_camera.html#023cb3e9d92301d8132f338c7ef5be77" title="Camera::callGLLookAt" alt="" coords="176,5,328,32">
+<area shape="rect" href="$class_collision.html#0b97a69bc20aeecc04e5c4359e675af7" title="Collision::Collide" alt="" coords="193,56,311,83">
+<area shape="rect" href="$class_camera.html#5b5c1468bdb3b8e6e654bea66c9561b8" title="Camera::SetPlains" alt="" coords="187,107,317,133">
+<area shape="rect" href="$class_plain_linked_list.html#4d9d62421c215a3c9e2c9ef0833b84a1" title="PlainLinkedList::AddToStart" alt="" coords="377,107,559,133">
+<area shape="rect" href="$class_plain_node.html#34f55330c3e261b76b9086fec5928386" title="PlainNode::GetNext" alt="" coords="608,56,744,83">
+<area shape="rect" href="$class_plain_node.html#566db8fc78c8b4dea13373f908a53577" title="PlainNode::SetData" alt="" coords="608,107,744,133">
+<area shape="rect" href="$class_plain_node.html#fe5be77c2dfbf7447105f0ea722e77f1" title="PlainNode::SetNext" alt="" coords="608,157,744,184">
