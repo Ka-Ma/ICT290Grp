@@ -783,6 +783,7 @@ void Display()
 	glDisable (GL_TEXTURE_2D); 
 
 	CheckLocationForTeleport();
+	
 
 	//Teleport Box Location (To Planets)
 	glPushMatrix();
@@ -876,7 +877,10 @@ void Display()
 
 	distToGoal = sqrt(((GoalLoc[GoalLocI][0] - cam.GetLR()) * (GoalLoc[GoalLocI][0] - cam.GetLR())) + ((GoalLoc[GoalLocI][1] - cam.GetFB()) * (GoalLoc[GoalLocI][1] - cam.GetFB())) + ((GoalLoc[GoalLocI][2] - cam.GetUD()) * (GoalLoc[GoalLocI][2] - cam.GetUD())));
  	uih.setDist(distToGoal);
-	
+	if (uih.getZeroClock() == false)
+	{
+		TeleportToPlanets();
+	}
 	//after everything else so it draws on top - KJM 13/10/2016
 	if (gVar.uiHUD) {
 		uih.displayUIHUD(tp.GetTexture(251));
@@ -1219,7 +1223,6 @@ void keys(unsigned char key, int x, int y)
 			cam.SetMoveSpeed(0.0f);
 			gVar.DisplayExit = true;
 			if (gVar.uiMenu) { gVar.uiMenu = false; }
-			if (gVar.uiInstruct) { gVar.uiInstruct = false; }
 		}
 	}
 	break;
@@ -5964,7 +5967,8 @@ void TeleportToPlanets()
 	gVar.paused = true;
 	glClearColor(0, 0, 0, 1.0);
 	cam.Position(SunX, allPlanets[0][1], cam.GetFB(), 0);
-
+	uih.resetClock();
+	uih.setZeroClock(true);
 
 	ambientspace->Play();
 	firstSound->Play();
@@ -6152,7 +6156,7 @@ void UpdateBalls()
 					//pause game while all things finalising
 					gVar.paused = true;
 
-					//need to wait somehow while initials are put in -- Couldn't think of a way at this time KJM 3/11/2016
+					//need to wait somehow while initials are put in
 					
 					//calculate score
 					gVar.endScore = uih.genScore();
@@ -6161,7 +6165,7 @@ void UpdateBalls()
 					gVar.uiScore = true;
 					string endInitials = uis.getInitials();
 										
-					//cout << "initials are " << endInitials << endl;
+					cout << "initials are " << endInitials << endl;
 
 					//stringify date
 					time_t now = time(0);

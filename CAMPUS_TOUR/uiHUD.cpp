@@ -34,7 +34,10 @@ void uiHUD::setTotalBallCount(int currentBalls)
 	current_Balls = currentBalls;
 }
 
-
+void uiHUD::setZeroClock(bool check)
+{
+	zeroClock = check;
+}
 void uiHUD::hitPlanet()
 {
 	hit_Planets++;
@@ -44,8 +47,17 @@ float uiHUD::getTimeCount()
 {
 	clock_t end = clock();
 	float seconds = (float)(end - start) / CLOCKS_PER_SEC;
-	return 1000 - seconds;
-}	
+	if (100 - seconds <= 0)
+	{
+		zeroClock = false;
+	}
+	return 100 - seconds;
+}
+
+bool uiHUD::getZeroClock()
+{
+	return zeroClock;
+}
 
 void uiHUD::setScore(int score)
 {
@@ -67,6 +79,11 @@ void uiHUD::updateUIHIDMembers(int w, int h)
 void uiHUD::setClock(clock_t nclock)
 {
 	start = nclock;
+}
+
+void uiHUD::resetClock()
+{
+	start = clock();
 }
 
 void uiHUD::displayUIHUD(const GLuint & tempImage)

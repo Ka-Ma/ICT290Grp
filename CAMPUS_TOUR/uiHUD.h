@@ -59,18 +59,64 @@ public:
 	@param ball - ball count
 	*/
 	void setBallCount(int ball);
+	/**
+	@brief Getter to get how many balls are in play
+	@return cball
+	*/
 	int getBallCount();
+	/**
+	@brief Getter to calculate the time
+	@return time
+	*/
 	float getTimeCount();
+	/**
+	@brief function to generate the score
+	@return score
+	*/
 	int genScore();
+	/**
+	@brief function to calculate the distance between cam and goal
+	@return distance
+	*/
 	int getDist();
+	/**
+	@brief getter to find how many balls can be played
+	@return current_balls
+	*/
 	int getTotalBallCount(); 
+	/**
+	@brief setter to generate how many balls are left
+	*/
 	void setTotalBallCount(int currentBalls);
+	/**
+	@brief function to check if the ball is hit a planet                                                                                                                                                               
+	*/
 	void hitPlanet();
-
-
+	/**
+	@brief function to reset clock                                                                                                                                                             
+	*/
+	void resetClock();
+	/**
+	@brief setter to set clock to nclock time                                                                                                                                                            
+	*/
 	void setClock(clock_t nclock);
+	/**
+	@brief setter to set the score                                                                                                                                                           
+	*/
 	void setScore(int score);
+	/**
+	@brief setter to set the distance                                                                                                                                                           
+	*/
 	void setDist(int dist);
+	/**
+	@brief getter to get the zeroCLOCK
+	@return zeroClock                                                                                                                                                           
+	*/
+	bool getZeroClock();
+	/**
+	@brief setter to set the clock to false                                                                                                                                                           
+	*/
+	void setZeroClock(bool check);
 
 private:
 	char buffer[30]; //buffer for string conversion MT
@@ -82,6 +128,7 @@ private:
 	int distance; //distance from planets
 	int current_Balls;
 	int hit_Planets = 0;
+	bool zeroClock = true;
 };
 
 	
