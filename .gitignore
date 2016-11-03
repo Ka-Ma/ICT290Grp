@@ -13,7 +13,7 @@ CAMPUS_TOUR/*.sln.docstates
 # Build results
 CAMPUS_TOUR/[Dd]ebug/
 CAMPUS_TOUR/[Dd]ebugPublic/
-CAMPUS_TOUR/[Rr]elease/
+#CAMPUS_TOUR/[Rr]elease/
 CAMPUS_TOUR/[Rr]eleases/
 CAMPUS_TOUR/x64/
 CAMPUS_TOUR/x86/
