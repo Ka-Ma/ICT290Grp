@@ -3,6 +3,7 @@
 uiScore::uiScore(int w, int h)
 {
 	updateUIScoreMembers(w, h);
+	initials = "AAA";
 }
 
 void uiScore::updateUIScoreMembers(int w, int h)
@@ -99,11 +100,12 @@ void uiScore::mouseUIScore(int button, int state, int x, int y)
 		//will need to height-y to convert coords to match screen and mouse together
 
 		//std::cout << "height " << height << ", x " << x << ", y " << y << std::endl;
+		/* Trouble shooting couts
 		cout << "intitials ";
 		for (int i = 0; i < 3; i++) {
 			cout << arr[i] << " ";
 		}
-		cout << endl;
+		cout << endl;*/
 		//if coord range equals 
 		//scroll up wards in alpha for intial 1
 		if (x >= wc-72 && x <= wc-42 && y >= hc+70 && y <= hc+92)
@@ -169,12 +171,12 @@ void uiScore::setInitials(int arr[] )
 	string temp;
 	string temp2;
 
-	cout << "moving array to string " << temp << endl;
+	//cout << "moving array to string " << temp << endl;
 
 	for (int i = 0; i < 3; i++) {
 		temp2 = alphaFromInt(arr[i]);
 		temp.append(temp2);
-		cout << "moving array to string " << temp << endl;
+		//cout << "moving array to string " << temp << endl;
 	}
 
 	initials = temp;

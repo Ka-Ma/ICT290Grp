@@ -72,8 +72,8 @@ void uiMenu::mouseUIMenu(int button, int state, int x, int y)
 	{
 		//will need to height-y to convert coords to match screen and mouse together
 		
-		std::cout << "height " << height << ", width " << width << std::endl;
-		std::cout << "x " << x << ", y " << y << std::endl;
+		//std::cout << "height " << height << ", width " << width << std::endl;
+		//std::cout << "x " << x << ", y " << y << std::endl;
 		//if coord range equals 
 		//restart: reset all variables to beginning state and uiMenu = false
 		if (x >= wc - btnW && x <= wc+btnW && y >= hc-100 && y <= hc - 75)

@@ -44,7 +44,7 @@ float uiHUD::getTimeCount()
 {
 	clock_t end = clock();
 	float seconds = (float)(end - start) / CLOCKS_PER_SEC;
-	return 10000 - seconds;
+	return 1000 - seconds;
 }	
 
 void uiHUD::setScore(int score)

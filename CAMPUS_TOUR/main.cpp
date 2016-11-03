@@ -6151,7 +6151,7 @@ void UpdateBalls()
 					//pause game while all things finalising
 					gVar.paused = true;
 
-					//need to wait somehow while initials are put in
+					//need to wait somehow while initials are put in -- Couldn't think of a way at this time KJM 3/11/2016
 					
 					//calculate score
 					gVar.endScore = uih.genScore();
@@ -6160,7 +6160,7 @@ void UpdateBalls()
 					gVar.uiScore = true;
 					string endInitials = uis.getInitials();
 										
-					cout << "initials are " << endInitials << endl;
+					//cout << "initials are " << endInitials << endl;
 
 					//stringify date
 					time_t now = time(0);

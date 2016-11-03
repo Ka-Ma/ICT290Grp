@@ -111,7 +111,7 @@ void uiLeaderBoard::mouseUILeaderBoard(int button, int state, int x, int y)
 
 	if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
 	{
-		std::cout << "x " << x << ", y " << y << std::endl;
+		//std::cout << "x " << x << ", y " << y << std::endl;
 		//return to menu
 		if (x >= wc + 168 && x <= wc + 275 && y >= hc +241 && y <= hc+272)
 		{
@@ -150,9 +150,9 @@ void uiLeaderBoard::getLeaderBoard()
 				temp.nScore = 0;  //if that fails sets to 0
 
 			//test
-			std::cout << "name " << temp.name << std::endl;
-			std::cout << "date " << temp.sDate << std::endl;
-			std::cout << "score " << temp.nScore << std::endl;
+			//std::cout << "name " << temp.name << std::endl;
+			//std::cout << "date " << temp.sDate << std::endl;
+			//std::cout << "score " << temp.nScore << std::endl;
 
 			//add this score to the vector
 			lboard.push_back(temp);
