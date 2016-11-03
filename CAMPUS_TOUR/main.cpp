@@ -1219,6 +1219,7 @@ void keys(unsigned char key, int x, int y)
 			cam.SetMoveSpeed(0.0f);
 			gVar.DisplayExit = true;
 			if (gVar.uiMenu) { gVar.uiMenu = false; }
+			if (gVar.uiInstruct) { gVar.uiInstruct = false; }
 		}
 	}
 	break;
